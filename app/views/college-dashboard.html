@@ -1,0 +1,108 @@
+<div class="college-board" ng-init="toTheTop()">
+  <div class="container-fluid">
+    <div class="row">
+     
+
+    <div class="sidebar-collapse ">
+        <nav id="dashboard-sidebar" style="z-index: 876543456!important;"  id="menu" role="navigation" class="navbar-default _college-dashboard-sidebar navbar-static-side col-md-2 col-sm-2">
+          <ul ng-init="tab=1" class="dashboard-sidebar">
+           
+            <span class="pull-right nav-button"><!-- <i class=" fa-sidenav fa-sidenav_bars  fa fa-bars "></i> --></span>
+          
+            <li class="user-board" style="height: 19em !important;">
+                <a ng-href="#/edit-college-profile" style="text-decoration:none; cursor:pointer">
+                    <div class="user-info-profile-image">
+                        <img class="img-circle img-responsive img-profile profile-image-college-dashboard-without-hover" id="profile-image-college-dashboard" src="{{userc.profile.collegephoto+'/convert?w=200&h=200'}}" alt="" width="65" height="65"  />
+                    </div>                
+                    <div class="user-info row-fluid text-center ">
+                        <div class="user-welcome">Welcome</div>
+                        <div class="text-overflow">{{userc.profile.collegename}} </div>
+                        <div class="status text-overflow">{{userc.profile.counselloremail  | cut:false:22:'...'}} </div>
+                    </div>
+                </a>
+            </li>
+            
+
+            <li id="dashboard-btn" >
+                <a class="dash-side-link " ng-click="tab=1" data-target="#dashboard"  data-toggle="tab"  ng-class="{active:tab===1}"> 
+                    <i class="fa fa-angle-right fa-liststyle"></i>
+                         Dashboard
+                    <i class="fa fa-dashboard fa-sidenav fa-fw pull-right"></i>
+                </a>
+            </li>  
+
+            <li id="dashboard-btn"  >
+                <a class="dash-side-link" ng-click="tab=2" data-target="#studentenquiry"  data-toggle="tab"  ng-class="{active:tab===2}"> 
+                    <i class="fa fa-angle-right fa-liststyle"></i>
+                         Student Enquiry
+                    <i class="fa fa-users  fa-sidenav fa-fw pull-right"></i>
+                </a>
+            </li>
+            
+            <li   id="dashboard-btn" >
+                <a class="dash-side-link" ng-click="tab=3" data-target="#chatfeedback" data-toggle="tab" ng-class="{active:tab===3}"> 
+                    <i class="fa fa-angle-right fa-liststyle"></i>
+                         Chat Feedback
+                    <i class="fa fa-bar-chart-o  fa-sidenav fa-fw pull-right"></i>
+                </a>
+            </li>
+            
+            <li id="dashboard-btn" >
+                <a class="dash-side-link" ng-click="tab=4" data-target="#contactstudents"   data-toggle="tab" ng-class="{active:tab===4}"> 
+                 <i class="fa fa-angle-right fa-liststyle"></i>
+                        Student Contact
+                    <i class="fa fa-phone  fa-sidenav fa-fw pull-right"></i>
+                </a>
+            </li>           
+
+            <li id="dashboard-btn" >
+                <a class="dash-side-link" ng-click="tab=5" data-target="#schedulewebinar"   data-toggle="tab" ng-class="{active:tab===5}"> 
+                 <i class="fa fa-angle-right fa-liststyle"></i>
+                        Knowledge Session
+                   <i class="fa fa-book fa-sidenav fa-fw pull-right" ></i>
+                </a>
+            </li>           
+
+
+          </ul>
+        </nav> 
+    </div>
+       
+  
+
+
+
+
+
+ 
+      <div class="noPadding tab-content" ng-controller="CollegeDashCtrl">
+
+        <div ng-include="'views/college-dashboard-dash.html'" class="tab-pane active" id="dashboard" ng-controller="CollegeDashCtrl">
+        </div>
+       
+        <div ng-include="'views/college-dashboard-bh.html'" class="tab-pane" id="studentenquiry" ng-controller="CollegeDashBookedHistoryCtrl">
+        </div>
+       
+        <div ng-include="'views/college-dashboard-profile.html'" class="tab-pane" id="chatfeedback" ng-controller="CollegeDashFeedbackCtrl">
+        </div>
+       
+        <div ng-include="'views/college-contact-student.html'" class="tab-pane" id="contactstudents" ng-controller="CollegeDashBookedHistoryCtrl">
+        </div>
+        <div ng-include="'views/schedule-webinar.html'" class="tab-pane" id="schedulewebinar" ng-controller="WebinarCtrl">
+        </div>
+       
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$('nav#dashboard-sidebar').on('mouseenter',function(){
+    $('#profile-image-college-dashboard').addClass('profile-image-college-dashboard-hover');$('#profile-image-college-dashboard').removeClass('profile-image-college-dashboard-without-hover');
+});
+$('nav#dashboard-sidebar').on('mouseleave',function(){
+    $('#profile-image-college-dashboard').removeClass('profile-image-college-dashboard-hover');$('#profile-image-college-dashboard').addClass('profile-image-college-dashboard-without-hover');
+});
+</script>

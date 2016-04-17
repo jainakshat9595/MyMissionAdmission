@@ -1,0 +1,359 @@
+<style type="text/css">.btn-group { width: 100%;margin-top: 8px;} .giv-feed-row{font-size: 17px}</style>
+<div class="container-fluid  noPadding" ng-init="toTheTop(); getUpcomingWebinar(); getWebinarsHistory()">
+  <ol class="breadcrumb blue noBorder">
+    <li>Home</li>
+    <li>Knowledge Session</li>
+  </ol>
+</div>
+
+<div class="noPadding dashHome-content row content-area-dash dashboard-leftPadding dashboard-rightPadding ">
+
+  <div class="row" style="padding: 0 3em;">
+    <div class="col-xs-11" style="margin-top: 0.5em; font-size: 1.5em;">
+      You have currently {{commingWebinars.length}} webinars lined up.
+    </div>
+    <div class="col-xs-1" data-toggle="collapse" data-target="#webinarCollapse" aria-expanded="false" aria-controls="webinarCollapse">
+      <div style="font-size: 3em; pointer:cursor; color:#237DAC; text-align: center;">
+        <i class="fa fa-plus-circle"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse" id="webinarCollapse" style="margin: 2em; margin-top: 0.5em; padding: 1em; background-color: white; color:black; border: 1px solid #237DAC;">
+    <div class="container-fluid _container-padding">
+      <center id="schedule_webinar_success" ng-model="schedule_webinar_success" ng-if="schedule_webinar_success=='done'" style="color:green">Webinar has been successfully scheduled.</center> 
+      <form ng-submit="scheduleWebinar()">
+        <div class="col-xs-8">
+          <div class="input-group-container">
+            <div class="input-group input-group-lg">
+              <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-book"></span>
+              <input type="text" ng-model="webinar.webinarTopic" required  placeholder="Webinar Topic" class="login-inputgroup_style form-control">
+            </div>
+          </div>
+          <div class="row"style="margin-top:6px;">
+             <div class="col-xs-2" style="margin-top: 5em;">
+              <center><timepicker id="timepicker" required ng-model="webinar.webinarTime" ng-change="changed(mytime)" hour-step="1" minute-step="1" show-meridian="false"></timepicker></center>
+            </div>
+            <div class="col-xs-5">
+              <datepicker style="background-color: transparent; outline: none; border: none;" required ng-model="webinar.webinarDate" min-date="minDate" max-date="'2015-12-31'" show-weeks="false" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+            </div>
+            <div class="col-xs-5">
+              <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-edit"></span>
+              <textarea style="margin-bottom: 10px;height: 248px !important;width: 97%;" ng-model="webinar.webinarDescription" class="login-inputgroup_style form-control textarea-bookSession" style="border: 1px solid #CEE5F3 !important; font-size:18px;" rows="5" required placeholder="Detailed Description of the topic" ></textarea>
+            </div>
+          </div> 
+          <div class="input-group-container">
+            <div class="input-group input-group-lg" style="margin-top: -1em;">
+              <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-time"></span>
+              <input type="text" ng-model="webinar.webinarDuration" required placeholder="Approximate Duration Of Webinar" class="login-inputgroup_style form-control">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="row">
+            <div class="col-xs-6">
+              <fp-input style="font-size:11px; margin-top: 2.4em;" class="btn btn-default btn-lg main-search-btn sel-btn-file btn-form form-control" id="fp-btn-id-1" required ng-model="newphoto" data-fp-button-text="Upload Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-change="webinar.mentorPhoto = newphoto.url; "/>
+            </div>
+            <div class="col-xs-6">
+              <center style="border-radius:100%;">
+                <img class="img-responsive" src="{{webinar.mentorPhoto}}" alt="">
+              </center>
+            </div>
+          </div>
+          <div class="input-group-container">
+            <div class="input-group input-group-lg">
+              <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user"></span>
+              <input type="text" ng-model="webinar.mentorName" required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')" placeholder="Mentor's Name" class="login-inputgroup_style form-control">
+            </div>
+          </div>
+          <div class="input-group-container">
+            <div class="input-group input-group-lg">
+              <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+              <input type="email" ng-model="webinar.mentorEmail" required oninvalid="this.setCustomValidity('Please enter a valid Email Address')" oninput="this.setCustomValidity('')" ui-validate="{blacklist : 'notBlackListed($value)' }" title='Enter in format abcdef@email.com' placeholder="Mentor's Email" class="login-inputgroup_style form-control">
+            </div>
+          </div>
+          <div class="input-group-container">
+            <div class="input-group input-group-lg">
+              <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-phone"></span>
+              <input type="text" ng-model="webinar.mentorMobile" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 placeholder="Mentor's Mobile" oninput="this.setCustomValidity('')" title="Phone number must be atleast 9 digits long" class="login-inputgroup_style form-control">
+            </div>
+          </div>
+          <div class="row" style="background-color: #F5F9FC; border-radius: 0.5em; border: 1px solid rgba(92,169,214,0.3); margin: 0 0.3em; ">
+            <div class="col-xs-5" style="border-right: 1px solid;border-color: #237DAC;">
+              <span class="radio">
+                <label>
+                  <input type="radio" class="radio" value="Male" ng-model="webinar.gender" id="gender"/>
+                  Male
+                </label>
+              </span>
+              <span class="radio">
+                <label>
+                  <input type="radio" class="radio" value="Female" ng-model="webinar.gender" id="gender"/>
+                  Female
+                </label>
+              </span>
+            </div>
+            <div class="col-xs-6">
+              <button type="button" class="btn btn-default" style="margin-top:15px; margin-left: 0.9em; " data-toggle="modal" data-target="#masteristModal">Master List Popup</button>  
+            </div>
+          </div>
+        </div>
+        <div class="row pull-right" style="padding: 1.5em;">
+          <input type="submit" class="btn btn-default" data-toggle="collapse" data-target="#knowledgeSession">
+          <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#webinarCollapse" aria-expanded="false" aria-controls="webinarCollapse" ng-click="toggleScheduleWebinarSuccessMsg()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-info Upcoming-panel" style="margin:2em; margin-top:0.5em;">
+    <div class="panel-heading">
+       <i class="fa-ns fa fa-lg fa-fw fa-star-half-o"></i>&nbsp;&nbsp;Upcoming
+    </div>
+    <div class="panel-body">
+    <center><div style="color:green" ng-if="commingWebinars.length === 0"> You have not scheduled any upcoming webinar yet.</div></center>
+      <div class="panel panel-info panel-enquiry_success" ng-repeat="(commingWebId,commingWeb) in commingWebinars">
+        <div class="panel-heading contentPadding" style="min-height: 3.6em;">
+
+          <div class="row">
+            <div class="col-xs-1"><div class="panel-heading-counter">{{$index+1}}</div></div>
+            <div class="col-xs-3">
+              {{commingWeb.webinarTopic}}
+            </div>
+            <div class="col-md-3 col-sm-offset-5">
+                <button type="button" ng-disabled="!commingWeb.hangoutURL" ng-click="startWebinar(commingWeb.hangoutURL)" class="btn btn-default btn-block btn-chat">Start Chat &nbsp;&nbsp;<i class="fa fa-play-circle-o"></i></button>
+                <div class="text-info" ng-if="!commingWeb.hangoutURL"> <center>"Start Chat" will be enabled 30 minutes prior to the scheduled time.</center></div>
+              </div>
+          </div>
+        </div>
+
+        <div class="panel-body lineHeight contentPadding">
+          <!-- {{commingWeb}} -->
+          <div class="col-md-2 sub-block-img">
+            <img src="{{commingWeb.mentorPhoto}}" alt="" class="img-thumbnail" ng-class="studentDetail[session.studenturlId].studentstatus.$value=='block' ? 'img-thumbnail haze' : 'img-thumbnail'" width="300" style="height:130px !important">
+          </div>
+
+          <div class="col-md-4 " style="border-right : 1px solid #191919;">
+            
+            <div class="row st-name">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mentor Name : <strong>&nbsp;&nbsp;{{commingWeb.mentorName}}</strong>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mentor Email : <strong>&nbsp;&nbsp;{{commingWeb.mentorEmail}} </strong>&nbsp;&nbsp;<i ng-show="studentemailstatus.$value=='true'" style="color:green" class="fa fa-check-circle"></i> 
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar ID : <strong>&nbsp;&nbsp;{{commingWeb.webinarId}} </strong>&nbsp;&nbsp;<i ng-show="studentemailstatus.$value=='true'" style="color:green" class="fa fa-check-circle"></i> 
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar Duration : <strong>&nbsp;&nbsp;{{commingWeb.webinarDuration}} </strong>&nbsp;&nbsp;<i ng-show="studentemailstatus.$value=='true'" style="color:green" class="fa fa-check-circle"></i> 
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar Time & Date : <strong>&nbsp;&nbsp;{{commingWeb.webinarTime}}, {{commingWeb.webinarDate}}</strong>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Students Attending : <strong>&nbsp;&nbsp;{{commingWeb.studentsAttending}}</strong>
+            </div>
+            <br>
+          </div>
+
+          <div class="col-md-6">
+            <div ng-class="studentstatus.$value=='block' ? 'container-fluid query-area haze' : 'container-fluid query-area'" style="padding:10px; overflow-y: scroll; height: 11em;">
+              {{commingWeb.webinarDescription}}
+            </div>
+          </div>
+        </div>
+      </div>
+                           
+    </div> 
+  </div>
+
+   <div class="panel panel-info History-panel" style="margin:2em; margin-top:0.5em;" ng-init="getCompletedWebinarsHistory();">
+    <div class="panel-heading" ng-click="expand_schedule_webinar_panelBody();">
+       <i class="fa-ns fa fa-lg fa-fw fa-star-half-o"></i>&nbsp;&nbsp;History
+    </div>
+    <div class="panel-body">
+      
+      <table class="table table-striped feed-table">
+       <col width="10px" />
+       <col width="10px" />
+       <col width="25px" />
+       <col width="25px" />
+       <col width="25px" />
+       <col width="25px" /> 
+       <thead>
+         <tr>
+          <th>Index</th>
+          <th>Webinar Topic</th>
+          <th>Webinar Date</th>
+          <th>Mentor Name</th>
+          <th>Mentor Contact Number</th>
+          <th>Give Feedback</th>
+         </tr>
+        </thead>
+        <tbody>
+          <tr class="feed-table-row" ng-repeat="CompletedWebinar in feedbackWebinars">
+            <td> {{$index + 1}}</td>
+            <td> {{ CompletedWebinar.webinarTopic }}</td>
+            <td> {{ CompletedWebinar.webinarDate }}</td>
+            <td> {{ CompletedWebinar.mentorName }} </td>
+            <td> {{ CompletedWebinar.mentorMobile }} </td>
+            <td data-toggle="modal" data-target="#{{CompletedWebinar.webinarId}}" ng-click="getWebinarFeedbacks(CompletedWebinar.webinarId)"> <i class="fa fa-comment"></i> </td>
+          </tr>
+          
+        </tbody>
+      </table>
+      <center><div style="color:green" ng-if="feedbackWebinars.length === 0"> You have not completed any webinar yet.</div></center>
+
+    </div> 
+  </div>
+
+</div>
+
+<div ng-repeat="CompletedWebinar in feedbackWebinars">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="{{CompletedWebinar.webinarId}}">
+  <div class="modal-dialog" >
+    
+    <div class="modal-content" ng-if="Webinarsfeedback.QualityoFWebinar">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;">Give Feedback</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid giv-feed-con">
+        <div class="container-fluid giv-feed-con">
+        <h4 style="color:green; text-align:center">Thanks For Giving the Feedback for this Webinar.</h4>
+        </div>
+        <br>
+        <div class="row giv-feed-row">
+            <p style="width:70%;float:left"> Rate your webinar experiance?</p>                 <p style="width:30%;float:left">:  &nbsp;{{Webinarsfeedback.webinarExperience}} </p><br>
+            <p style="width:70%;float:left">Your satisfication Index on targeted students?</p><p style="width:30%;float:left">:  &nbsp;{{Webinarsfeedback.satisfactionLevel}} </p> <br>
+            <p style="width:70%;float:left">Rate the quality of webinar?</p>                 <p style="width:30%;float:left">:  &nbsp;{{Webinarsfeedback.QualityoFWebinar}}</p> <br>
+            <p style="width:70%;float:left">Any technological problems?</p>                  <p style="width:30%;float:left" ng-if="Webinarsfeedback.TechnicalProblems === 'No'">
+            :  &nbsp;{{Webinarsfeedback.TechnicalProblems}}</p><p style="width:30%;float:left" ng-if="Webinarsfeedback.TechnicalProblems === 'Yes'">
+            :  &nbsp;{{Webinarsfeedback.TechnicalProblemsDetail}}</p> <br>
+            <p style="width:70%;float:left">Any Recomendations?</p>                          <p style="width:30%;float:left" ng-if="Webinarsfeedback.Recommendation === 'No'">:  &nbsp;{{Webinarsfeedback.Recommendation}}</p> <p style="width:30%;float:left" ng-if="Webinarsfeedback.Recommendation === 'Yes'">:  &nbsp;{{Webinarsfeedback.RecommendationDetail}}</p> <br>
+        </div>  
+        </div>
+      </div> 
+    </div> 
+
+    <div class="modal-content" ng-if="!Webinarsfeedback.QualityoFWebinar">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;">Give Feedback</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid giv-feed-con">
+            <div class="text-danger" style="color:red" ng-show="errormessage">
+              <h4 style="text-align:center">{{errormessage}}</h4>
+            </div>
+          <div class="row giv-feed-row">
+            Rate your webinar experiance?
+            <center>
+              <div class="btn-group">
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'1'" uncheckable>1</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'2'" uncheckable>2</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'3'" uncheckable>3</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'4'" uncheckable>4</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'5'" uncheckable>5</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'6'" uncheckable>6</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'7'" uncheckable>7</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'8'" uncheckable>8</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'9'" uncheckable>9</label>
+                <label class="btn btn-primary" ng-model="radioModel" btn-radio="'10'" uncheckable>10</label>
+              </div>
+            </center>
+          </div>
+          <br>
+          <div class="row giv-feed-row">
+            Your satisfication Index on targeted students?
+            <center>
+              <div class="btn-group">
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'1'" uncheckable>1</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'2'" uncheckable>2</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'3'" uncheckable>3</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'4'" uncheckable>4</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'5'" uncheckable>5</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'6'" uncheckable>6</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'7'" uncheckable>7</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'8'" uncheckable>8</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'9'" uncheckable>9</label>
+                <label class="btn btn-primary" ng-model="radioModel2" btn-radio="'10'" uncheckable>10</label>
+              </div>
+            </center>
+          </div>
+          <br/>
+          <div class="row giv-feed-row">
+            Rate the quality of webinar?
+            <center>
+              <div class="btn-group">
+                <label class="btn btn-primary" ng-model="radioModel3" btn-radio="'1'" uncheckable>1</label>
+                <label class="btn btn-primary" ng-model="radioModel3" btn-radio="'2'" uncheckable>2</label>
+                <label class="btn btn-primary" ng-model="radioModel3" btn-radio="'3'" uncheckable>3</label>
+                <label class="btn btn-primary" ng-model="radioModel3" btn-radio="'4'" uncheckable>4</label>
+                <label class="btn btn-primary" ng-model="radioModel3" btn-radio="'5'" uncheckable>5</label>
+              </div>
+            </center>
+          </div>
+          <br>
+          <div class="row giv-feed-row">
+            Any technological problems?
+            <center>
+              <div class="btn-group">
+                <div class="btn-group">
+                <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'No'" uncheckable>&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+              </div>
+              </div>
+                <br/>
+                <div class="btn-group" ng-show="radioModelTwo === 'Yes'">
+                  <input type="text" class="form-control" ng-model="techproblem" placeholder="Please Tell us about the problem" />
+                </div>
+            </center>
+          </div>
+          <br>
+          <div class="row giv-feed-row">
+            Any Recomendations?
+            <center>
+              <div class="btn-group">
+                <div class="btn-group">
+                <label class="btn btn-primary"  ng-model="radioModelThree" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                <label class="btn btn-primary" ng-model="radioModelThree" btn-radio="'No'" uncheckable >&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+              </div>
+              </div>
+                <br/>
+                <div class="btn-group" ng-show="radioModelThree === 'Yes'">
+                  <input type="text" class="form-control" ng-model="yourrecommendation" placeholder="Write your Recommendation"/>
+                </div>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="text-info" style="color:green; text-align:center" ng-show="successmessage"><h4>{{ successmessage }}</h4></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="SaveWebinarFeedback(CompletedWebinar.webinarId,radioModel,radioModel2,radioModel3,radioModelTwo,radioModelThree,techproblem,yourrecommendation)" >Give FeedBack</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="masteristModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        This Feature is coming soon.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+<div class="container-fluid " ng-init="toTheTop()">
+ <div class="theme-container container ">
+ <div class="contentPadding  container-fluid">
+    <div class="row ">
+      <div class="col-xs-6 pull-left" ng-init="getNodalDetails();getCollegeListDetails()">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Session Details<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right">Session Information - Datewise<h5>
+      </div>
+    </div>  <!-- END OF DIV HEADER -->
+    
+    <hr />
+
+    <div class="row side-fix-admin _detail-attr" >   
+        <div calss="row clearfix">
+        <div class="col-md-2" >
+          <h4>Year</h4>          
+          <select ng-model="usera.year" ng-change="hideLoadButton1()">
+            <option role="scope" value="">--Year-- </option>
+            <option value="2015">2015</option>
+          </select>
+        </div>
+
+        <div class="col-md-2" >
+          <h4>Month</h4>          
+          <select ng-model="usera.month" ng-disabled ="selectAll === true || !usera.year "  ng-change="hideLoadButton2()">
+            <option role="scope" value="">--Month-- </option>
+            <option value="ALL">ALL</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+        </div>
+        <div class="col-md-3" >  
+          <h4>Select Nodal Center</h4>          
+          <select ng-model="usera.nodal" ng-disabled ="!usera.month || !usera.year " ng-change="applyNodalFilter()"  class=" main-input-box _main-input-box" ng-options="v.name as v.name for (k, v) in nodalList" >
+            <option>Select Nodal Center</option>          
+            <option value="">{{nodalLoadingMessage}} </option> 
+          </select>
+        </div>
+           
+        <div class="col-md-3" > 
+          <h4>Select College</h4>          
+          <select ng-model="usera.college" ng-disabled ="!usera.month || !usera.year " ng-change="applyCollegeFilter()"  class=" main-input-box _main-input-box _main-input-box_college" ng-options="v.name as v.name for (k, v) in collegeListForNodal" style="max-width: 100%;">
+            <option>Select Nodal Center</option>          
+            <option value="">{{collegeLoadingMessage}} </option>
+          </select> 
+        </div>
+        <div class="col-md-2"   > 
+         <h4 ng-if="showLoadButton1 === 'show' && usera.year !== '' && usera.month !== ''"> Load Sessions</h4>
+          &nbsp;&nbsp;
+          <span class="btn btn-primary btn-xs" ng-if="showLoadButton1 === 'show' && usera.year !== '' && usera.month !== ''" ng-click="getMonthlySession(usera.month,usera.year)" style="border-radius:4px; " ng-disabled="!usera.month">Load</span> 
+        </div>
+      </div>  <!-- END OF FILTERS -->
+    </div> <!-- End of ROW -->
+       
+    <div class="row">
+      <modal-dialog ng-show='spinner'> 
+        <div class="container-fluid">
+            <div class="row">
+                <center>
+                    <i class="fa fa-spinner fa-5x fa-spin"></i>
+                </center>
+            </div>
+            <div class="row">
+                <center>
+                    <h4>Please wait data is loading ... </h4>
+                </center>
+            </div>
+        </div>
+      </modal-dialog>
+    </div>
+
+
+    <div class="" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+      <div class="row ">        
+        <div class="col-md-12 session-details">
+          <div class="container-fluid" id="src-scroll" style=" height : auto;">
+            <div class="row">
+              <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                <table class="table table-striped feed-table">
+                  <col width="10px" />
+                  <col width="25px" />
+                  <col width="25px" />
+                  <col width="15px"/>
+                  <col width="25px" />
+                  <col width="25px" />
+                  <col width="20px"/>
+                  <col width="15px" />
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Date</th>
+                      <th>Student Name</th>
+                      <th>Email</th>
+                      <th>Query</th>
+                      <th>College</th>
+                      <th>Nodal</th>
+                      <th>Session Status</th>
+                    </tr>
+                  </thead>
+                  <tbody ng-animate="'animate'" ng-repeat="(value,key) in sessionDetailForMonthlySession | orderBy: sortSessionsByDate: false | filter:usera.nodal | filter:subfilter |  filter:usera.college  ">
+                    <tr class="feed-table-row">
+                      <td>{{$index + 1}}</td>
+                      <td><strong>{{key.sessiondate}}</strong></td>
+                      <td><strong>{{key.studentname}}</strong></td>
+                      <td><strong>{{key.studentemail}}</strong></td>
+                      <td><strong>{{key.sessionquery}}</strong> </td>
+                      <td><strong>{{key.collegename}}</strong> </td>
+                      <td><strong>{{key.nodalname}}</strong></td>
+                      <td> 
+                        <span ng-if="key.sessionstatus !== null"><strong>{{key.sessionstatus}}</strong></span>
+                        <span ng-if="key.sessionstatus == null "><strong> Feedback Not given </strong></span>
+                      </td>
+                      <!-- <td class="v-l" align="center" style="color:#00FF00; cursor:pointer;" ng-click="verifyStudent(student)"><i class="fa fa-thumbs-o-up"></i></td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- END OF TABLE -->
+    <div><span style="color:red"><center> <h1>{{notFountMessage}}</h1> </center></span></div>
+    <div ><span style="color:red"><center> <h1 ng-if="((sessionDetailForMonthlySession | filter:usera.nodal | filter:usera.college).length) == 0 && !spinner">No record found for selected college/nodal</h1> </center></span></div>
+    <div> <center> <span style="color:green"><h2> <p ng-if="resetMonthCounter == 12"> No more Session </p> </h2></span></center> </div>
+    <div class="row">
+      <div class="col-md-12 page-break" style="width: 98%;"></div>
+    </div> <!-- END OF PAGE BREAK -->
+
+    <h3 style="color: black;">Total Sessons: {{(sessionDetailForMonthlySession | filter:usera.nodal | filter:usera.college).length}}</h3>
+    </div> <!-- End of _detail-attr -->
+
+    </div>
+  </div>

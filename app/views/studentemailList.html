@@ -1,0 +1,632 @@
+<head>
+
+  <style type="text/css">
+          
+      .dright
+      {
+       border: 3px solid;
+       height:434px;
+       width:300px;
+       margin-right: 10px;
+       background: #757F9A;
+
+      }
+
+      .head {
+        background-color: #006363;
+          height:60px;
+         /* border-radius: 14px;*/
+          width:297px;
+          margin: 0px 0px 0px 0px;
+          white-space: 0px;
+          float:left;
+          display: inline-block;
+          border: 2px solid;
+
+          }
+      #caption
+      {
+        font-size: 17px;
+        font-weight: bold;
+        margin-top: 13px;
+        
+        margin-left: 15px;
+        color: white;
+        float: left;
+      }    
+
+
+      .footer {
+          height:45px;
+          border-radius: 5px;
+          width:295px;
+          margin: 0px 0px 0px 0px;
+          box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+          background: rgba(0,0,0,.2);
+          padding:5px;
+          }
+          .content {
+          height:325px;
+          /*border-radius: 15px;*/
+          width:297px;
+          margin:0px 0px 0px 0px;
+          overflow:scroll;
+          padding-bottom: 0px;
+          overflow-x: hidden;
+          
+          }
+      .control-group{
+        margin: 10px 3px 0px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+        
+      ::-webkit-input-placeholder {
+          color:black;
+      }
+      #date
+      {
+        text-align: center;
+        font-family: Montsserat;
+        font-weight: bold;
+        color: BLACK;
+
+      }
+      #time
+      {
+        display: table-cell;
+        float: right;
+        vertical-align: bottom;
+        font-size: 9px;
+        color: grey;
+        border-radius: 8px;
+        border-collapse: separate;
+        padding-top: 5px;
+      }
+      #msg
+      {
+        border-radius: 5px;
+        
+        border-collapse: separate;
+        background-position: left top;
+        display: inline-block;
+        margin-right: 3px;
+        padding-left: 5px;
+        word-wrap:break-word;
+        text-align: left;
+        padding-bottom: 0px;
+        font-size: 12px;
+        color: black;
+        font-family: Montserrat;
+      }
+      #recipent
+      {
+        text-align: center;
+      }
+      .glyphicon {
+          font-size: 16px;
+          margin-left: 5px;
+          color: #061439;
+      }
+      .glyphicon.glyphicon-time {
+          font-size: 10px;
+          color: black;
+
+      }
+      #load
+      {
+        font-size: 12px;
+        width: 160px;
+        height: 30px;
+        text-decoration: none;
+        background-color:lavender;
+        color:black;
+      }
+      .msgInfo
+      {
+        padding: 2px 0px 0px 0px;
+        position: relative;
+        max-width: 70%;
+      }
+      #content::-webkit-scrollbar-track -moz-scrollbar-track {
+            background-color: #b46868;
+      } /* the new scrollbar will have a flat appearance with the set background color */
+       
+      #content::-webkit-scrollbar-thumb -moz-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2); 
+      } /* this will style the thumb, ignoring the track */
+       
+      #content::-webkit-scrollbar-button -moz-scrollbar-button {
+            background-color: #7c2929;
+      } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+       
+      #content::-webkit-scrollbar-corner -moz-scrollbar-corner {
+            background-color: black;
+      }
+      /*.glyphicon-refresh-animate {
+          -animation: spin 0.7s infinite linear;
+          -webkit-animation: spin2 0.7s infinite linear;
+          -moz-animation: spin2 0.7s infinite linear;
+          -o-animation: spin2 0.7s infinite linear;
+      }
+
+      @-webkit-keyframes spin2 {
+          from { -webkit-transform: rotate(0deg);}
+          to { -webkit-transform: rotate(360deg);}
+      }
+      @-moz-keyframes spin2 {
+          from { -moz-transform: rotate(0deg);}
+          to { -moz-transform: rotate(360deg);}
+      }
+      @keyframes spin {
+          from { transform: scale(1) rotate(0deg);}
+          to { transform: scale(1) rotate(360deg);}
+      }*/
+      #note{
+        display:none;
+        color:green;
+        margin-right: 3px;
+        animation: blink 1s steps(2, start) infinite;
+      }
+      @keyframes blink {
+      to { color: white; }
+      }
+
+
+      .glyphicon.glyphicon-comment {
+          font-size:40px;
+          
+      }
+
+      .bigEntrance{
+        animation-name: bigEntrance;
+        -webkit-animation-name: bigEntrance;  
+        -moz-animation-name: bigEntrance;  
+
+        animation-duration: 1.6s; 
+        -webkit-animation-duration: 1.6s;
+        -moz-animation-duration: 1.6s;
+
+        animation-timing-function: ease-out;  
+        -webkit-animation-timing-function: ease-out;  
+        -moz-animation-timing-function: ease-out;  
+
+        visibility: visible !important;     
+      }
+
+      @keyframes bigEntrance {
+        0% {
+          transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+          opacity: 1;
+        }
+        30% {
+          transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);    
+          opacity: .5;
+        }
+        45% {
+          transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }
+        60% {
+          transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);   
+          opacity: .5;
+        } 
+        75% {
+          transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }
+        90% {
+          transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);    
+          opacity: .5;
+        } 
+        100% {
+          transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }   
+      }
+
+      @-webkit-keyframes bigEntrance @-moz-keyframes bigEntrance {
+        0% {
+          -webkit-transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+          -moz-transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+          opacity: 0.2;
+        }
+        30% {
+          -webkit-transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);    
+          -moz-transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);    
+          opacity: .5;
+        }
+        45% {
+          -webkit-transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+          -moz-transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: .85;
+        }
+        60% {
+          -webkit-transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);   
+          -moz-transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);   
+          opacity: .95;
+        } 
+        75% {
+          -webkit-transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+          -moz-transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: .7;
+        }
+        90% {
+          -webkit-transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);    
+          -moz-transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);    
+          opacity: .8;
+        } 
+        100% {
+          -webkit-transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+          -moz-transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }       
+      }
+      /*Clearing Floats*/
+      .cf:before, .cf:after{
+          content:"";
+          display:table;
+      }
+
+      .cf:after{
+          clear:both;
+      }
+
+      .cf{
+          zoom:1;
+      }    
+      /* Form wrapper styling */
+      /*.form-wrapper {
+          width: 450px;
+          padding: 15px;
+          margin: 150px auto 50px auto;
+          background: #444;
+          background: rgba(0,0,0,.2);
+          border-radius: 10px;
+          box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+      }*/
+
+      /* Form text input */
+
+      .form-wrapper input {
+          width: 225px;
+          height:35px;
+          margin-left: 3px;
+          float: left;   
+          font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+          border: 0;
+          background: #eee;
+          border-radius: 3px 0 0 3px; 
+          color: black;    
+      }
+
+      .form-wrapper input:focus {
+          outline: 0;
+          background: #fff;
+          box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+      }
+
+      .form-wrapper input::-webkit-input-placeholder {
+         color: #999;
+         font-weight: normal;
+         font-style: italic;
+      }
+
+      .form-wrapper input:-moz-placeholder {
+          color: #999;
+          font-weight: normal;
+          font-style: italic;
+      }
+
+      .form-wrapper input:-ms-input-placeholder {
+          color: #999;
+          font-weight: normal;
+          font-style: italic;
+      }   
+
+      /* Form submit button */
+      .form-wrapper button {
+          overflow: visible;
+          position: relative;
+          float: left;
+          border: 0;
+          padding: 0;
+          cursor: pointer;
+          height: 35px;
+          width: 55px;
+          font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+          color: #fff;
+          text-transform: uppercase;
+          background: #d83c3c;
+          border-radius: 0 3px 3px 0;     
+          text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+          box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+          margin-right: 2px;
+          
+      }  
+
+      .form-wrapper button:hover{    
+          background: #e54040;
+      }  
+
+      .form-wrapper button:active,
+      .form-wrapper button:focus{  
+          background: #c42f2f;
+          outline: 0;  
+      }
+
+      .form-wrapper button:before { /* left arrow */
+          content: '';
+          position: absolute;
+          border-width: 8px 8px 8px 0;
+          border-style: solid solid solid none;
+          border-color: transparent #d83c3c transparent;
+          top: 12px;
+          left: -6px;
+      }
+
+      .form-wrapper button:hover:before{
+          border-right-color: #e54040;
+      }
+
+      .form-wrapper button:focus:before,
+      .form-wrapper button:active:before{
+              border-right-color: #c42f2f;
+      }     
+
+      .form-wrapper button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
+          border: 0;
+          padding: 0;
+      }  
+  </style>
+
+</head>
+
+
+<div class="container-fluid " ng-init="toTheTop()">
+  
+  <div class="theme-container">
+      <div class="row a-head">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/nodal-studentemails"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Students Email List<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can edit or cancel student email here.<h5>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="container-fluid" ng-if ="signedIn() && usera.profile.profiletype=='admin'"> 
+          <div class="row search-results" ng-init="getnodaluid()">
+            <div class="col-md-12">
+              <div class="container-fluid" style="color:black; font-family: Montserrat,Helvetica,Arial,sans-serif;margin-bottom: 4em;">
+                <div class="row">
+                  <strong> Center Details:</strong>  
+                </div>
+                <hr />
+                <div class="row" style="margin-top:10px;">
+                  <div class="col-xs-2">
+                    <strong> Name :</strong>
+                  </div>
+                  <div class="col-xs-10" style="font-size:18px">
+                    {{nodalAdminName}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-2">
+                    <strong> Email :</strong>
+                  </div>
+                  <div class="col-xs-10" style="font-size:18px">
+                    {{nodalAdminEmail}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-2">
+                    <strong> Center Name :</strong>
+                  </div>
+                  <div class="col-xs-10" style="font-size:18px">
+                    {{nodalCenterName}}
+                  </div>
+                </div>
+                <div class="row">
+                      <div class="col-xs-2">
+                        <strong> Mobile :</strong>
+                      </div>
+                      <div class="col-xs-10" style="font-size:18px">
+                        {{nodalPhone}}
+                      </div>
+                </div>
+                <div class="row">
+                      <div class="col-xs-2">
+                        <strong> NodalID :</strong>
+                      </div>
+                      <div class="col-xs-10" style="font-size:18px">
+                        nodal{{nodalLoginId}}
+                      </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" ng-if="nodaluid !== null" >
+              <div class="container-fluid" id="src-scroll" style="overflow: visible; height : auto;">
+                <div class="row" ng-init="emailList = getStudentEmailList(nodaluid)" >
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive" ng-if="emailList.length" >
+                    <table class="table table-striped feed-table">
+                        <col width="60px" />
+                        <!-- <col width="40px" />
+                        <col width="40px" />
+                        <col width="20px" />-->
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Student Email</th>
+                            <th>Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-animate="'animate'" ng-repeat="(studentId,detail) in emailList " >
+                        
+                          <tr class="feed-table-row">
+                            <td scope="row">{{detail.$id | slice:5 }}</td>
+                            <td><strong>
+                            <i class="fa fa-envelope fa-1x"></i>&nbsp;&nbsp;{{ detail.$value }} {{ name1 }}
+                            </strong></td>
+                            <td ng-init="makearray(detail.$id,detail.$value)">{{ nameList[detail.$id] }}</td>
+                            <!-- <td style="color:red"><i class="fa fa-times fa-2x" ng-click="deleteEmail(nodaluid,detail.$id)"></i></td> -->
+                          </tr>                        
+                        
+                        </tbody>                      
+                      </table>
+                        <div align="center">
+                          <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal_confirm" ng-click="getStudentEmailLists(nodaluid)">Delete All</button>
+                          <button class="btn btn-danger btn-lg"  ng-click="getStudentNameByEmail()">Get Names</button>
+                          <button class="btn btn-danger btn-lg" ng-click="redirectToAlignSession(nodaluid,nodalLoginId)">Align Session</button>
+                        </div>
+                    </div>
+                    <div ng-if="!emailList.length" style="color:red"><strong><h2><center>Nodal Person has deleted all the emails.</center></h2></strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      <div id="chatParentDiv" class="col-xs-4">
+              <div ng-controller="chatCtrl" style="float:right">
+            <div class="dright"   >
+       <div class="head" ng-init="loadMsg(nodaluid,usera.profile.adminname);setNodalStatus(nodaluid);">  
+          <span  id="caption"> &nbsp;&nbsp;&nbsp;Status&nbsp;&nbsp;&nbsp;</span>
+          <div ng-if="nodalStatus=='online'"style="height:15px;width:15px;border-radius:100%;background-color:green;float:left;margin-top:20px;"></div>
+          <div ng-if="nodalStatus=='offline'"style="height:15px;width:15px;border-radius:100%;background-color:red;float:left;margin-top:20px;"></div>
+              <div class="row">
+              <div class="col-md-2" style="padding-top:15px;">
+                <span ng-if="typingFlag" ><b>Typing...</b></span>
+              <span class="glyphicon glyphicon-comment" class="pulse" id="note" align="right"></span></div>
+              <div class="col-md-2">
+              <span class="btn" align="center" style="font-size:2em;color:lavender">
+                  <i class="fa fa-chevron-up" ng-click="scrollUp();"></i>
+                </span>
+                </div>
+               <div class="col-md-2">
+                <span class="btn" align="center" style="font-size:2em;color:lavender">
+                  <i class="fa fa-chevron-down" ng-click="toTheBottom();"></i>
+                </span>
+
+                </div>
+
+              </div>
+            </div>
+             <div class="content" id="content" ng-init="checker(nodaluid);"  >
+              <div align="center">
+                <button type="button" id="load" class="btn btn-default" ng-click="loadMsg(nodaluid,usera.profile.adminname);addclass();" ng-if="loader&&loader1" >
+                    <span id="loadMsg" class=""style="font-size:1.3em;float:left"></span>
+                    <span ng-model="loadInfo" style="float:center" >&nbsp;&nbsp;&nbsp;{{loadInfo}}</span>
+                </button>
+              </div>
+
+            <div ng-repeat="(key,value) in list"  >
+                      <div ng-init="compare(value.name,key,value.date);">
+
+                          <div id="date" ng-if="date[key]=='not_same'" >
+                          <BR>
+                              <span style="background:#AAD3E2;border-radius:5px;padding:2px 2px 2px 2px;">  {{value.date|convert }} </span>
+                          </div>
+                          <div id="recipent" >  
+                            <div ng-if="name[key]=='not_same'"> 
+                                 
+                              <div ng-if="value.name==usera.profile.adminname " align="right" style="margin-right:15px;color:black;" >
+                                  <span class="glyphicon glyphicon-user" ></span> : You</div>
+                              <div ng-if="value.name!==usera.profile.adminname" align="left" style="color:black;"  >
+                              <span class="glyphicon glyphicon-user" ></span> : {{value.name}}</div>
+                              
+                            </div>
+                          </div>
+                      </div>
+                    <div class="msgInfo" ng-if="value.name==usera.profile.adminname" align='right' style="margin-left:30%" >
+                        <div id="msg"style="BACKGROUND:#C8F4B5;"  > {{value.msg}}&nbsp;&nbsp;&nbsp;<b id="time">{{value.time|change_time}}&nbsp;&nbsp;</b></div> 
+                    </div>                             
+                   
+                    <div class="msgInfo" ng-if="value.name!==usera.profile.adminname" align='left' style="margin-left:3px">
+                      <div id="msg"style="BACKGROUND:LAVENDER;"  >  {{value.msg}}&nbsp;&nbsp;&nbsp;<b id="time">{{value.time|change_time}}&nbsp;&nbsp;</b></div>
+                    </div>                             
+            </div>   
+          </div>  
+            <div class="footer">
+              
+              <form class="form-wrapper cf">
+            <input type="text"  class=" textbox" id="textmsg" placeholder="Type a Message" ng-model="inp_msg" ng-keydown="keyPressed($event,usera.uid,null)" onbeforeunload=""/ >
+            <button type="submit" id="textbtn" ng-click="sendMsg(inp_msg,usera.profile.adminname,nodaluid); inp_msg=''">Send</button>
+        </form>
+            </div> 
+
+        </div>
+        </div>
+            </div>        
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>    
+
+ </div>
+
+<div class="modal fade" id="myModal_confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" style="width:90%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" class="close" id="confirmatiomPopClose"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Delete!</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid" style="padding:20px; padding-left:40px; padding-right:40px;">
+          <div class="row studentmail-confirmatiomPop-table">
+            <table class="table table-striped feed-table">
+            <col width="60px" />
+            <col width="150px" />
+            <col width="300px" />
+            <col width="270px" />
+              <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Student Name</th>
+                    <th>College Name</th>
+                    <th>Nodal Center</th>
+                    <th>Time</th>
+                  </tr>
+              </thead>
+              <tbody ng-animate="'animate'" ng-repeat="(studentId,detail) in List" >
+                <tr class="feed-table-row">
+                  <td scope="row">{{$index+1}}</td>
+                  <td >{{detail.studentName | titleCase}}<br>
+                       <strong>{{detail.studentEmail }}</strong></td>
+                  <td ng-init="collegename = getcollegesname(detail.collegeurl)">{{collegename.$value | titleCase}}</td>
+                  <td ng-init="nodalname = getnodalsname(detail.nodalurl)"><strong ng-if="detail.collegeurl !== null">{{nodalname.nodalCenterName | titleCase}}</strong> <strong ng-if="detail.collegeurl == null" style="color:red">Session not booked yet</strong> </td>
+                  <td>{{detail.Lastseen}}</td>
+                </tr>
+              </tbody>                      
+            </table>
+          </div>
+          <div class="row popup-text" style="color:black; font-size:18px; font-family: Montserrat,Helvetica,Arial,sans-serif; margin-top:15px;">
+            <center>Are you sure you want to delete.
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+       <center> <button type="button" id="confirmatiomPopYes" class="btn btn-default " ng-click="deleteAllEmail(nodaluid, detail.$id)" data-dismiss="modal">Yes</button>
+        <button type="button" id="confirmatiomPopNo" class="btn btn-default" ng-click="close()" data-dismiss="modal">No</button> </center>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">   
+  #chatParentDiv{   
+    position:fixed;   
+    right:0;    
+    bottom:0;   
+    z-index:9999999;    
+    margin-right:0;   
+  }
+  #myModal_confirm .modal-backdrop {
+    position: fixed;
+  }   
+</style>

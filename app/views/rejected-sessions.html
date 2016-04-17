@@ -1,0 +1,133 @@
+<div class="theme-container">
+	<div class="container-fluid" ng-init="toTheTop()">
+	  		<div class="row">
+	    		<div class="col-xs-6 pull-left">
+	      		<h3 class="pull-left"> <a href="#/rejected-session"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Inspect Session<h3>
+	  		  </div>
+	  		  <div class="col-xs-6 pull-right">
+	  		    <h5 class="pull-right">You can verify or un-verify a session here.<h5>
+	  		  </div>
+	  		</div>
+	  		<hr />
+	  		<div class="row" ng-show="signedIn() && usera.profile.profiletype=='admin'" ng-init="details = getRejectedSessionDetails()">
+	  			<div ng-init="college = getcollegedetail(studentsId.$id)">
+	  				<center>
+	  					<h3 style="color:yellow">{{college.collegename}} ({{college.counselloremail}})</h3>
+	  				</center>
+	  			</div>
+	    		<div class="container-fluid sessions-page" ng-controller="AdminTaskCtrl" ng-repeat="(Id,details) in studentsId" ng-if="details.sessionVerificationStatus=='rejected'">
+				<div class="row sess-head" ng-init= "getDetails(Id)"> 
+					<center> Session Id = {{collegeSessionDetails.interactionId}} </center> 
+				</div>
+				<!-- {{studentdetail}} -->
+
+				<hr />
+				<!-- {{collegeFeedbackDetails}} -->
+				
+				
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="container-fluid">
+								<img class="img-responsive" src="" ng-src="{{studentdetail.studentphoto}}" alt="Photo of {{studentdetail.studentname}}" />
+							</div>
+						</div>
+						<iframe class="embed-responsive-item" ng-src="{{trustSrc(video.src)}}"  frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+				<div class="row video-row-with-btn" >
+					<!-- <div class="col-xs-2 sw-btn">
+						<center><i class="fa fa-chevron-left fa-4x"></i></center>
+					</div> -->
+					<!-- <div class="col-xs-8">
+						
+							<div class="embed-responsive embed-responsive-16by9">
+					 			<iframe class="embed-responsive-item" ng-src="{{trustSrc(video.src)}}"  frameborder="0" allowfullscreen></iframe>
+							</div>
+						
+					</div> -->
+					<!-- <div class="col-xs-2 sw-btn">
+						<center><i class="fa fa-chevron-right fa-4x"></i></center> 
+					</div> -->
+	  			</div>
+				<hr />
+				<div ng-if="studentdetail.studentstatus == 'verified'">
+							<center><strong style="color:green">This is a verified student.</strong></center><br>
+				</div>
+				<div ng-if="studentdetail.studentstatus == 'notverified'">
+							<center><strong style="color:red">Student verification required.</strong></center><br>
+				</div>
+				<div ng-if="studentdetail.studentstatus == 'block'">
+							<center><strong style="color:red">This student is currently blocked by Admin. Please inform your supervisor.</strong></center><br>		
+				</div>
+				<!-- collegeurl  {{collegeSessionDetails.collegeurl}}
+				studenturl  {{collegeSessionDetails.studenturl}} -->
+				<input type="hidden" ng-model="collegeurl" ng-init="collegeurl=collegeSessionDetails.collegeurl">
+				<input type="hidden" ng-model="studenturl" ng-init="studenturl=collegeSessionDetails.studenturl">
+				<div class="row sess-des" style="padding:2em;">
+					<div class="col-xs-6">
+						<div class="row">
+							<!-- <strong>collegeSessionDetailsA 1: </strong> {{collegeSessionDetailsA[2]}}<br>
+							<strong>collegeFeedbackDetailsA 1 : </strong> {{collegeFeedbackDetailsA[2]}}<br>
+							<strong>collegeSessionDetailsA 2: </strong> {{collegeSessionDetailsA[0]}}<br>
+							<strong>collegeFeedbackDetailsA 2 : </strong> {{collegeFeedbackDetailsA[0]}}<br> -->	
+
+							<strong>Student's Name : </strong> {{studentdetail.studentname}} 
+						</div>
+						<div class="row">
+							<strong>Student's Email : </strong> {{studentmail.$value}}
+						</div>
+						<div class="row">
+							<strong>Student's Query : </strong> {{collegeSessionDetails.studentquery}}
+						</div>
+						<div class="row">
+							<strong>Session's Date : </strong> {{collegeSessionDetails.sessiondate}}
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="row">
+							<strong>Chat discussion : </strong> {{collegeFeedbackDetails.chatdiscussion}}
+						</div>
+						<div class="row">
+							<strong>Next Step : </strong> {{collegeFeedbackDetails.nextstep}}
+						</div>
+						<div class="row">
+							<strong>Video URL : </strong> <a href={{collegeFeedbackDetails.videourl}} target="_blank">{{collegeFeedbackDetails.videourl}}</a>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<form ng-if="collegeSessionDetails.collegeurl" ng-submit="approveSession(action.$value,hours,minutes,seconds,collegeSessionDetails.studenturl,collegeSessionDetails.collegeurl,collegeFeedbackDetails.videourl,collegeSessionDetails.interactionId, collegeFeedbackDetails.chatdiscussion, collegeFeedbackDetails.nextstep,'rejected')">
+					<div style="padding:2em;" class="row qua-controls" ng-init="action = actionTaken(collegeSessionDetails.collegeurl, collegeSessionDetails.$id); video= rejectedVideoUrl(collegeSessionDetails.collegeurl, collegeSessionDetails.$id)">
+			   		 <div class="row block-det">
+					  <div class="row">
+						<div class="col-md-5">
+									<h4> Action Taken :</h4>
+						</div>
+						<div class="col-md-5">
+		  					<h4 class="non-edit-field-1"> {{ action.$value }} </h4>
+						</div><br>
+						<div class="col-md-5">
+									<h4> Last Video Url :</h4>
+						</div>
+						<div class="col-md-5">
+		  					<h4 class="non-edit-field-1"><a href="{{ video.$value }}" target="_blank"> {{ video.$value }} </a> </h4>
+						</div>
+						</div>
+						</div>
+						<div class="col-xs-10">
+							<input type="number" min="0" max="6" required ng-model="hours"><strong> Hours </strong> 
+							<input type="number" min="0" max="60" required ng-model="minutes"><strong> Minutes </strong> 
+							<input type="number" min="0" max="60" required ng-model="seconds"> <strong> Seconds </strong>
+						</div> 
+
+						<div class="col-xs-2">
+							<input type="submit" class="btn btn-default btn-block input-g" value="Approve">
+							<!-- <input type="submit" class="btn btn-default btn-block input-g" ng-click="rejectSession(action,hours,minutes,seconds,collegeSessionDetails.studenturl,collegeSessionDetails.collegeurl,collegeFeedbackDetails.videourl)" value="Reject"> -->
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>    
+	  </div>
+</div>

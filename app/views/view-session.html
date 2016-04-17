@@ -1,0 +1,106 @@
+<div class="container-fluid " ng-init="toTheTop()">
+  
+
+<div class="theme-container">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; View Sessions Details<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right">You can view any session's details here.<h5>
+      </div>
+    </div>  
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="container-fluid sessions-page" ng-controller="AdminTaskCtrl" ng-init="toTheTop()">
+      <div class="row sess-head">
+        <div class="col-xs-6">
+          <input type="text" ng-model="sessionId" class="form-control" placeholder="Enter Session ID"> 
+        </div>
+        <div class="col-xs-1">
+          <input type="button" class="btn btn-default btn-block input-g" ng-click="getSessionDetail(sessionId) ; getActionTaken(sessionId)" value="Go">
+        </div>
+        <div class="col-xs-5">
+          <center>Session ID : {{sessionId}}</center>
+        </div>
+      </div>
+      <hr />
+
+      <h3 ng-if="showHead" style="color: red;">Please enter correct Session ID !</h3>
+      
+      <div class="row sess-des-all" style="padding:2em;" ng-if="sessionDetail.sessiondate != null">
+        <div class="col-xs-6">
+           <!-- <div class="row sess-des-all-label">
+            <strong>College Name : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{ collegename }}
+          </div>
+          <div class="row sess-des-all-label">
+            <strong>College Email : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{ collegeemail }}
+          </div>  -->
+          <div class="row sess-des-all-label">
+            <strong>Student's Name : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{studentName.$value}}
+          </div>
+          <div class="row sess-des-all-label">
+            <strong>Student's Email : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{studentEmail.$value}}
+          </div>
+          <div class="row sess-des-all-label">
+            <strong>Student's Query : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{sessionDetail.studentquery}}
+          </div>
+          <div class="row sess-des-all-label">
+          <strong>Session's Date : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{sessionDetail.sessiondate}}
+          </div>
+          <div class="row sess-des-all-label">
+            <strong>Chat discussion : </strong>
+          </div>
+          <div class="row sess-des-all-ans" id="view-scroll" style="height:300px; overflow-y:scroll">
+            {{sessionDetail.chatdiscussion}}
+          </div>
+          <div class="row sess-des-all-label">
+            <strong>Next Step : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{sessionDetail.nextstep}}
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <center>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="{{trustSrc(video.src)}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </center>
+          <div style="margin-top:20px; padding-left:20px;" class="row sess-des-all-label">
+            <strong>Action Taken : </strong>
+          </div>
+          <div class="row sess-des-all-ans">
+            {{actionTaken.$value}}
+          </div>
+        </div>
+      </div>
+      <hr />
+    </div>    
+  </div>
+</div>
+
+
+</div>

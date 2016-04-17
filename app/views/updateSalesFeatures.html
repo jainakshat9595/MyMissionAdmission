@@ -1,0 +1,31 @@
+<img class="intro-bg" src="../images/intro-bg.jpg" />
+<div class="container-fluid search-page ex-pad" ng-init="toTheTop(); getsalesfeature()">
+  <div class="row a-head">
+    <div class="col-xs-6 pull-left">
+      <h3 class="pull-left"> <a href="#/updateAdminDeligation"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Update Features<h3>
+    </div>
+    <div class="col-xs-6 pull-right">
+      <h5 class="pull-right">You can update Sales features to your subordinate here.<h5> 
+
+    </div>
+  </div>
+  <hr />
+
+
+                                 <!-- Sales Head Admin work deligation and approval to his/ her subordinate  -->
+
+  <div class="row">
+    <div class="col-xs-10" style="color:white; font-size:18px; padding-left:20px;">
+      <label class="checkbox" ng-repeat="salesFeature in salesFeatures">
+        <input type="checkbox" checklist-model="uSer.Features" checklist-value="salesFeature.id"> {{salesFeature.text}}
+      </label>
+      You can Assign only one of them in this
+                  <div ng-repeat="admin in onefeature">
+                  <input type="radio" value="{{ admin.id }}" ng-model="onefeaturemodel" name="name" ng-click="testarray(admin.id)" title="Please Select one of them" />&nbsp; {{admin.text}}
+                  </div>
+    </div>
+    
+    <strong><input type="button" class=" btn btn-primary btn-block" style="color:#00FF00; cursor:pointer;" ng-disabled="uSer.Features ==''" ng-click = "updateSalesSubordinate()" value="Update Roles"></strong>
+  </div>
+</div>
+</div>

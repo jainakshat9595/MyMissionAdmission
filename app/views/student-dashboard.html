@@ -1,0 +1,131 @@
+<style type="text/css">
+	@-webkit-keyframes example {
+    0%   {
+    	transform:scale(1,1);
+    }
+    25%  {
+    	transform:scale(1.25,1.25);
+    }
+    50%  {
+    	transform:scale(1.5,1.5);
+    }
+    75% {
+    	transform:scale(1.25,1.25);	
+    }
+    100% {
+    	transform:scale(1,1);
+    }
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {
+    	transform:scale(1,1);
+    }
+    25%  {
+    	transform:scale(1.25,1.25);
+    }
+    50%  {
+    	transform:scale(1.5,1.5);
+    }
+    75% {
+    	transform:scale(1.25,1.25);	
+    }
+    100% {
+    	transform:scale(1,1);
+    }
+}
+	#liveBtn {
+		-webkit-animation-name: example;
+		-webkit-animation-duration: 0.5s;
+		animation-name: example;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		transition: all 1s;
+	}
+</style>
+
+
+<div class="row student-dashboard-main-user-row" id="topCoverPic" ng-init="toTheTop(); isAnyWebinarLive()">
+	<div class="col-sm-1 userImage">
+		<img src="{{user.profile.studentphoto}}" alt="../images/bower-logo.png" class="">
+	</div>
+	<div class="col-sm-8 userDetails">
+		<div class="userDetails-name">{{user.profile.studentname}}</div>
+		<div class="userDetails-bio">{{user.profile.studentabout}} </div>
+	</div>
+	
+	<div class="col-xs-12" style="color:white; text-align:right;">
+		<button class="btn" data-target="#webinar" data-toggle="tab" ng-if="anyLiveWebinars.length!==0" ng-click="bookhistorytab='hide'; studentDashboardChangeTab('index5');" style="color: #FF3636; padding: 0.5em 2em; background-color: transparent; border: 2px solid #FF3636; border-radius: 2em; letter-spacing: 2px;"><i class="fa fa-circle" id="liveBtn"></i>&nbsp;<strong>Live</strong></button>
+	</div>
+</div>
+
+
+<div id="extra-div-by-animesh">
+	<div class="student-dashboard-main-nav-row student-darkBlue" id="student-top-bar-for-directive">
+		<div id="topBarDiv">
+			<span id="index1" class="focus" role="tab" data-target="#dashboard" data-toggle="tab" ng-init="getStudentEmailVerificationStatus()" ng-click="studentDashboardChangeTab('index1');">&nbsp;&nbsp; Dashboard <i ng-if="user.profile.emailverificationstatus === 'false'" class="fa fa-asterisk" style="color:red"></i>&nbsp;&nbsp;</span>
+			
+			<span id="index2" role="tab" data-target="#bookedhistory" data-toggle="tab" ng-init="checkNewBookSessionForNotification()" ng-click="bookhistorytab='hide'; studentDashboardChangeTab('index2');">&nbsp;&nbsp; Booked History <i ng-if="(sessionLength !== 1) && (sessionLength !== 0)" class="fa fa-asterisk" style="color:red"></i> &nbsp;&nbsp;</span>
+			
+			<span id="index3" role="tab" data-target="#profile" data-toggle="tab" ng-init="incompleteProfileCheck(user.uid)" ng-click="studentDashboardChangeTab('index3');">&nbsp;&nbsp; Profile <i ng-if="(profileIncomplete == 'Done') && profiletab == 'show'" class="fa fa-asterisk" style="color:red"></i> &nbsp;&nbsp;</span>
+			
+			<span id="index4" role="tab" data-target="#incentive" data-toggle="tab" ng-init="notificationOfIncentiveChange()" ng-click="studentDashboardChangeTab('index4');"> &nbsp;&nbsp; My Scholarship Fund <i ng-if="((sessionIncentive !== 1) && (sessionIncentive !== 0)) || ((referralIncentive !== 1) && (referralIncentive !== 0))" class="fa fa-asterisk" style="color:red"></i> &nbsp;&nbsp;</span>
+
+			<span id="index5" role="tab" data-target="#webinar" data-toggle="tab" ng-init="checkNewBookSessionForNotification()" ng-click="bookhistorytab='hide'; studentDashboardChangeTab('index5');">&nbsp;&nbsp; Webinars<i ng-if="(sessionLength !== 1) && (sessionLength !== 0)" class="fa fa-asterisk" style="color:red"></i> &nbsp;&nbsp;</span>
+		</div>
+	</div>
+</div>
+
+<div class="tab-content" ng-controller="StudentDashCtrl">
+	<div ng-include="'views/student-dashboard-dash.html'" role="tabpanel" class="tab-pane active" id="dashboard" ng-controller="StudentDashCtrl">
+	</div>
+	<div ng-include="'views/student-dashboard-bh.html'" role="tabpanel" class="tab-pane" id="bookedhistory" ng-controller="studentDashBookedHistoryCtrl">
+	</div>
+	<div ng-include="'views/student-dashboard-profile.html'" role="tabpanel" class="tab-pane" id="profile" ng-controller="StudentDashCtrl">
+	</div>
+	<div ng-include="'views/student-dashboard-incentive.html'" role="tabpanel" class="tab-pane" id="incentive" ng-controller="StudentDashCtrl">
+	</div>
+	<div ng-include="'views/student-webinar.html'" role="tabpanel" class="tab-pane" id="webinar" ng-controller="studentDashBookedHistoryCtrl">
+	</div>
+</div>
+
+
+<!-- For FOOTER SCROLL DIRECTIVE -->
+<div scroll-directive></div>
+
+<script type="text/javascript">
+		
+
+
+	/*function HaveFun(tabIndex){
+		var totalBarLength=$('#topBarDiv').parent().width();
+		var totalLinks=$('#topBarDiv>span').length;
+		var divWithSpans=$('#topBarDiv');
+		divWithSpans.css('transition','all 0.3s');
+		var totalSpanLengthRequired=0;
+		//var totalSpanLength=0;
+		for(var i=0;i<totalLinks;i++){
+			//totalSpanLength+=$('#index'+(i+1)).width();
+			if($('#index'+(i+1)).hasClass('focus')){
+				$('#index'+(i+1)).removeClass('focus');
+			}
+			$('#index'+(i+1)).css('opacity',String(1.0-0.15*Math.abs(tabIndex-(i+1))));
+		}
+		for(var i=0;i<tabIndex-1;i++){
+			totalSpanLengthRequired+=$('#index'+(i+1)).width();
+			// console.log($('#index'+(i+1)).width());
+		}
+		totalSpanLengthRequired+=($('#index'+(tabIndex)).width())/2.0;
+		$('#index'+tabIndex).addClass('focus');
+		$('.staticSpan').width(String($('#index'+tabIndex).width()));
+		// console.log(totalBarLength);
+		var t = ((totalBarLength/2)-totalSpanLengthRequired);
+		divWithSpans.css('marginLeft',((totalBarLength/2.0)-totalSpanLengthRequired-(((tabIndex-1)/(totalLinks-1))*13))+'px');
+	}
+
+	$(document).ready(function() {
+		HaveFun(1);
+	});*/
+
+</script>

@@ -1,0 +1,772 @@
+<div id="bg-img-landing">
+  <!-- <img id="bg2" src="images/bg/bg2.jpg"> -->
+  <img id="boy" src="images/bg/boy.png">
+  <img id="clock" src="images/bg/clock.png">
+  <img id="guitar" src="images/bg/guitar.png">
+  <img id="dogL" src="images/bg/dog-left.png">
+  <img id="dogM" src="images/bg/dog-center.png">
+  <img id="hourHand" src="images/bg/hourHand.png">
+  <img id="minuteHand" src="images/bg/minuteHand.png">
+  <img id="secondHand" src="images/bg/secondHand.png">
+  <img id="clockCircle" src="images/bg/clockCenterCircle.png">
+  <!-- <img style="display:none;" id="night" src="images/bg/nightScene.png">
+  <img style="display:none;" id="evening" src="images/bg/eveningScene.png">
+  <img style="display:none;" id="morning" src="images/bg/morningScene.png">
+  <img id="sideWindow" src="images/bg/window.png"> -->
+</div>
+<toaster-container toaster-options="{'time-out': 3000,'position-class': 'toast-bottom-right'}"></toaster-container>
+
+<div class="container-fluid landing-div" ng-controller="MainCtrl" ng-init="setDefaults();"><!-- toTheTop();  -->
+  
+
+  <div class="intro-modal intro-modal_position intro-modal_style" > 
+    <div class="row intro-head">
+      <center>MY MISSION ADMISSION</center>
+    </div>
+    <div class="row intro-subhead">
+      <center>Our Mission : Your Admission</center>
+    </div>
+    <div class="row login-button-row">
+      <center>
+        <a href="#main?scrollTo=howItWorks"><input type="button" class="btn btn-default main-page-feature-first-signup-btn main-page-feature-first-signup-btn-white" style="width:auto !important" value="How it Works ?"></a>
+      </center>
+    </div>
+  </div>  <!-- end of landing page message -->
+
+
+  <div class="row search-row search-row_style search-row_position" id="search-row-web"><!-- Search Row Web -->
+    <div class="col-sm-5">
+      <select ng-model="stateToView" ng-change="stateSelected()" class="form-control search-row-select" ng-options="k as v for (k, v) in states">
+        <option value="">{{dropdownMessage}}</option>
+      </select>
+    </div>
+    <div class="col-sm-6">  
+      <select ng-model="courseToView" ng-change="courseSelected()" class="form-control search-row-select" ng-options="k as v for (k, v) in courses"> 
+        <option value="">{{dropdownMessageCourses}}</option>
+      </select>
+    </div>
+    <div class="col-sm-1"><a ng-href="#/search" class="btn btn-primary btn-lg btn-block search-row-selectBTN"><i class="fa fa-search fa-lg"></i></a>
+    </div>
+  </div> <!-- end of search row web -->
+
+  <div class="row search-row search-row_style search-row_position" id="search-row-mobile"><!-- Search Row Mobile -->
+    <div class="container-fluid">
+      <div class="row search-row-mobile-component-zero">
+        <center>
+          <div class="col-sm-12 search-row-startBTN " id="search-row-mobile-start-search"><i class="fa fa-search"></i> &nbsp; Search Colleges</div>
+        </center>
+      </div>
+      <div class="row search-row-mobile-component search-row-mobile-component-first">
+        <select ng-model="stateToView" ng-change="stateSelected()" class="form-control search-row-select" ng-options="k as v for (k, v) in states">
+          <option value="">{{dropdownMessage}}</option>
+        </select>
+      </div>
+      <div class="row search-row-mobile-component search-row-mobile-component-second">
+        <select ng-model="courseToView" ng-change="courseSelected()" class="form-control search-row-select" ng-options="k as v for (k, v) in courses">
+          <option value="">{{dropdownMessageCourses}}</option>
+        </select>
+      </div>
+      <div class="row search-row-mobile-component search-row-mobile-component-third">
+        <a ng-href="#/search" class="btn btn-primary btn-lg btn-block search-row-selectBTN" s><i class="fa fa-search fa-lg"></i></a>
+      </div>
+    </div>
+  </div> <!-- end of searc row mobile -->
+
+  <!-- first slide : what is mymissionadmission -->
+  <div id="feature-bar" class="row main-page-feature main-page-feature-first">
+    <div class="container-fluid">
+      <div class="col-md-12 main-page-feature-head main-page-title">
+        <center><span>What is mymissionadmission?</span></center>
+        <div class="title-seperator"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 main-page-feature-left">
+          <div class="row main-page-feature-left-head">
+            <strong>Our Mission is Your Admission</strong><br />
+          </div>
+          <div class="row main-page-feature-left-text" style="font-size: 1.2em ! important;">
+            We help students in their pursuit of quality higher eduation by providing a  platform for discovery, learning and decision-making, so that each student gets into their dream career, course and college. 
+          </div> 
+          <div class="row">
+            <center>
+              <input type="button" class="btn btn-default btn-lg btn-block main-page-feature-first-signup-btn" ng-hide="signedIn()" ng-click="go('/register')" value="Signup">
+            </center>
+          </div>         
+        </div>
+        <div class="col-sm-6">
+          <div class="row main-page-video-row" id="vid-start">
+            <center>
+              <img src="../images/tv-house-clipart.png" class="main-page-video-row-img">
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of first slide -->
+
+  <!-- second slide : stats -->
+  <div class="container-fluid stats">
+    <div class="row main-page-feature main-page-feature-sixth">
+      <!-- <div class="row-fluid">
+        <div class="col-md-12 main-page-feature-head main-page-title">
+          <div class="row main-page-feature-head">
+            <center><span>&nbsp;&nbsp;</span></center>
+          </div>    
+        </div>        
+      </div> -->
+      <div class="col-sm-6 ">
+        <div class="row main-page-feature-sixth-title">Video Counselling Sessions Delivered
+        </div>
+        <div class="row main-page-feature-sixth-stat">10,000+
+        </div>
+      </div>
+      <div class="col-sm-6 ">
+        <div class="row main-page-feature-sixth-title">Scholarships offered
+        </div>
+        <div class="row main-page-feature-sixth-stat">Rs. 3,00,00,000+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of second slide -->
+
+  <!-- third slide : how it works -->
+  <section id="howItWorks">
+    <div class="row main-page-feature main-page-feature-second">
+      <div class="container-fluid">
+        <div class="col-md-12 main-page-feature-head main-page-title">
+          <center><span>How it works.</span></center>
+          <div class="title-seperator"></div>
+        </div>
+        <div class="row" id="how-it-works-web">
+          <div scroll class="col-md-6 main-page-feature-second-how-it-works-img-div" id="main-page-feature-second-how-it-works-img-div">
+            <center>
+              <img src="../images/desktop.png" class="main-page-feature-second-how-it-works-desktop" >
+              <div class="main-page-feature-second-how-it-works-desktop-img"><img src="../images/hiwsprite.png" class="img-responsive"></div>
+            </center>
+          </div>
+          <div class="col-md-6 main-page-feature-second-how-it-works-img-div-right" id="main-page-feature-second-how-it-works-img-div-right">
+            <div class="container-fluid">
+              <div class="row how-it-works-step-block">
+                <div class="container-fluid">
+                  <div class="row how-it-works-step-block-head">
+                    &nbsp;
+                  </div>
+                  <div class="row how-it-works-step-block-sub-head">
+                    Discover dream Careers, Courses & Colleges.
+                  </div>
+                  <hr class="sub-divide" />
+                  <div class="row how-it-works-step-block-text">
+                    <center style="font-size: 1.2em ! important;">Search & explore career options through Personalised Houses, attend knowledge sessions and then discover your dream college. </center>
+                  </div>
+                </div>
+              </div>
+              <div class="row how-it-works-step-block">
+                <div class="container-fluid">
+                  <div class="row how-it-works-step-block-head">
+                    &nbsp;
+                  </div>
+                  <div class="row how-it-works-step-block-sub-head">
+                    Get counselled.
+                  </div>
+                  <hr class="sub-divide" />
+                  <div class="row how-it-works-step-block-text">
+                    <center style="font-size: 1.2em ! important;">Enquire one-on-one with college counsellors and clear your doubts, learn about colleges, college life, scholarships. Also attend expert webinars and get unbiased  advice and mentorship from our experts. </center>
+                  </div>
+                </div>
+              </div>
+              <div class="row how-it-works-step-block">
+                <div class="container-fluid">
+                  <div class="row how-it-works-step-block-head">
+                    &nbsp;
+                  </div>
+                  <div class="row how-it-works-step-block-sub-head">
+                    Get scholarships.
+                  </div>
+                  <hr class="sub-divide" />
+                  <div class="row how-it-works-step-block-text">
+                    <center style="font-size: 1.2em ! important;"> My scholarships fund helps you to create your own personal fund by helping yourself and contribute to the student community to improve everyone's access to their dream higher education. And by doing this, you self-finance your education.</center>
+                  </div>
+                </div>
+              </div>
+              <div class="row how-it-works-step-block">
+                <div class="container-fluid">
+                  <div class="row how-it-works-step-block-head">
+                    &nbsp;
+                  </div>
+                  <div class="row how-it-works-step-block-sub-head">
+                    Study.
+                  </div>
+                  <hr class="sub-divide" />
+                  <div class="row how-it-works-step-block-text">
+                    <center style="font-size: 1.2em ! important;">Get admission into your choice of quality higher education.</center>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:100px;" id="how-it-works-mob">
+          <center>
+            <div class="col-sm-3 how-it-works-mob-tile">
+              <img class="img-circle main-page-feature-howItWorks-img" src="../images/HIW1.png">
+              <br /><br /><br />
+              <div class="how-it-works-mob-tile-head">Discover great colleges.</div>
+              <br />
+              <div class="how-it-works-mob-tile-text">search among the wide range of colleges.</div>
+            </div>
+            <div class="col-sm-3 how-it-works-mob-tile">
+              <img class="img-circle main-page-feature-howItWorks-img" src="../images/HIW2.png">
+              <br /><br /><br />
+              <div class="how-it-works-mob-tile-head">Get counselled.</div>
+              <br />
+              <div class="how-it-works-mob-tile-text">one on one video chat with the college counsellor helps you solve your queries.</div>
+            </div>
+            <div class="col-sm-3 how-it-works-mob-tile">
+              <img class="img-circle main-page-feature-howItWorks-img" src="../images/HIW3.png"> 
+              <br /><br /><br />
+              <div class="how-it-works-mob-tile-head">Earn scholarships.</div>
+              <br />
+              <div class="how-it-works-mob-tile-text">You can earn scholarships by doing sessions.</div>
+            </div>
+            <div class="col-sm-3 how-it-works-mob-tile">
+              <img class="img-circle main-page-feature-howItWorks-img" src="../images/HIW4.png">
+              <br /><br /><br />
+              <div class="how-it-works-mob-tile-head">Study.</div>
+              <br />
+              <div class="how-it-works-mob-tile-text">Immediately get admissions directly from the college counsellor.</div>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end of third slide -->
+
+  <!-- <div class="divider">
+    <center><img src="../images/divider-3.png"></center>
+  </div> -->
+
+  <!-- fourth slide : Explore the oppurtunities -->
+  <!-- <div class="row main-page-feature text-center">
+    <div class="container-fluid tile-container_style">
+      <div class="col-md-12 main-page-feature-head main-page-title">
+        <center><span>Explore the oppurtunities.</span></center>
+        <div class="title-seperator"></div>
+      </div>
+
+      <div class="row tile-row_style">
+        <div class="container-fluid  tile-container_style">
+          <div class="col-md-3 opportunities-tile tile-1 blue">
+            <h1>CUBE1</h1>
+          </div>
+          <div class="col-md-9 opportunities-tile tile-2 blue-light">
+            <h1>CUBE2</h1>
+          </div>
+        </div>
+      </div> --> <!-- END OF ROW -->
+
+     <!--  <div class="row tile-row_style">
+        <div class="container-fluid tile-container_style">
+          <div class="col-md-3 opportunities-tile tile-3 blue-dark">
+            <h1>CUBE3</h1>
+          </div>
+          <div class="col-md-6 opportunities-tile tile-4 blue-light">
+            <h1>CUBE4</h1>
+          </div>
+          <div class="col-md-3 opportunities-tile tile-5 blue-dark">
+            <h1>CUBE5</h1>
+          </div>
+        </div>
+      </div> --> <!-- END OF ROW -->
+
+      <!-- <div class="row tile-row_style">
+        <div class="container-fluid tile-container_style">
+          <div class="col-md-9 opportunities-tile tile-6 blue">
+            <h1>CUBE6</h1>
+          </div>
+          <div class="col-md-3 opportunities-tile tile-7 blue-light">
+            <h1>CUBE7</h1>
+          </div>
+        </div>
+      </div>  --><!-- END OF ROW -->      
+
+
+
+
+
+<!-- <div class="row tile-row_style">
+        <div class="container-fluid tile-container_style">
+          <div class="col-md-2 opportunities-tile blue">
+            <h1>CUBE1</h1>
+          </div>
+          <div class="col-md-2 opportunities-tile blue-light">
+            <h1>CUBE2</h1>
+          </div>
+          <div class="col-md-2 opportunities-tile blue-dark">
+            <h1>CUBE3</h1>
+          </div>
+          <div class="col-md-2 opportunities-tile blue">
+            <h1>CUBE4</h1>
+          </div>
+          <div class="col-md-2 opportunities-tile blue-light">
+            <h1>CUBE5</h1>
+          </div>
+          <div class="col-md-2 opportunities-tile blue-dark">
+            <h1>CUBE6</h1>
+          </div>
+        </div>
+      </div> 
+
+      <div class="row tile-row_style">
+        <div class="container-fluid tile-container_style">
+          <div class="col-md-3 opportunities-tile blue-dark">
+            <h1>CUBE7</h1>
+          </div>
+          <div class="col-md-6 opportunities-tile blue">
+            <h1>CUBE8</h1>
+          </div>
+          <div class="col-md-3 opportunities-tile blue-light">
+            <h1>CUBE9</h1>
+          </div>
+        </div>
+      </div> 
+
+      <div class="row tile-row_style">
+        <div class="container-fluid tile-container_style">
+          <div class="col-md-3 opportunities-tile blue">
+            <h1>CUBE10</h1>
+          </div>
+          <div class="col-md-3 opportunities-tile blue-light">
+            <h1>CUBE11</h1>
+          </div>
+          <div class="col-md-3 opportunities-tile blue-dark">
+            <h1>CUBE12</h1>
+          </div>
+          <div class="col-md-3 opportunities-tile blue">
+            <h1>CUBE13</h1>
+          </div>
+        </div>
+      </div>  -->
+
+
+
+
+
+
+
+
+
+
+
+<!--       <div class="row main-page-feature-oppurtunities-tiles-row">
+        <div class="col-sm-3 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+        <div class="col-sm-9 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+        <div class="col-sm-4 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+        <div class="col-sm-4 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+        <div class="col-sm-4 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+        <div class="col-sm-8 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+        <div class="col-sm-4 main-page-feature-oppurtunities-tiles-row-tile"><center><img class="img-responsive" src="../images/mac.jpg" /></center></div>
+      </div> -->
+    </div>
+  </div>
+  <!-- end of fourth slide -->
+
+  <!-- fifth slide : what drives us --> 
+  <div class="row main-page-feature main-page-feature-third blue" ng-init="getUpcomingWebinar()">
+    <div class="container">
+      <div class="col-md-12 main-page-title ">
+        <center>Featured Webinars</center>
+        <div class="title-seperator"></div>
+      </div>
+      <div class="row main-page-feature-third-quote-icon">
+        <center><i class="fa fa-quote-left fa-3x"></i></center>
+      </div>
+      <div class="row" style="font-size: 1.6em;padding-top: 1em;padding-bottom: 1em;">
+        <center>Explore upcoming career trends from industry mentors.<br><strong> Book Your Webinar</strong></center>
+      </div>
+      <div class="row testimonials-strip" style="padding-left:100px; padding-right:100px;">
+        <div class="testimonials-strip-button-prev" style="position:absolute; cursor:pointer; left:1em;font-size: 3em;" ng-click="arrayPrev()"><i class="fa fa-chevron-left"></i></div>
+        <div class="testimonials-strip-button-next" style="position:absolute; cursor:pointer; right:1em;font-size: 3em;" ng-click="arrayNext()"><i class="fa fa-chevron-right"></i></div>
+        <center>
+          <div class="col-sm-3" style="overflow:hidden;" ng-mouseleave="hideRegisterBtn_webinar_Main(arrayIter)" ng-mouseenter="showRegisterBtn_webinar_Main(arrayIter)">
+            <div class="webinar-main-btn-row" id="webinar_main_btn_{{arrayIter}}" style="padding: 0.5em;">
+              <div class="row" style="font-size:0.7em; height:83%; overflow:hidden;padding: 0px 15px;">
+                {{upcomingWebinars[arrayIter].webinarDescription | limitTo:210}}.. <span style="font-size:0.7em; cursor:pointer;" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter)">Know More </span>
+              </div>
+              <div class="row" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter)">
+                <input type="button" class="btn btn-default" style="font-size: 0.55em; letter-spacing: 1px;" value="Register">
+              </div>
+            </div>
+            <div id="testimonial-stu-1">
+              <img class="img-circle main-page-feature-howItWorks-img" ng-src="{{upcomingWebinars[arrayIter].mentorPhoto}}">
+              <br /><br />
+              <strong style="color:black">{{upcomingWebinars[arrayIter].mentorName}}</strong>
+              <p>{{upcomingWebinars[arrayIter].webinarTopic}}</p>
+              <p>{{upcomingWebinars[arrayIter].webinarDate}}, {{upcomingWebinars[arrayIter].webinarTime}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3" style="overflow:hidden;" ng-mouseleave="hideRegisterBtn_webinar_Main(arrayIter+1)" ng-mouseenter="showRegisterBtn_webinar_Main(arrayIter+1)">
+            <div class="webinar-main-btn-row" id="webinar_main_btn_{{arrayIter+1}}" style="padding: 0.5em;">
+              <div class="row" style="font-size:0.7em; height:83%; overflow:hidden;padding: 0px 15px;">
+                {{upcomingWebinars[arrayIter+1].webinarDescription | limitTo:210}}.. <span style="font-size:0.7em; cursor:pointer;" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter+1)">Know More </span>
+              </div>
+              <div class="row" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter+1)">
+                <input type="button" class="btn btn-default" style="font-size: 0.55em; letter-spacing: 1px;" value="Register">
+              </div>
+            </div>
+            <div id="testimonial-stu-2">
+              <img class="img-circle main-page-feature-howItWorks-img" ng-src="{{upcomingWebinars[arrayIter+1].mentorPhoto}}">
+              <br /><br />
+              <strong style="color:black">{{upcomingWebinars[arrayIter+1].mentorName}}</strong>
+              <p>{{upcomingWebinars[arrayIter+1].webinarTopic}}</p>
+              <p>{{upcomingWebinars[arrayIter+1].webinarDate}}, {{upcomingWebinars[arrayIter+1].webinarTime}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3" style="overflow:hidden;" ng-mouseleave="hideRegisterBtn_webinar_Main(arrayIter+2)" ng-mouseenter="showRegisterBtn_webinar_Main(arrayIter+2)">
+            <div class="webinar-main-btn-row" id="webinar_main_btn_{{arrayIter+2}}" style="padding: 0.5em;">
+              <div class="row" style="font-size:0.7em; height:83%; overflow:hidden;padding: 0px 15px;">
+                {{upcomingWebinars[arrayIter+2].webinarDescription | limitTo:210}}.. <span style="font-size:0.7em; cursor:pointer;" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter+2)">Know More </span>
+              </div>
+              <div class="row" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter+2)">
+                <input type="button" class="btn btn-default" style="font-size: 0.55em; letter-spacing: 1px;" value="Register">
+              </div>
+            </div>
+            <div id="testimonial-stu-3">
+              <img class="img-circle main-page-feature-howItWorks-img" ng-src="{{upcomingWebinars[arrayIter+2].mentorPhoto}}">
+              <br /><br />
+              <strong style="color:black">{{upcomingWebinars[arrayIter+2].mentorName}}</strong>
+              <p>{{upcomingWebinars[arrayIter+2].webinarTopic}}</p>
+              <p>{{upcomingWebinars[arrayIter+2].webinarDate}}, {{upcomingWebinars[arrayIter+2].webinarTime}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3" style="overflow:hidden;" ng-mouseleave="hideRegisterBtn_webinar_Main(arrayIter+3)" ng-mouseenter="showRegisterBtn_webinar_Main(arrayIter+3)">
+            <div class="webinar-main-btn-row" id="webinar_main_btn_{{arrayIter+3}}" style="padding: 0.5em;">
+              <div class="row" style="font-size:0.7em; height:83%; overflow:hidden;padding: 0px 15px;">
+                {{upcomingWebinars[arrayIter+3].webinarDescription | limitTo:210}}.. <span style="font-size:0.7em; cursor:pointer;" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter+3)">Know More </span>
+              </div>
+              <div class="row" data-toggle="modal" data-target="#webinar-main-modal" ng-click="getDetailOfCurrentWebinar(arrayIter+3)">
+                <input type="button" class="btn btn-default" style="font-size: 0.55em; letter-spacing: 1px;" value="Register">
+              </div>
+            </div>
+            <div id="testimonial-stu-4">
+              <img class="img-circle main-page-feature-howItWorks-img" ng-src="{{upcomingWebinars[arrayIter+3].mentorPhoto}}">
+              <br /><br />
+              <strong style="color:black">{{upcomingWebinars[arrayIter+3].mentorName | titleCase}}</strong>
+              <p>{{upcomingWebinars[arrayIter+3].webinarTopic | titleCase}}</p>
+              <p>{{upcomingWebinars[arrayIter+3].webinarDate}}, {{upcomingWebinars[arrayIter+3].webinarTime}}</p>
+            </div>
+          </div>
+        </center>
+      </div>
+      <!-- <div class="col-xs-12" style="color:white; text-align:right; cursor:pointer;">
+        <p style="margin-right:-4em; text-decoration:underline;"><a style="color:white" href="#/all-webinar" target="_blank"> View All </a></p>
+      </div> -->
+    </div>
+  </div>
+  <!-- end of fifth slide -->
+
+  <div class="seperator"></div>
+
+  <!-- sixth slide : signup -->
+  <div class="row main-page-feature main-page-feature-fourth">
+    <center><p class="main-page-feature-fourth-title-big">Start Your Journey Now, with us...</p></center>
+    <center><p class="main-page-feature-fourth-tag">It's free and will always be.</p></center>
+    <center><input type="button" class="btn btn-default btn-lg main-page-feature-second-signup-btn" ng-hide="signedIn()" ng-click="go('/register')" value="Sign Up"></center>
+  </div>
+  <!-- end of sixth slide -->
+  
+</div>
+
+<div ng-controller="MainCtrl" id="popup-overlay" class="popup-overlay" ng-click="custom.player.pauseVideo()">
+  <div class="popup-content-video">
+    <div class="container-fluid">
+      <div class="embed-responsive embed-responsive-16by9">
+        <youtube-video video-id="custom.video" player="custom.player" player-vars="custom.vars"></youtube-video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for schedule webinar -->
+<div class="modal fade" id="webinar-main-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document" style="width:70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{currentWebinar.webinarTopic | titleCase}}</h4>
+      </div>
+      <div class="modal-body">
+        <!-- ...{{knowMoreClicked}} -->
+        <center id="booking_success{{currentWebinar.$id}}" ng-model="webinar_booking_success[currentWebinar.$id]" ng-if="webinar_booking_success[currentWebinar.$id]=='done'" style="color:green">You have successfuly booked this webinar</center> 
+        <center id="webinarAlreadyBooked{{currentWebinar.webinarId}}" ng-model="webinarAlreadyBooked[currentWebinar.webinarId]" ng-if="webinarAlreadyBooked[currentWebinar.webinarId]=='yes'" style="color:red">You have already booked this session.</center>
+        <div class="row">
+          <div class="col-xs-3">
+            <div class="med-user-img"><img src="{{currentWebinar.mentorPhoto}}" alt="" class=""></div>
+            <div class="row dateTimeIndc-year"><center><h4><strong>{{currentWebinar.mentorName | titleCase}}</strong></h4></center></div>
+            <br />
+            <div class="dateTimeIndc">
+              <div class="row dateTimeIndc-date"><center>{{currentWebinar.webinarDate.split(" ")[2]}}</center></div>
+              <div class="row dateTimeIndc-month"><center>{{currentWebinar.webinarDate.split(" ")[1]}}</br>{{currentWebinar.webinarDate.split(" ")[0]}}</center></div>
+              <div class="row dateTimeIndc-year"><center>{{currentWebinar.webinarTime}}</center></div>
+            </div>
+          </div>
+          <div class="col-xs-9 student-dashboard-bh-row-rightPart">
+            <div class="row student-dashboard-bh-row-rightPart-name" style="padding-bottom:0.5em;"><strong>{{currentWebinar.webinarTopic | titleCase}}</strong></div>
+            <div class="row student-dashboard-bh-row-rightPart-subName" style="margin-top:2em;"><i class="fa fa-envelope"></i> {{currentWebinar.mentorEmail}} &nbsp;&nbsp;<i class="fa fa-phone"></i> {{currentWebinar.mentorMobile}}</div>
+            <div class="seperator" style="margin-bottom:2em;"></div>
+            <div class="row student-dashboard-bh-row-rightPart-query" style="height:auto; margin-top:">{{currentWebinar.webinarDescription | limitTo:650}}.</div>
+            <div class="seperator"></div>
+            <div class="row student-dashboard-bh-row-rightPart-subName"><strong>Duration</strong> : {{currentWebinar.webinarDuration}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- <h4 style="color:red" ng-if="!signedIn() || user.profile.profiletype !== 'student'"> <center>Please Sign In as a student to book this Webinar </center></h4> -->
+      <h4 style="color:red"> <center>Seats are full.</center></h4>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary" ng-if="user.profile.profiletype == 'student' && signedIn()" ng-click="bookThisWebinar(currentWebinar)">Book webinar</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- FOR HOME-BG -->
+<script type="text/javascript">
+  var winH=$(window).height();
+  var winW=$(window).width();
+  var dateData=new Date();
+  var hours=dateData.getHours();
+  var minutes=dateData.getMinutes();
+  var seconds=dateData.getSeconds();
+  
+  //OFFSET COMPLETE BG = -10%
+  var offsetL=-12;
+  
+  var dogL=$('#dogL');
+  var dogM=$('#dogM');
+  var boy=$('#boy');
+  var guitar=$('#guitar');
+  var clock=$('#clock');
+  var clockCircle=$('#clockCircle');
+  var hourHand=$('#hourHand');
+  var minuteHand=$('#minuteHand');
+  var secondHand=$('#secondHand');
+  var sideWindow=$('#sideWindow');
+
+  var parallaxFactor=0;//0.4;
+  var rotationFactor=10;
+
+
+  $(window).on('scroll',function(){
+    if($(window).scrollTop()<0.7*$(window).height()){
+      $('#bg-img-landing').css('top',(($(window).scrollTop()/(0.7*$(window).height()))*0)+'%');//10)+'%');
+    }
+  });
+
+
+  /*if(Number(String(dateData).split(' ')[4].split(':')[0])>6&&Number(String(dateData).split(' ')[4].split(':')[0])<12){
+    $('#morning').css('display','');
+    $('#evening').css('display','none');
+    $('#night').css('display','none');
+  }
+  else
+  if(Number(String(dateData).split(' ')[4].split(':')[0])>=12&&Number(String(dateData).split(' ')[4].split(':')[0])<19){
+    $('#morning').css('display','none');
+    $('#evening').css('display','');
+    $('#night').css('display','none');
+  }
+  else
+  if(Number(String(dateData).split(' ')[4].split(':')[0])>=19||Number(String(dateData).split(' ')[4].split(':')[0])<=6){
+    $('#morning').css('display','none');
+    $('#evening').css('display','none');
+    $('#night').css('display','');
+  }*/
+  hourHand.css('transform','translate(-50%,0) rotateZ('+((30*hours)+(0.5*minutes))+'deg)');
+  minuteHand.css('transform','translate(-50%,0) rotateZ('+(6*minutes)+'deg)');
+  secondHand.css('transform','translate(-50%,0) rotateZ('+(6*seconds)+'deg)');
+  setInterval(function(){
+    dateData=new Date();
+    hours=dateData.getHours();
+    minutes=dateData.getMinutes();
+    seconds=dateData.getSeconds();
+    hourHand.css('transform','translate(-50%,0) rotateZ('+((30*hours)+(0.5*minutes))+'deg)');
+    minuteHand.css('transform','translate(-50%,0) rotateZ('+(6*minutes)+'deg)');
+    secondHand.css('transform','translate(-50%,0) rotateZ('+(6*seconds)+'deg)');
+    if(Number(String(dateData).split(' ')[4].split(':')[0])>6&&Number(String(dateData).split(' ')[4].split(':')[0])<12){
+    $('#morning').css('display','');
+    $('#evening').css('display','none');
+    $('#night').css('display','none');
+  }
+  else
+  if(Number(String(dateData).split(' ')[4].split(':')[0])>=12&&Number(String(dateData).split(' ')[4].split(':')[0])<19){
+    $('#morning').css('display','none');
+    $('#evening').css('display','');
+    $('#night').css('display','none');
+  }
+  else
+  if(Number(String(dateData).split(' ')[4].split(':')[0])>=19||Number(String(dateData).split(' ')[4].split(':')[0])<=6){
+    $('#morning').css('display','none');
+    $('#evening').css('display','none');
+    $('#night').css('display','');
+  }
+  },1000);
+
+  $(window).on('mousemove',function($event){
+    var xDiff=($event.pageX-winW/2)/winW;
+    var yDiff=($event.pageY-winH/2)/winH;
+
+    //xDiff
+    $('#bg2').css('left',(offsetL+xDiff*-1*parallaxFactor)+'%');
+    dogM.css('left',(offsetL+xDiff*-4*parallaxFactor)+'%');
+    dogL.css('left',(offsetL+xDiff*-5*parallaxFactor)+'%');
+    boy.css('left',(offsetL+xDiff*-2.7*parallaxFactor)+'%');
+    guitar.css('left',(offsetL+xDiff*-3*parallaxFactor)+'%');
+    clock.css('left',(offsetL+xDiff*-2*parallaxFactor)+'%');
+    clockCircle.css('left',(offsetL+xDiff*-2*parallaxFactor)+'%');
+    hourHand.css('left',(offsetL+xDiff*-2*parallaxFactor)+'%');
+    minuteHand.css('left',(offsetL+xDiff*-2*parallaxFactor)+'%');
+    secondHand.css('left',(offsetL+xDiff*-2*parallaxFactor)+'%');
+    sideWindow.css('left',(offsetL+xDiff*-1.5*parallaxFactor)+'%');
+    
+
+    //yDiff
+  /*  $('#bg2').css('top',(yDiff*-1*parallaxFactor)+'%');    
+    dogM.css('top',(yDiff*-2*parallaxFactor)+'%');
+    dogL.css('top',(yDiff*-2.5*parallaxFactor)+'%');
+    boy.css('top',(yDiff*-1.35*parallaxFactor)+'%');
+    guitar.css('top',(yDiff*-1.5*parallaxFactor)+'%');
+    clock.css('top',(yDiff*-1*parallaxFactor)+'%');
+    clockCircle.css('top',(yDiff*-1*parallaxFactor)+'%');
+    hourHand.css('top',(yDiff*-1*parallaxFactor)+'%');
+    minuteHand.css('top',(yDiff*-1*parallaxFactor)+'%');
+    secondHand.css('top',(yDiff*-1*parallaxFactor)+'%');
+    sideWindow.css('top',(yDiff*-0.5*parallaxFactor)+'%');*/
+
+    // //rotate-X
+    // $('#bg2').css('transform','rotateY('+(xDiff*-5*rotationFactor)+'deg)');    
+    // dogM.css('transform','rotateY('+(xDiff*-4*rotationFactor)+'deg)');
+    // dogL.css('transform','rotateY('+(xDiff*-4*rotationFactor)+'deg)');
+    // boy.css('transform','rotateY('+(xDiff*-2.7*rotationFactor)+'deg)');
+    // guitar.css('transform','rotateY('+(xDiff*-3*rotationFactor)+'deg)');
+    // clock.css('transform','rotateY('+(xDiff*-2*rotationFactor)+'deg)');
+    // clockCircle.css('transform','rotateY('+(xDiff*-2*rotationFactor)+'deg)');
+    // hourHand.css('transform','rotateY('+(xDiff*-2*rotationFactor)+'deg)');
+    // minuteHand.css('transform','rotateY('+(xDiff*-2*rotationFactor)+'deg)');
+    // secondHand.css('transform','rotateY('+(xDiff*-2*rotationFactor)+'deg)');
+    // sideWindow.css('transform','rotateY('+(xDiff*-1.5*rotationFactor)+'deg)');
+
+
+  });  
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+$(document).height('4890px');
+
+$('.popup-overlay').hide();
+$('.search-row-mobile-component').hide();
+$(document).on('scroll',function(){
+  if($(document).width()<751){
+    if($('#feature-bar').css('backgroundImage')!=='none'){
+    $('#feature-bar div.row-fluid div.col-md-12.main-page-feature-head.main-page-title div.row').addClass('main-page-heading-for-small-screen-by-ak');
+    $('#feature-bar div.col-sm-4').addClass('main-page-features-for-small-screen-by-ak');
+    $('#feature-bar').css('backgroundImage','none');
+    }
+  }
+  else{
+    if($('#feature-bar').css('backgroundImage')==='none'){
+      $('#feature-bar div.row-fluid div.col-md-12.main-page-feature-head.main-page-title div.row').removeClass('main-page-heading-for-small-screen-by-ak');
+      $('#feature-bar div.col-sm-4').removeClass('main-page-features-for-small-screen-by-ak');
+      $('#feature-bar').css('backgroundImage','');
+    }
+  }
+});
+$(window).on('resize',function(){
+  if($(document).width()<751){
+    if($('#feature-bar').css('backgroundImage')!=='none'){
+    $('#feature-bar div.row-fluid div.col-md-12.main-page-feature-head.main-page-title div.row').addClass('main-page-heading-for-small-screen-by-ak');
+    $('#feature-bar div.col-sm-4').addClass('main-page-features-for-small-screen-by-ak');
+    $('#feature-bar').css('backgroundImage','none');
+    }
+  }
+  else{
+    if($('#feature-bar').css('backgroundImage')==='none'){
+      $('#feature-bar div.row-fluid div.col-md-12.main-page-feature-head.main-page-title div.row').removeClass('main-page-heading-for-small-screen-by-ak');
+      $('#feature-bar div.col-sm-4').removeClass('main-page-features-for-small-screen-by-ak');
+      $('#feature-bar').css('backgroundImage','');
+    }
+  }
+});
+$( ".container-fluid" ).on( "click", "#vid-start", function( event ) {    
+  $('.popup-overlay').fadeIn();
+});
+$( document ).on( "click", "#popup-overlay", function( event ) {    
+  $('.popup-overlay').fadeOut();
+});
+$( '.container-fluid' ).on( "click", "#search-row-mobile-start-search", function( event ) {
+  if($('#search-row-mobile-start-search').hasClass('isOpened')) {
+    $('.search-row-mobile-component').hide();
+    setTimeout(function(){
+      $('#search-row-mobile').css("height","76px");
+      $('#search-row-mobile-start-search').html('<i class="fa fa-search"></i> &nbsp; Search Colleges');
+    }, 200);
+    setTimeout(function(){
+      $('#search-row-mobile-start-search').removeClass('isOpened');
+      $('.intro-modal').css("opacity","1");  
+    }, 300);
+  }
+  else {
+    setTimeout(function(){
+      $('#search-row-mobile-start-search').addClass('isOpened');
+      $('.intro-modal').css("opacity","0");  
+    }, 200);
+    setTimeout(function(){
+      $('#search-row-mobile').css("height","90vh");
+      $('#search-row-mobile-start-search').html('<i class="fa fa-times"></i> &nbsp; Close');
+    }, 300);
+    setTimeout(function(){
+      $('.search-row-mobile-component').show();
+    }, 400);
+  }
+});
+
+$("#testimonial-stu-1").children().addClass('active');
+
+$(".container-fluid" ).on( "mouseenter", "#testimonial-stu-1", function( event ) {
+  $("#testimonial-stu-1").children().addClass('active');
+  $("#testimonial-stu-2").children().removeClass('active');
+  $("#testimonial-stu-3").children().removeClass('active');
+  $("#testimonial-stu-4").children().removeClass('active');
+  $('#testimonial-string center').html("Alii sonet possit eum in, vel melius reprehendunt ad. Ex hinc elitr delectus nec, duo id nostro consetetur, at omnium vocent delectus vim.");
+});
+$( ".container-fluid" ).on( "mouseenter", "#testimonial-stu-2", function( event ) {
+  $("#testimonial-stu-2").children().addClass('active');
+  $("#testimonial-stu-1").children().removeClass('active');
+  $("#testimonial-stu-3").children().removeClass('active');
+  $("#testimonial-stu-4").children().removeClass('active');
+  $('#testimonial-string center').html("Ne mea vivendum platonem euripidis. Eu decore necessitatibus mea, vix no labores omittam recusabo, illum consequat urbanitas cum ea.");
+});
+$( ".container-fluid" ).on( "mouseenter", "#testimonial-stu-3", function( event ) {
+  $("#testimonial-stu-3").children().addClass('active');
+  $("#testimonial-stu-2").children().removeClass('active');
+  $("#testimonial-stu-1").children().removeClass('active');
+  $("#testimonial-stu-4").children().removeClass('active');
+  $('#testimonial-string center').html("Illum corrumpit constituto has an, vix saperet argumentum ex, vocibus temporibus te vim. Harum noluisse argumentum et vix.");
+});
+$( ".container-fluid" ).on( "mouseenter", "#testimonial-stu-4", function( event ) {
+  $("#testimonial-stu-4").children().addClass('active');
+  $("#testimonial-stu-2").children().removeClass('active');
+  $("#testimonial-stu-3").children().removeClass('active');
+  $("#testimonial-stu-1").children().removeClass('active');
+  $('#testimonial-string center').html("Eam cu exerci erroribus delicatissimi. Honestatis conclusionemque quo an, blandit insolens concludaturque his te, ex eam sensibus persequeris.");
+});
+ 
+</script>

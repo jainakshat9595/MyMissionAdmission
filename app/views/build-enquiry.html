@@ -1,0 +1,619 @@
+<div class="container-fluid" ng-controller="AdminTaskCtrl" ng-init="toTheTop(); getEnquiryDetailsInBuildEnquiry()">
+  
+  <div class="theme-container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Build Enquiry<h3>
+        </div>
+        <div class="col-md-6 pull-right">
+          <h5 class="pull-right">You can build multiple enquiries at same time with multiple students here.<h5>
+        </div>
+        <div class="col-xs-3 pull-right">
+          <input ng-model="demoBooking" type="checkbox">  User Training Session
+        </div>
+
+        <div ng-if="!demoBooking">
+                                  <!--  **************************  this is the div  **************************-->  
+          <div class="row">
+            <div class="col-xs-3 btn btn-danger btn-sm" ng-if="collegeVerify.$value=='notverified'" align="left" style="margin-top:50px;;font-size:13px;color:lavender;pointer-events:none;margin-right:40px;width:170px;font-family:Montserrat ">
+              <i class="fa fa-warning"></i>&nbsp;&nbsp;College Not Verified
+             </div>
+             <div class="col-xs-3 btn btn-danger btn-sm" ng-if="collegeType.$value=='free'" style="margin-top:50px;font-family:Montserrat;font-size:13px;color:lavender;pointer-events:none;width:160px "><i class="fa fa-warning"></i>&nbsp;&nbsp;College Not Paid
+             </div>
+            <div class="col-xs-3 pull-right">
+              <input value="Get Ready For Next session" type="button" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt" ng-hide = "!submitdisabled" ng-click="doThisForStudent1(studentEmail1); doThisForStudent2(studentEmail2); doThisForStudent3(studentEmail3); doThisForStudent4(studentEmail4); doThisForStudent5(studentEmail5); doThisForStudent6(studentEmail6); doThisForStudent7(studentEmail7); doThisForStudent8(studentEmail8); doThisForStudent9(studentEmail9); doThisForStudent10(studentEmail10); doThisForNodal(nodalId); doThisForCollege(collegeEmail)">
+            </div>
+            <h3 style="color:red;" class="pull-left" ng-if="collegeVerify.$value=='notverified' || collegeType.$value=='free'">Session cannot be booked !!</h3>
+          </div> 
+      
+                                  <!--  **************************  this is the div  **************************-->  
+          <hr />
+          <div class="row">
+            <form name="build_enquiry" ng-submit="getSessionStatusForStudent1(collegeEmail, nodalId, studentEmail1,studentEmail2,studentEmail3,studentEmail4,studentEmail5,studentEmail6,studentEmail7,studentEmail8,studentEmail9,studentEmail10,query)">
+              <div class="container-fluid" ng-show="signedIn && usera.profile.profiletype=='admin'"> 
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <div class="container-fluid"> 
+                      <div class="row"> 
+
+                                                  <!-- **************student1******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail1" ng-keyup="doThisForStudent1(studentEmail1)" placeholder="student 1" class="form-control">
+                        </div>
+                        <div ng-if="student1IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student1IdFlag == 'Rejected' || student1IdFlag == 'pending' || student1IdFlag == 'Approved' || student1IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student1IdFlag == 'booked'" class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        
+                        <div class="col-md-11" ng-show="student1IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student1Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student1IdFlag == 'booked'" style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student1Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student1IdFlag == 'already booked'" style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student1IdFlag == 'Approved'" style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student1IdFlag == 'Rejected'" style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student1IdFlag == 'pending'" style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student1IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                        <!-- **************student2******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail2" ng-keyup="doThisForStudent2(studentEmail2)"placeholder="student 2" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student2IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student2IdFlag == 'Rejected' || studen2IdFlag == 'pending' || student2IdFlag == 'Approved' || student2IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student2IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student2IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student2Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student2IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student2Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student2IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student2IdFlag == 'Approved' " style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student2IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student2IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student2IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                      <!-- **************student3******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail3" ng-keyup="doThisForStudent3(studentEmail3)"placeholder="student 3" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student3IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student3IdFlag == 'Rejected' || student3IdFlag == 'pending' || student3IdFlag == 'Approved' || student3IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student3IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student3IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student3Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student3IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student3Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student3IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student3IdFlag == 'Approved' " style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student3IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student3IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student3IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                      <!-- **************student4******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail4" ng-keyup="doThisForStudent4(studentEmail4)"placeholder="student 4" class="form-control">
+                        </div>
+
+                        <div ng-if="student4IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student4IdFlag == 'Rejected' || student4IdFlag == 'pending' || student4IdFlag == 'Approved' || student4IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student4IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student4IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student4Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student4IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student4Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student4IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student4IdFlag == 'Approved' " style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student4IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student4IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student4IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                        <!-- **************student5******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail5" ng-keyup="doThisForStudent5(studentEmail5)"placeholder="student 5" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student5IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student5IdFlag == 'Rejected' || student5IdFlag == 'pending' || student5IdFlag == 'Approved' || student5IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student5IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student5IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student5Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student5IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student5Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student5IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student5IdFlag == 'Approved' " style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student5IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student5IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student5IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                          <!-- **************student6******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail6" ng-keyup="doThisForStudent6(studentEmail6)"placeholder="student 6" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student6IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student6IdFlag == 'Rejected' || student6IdFlag == 'pending' || student6IdFlag == 'Approved' || student6IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student6IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student6IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student6Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student6IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student6Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student6IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student6IdFlag == 'Approved' " style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student6IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student6IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student6IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                            <!-- **************student7******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail7" ng-keyup="doThisForStudent7(studentEmail7)"placeholder="student 7" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student7IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student7IdFlag == 'Rejected' || student7IdFlag == 'pending' || student7IdFlag == 'Approved' || student7IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student7IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student7IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student7Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student7IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student7Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student7IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student7IdFlag == 'Approved'" style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student7IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student7IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student7IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                        <!-- **************student8******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail8" ng-keyup="doThisForStudent8(studentEmail8)"placeholder="student 8" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student8IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student8IdFlag == 'Rejected' || student8IdFlag == 'pending' || student8IdFlag == 'Approved' || student8IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student8IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student8IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student8Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student8IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student8Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student8IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student8IdFlag == 'Approved' " style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student8IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student8IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student8IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                <!-- **************student9******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail9" ng-keyup="doThisForStudent9(studentEmail9)"placeholder="student 9" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student9IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student9IdFlag == 'Rejected' || student9IdFlag == 'pending' || student9IdFlag == 'Approved' || student9IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student9IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student9IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student9Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student9IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student9Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student9IdFlag == 'already booked'" style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student9IdFlag == 'Approved'" style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student9IdFlag == 'Rejected'" style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student9IdFlag == 'pending'" style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div ng-if="student9IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                <!-- **************student10******************* -->
+
+                        <div class="col-md-11">
+                          <input type="email" ng-model="studentEmail10" ng-keyup="doThisForStudent10(studentEmail10)"placeholder="student 10" class="form-control">
+                        </div>
+                        
+                        <div ng-if="student10IdFlag == 'Done' && bulkSessionFlag == ''" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student10IdFlag == 'Rejected' || student10IdFlag == 'pending' || student10IdFlag == 'Approved' || student10IdFlag == 'already booked'" class="col-md-1" style="color:red">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+                        <div ng-if="student10IdFlag == 'booked' " class="col-md-1" style="color:#64FE2E">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div>
+
+                        <div class="col-md-11" ng-show="student10IdFlag == 'Done' && bulkSessionFlag == ''" ng-hide="bulkSessionFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{student10Name.$value}}</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student10IdFlag == 'booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for {{student10Name.$value}} !</h5>
+                        </div>
+                        <div class="col-md-11" ng-show="student10IdFlag == 'already booked' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student10IdFlag == 'Approved'" style="margin-top:-10px;" >
+                          <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student10IdFlag == 'Rejected' " style="margin-top:-10px;">
+                          <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                        </div>
+                        <div class="col-md-11" ng-if="student10IdFlag == 'pending' " style="margin-top:-10px;">
+                          <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div ng-if="student10IdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                                                <!-- **************collegeId******************* -->
+
+
+                  <div class="col-md-6">
+                    <div class="container-fluid ">
+                      <div class="row">
+                        <div class="col-md-11">
+                         <br> <input type="email" ng-model="collegeEmail" ng-keyup="doThisForCollege(collegeEmail)"placeholder="College Email" class="form-control">
+                        </div>
+                        <div ng-if="collegeIdFlag == 'Done'" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div><br>
+                        <div class="col-md-11" ng-if="collegeIdFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{collegeName.$value}}</h5>
+                        </div><div class="col-md-1"></div>
+                        <div ng-if="collegeIdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000">
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>
+
+                                                <!-- **************NodalCenterId******************* -->
+
+                        <div class="col-md-11">
+                         <br> <input type="text" ng-model="nodalId" ng-keyup="doThisForNodal(nodalId)"placeholder="Nodal Center Id" class="form-control"><br>
+                        </div>
+                        <div ng-if="nodalIdFlag == 'Done'" class="col-md-1" style="color:#237DAC">
+                          <i class="fa fa-check fa-2x"></i>
+                        </div><br>
+                        <div class="col-md-11" ng-if="nodalIdFlag == 'Done'" style="margin-top:-10px;">
+                          <h5 class="pull-right" style="color:grey">{{nodalName.$value}}</h5>
+                        </div><div class="col-md-1"></div>
+                        <div ng-if="nodalIdFlag == 'Not Done'" class="col-md-1" style="color:#FF4000"> 
+                          <i class="fa fa-times fa-2x"></i>
+                        </div>                                        
+
+                                                <!-- **************2TextAreas******************* -->
+
+                        <br><textarea name="query" ng-model="query" placeholder="Your Query" class="form-control buildenquiry-textarea" rows="6" cols="10" required></textarea>
+                        <br><textarea name="extra" placeholder="Do Your extra work here" class="form-control buildenquiry-textarea" rows="6" ></textarea>
+                        <div class="side-fix-admin">                         
+                                  
+                                              <!-- **************DAtePicker******************* -->
+
+                          <p class="input-group">
+                           <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="dt" is-open="opened" format-month="MMMM" min-date="minDate" max-date="'2016-12-30'" show-button-bar="false" date-disabled="null" ng-required="true" close-text="Close" placeholder="" />
+                            <span class="input-group-btn" show-weeks="false">
+                              <button type="button" class="btn btn-default btn-primary" style="color:white" id="date-btn" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                          </p>
+                          <center>
+                            <timepicker ng-model="mytime" ng-change="changed()" hour-step="1" minute-step="1" show-meridian="false"></timepicker>
+                          </center>
+                        </div>
+                      </div>
+                    </div>
+
+                                        <!-- **************Button(buildEnquiry)******************* -->
+
+              <input type="submit" value="Build Enquiry" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt" ng-disabled = "submitdisabled || collegeVerify.$value=='notverified' || collegeType.$value=='free'"/>
+            </div>
+          </div>
+        </div>
+        <center><div ng-if="bulkSessionFlag == 'Done'"> <h3 style="color:#fbf3f3">Operation Successfully Completed.</h5></div></center>
+        <center><div ng-if="bulkSessionFlag == 'Not Done'"> <h3 style="color:red">Some Error Has Occured</h5></div></center>
+      </form>
+    </div>
+    </div>
+
+    <!-- ===========================================================stu.anhad@gmail.com==================================================== -->
+  <div ng-if="demoBooking">  
+                                <!--  **************************  this is the div  **************************-->  
+      <div class="row">
+         <div class="col-xs-3 btn btn-danger btn-sm" ng-if="DemoCollegeVerify.$value=='notverified' && demoBooking" align="left" style="margin-top:50px;;font-size:13px;color:lavender;pointer-events:none;margin-right:40px;width:170px;font-family:Montserrat ">
+          <i class="fa fa-warning"></i>&nbsp;&nbsp;College Not Verified
+         </div>
+         <div class="col-xs-3 btn btn-danger btn-sm" ng-if="DemoCollegeType.$value=='free' && demoBooking" style="margin-top:50px;font-family:Montserrat;font-size:13px;color:lavender;pointer-events:none;width:160px "><i class="fa fa-warning"></i>&nbsp;&nbsp;College Not Paid
+         </div>
+        <div class="col-xs-3 pull-right" ng-if="demoBooking">
+          <input value="Get Ready For Next session" type="button" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt" ng-hide = "!submitdisabled" ng-click="doThisForDemoStudent(demoStudentEmail, demoCollegeEmail)">
+        </div>
+      </div> 
+  
+                              <!--  **************************  this is the div  **************************-->  
+      <hr />              
+
+    <form name="build_enquiry" ng-submit="getSessionStatusForDemoStudent(demoCollegeEmail, demonodalId, demoStudentEmail, demoQuery)" ng-show="signedIn && usera.profile.profiletype=='admin'">
+      <div class="container-fluid" ng-show="usera.profile.profiletype=='admin'"> 
+        <div class="row">
+          <div class="col-md-6 ">
+            <div class="container-fluid"> 
+              <div class="row">
+
+                                          <!-- **************student1******************* -->
+
+                <div class="col-xs-11">
+                  <label ng-model="demoStudentEmail" class="form-control">{{demoStudentEmail}}</label>
+                </div>
+                <div ng-if="demoStudentIdFlag=='Done'" class="col-xs-1" style="color:white">
+                  <i class="fa fa-check fa-2x"></i>
+                </div>
+                <div ng-if="demoStudentIdFlag == 'Rejected' || demoStudentIdFlag == 'pending' || demoStudentIdFlag == 'Approved' || demoStudentIdFlag == 'already booked'" class="col-xs-1" style="color:red">
+                  <i class="fa fa-check fa-2x"></i>
+                </div>
+                <div ng-if="demoStudentIdFlag == 'booked'" class="col-xs-1" style="color:#64FE2E">
+                  <i class="fa fa-check fa-2x"></i>
+                </div>
+                
+                <div class="col-xs-11" ng-show="demoStudentIdFlag == 'Done' && demoSessionFlag == ''" ng-hide="demoSessionFlag == 'Done'" style="margin-top:-10px;">
+                  <h5 class="pull-right" style="color:grey">MMA Demo Student</h5>
+                </div>
+                <div class="col-xs-11" ng-if="demoStudentIdFlag == 'booked'" style="margin-top:-10px;">
+                  <h5 class="pull-left" style="color:grey"><strong style="color:green">SESSION BOOKED</strong> for MMA Demo Student !</h5>
+                </div>
+                <div class="col-xs-11" ng-show="demoStudentIdFlag == 'already booked'" style="margin-top:-10px;">
+                  <h5 class="pull-left" style="color:grey">College is yet to <strong style="color:red">GIVE FEEDBACK</strong> for this session</h5>
+                </div>
+                <div class="col-xs-11" ng-if="demoStudentIdFlag == 'Approved'" style="margin-top:-10px;" >
+                  <h5 class="pull-left" style="color:grey">Booking failed, session was <strong style="color:red">APPROVED</strong> by QA</h5>
+                </div>
+                <div class="col-xs-11" ng-if="demoStudentIdFlag == 'Rejected'" style="margin-top:-10px;">
+                  <h5 class="pull-left"  style="color:grey">Booking failed, session was <strong style="color:red">REJECTED</strong>by QA</h5>
+                </div>
+                <div class="col-xs-11" ng-if="demoStudentIdFlag == 'pending'" style="margin-top:-10px;">
+                  <h5 class="pull-left" style="color:grey">Booking failed, session is <strong style="color:red">AWAITED FOR APPROVAL</strong> by QA</h5>
+                </div>
+                
+
+                                                  <!-- ***************COLLEGE**************** -->
+
+                <div class="col-xs-11">
+                  <input type="email" ng-model="demoCollegeEmail" ng-keyup="updateDemoCollegeEmail(demoCollegeEmail)"placeholder="College Email" class="form-control">
+                </div>
+                <div ng-if="DemoCollegeIdFlag == 'Done'" class="col-xs-1" style="color:white">
+                  <i class="fa fa-check fa-2x"></i>
+                </div><br>
+                <div class="col-xs-11" ng-if="DemoCollegeIdFlag == 'Done'" style="margin-top:-10px;">
+                  <h5 class="pull-right" style="color:grey">{{DemoCollegeName.$value}}</h5>
+                </div><div class="col-xs-1"></div>
+                <div ng-if="DemoCollegeIdFlag == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                  <i class="fa fa-times fa-2x"></i>
+                </div>  
+
+                                                      <!-- ************Nodal************** -->
+
+                <div class="col-xs-11">
+                  <label ng-model="demonodalId" class="form-control">{{demonodalId}}</label>
+                </div>
+                <div ng-if="DemoNodalIdFlag == 'Done'" class="col-xs-1" style="color:white">
+                  <i class="fa fa-check fa-2x"></i>
+                </div><br>
+                <div class="col-xs-11" ng-if="DemoNodalIdFlag == 'Done'" style="margin-top:-10px;">
+                  <h5 class="pull-right" style="color:grey">MMA NODAL CENTER</h5>
+                </div><div class="col-xs-1"></div>
+                <div ng-if="DemoNodalIdFlag == 'Not Done'" class="col-xs-1" style="color:#FF4000"> 
+                  <i class="fa fa-times fa-2x"></i>
+                </div> 
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <div class="container-fluid">
+              <div class="row">
+                
+                                        <!-- **************TextAreas******************* -->
+
+                <textarea name="query" ng-model="demoQuery"  placeholder="Your Query" class="form-control" rows="6" required></textarea>
+                          
+                                      <!-- **************DAtePicker******************* -->
+
+                  <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="dt" is-open="opened" format-month="MMMM" min-date="minDate" max-date="'2015-12-30'" show-button-bar="false" date-disabled="null" ng-required="true" close-text="Close" placeholder="" />
+                    <span class="input-group-btn" show-weeks="false">
+                      <button type="button" class="btn btn-default" style="color:white" id="date-btn" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+                  <center>
+                    <timepicker ng-model="mytime" ng-change="changed()" hour-step="1" minute-step="1" show-meridian="false"></timepicker>
+                  </center>
+                </div>
+              </div>
+            </div>
+
+                                      <!-- **************Button(buildEnquiry)******************* -->
+
+            <input type="submit" value="Build Enquiry" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt" ng-disabled = "demosubmitdisabled"/>
+          </div>
+        </div>
+      </div>
+      <center><div ng-if="demoSessionFlag == 'Done'"> <h3 style="color:#fbf3f3">Operation Successfully Completed.</h5></div></center>
+      <center><div ng-if="demoSessionFlag == 'Not Done'"> <h3 style="color:red">Some Error Has Occured</h5></div></center>
+    </form>
+  </div>
+<!-- ===========================================================stu.anhad@gmail.com==================================================== -->
+
+</div>

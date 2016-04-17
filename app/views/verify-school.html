@@ -1,0 +1,74 @@
+<div class="container-fluid " ng-init="toTheTop(); getSchools()">
+  <div class="theme-container">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Verify School<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right"><b>You can verify a School here.</b><h5>
+      </div>
+    </div>
+  </div>
+
+
+  <hr />
+
+
+  <div class="row">
+  <div class="container-fluid">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div class="col-md-9">
+            <div class="container-fluid" id="src-scroll" style="height : 900px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table">
+                      <col width="8px" />
+                      <col width="40px" />
+                      <col width="40px" />
+                      <col width="30px" />
+                      <col width="25px" />
+                      <col width="18px" />
+                      <col width="20px" />
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>School Name</th>
+                          <th>School E-mail</th>
+                          <th>Registration Date</th>
+                          <th>Current Status</th>
+                          <th>Verify</th>
+                          </tr>
+                        </thead>
+                        <tbody ng-animate="'animate'" ng-repeat="(schoolId,school) in school| filter:colltype | filter:subfilter" ng-show="school.privilege=='access_denied'" >
+                          <div ng-show="signedIn()">
+                            <tr class="feed-table-row">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><strong>{{school.schoolname}}</strong></td>
+                              <td>{{school.schooladminemail}}<br>Password: {{school.password}}</td>
+                              <td><strong>{{school.dateOfApplying}}</strong></td>
+                              <td align="center" style="color:red;"><i class="fa fa-exclamation-triangle fa-lg"></i></td>
+                              <td class="v-l" align="center" style="color:#00FF00; cursor:pointer;" ng-click="verifySchool(school)"><i class="fa fa-thumbs-o-up"></i></td>
+                            </tr>
+                          </div>
+                          <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                            <div class="container-fluid">
+                              <div class="row result-det">
+                                <strong><h5>{{school.schoolname}}</h5></strong>
+                              </div>
+                            </div>
+                          </a>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>

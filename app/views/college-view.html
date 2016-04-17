@@ -1,0 +1,90 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  <div class="theme-container">
+    <div class="row">
+      <div class="container-fluid content-padding">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Update College View<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can update views of college here.<h5>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="container-fluid content-padding" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div class="row" style="padding:20px;">
+            <div class="col-xs-4">
+              <label class="radioFilter">
+                <input type="radio" name="colltype" value="paid" ng-model="colltype"> &nbsp; Paid Colleges
+              </label>
+            </div>
+            <div class="col-xs-4">
+              <label class="radioFilter">
+                <input type="radio" name="colltype" checked value="college" ng-model="colltype"> &nbsp; All Colleges
+              </label>
+            </div>
+            <toaster-container toaster-options="{'time-out': 5000, 'position-class': 'toast-bottom-right'}"></toaster-container> 
+            <div class="col-xs-4">
+              <input type="text" placeholder="Search with College Name" class="form-control main-input-box aaa" ng-model="subfilter">
+            </div>
+          </div>
+          <div >
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table">
+                      <col width="8px" />
+                      <col width="45px" />
+                      <col width="40px" />
+                      <col width="25px" />
+                      <col width="25px" />
+                      <col width="25px" />
+                      <col width="20px" />
+                      <col width="35px" />
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>College Name</th>
+                          <th>College E-mail</th>
+                          <th>No. of Contract</th>
+                          <th style="border-right:3px solid white;"> College Type </th>
+                          <th></th>
+                          <th>Update View</th> 
+                          <th> </th>
+                          </tr>
+                        </thead>
+                        <tbody ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter" ng-show="college.verifiedcollege=='verified'">
+                          <div ng-show="signedIn()">
+                            <tr class="feed-table-row">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><strong>{{college.collegename}}</strong></td>
+                              <td>{{college.counselloremail}}<br>Password: {{college.collegepassword}}</td>
+                              <td>{{college.contractsessions}} </td>
+                              <td>{{college.collegetype}}</td>
+                              <td ><input ng-change="inputDone(collegeId)"  type="text" ng-model="college.collegeView" required class="form-control main-input-box aaa"></td>
+                              <td style="border-right:3px solid white;"><input ng-disabled="!college.collegeView"  ng-click="updateCollegeView(college.collegeId, college.collegeView,$index)" type="button" class="btn btn-primary" value="Update"></td>
+                            </tr>
+                          </div>
+                          <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                            <div class="container-fluid">
+                              <div class="row result-det">
+                                <strong><h5>{{college.collegename}}</h5></strong>
+                              </div>
+                            </div>
+                          </a>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+

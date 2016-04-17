@@ -1,0 +1,1513 @@
+<head>
+  <style type="text/css">
+          
+      .dright
+      {
+       border: 3px solid;
+       /*border-radius: 15px;*/
+       height:434px;
+       width:300px;
+       margin-right: 10px;
+
+       /* background: -webkit-linear-gradient(90deg, #757F9A 0%, #D7DDE8 100%); /* Chrome 10+, Saf5.1+ */
+        /*background:    -moz-linear-gradient(90deg, #757F9A 0%, #D7DDE8 100%); /* FF3.6+ */
+        /*background:     -ms-linear-gradient(90deg, #757F9A 0%, #D7DDE8 100%); /* IE10 */
+        /*background:      -o-linear-gradient(90deg, #757F9A 0%, #D7DDE8 100%); /* Opera 11.10+ */
+        /*background:         linear-gradient(90deg, #757F9A 0%, #D7DDE8 100%); /* W3C */
+              background: #757F9A;
+
+      }
+
+      .head {
+        background-color: #006363;
+          height:60px;
+         /* border-radius: 14px;*/
+          width:297px;
+          margin: 0px 0px 0px 0px;
+          white-space: 0px;
+          float:left;
+          display: inline-block;
+          border: 2px solid;
+
+          }
+      #caption
+      {
+        font-size: 17px;
+        font-weight: bold;
+        margin-top: 13px;
+        
+        margin-left: 15px;
+        color: white;
+        float: left;
+      }    
+
+
+      .footer {
+          height:45px;
+          border-radius: 5px;
+          width:295px;
+          margin: 0px 0px 0px 0px;
+          box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+          background: rgba(0,0,0,.2);
+          padding:5px;
+          }
+          .content {
+          height:325px;
+          /*border-radius: 15px;*/
+          width:297px;
+          margin:0px 0px 0px 0px;
+          overflow:scroll;
+          padding-bottom: 0px;
+          overflow-x: hidden;
+          
+          }
+      .control-group{
+        margin: 10px 3px 0px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+        
+      ::-webkit-input-placeholder {
+          color:black;
+      }
+      #date
+      {
+        text-align: center;
+        font-family: Montsserat;
+        font-weight: bold;
+        color: BLACK;
+
+      }
+      #time
+      {
+        display: table-cell;
+        float: right;
+        vertical-align: bottom;
+        font-size: 9px;
+        color: grey;
+        border-radius: 8px;
+        border-collapse: separate;
+        padding-top: 5px;
+      }
+      #msg
+      {
+        border-radius: 5px;
+        
+        border-collapse: separate;
+        background-position: left top;
+        display: inline-block;
+        margin-right: 3px;
+        padding-left: 5px;
+        word-wrap:break-word;
+        text-align: left;
+        padding-bottom: 0px;
+        font-size: 12px;
+        color: black;
+        font-family: Montserrat;
+      }
+      #recipent
+      {
+        text-align: center;
+      }
+      .glyphicon {
+          font-size: 16px;
+          margin-left: 5px;
+          color: #061439;
+      }
+      .glyphicon.glyphicon-time {
+          font-size: 10px;
+          color: black;
+
+      }
+      #load
+      {
+        font-size: 12px;
+        width: 160px;
+        height: 30px;
+        text-decoration: none;
+        background-color:lavender;
+        color:black;
+      }
+      .msgInfo
+      {
+        padding: 2px 0px 0px 0px;
+        position: relative;
+        max-width: 70%;
+      }
+      #content::-webkit-scrollbar-track -moz-scrollbar-track {
+            background-color: #b46868;
+      } /* the new scrollbar will have a flat appearance with the set background color */
+       
+      #content::-webkit-scrollbar-thumb -moz-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2); 
+      } /* this will style the thumb, ignoring the track */
+       
+      #content::-webkit-scrollbar-button -moz-scrollbar-button {
+            background-color: #7c2929;
+      } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+       
+      #content::-webkit-scrollbar-corner -moz-scrollbar-corner {
+            background-color: black;
+      }
+      /*.glyphicon-refresh-animate {
+          -animation: spin 0.7s infinite linear;
+          -webkit-animation: spin2 0.7s infinite linear;
+          -moz-animation: spin2 0.7s infinite linear;
+          -o-animation: spin2 0.7s infinite linear;
+      }
+
+      @-webkit-keyframes spin2 {
+          from { -webkit-transform: rotate(0deg);}
+          to { -webkit-transform: rotate(360deg);}
+      }
+      @-moz-keyframes spin2 {
+          from { -moz-transform: rotate(0deg);}
+          to { -moz-transform: rotate(360deg);}
+      }
+      @keyframes spin {
+          from { transform: scale(1) rotate(0deg);}
+          to { transform: scale(1) rotate(360deg);}
+      }*/
+      #note{
+        display:none;
+        color:green;
+        margin-right: 3px;
+        animation: blink 1s steps(2, start) infinite;
+      }
+      @keyframes blink {
+      to { color: white; }
+      }
+
+
+      .glyphicon.glyphicon-comment {
+          font-size:40px;
+          
+      }
+
+      .bigEntrance{
+        animation-name: bigEntrance;
+        -webkit-animation-name: bigEntrance;  
+        -moz-animation-name: bigEntrance;  
+
+        animation-duration: 1.6s; 
+        -webkit-animation-duration: 1.6s;
+        -moz-animation-duration: 1.6s;
+
+        animation-timing-function: ease-out;  
+        -webkit-animation-timing-function: ease-out;  
+        -moz-animation-timing-function: ease-out;  
+
+        visibility: visible !important;     
+      }
+
+      @keyframes bigEntrance {
+        0% {
+          transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+          opacity: 1;
+        }
+        30% {
+          transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);    
+          opacity: .5;
+        }
+        45% {
+          transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }
+        60% {
+          transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);   
+          opacity: .5;
+        } 
+        75% {
+          transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }
+        90% {
+          transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);    
+          opacity: .5;
+        } 
+        100% {
+          transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }   
+      }
+
+      @-webkit-keyframes bigEntrance @-moz-keyframes bigEntrance {
+        0% {
+          -webkit-transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+          -moz-transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+          opacity: 0.2;
+        }
+        30% {
+          -webkit-transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);    
+          -moz-transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);    
+          opacity: .5;
+        }
+        45% {
+          -webkit-transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+          -moz-transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: .85;
+        }
+        60% {
+          -webkit-transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);   
+          -moz-transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);   
+          opacity: .95;
+        } 
+        75% {
+          -webkit-transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+          -moz-transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+          opacity: .7;
+        }
+        90% {
+          -webkit-transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);    
+          -moz-transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);    
+          opacity: .8;
+        } 
+        100% {
+          -webkit-transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+          -moz-transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+          opacity: 1;
+        }       
+      }
+      /*Clearing Floats*/
+      .cf:before, .cf:after{
+          content:"";
+          display:table;
+      }
+
+      .cf:after{
+          clear:both;
+      }
+
+      .cf{
+          zoom:1;
+      }    
+      /* Form wrapper styling */
+      /*.form-wrapper {
+          width: 450px;
+          padding: 15px;
+          margin: 150px auto 50px auto;
+          background: #444;
+          background: rgba(0,0,0,.2);
+          border-radius: 10px;
+          box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+      }*/
+
+      /* Form text input */
+
+      .form-wrapper input {
+          width: 225px;
+          height:35px;
+          margin-left: 3px;
+          float: left;   
+          font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+          border: 0;
+          background: #eee;
+          border-radius: 3px 0 0 3px; 
+          color: black;    
+      }
+
+      .form-wrapper input:focus {
+          outline: 0;
+          background: #fff;
+          box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+      }
+
+      .form-wrapper input::-webkit-input-placeholder {
+         color: #999;
+         font-weight: normal;
+         font-style: italic;
+      }
+
+      .form-wrapper input:-moz-placeholder {
+          color: #999;
+          font-weight: normal;
+          font-style: italic;
+      }
+
+      .form-wrapper input:-ms-input-placeholder {
+          color: #999;
+          font-weight: normal;
+          font-style: italic;
+      }   
+
+      /* Form submit button */
+      .form-wrapper button {
+          overflow: visible;
+          position: relative;
+          float: left;
+          border: 0;
+          padding: 0;
+          cursor: pointer;
+          height: 35px;
+          width: 55px;
+          font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+          color: #fff;
+          text-transform: uppercase;
+          background: #d83c3c;
+          border-radius: 0 3px 3px 0;     
+          text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+          box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+          margin-right: 2px;
+          
+      }  
+
+      .form-wrapper button:hover{    
+          background: #e54040;
+      }  
+
+      .form-wrapper button:active,
+      .form-wrapper button:focus{  
+          background: #c42f2f;
+          outline: 0;  
+      }
+
+      .form-wrapper button:before { /* left arrow */
+          content: '';
+          position: absolute;
+          border-width: 8px 8px 8px 0;
+          border-style: solid solid solid none;
+          border-color: transparent #d83c3c transparent;
+          top: 12px;
+          left: -6px;
+      }
+
+      .form-wrapper button:hover:before{
+          border-right-color: #e54040;
+      }
+
+      .form-wrapper button:focus:before,
+      .form-wrapper button:active:before{
+              border-right-color: #c42f2f;
+      }     
+
+      .form-wrapper button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
+          border: 0;
+          padding: 0;
+      }  
+      .edit-label {
+          margin-bottom: 10px;
+          letter-spacing: 1px;
+          font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        
+        #chatParentDiv{
+          position:fixed;
+          right:0%;
+          bottom:0%;
+          z-index:9999999;
+          margin-right:5%;
+          padding-right:0;
+        }
+  </style>
+</head>
+
+
+<div class="container-fluid" ng-init="toTheTop()">
+  <div class="theme-container">
+    <div class="row ">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-nodal"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Send Email<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right">You Can Send Emails of students here to the mymission admission team.<h5>
+      </div>
+    </div>
+
+    <hr />
+
+    <toaster-container toaster-options="{'time-out': 10000, 'position-class': 'toast-bottom-center'}"></toaster-container>
+    <div class="row" ng-if="usern.profile.nodalCenterName">
+      <div class="col-xs-6">
+        <div class="container-fluid" ng-init="getnodalid()">
+          <div class="row edit-field" style="font-size:18px; color:black; margin-bottom:10px; margin-left:10px;">
+            <b>Student Email List</b>
+          </div>
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email1" ng-keyup="doThisForStudent1(usern.profile.studentEmailList.Email1)" placeholder="student 1" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail1(student1Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail1(student1Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'Not Done'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent1(student1Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent1(student1Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent1(student1Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            
+            <div ng-if="student1IdFlag == 'Done' && student1nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student1IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email1}}" ng-click="doforStudent1()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email1">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              1. {{usern.profile.studentEmailList.Email1}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email1">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email1')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email2" ng-keyup="doThisForStudent2(usern.profile.studentEmailList.Email2)" placeholder="student 2" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail2(student2Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail2(student2Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent2(student2Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent2(student2Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent2(student2Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student2IdFlag == 'Done' && student2nodalstatus == 'Other'" class="align-right"   style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student2IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email2}}"  target="_blank" ng-click="doforStudent2()" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div> 
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email2">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              2. {{usern.profile.studentEmailList.Email2}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email2">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email2')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email3" ng-keyup="doThisForStudent3(usern.profile.studentEmailList.Email3)" placeholder="student 3" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail3(student3Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail3(student3Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent3(student3Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent3(student3Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent3(student3Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student3IdFlag == 'Done' && student3nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student3IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email3}}"  target="_blank" ng-click="doforStudent3()"  style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email3">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              3. {{usern.profile.studentEmailList.Email3}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email3">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email3')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email4" ng-keyup="doThisForStudent4(usern.profile.studentEmailList.Email4)" placeholder="student 4" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student4IdFlag == 'Done' && student4nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail4(student4Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student4IdFlag == 'Done' && student4nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail4(student4Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student4IdFlag == 'Done' && student4nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student4IdFlag == 'Done' && student4nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent4(student4Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student1IdFlag == 'Done' && student4nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent4 (student4Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student1IdFlag == 'Done' && student4nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent4(student4Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student4IdFlag == 'Done' && student4nodalstatus == 'Other'"   class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student4IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email4}}"   target="_blank" style="font-size:10px;" ng-click="doforStudent4()">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email4">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              4. {{usern.profile.studentEmailList.Email4}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email4">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email4')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email5" ng-keyup="doThisForStudent5(usern.profile.studentEmailList.Email5)" placeholder="student 5" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail5(student5Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail5(student5Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div> 
+
+
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent5(student5Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent5(student5Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent5(student5Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student5IdFlag == 'Done' && student5nodalstatus == 'Other'" class="align-right"  style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student5IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email5}}" ng-click="doforStudent5()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email5">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              5. {{usern.profile.studentEmailList.Email5}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email5">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email5')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email6" ng-keyup="doThisForStudent6(usern.profile.studentEmailList.Email6)" placeholder="student 6" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail6(student6Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail6(student6Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent6(student6Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent6(student6Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent6(student6Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student6IdFlag == 'Done' && student6nodalstatus == 'Other'"  class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student6IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email6}}" ng-click="doforStudent6()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email6">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              6. {{usern.profile.studentEmailList.Email6}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email6">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email6')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email7" ng-keyup="doThisForStudent7(usern.profile.studentEmailList.Email7)" placeholder="student 7" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail7(student7Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail7(student7Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent7(student7Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent7(student7Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent7(student7Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student7IdFlag == 'Done' && student7nodalstatus == 'Other'"  class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student7IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email7}}" ng-click="doforStudent7()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email7">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              7. {{usern.profile.studentEmailList.Email7}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email7">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email7')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email8" ng-keyup="doThisForStudent8(usern.profile.studentEmailList.Email8)" placeholder="student 8" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail8(student8Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail8(student8Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent8(student8Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent8(student8Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent8(student8Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student8IdFlag == 'Done' && student8nodalstatus == 'Other'"  class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student8IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email8}}" ng-click="doforStudent8()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email8">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              8. {{usern.profile.studentEmailList.Email8}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email8">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email8')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email9" ng-keyup="doThisForStudent9(usern.profile.studentEmailList.Email9)" placeholder="student 9" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail9(student9Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail9(student9Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div> 
+
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent9(student9Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent9(student9Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent9(student9Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student9IdFlag == 'Done' && student9nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student9IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email9}}" ng-click="doforStudent9()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+          </div>
+
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email9">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              9. {{usern.profile.studentEmailList.Email9}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email9">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email9')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email10" ng-keyup="doThisForStudent10(usern.profile.studentEmailList.Email10)" placeholder="student 10" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail10(student10Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail10(student10Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent10(student10Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent10(student10Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent10(student10Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student10IdFlag == 'Done' && student10nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student10IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email10}}"  ng-click="doforStudent10()" target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email10">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              10. {{usern.profile.studentEmailList.Email10}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email10">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email10')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email11" ng-keyup="doThisForStudent11(usern.profile.studentEmailList.Email11)" placeholder="student 11"  class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail11(student11Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail11(student11Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'Not Done'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent11(student11Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent11(student11Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent11(student11Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            
+            <div ng-if="student11IdFlag == 'Done' && student11nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student11IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email11}}" ng-click="doforStudent11()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email11">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              11. {{usern.profile.studentEmailList.Email11}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email11">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email11')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email12" ng-keyup="doThisForStudent12(usern.profile.studentEmailList.Email12)" placeholder="student 12" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail12(student12Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail12(student12Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent12(student12Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent12(student1Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent12(student1Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student12IdFlag == 'Done' && student12nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student12IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email12}}" ng-click="doforStudent12()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div> 
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email12">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              12. {{usern.profile.studentEmailList.Email12}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email12">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email12')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email13" ng-keyup="doThisForStudent13(usern.profile.studentEmailList.Email13)" placeholder="student 13" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail13(student13Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail13(student13Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent13(student13Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent13(student13Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent13(student13Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student13IdFlag == 'Done' && student13nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student13IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email13}}" ng-click="doforStudent13()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email13">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              13. {{usern.profile.studentEmailList.Email13}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email13">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email13')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email14" ng-keyup="doThisForStudent14(usern.profile.studentEmailList.Email14)" placeholder="student 14" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail14(student14Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail14(student14Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent14(student14Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent14(student14Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent14(student14Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student14IdFlag == 'Done' && student14nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student14IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email14}}" ng-click="doforStudent14()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email14">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              14. {{usern.profile.studentEmailList.Email14}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email14">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email14')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email15" ng-keyup="doThisForStudent15(usern.profile.studentEmailList.Email15)" placeholder="student 15" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail15(student15Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail15(student15Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent15(student15Uid)" value="Send Enrollement Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent15(student15Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent15(student15Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student15IdFlag == 'Done' && student15nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student15IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email15}}" ng-click="doforStudent15()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email15">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              15. {{usern.profile.studentEmailList.Email15}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email15">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email15')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email16" ng-keyup="doThisForStudent16(usern.profile.studentEmailList.Email16)" placeholder="student 16" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail16(student16Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail16(student16Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent16(student16Uid)" value="Send Enrollement Link" class="btn btn-default btn-block" style="font-size:10px;" />
+            </div>
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent16(student16Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent16(student16Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student16IdFlag == 'Done' && student16nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student16IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email16}}" ng-click="doforStudent16()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email16">
+            <div class="col-xs-8" style="color:black; font-size:15px;" >
+              16. {{usern.profile.studentEmailList.Email16}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email16">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email16')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email17" ng-keyup="doThisForStudent17(usern.profile.studentEmailList.Email17)" placeholder="student 17" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail17(student17Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail17(student17Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent17(student17Uid)" value="Send Enrollement Link" class="btn btn-default btn-block" style="font-size:10px;" />
+            </div>
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent17(student17Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent17(student17Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student17IdFlag == 'Done' && student17nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student17IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email17}}"  ng-click="doforStudent17()" target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email17">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+             17. {{usern.profile.studentEmailList.Email17}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email17">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email17')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email18" ng-keyup="doThisForStudent18(usern.profile.studentEmailList.Email18)" placeholder="student 18" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail18(student18Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail18(student18Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent18(student18Uid)" value="Send Enrollement Link" class="btn btn-default btn-block" style="font-size:10px;" />
+            </div>
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent18(student18Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent18(student18Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+
+            <div ng-if="student18IdFlag == 'Done' && student18nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student18IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email18}}" ng-click="doforStudent18()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email18">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              18. {{usern.profile.studentEmailList.Email18}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email18">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email18')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field">
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email19" ng-keyup="doThisForStudent19(usern.profile.studentEmailList.Email19)" placeholder="student 19" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail19(student19Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail19(student19Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent19(student19Uid)" value="Send Enrollement Link" class="btn btn-default btn-block" style="font-size:10px;" />
+            </div>
+
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent19(student19Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent19(student19Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student19IdFlag == 'Done' && student19nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student19IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email19}}"  ng-click="doforStudent19()" target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email19">
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              19. {{usern.profile.studentEmailList.Email19}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email19">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email19')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+          <div class="row edit-field" >
+            <div class="col-xs-8">
+              <input type="email" ng-model="usern.profile.studentEmailList.Email20" ng-keyup="doThisForStudent20(usern.profile.studentEmailList.Email20)" placeholder="student 20" class="form-control main-input-box aaa">
+            </div>
+
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'emailfalse'" class="col-xs-4">
+              <a  style="font-size:11px;">Email is not verified</a>
+              <input type="button" ng-click="verificationmail20(student20Uid)" value="Send Verification Email" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'resendemail'" class="col-xs-4">
+              <input type="button" ng-click="verificationmail20(student20Uid)" value="Resend Verification Link" style="font-size:9px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'Done'" class="col-xs-1" style="color:green">
+              <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'Not Done'" class="col-xs-4">
+                  <input type="button" ng-click="mailforStudent20(student20Uid)" value="Send Enrollement Link" class="btn btn-default btn-block" style="font-size:10px;" />
+            </div>
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'Not Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent20(student20Uid)" value="Resend Link" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'Sent'" class="col-xs-4">
+            <input type="button" ng-click="mailforStudent20(student20Uid)" value="Check Status" style="font-size:10px;" class="btn btn-default btn-block" />
+            </div>
+
+            <div ng-if="student20IdFlag == 'Done' && student20nodalstatus == 'Other'" class="align-right" style="color:#64FE2E">
+              <h4 style="font-size: 12px;">Student is already a part of some other Nodal Center</h4>
+            </div>
+            <div ng-if="student20IdFlag == 'Not Done'" class="align-right">
+             <strong><a href="#/nodal-studentregister/:{{usern.profile.studentEmailList.Email20}}" ng-click="doforStudent20()"  target="_blank" style="font-size:10px;">Click Here To register This student</a></strong>
+            </div>  
+            
+          </div>
+          <div class="row edit-label" ng-show="usern.profile.studentEmailList.Email20" >
+            <div class="col-xs-8" style="color:black; font-size:15px;">
+              20. {{usern.profile.studentEmailList.Email20}}
+            </div>
+            <div class="colxs-4" style="color:red;" ng-show="usern.profile.studentEmailList.Email20">
+              <button class="btn btn-danger" ng-click="deleteEmail('Email20')" style="font-size:10px; border:2px solid white;">Remove from List</button>
+            </div>
+          </div>
+
+          <!-- #################### -->
+
+
+
+
+
+
+
+
+
+          <div class="row" style="margin-top:50px;">
+            <div class="edit-field-btn">
+            <div class="col-xs-6"></div>
+              <div class="col-xs-3"><input type="button" class="btn btn-primary active sub-btn" ng-click="getemaillist(); checkemaillist()" value="Cancel"/></div>
+              <div class="col-xs-3"><input type="button" ng-disabled="submitdisabled" class="btn btn-primary active sub-btn" value="Send Now" ng-click="sendMail()" /></div>
+            </div>
+            <div class="edit-label-btn" ng-show="usern.profile.studentEmailList">
+              <div class="col-xs-3"></div>
+              <div class="col-xs-5" ><button type="button" class="btn btn-danger active " id="removeAllbtn"><i class="fa fa-trash-o"></i>&nbsp;Remove All Students</button></div>
+
+              <div class="col-xs-4"><button type="button" class="btn btn-success active can-btn" ng-click="getemaillist(); allkeyup()"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit List</button></div>
+            </div>
+            <div class="edit-label-btn" ng-show="!usern.profile.studentEmailList">
+                <h4  >You don't have any Active Students for Sessions please use bellow the button to send students email to us.</h4>
+                <Center>
+                      <button type="button" class="btn btn-danger active can-btn" ng-click="checkemaillist()" ><i class="fa fa-plus"></i>&nbsp;Add Student Email</button>
+                </Center>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-3" id="chatParentDiv">
+                       <div ng-controller="chatCtrl">
+                          <div class="dright"  >
+                            <div class="head" ng-init="loadMsg(usern.uid,usern.profile.nodalAdminName);checkAdminStatus()">
+                              <img src="../images/chat.png" height="58px" class="img-rounded" align="left" >
+                               <span align="right" id="caption">Status&nbsp;&nbsp;&nbsp;</span>
+                              <div ng-if="adminStatus=='online'"style="height:15px;width:15px;border-radius:100%;background-color:green;float:left;margin-top:20px;"></div>
+                              <div ng-if="adminStatus=='offline'"style="height:15px;width:15px;border-radius:100%;background-color:red;float:left;margin-top:20px;"></div>
+                              <div style="color:lavender;padding-top:14px;font-weight:bold" ng-if="typingFlag">&nbsp;&nbsp; Typing...</div>
+                              <span class="glyphicon glyphicon-comment" class="pulse" id="note" align="right"></span>
+
+                            </div>
+          <div class="content" id="content" ng-init="checker(usern.uid)"  >
+            <div align="center"><button type="button" id="load" class="btn btn-default" ng-click="loadMsg(usern.uid,usern.profile.nodalAdminName);addclass();" ng-if="loader1&&loader" >
+                  <span id="loadMsg" class=""style="font-size:1.3em;"></span>
+                      <span ng-model="loadInfo" style="font-weight:bold;">{{loadInfo}}</span></button>
+            </div>
+          <div ng-repeat="(key,value) in list"  >
+                    <div ng-init="compare(value.name,key,value.date);">
+                        <div id="date" ng-if="date[key]=='not_same'" > 
+                            <br>
+                              <span style="background:#AAD3E2;border-radius:5px;padding:2px 2px 2px 2px;"> {{value.date|convert }} </span>
+                              </div>
+                              <div id="recipent" >  
+                                  <div ng-if="name[key]=='not_same'" align="left">
+                                    <b ng-if="value.name!==usern.profile.nodalAdminName" ><span class="glyphicon glyphicon-user"></span>:Support</b>
+                                  </div>
+                              </div>
+                    </div>
+                   
+                  <div class="msgInfo" ng-if="value.name==usern.profile.nodalAdminName" align='right' style="margin-left:30%" >
+                      <div id="msg"style="BACKGROUND:#C8F4B5;"  > {{value.msg}}&nbsp;&nbsp;&nbsp;<b id="time">{{value.time|change_time}}&nbsp;&nbsp;</b></div> 
+                  </div>                             
+                 
+                  <div class="msgInfo" ng-if="value.name!==usern.profile.nodalAdminName" align='left' style="margin-left:3px">
+                    <div id="msg"style="BACKGROUND:LAVENDER;"  >  {{value.msg}}&nbsp;&nbsp;&nbsp;<b id="time">{{value.time|change_time}}&nbsp;&nbsp;</b></div>
+                  </div>                           
+          </div>   
+        </div>  
+              <div class="footer">
+                <form class="form-wrapper cf">
+                  <input type="text"  class="textbox" id="textmsg" placeholder="Type a Message" ng-model="inp_msg" ng-keydown="keyPressed($event,null,usern.uid)"/>
+                  <button type="submit" id="textbtn" ng-click="sendMsg(inp_msg,usern.profile.nodalAdminName,usern.uid); inp_msg=''">Send</button>
+                </form>
+              </div> 
+      </div>
+      </div>
+  <!--chat close --> 
+    </div>
+  </div>
+
+<div class="search-Page-loginErrorModal confirmatiomPop">
+  <div class="modal-backdrop"></div> 
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="studentblocked=false" id="confirmatiomPopClose"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+    </div>
+    <div class="modal-body">
+      <center>
+        <h4>Are you sure you want to remove all the students from the list?</h4>
+      </center>
+      <br /><br />
+      <div class="row">
+        <div class="col-xs-6">
+          <button type="button" id="confirmatiomPopYes" class="btn btn-success btn-lg pull-right" ng-click="deleteAllEmail(); cancelmail()"><i class="fa fa-check"></i>Yes</button>
+        </div>
+        <div class="col-xs-6">
+        <button type="button" id="confirmatiomPopNo" class="btn btn-danger btn-lg"><i class="fa fa-times"></i>No</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="studentblocked=false" id="confirmatiomPopClose">Close</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  $(".edit-field").hide();
+  $(".edit-label").show();
+  $(".edit-field-btn").hide();
+  $(".edit-label-btn").show();
+  $('.confirmatiomPop').hide();
+
+  $(document).on( "click", ".sub-btn", function( event ) {
+    $(".edit-field").hide();
+    $(".edit-label").show();
+    $(".edit-field-btn").hide();
+  $(".edit-label-btn").show();
+  });
+  $(document).on( "click", ".can-btn", function( event ) {
+    $(".edit-field").show();
+    $(".edit-label").hide();
+    $(".edit-field-btn").show();
+    $(".edit-label-btn").hide();
+  });
+
+  $(document).on( "click", "#removeAllbtn", function( event ) {
+    $('.confirmatiomPop').show();
+  });
+  $(document).on( "click", "#confirmatiomPopClose", function( event ) {
+    $('.confirmatiomPop').hide();
+  });
+  $(document).on( "click", "#confirmatiomPopNo", function( event ) {
+    $('.confirmatiomPop').hide();
+  });
+  $(document).on( "click", "#confirmatiomPopYes", function( event ) {
+    $('.confirmatiomPop').hide();
+  });
+</script>

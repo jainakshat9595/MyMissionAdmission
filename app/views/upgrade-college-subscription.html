@@ -1,0 +1,133 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  <div class="theme-container">
+    <div class="row">
+      <div class="container-fluid content-padding">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Upgrade/Downgrade College<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can upgrade / downgrade the subscription plan here.<h5>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="container-fluid content-padding" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div class="row" style="padding:20px;">
+            <div class="col-xs-4">
+              <label class="radioFilter">
+                <input type="radio" name="colltype" value="paid" ng-model="colltype"> &nbsp; Paid Colleges
+              </label>
+            </div>
+            <div class="col-xs-4">
+              <label class="radioFilter">
+                <input type="radio" name="colltype" checked value="college" ng-model="colltype"> &nbsp; All Colleges
+              </label>
+            </div>
+            <toaster-container toaster-options="{'time-out': 5000, 'position-class': 'toast-bottom-right'}"></toaster-container> 
+            <div class="col-xs-4">
+              <input type="text" placeholder="Search with College Name" class="form-control main-input-box aaa" ng-model="subfilter">
+            </div>
+          </div>
+          <div >
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table">
+                      <col width="8px" />
+                      <col width="45px" />
+                      <col width="40px" />
+                      <col width="25px" />
+                      <col width="25px" />
+                      <col width="25px" />
+                      <col width="20px" />
+                      <col width="35px" />
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>College Name</th>
+                          <th>College E-mail</th>
+                          <th>New Request</th> 
+                          <th>Sessions as per contract</th> 
+                          <th style="border-right:3px solid white;"> </th>
+                          <th> </th>
+                          <th>College Contract Status</th>
+                          </tr>
+                        </thead>
+                        <tbody ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter" ng-show="college.verifiedcollege=='verified'">
+                          <div ng-show="signedIn()">
+                            <tr class="feed-table-row">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><strong>{{college.collegename}}</strong></td>
+                              <td>{{college.counselloremail}}<br>Password: {{college.collegepassword}}</td>
+                              <td> <button class="btn btn-default up-btn" data-toggle="modal" data-target="#newRequestModal_{{collegeId}}">Alarm</button> </td>
+                              <td ><input ng-change="inputDone(collegeId)" ng-show="college.collegetype =='paid'" type="text" ng-model="college.contractsessions" required class="form-control main-input-box aaa"></td>
+                              <td style="border-right:3px solid white;"><input ng-disabled="input[collegeId]=='' || !input[collegeId]" ng-show="college.collegetype =='paid'" ng-click="updateSessionContract(collegeId, college)" type="button" class="btn btn-primary" value="Update"></td>
+                              <td align="center" ng-show="college.collegetype =='free'" style="color:#FF0000;">{{college.collegetype}}</td>
+                              <td align="center" ng-show="college.collegetype =='paid'" style="color:#00FF00;">{{college.collegetype}}</td>
+                              <td align="center"><button class="btn btn-default up-btn" data-toggle="modal" data-target="#newModal_{{collegeId}}"> Upgrade / Downgrade </button></td>
+                            </tr>
+                          </div>
+                          <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                            <div class="container-fluid">
+                              <div class="row result-det">
+                                <strong><h5>{{college.collegename}}</h5></strong>
+                              </div>
+                            </div>
+                          </a>
+                          <td>
+                            <div class="modal fade" id="newRequestModal_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel" style="color:black">Training Request</h4>
+                                  </div>
+                                  <div class="modal-body" styLe="color:black;">
+                                    <h2 style="color:green">Request Training For </h2>
+                                    {{college.collegename}}
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" ng-click="trainingRequest(college.$id)" data-dismiss="modal">Send Request</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="modal fade" id="newModal_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel" style="color:black">Upgrade/Downgrade College </h4>
+                                  </div>
+                                  <div class="modal-body" styLe="color:black;">
+                                    <h2 style="color:green">Are you sure to change the subscription ?</h2>
+                                    {{college.collegename}}
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" ng-click="changeSubscription(college)"  data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+

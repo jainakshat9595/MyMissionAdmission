@@ -1,0 +1,27 @@
+<img class="intro-bg" src="../images/intro-bg.jpg" />
+<div class="container-fluid search-page ex-pad" ng-init="toTheTop()">
+  <div class="row a-head">
+    <div class="col-xs-6 pull-left">
+      <h3 class="pull-left"> <a href="#/workDeligation"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Select Features<h3>
+    </div>
+    <div class="col-xs-6 pull-right">
+      <h5 class="pull-right">You can alot Business features to your subordinate here.<h5> 
+
+    </div>
+  </div>
+  <hr />
+
+
+                             <!-- Business Head Admin work deligation and approval to his/ her subordinate -->
+
+  <div class="row">
+  	<div class="col-xs-10" style="color:white; font-size:18px; padding-left:20px;">
+  		<label class="checkbox" ng-repeat="businessFeatures in businessFeatures">
+    		<input type="checkbox" checklist-model="uSer.Features" checklist-value="businessFeatures.id"> {{businessFeatures.text}}
+    	</label>
+  	</div>
+  	
+  	<strong><input type="button" class=" btn btn-primary btn-block" style="color:#00FF00; cursor:pointer;" ng-disabled="uSer.Features==''" ng-click = "approveBusinessSubordinate()" value="Approve"></strong>
+  </div>
+</div>
+</div>

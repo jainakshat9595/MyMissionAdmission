@@ -1,0 +1,97 @@
+<style type="text/css">
+  
+</style>
+
+  <div class="container-fluid noPadding" ng-init="toTheTop()">
+     <div class="row" ng-init = "getApprovedSessions()">
+     
+      </div>
+          <ol class="breadcrumb blue noBorder">
+                 <li>Home</li>
+                 <li>Contact Students</li>
+          </ol>
+     </div>
+
+     <div class="contentPadding  dashboard-leftPadding ">
+       <div class="panel panel-info" style="width:100%;">
+        <div class="panel-heading row-fluid noPadding contentPadding">
+          <i class="fa fa-phone fa-lg fa-fw "></i>&nbsp;&nbsp;Contact Students
+           
+           <div class="pull-right" ng-hide="loadVar === 'No value'">
+                  <div class="dropdown pull-right session-filter">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                      Number of Contact
+                      <span class="caret"></span>
+                    </button>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" >
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="limitedContact(10)" href="">10</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="limitedContact(20)" href="">20</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="limitedContact(50)" href="">50</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="limitedContact(100)" href="">100</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="loadAllContacts()" href="">All Contacts</a></li>
+                      </ul>
+                  </div>   
+           </div>
+        </div>
+        <div>
+           <div class="row content-area-dash">
+                <div class="col-lg-12 col-md-12 col-sm-12 pull-right dashboard-leftPadding noPadding contentPadding block">
+                     
+                      <div class="row block-side" style="margin-top:-1em;">
+
+                            <h5 class="pull-right" ng-if="studentContactDetail.length>1">Showing Sessions: 1-{{studentContactDetail.length}}</h5> 
+                       </div>
+
+                     <div class="row block-content " style="max-height:auto; ">
+                          <div class="container-fluid sub-block no-rec" > <!-- No Records Found -->
+                               <div class="row no-rec-block" ng-if="loadVar == 'Done'">
+                                    <center><i class="fa fa-spinner fa-3x fa-spin"></i><br><h3>Loading....</h3></center>
+                               </div>
+                               <div class="row no-rec-block" ng-if="loadVar == 'No value'">
+                                    <center><h2> You have no contacts yet.</h2></center>
+                               </div>
+                          </div>
+                          <div style="margin-top:10px;" class="container-fluid sub-block table-responsive" ng-show="studentContactDetail.length!==0">
+                               <table class="table table-striped feed-table">
+                                   <col width="10px" />
+                                   <col width="10px" />
+                                   <col width="25px" />
+                                   <col width="25px" />
+                                   <col width="25px" /> 
+                                   <thead>
+                                       <tr>
+                                              <th>Index</th>
+                                              <th>Session ID</th>
+                                              <th>Student Name</th>
+                                              <th>Student E-mail</th>
+                                              <th>Student Contact Number</th>
+                                       </tr>
+                                     </thead>
+                                     <tbody>
+                                       <tr class="feed-table-row" ng-repeat="(studentId, session) in studentContactDetail | orderBy: '-sessionNumber'">
+                                          <td> {{$index+1}} </td>
+                                         <td> {{session.interactionId.$value}} </td>
+                                         <td> {{session.studentName.$value}} </td>
+                                         
+                                         <td> {{session.studentEmail.$value}} <i ng-show="session.studentEmailStatus.$value=='true'"  class="fa fa-check-circle" style="color:green"></i></strong></td>
+
+                                         <td> {{session.studentPhone.$value}} </td>
+                                       </tr>
+                                     </tbody>
+                              </table>
+                          </div>
+
+                          <div class="text-center btn-load-frame">
+                            <div ng-if="allContactLoaded === 'Done'"><p style="color:green"><h3><strong style="color:green">No More Contacts</strong></h3></p></div>
+                            <center><span ng-if="waitContactStatus == 'Done'"> <i class="fa fa-spinner fa-pulse fa-5x"></i> </span></center>
+                            <button class="btn-load btn-border" ng-hide="allContactLoaded == 'Done'" ng-if="(studentContactDetail.length>10 || studentContactDetail.length==10) && waitContactStatus == 'Not Done'" ng-click="loadMOreStudentContact()">Load More Contacts</button>
+                          </div>
+                          <!-- <div><button ng-click="loadMOreStudentContact()">Load More Contacts</button> -->
+                     </div>
+                </div>
+           </div>
+        </div>
+       </div>
+     </div> 
+
+  </div>

@@ -1,0 +1,84 @@
+<div class="container-fluid" ng-init="toTheTop()">
+
+  <div class="theme-container">
+  <div class="container-fluid">
+    <div class="row ">
+     <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Change College Rank<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right"><b>You can upgrade / downgrade the Rank of college Here.</b><h5>
+      </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row contentPadding">
+          <div class="col-md-3 theme-container">
+            <label class="radioFilter">
+              &nbsp;<input type="radio" name="colltype" value="paid" ng-model="colltype">&nbsp;Paid Colleges
+            </label>
+            <label class="radioFilter">
+              &nbsp;<input type="radio" name="colltype" checked value="college" ng-model="colltype">&nbsp;All Colleges
+            </label>
+            <hr />
+            <input type="text" placeholder="Search with College Name" class="form-control main-input-box aaa" ng-model="subfilter">
+          </div>
+          <div class="col-md-9">
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table">
+                      <col width="8px" />
+                      <col width="30px" />
+                      <col width="12px" />
+                      <col width="30px" />
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>College Name</th>
+                          <th>Current Rank</th>
+                          <th></th>
+                          </tr>
+                        </thead>
+                        <p  class="text-danger">{{ errorC }}</p>
+                        <tbody ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter | orderBy: 'cId'" ng-show="college.verifiedcollege=='verified'" >
+                          <div ng-show="signedIn()">
+                            <tr class="feed-table-row">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><strong>{{college.collegename}}</strong></td>
+                              <td ng-show="college.collegetype =='free'" style="color:#00FF00;">{{college.cId}}</td>
+                              <td ng-show="college.collegetype =='paid'" style="color:#00FF00;">{{college.cId}}</td>     
+                              <td align="right">
+                                <form class="form-inline" name="college_edit" ng-submit="changeRank(college, user.cid)">
+                                    <input type="number" ng-model="user.cid" required min="1" max="2000" class="form-control input-sm">
+                                      &nbsp; &nbsp; 
+                                    <input type="submit" value="Change Rank" style="color : white; font-size:11px;" class="btn btn-success input-sm"/>
+                                </form>
+                              </td>
+                            </tr>
+                            </div>
+                          <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                            <div class="container-fluid">
+                              <div class="row result-det">
+                                <strong><h5>{{college.collegename}}</h5></strong>
+                              </div>
+                            </div>
+                          </a>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</div>

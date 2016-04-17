@@ -1,0 +1,192 @@
+<img class="intro-bg" src="../images/intro-bg.jpg" />
+<div class="container-fluid search-page ex-pad" ng-init="toTheTop()">
+  <div class="row a-head">
+    <div class="col-xs-6 pull-left">
+      <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Deadly Feature<h3>
+    </div>
+    <div class="col-xs-6 pull-right">
+      <h5 class="pull-right">You can do everything deadly here.<h5>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="container-fluid"><!-- ng-show="signedIn() && usera.profile.profiletype=='admin'" --> 
+      <div class="row div-table-head">
+        <center>
+          <div class="col-xs-2 email-div-expand">
+            Email
+          </div>
+          <div class="col-xs-2 course-div-expand">
+            Courses Interested
+          </div>
+          <div class="col-xs-4 done-div-expand">
+            Session Done
+          </div>
+          <div class="col-xs-4 college-div-expand">
+            Available Colleges
+          </div>
+        </center>
+      </div>
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 1 : 
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 1" >
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          B
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          C
+        </div>
+        <div class="col-xs-4 college-div-expand">
+          D
+        </div>
+      </div>
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 1 : 
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 1" >
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          B
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          C
+        </div>
+        <div class="col-xs-4 college-div-expand">
+          D
+        </div>
+      </div>
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 1 : 
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 1" >
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          B
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          C
+        </div>
+        <div class="col-xs-4 college-div-expand">
+          D
+        </div>
+      </div>
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 1 : 
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 1" >
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          B
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          C
+        </div>
+        <div class="col-xs-4 college-div-expand">
+          D
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slip-main-content">
+    <div class="slip-main-content-title">
+      <div class="row">
+        <div class="col-xs-2 slip-main-content-title-ico">
+          <i class="fa fa-chevron-left fa-2x"></i>
+        </div>
+        <div class="col-xs-10" style="padding-top:15px; color:white; font-family:Montserrat,Helvetica,Arial,sans-serif;">
+          <center>Available Colleges</center>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-offset-2">
+          <div class="row" style="padding-bottom:10px; padding-top:10px; border-bottom:1px solid grey;">
+            <div class="col-xs-9">
+              Deadly College of Dudes ( 12 )
+            </div>
+            <div class="col-xs-3">
+              1,2,3,4
+            </div>  
+          </div>
+          <div class="row" style="padding-bottom:10px; padding-top:10px; border-bottom:1px solid grey;">
+            <div class="col-xs-9">
+              Deadly College of Dudes ( 12 )
+            </div>
+            <div class="col-xs-3">
+              1,2,3,4
+            </div>  
+          </div>
+          <div class="row" style="padding-bottom:10px; padding-top:10px; border-bottom:1px solid grey;">
+            <div class="col-xs-9">
+              Deadly College of Dudes ( 12 )
+            </div>
+            <div class="col-xs-3">
+              1,2,3,4
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $( ".search-page" ).on( "mouseover", ".email-div-expand", function( event ) {    
+    $('.done-div-expand').removeClass('col-xs-4');
+    $('.done-div-expand').addClass('col-xs-3');
+    $('.email-div-expand').removeClass('col-xs-2');
+    $('.email-div-expand').addClass('col-xs-3');
+  });
+  $( ".search-page" ).on( "mouseout", ".email-div-expand", function( event ) {    
+    $('.done-div-expand').removeClass('col-xs-3');
+    $('.done-div-expand').addClass('col-xs-4');
+    $('.email-div-expand').removeClass('col-xs-3');
+    $('.email-div-expand').addClass('col-xs-2');
+  });
+
+  $( ".search-page" ).on( "mouseover", ".done-div-expand", function( event ) {    
+    $('.done-div-expand').removeClass('col-xs-4');
+    $('.done-div-expand').addClass('col-xs-5');
+    $('.college-div-expand').removeClass('col-xs-4');
+    $('.college-div-expand').addClass('col-xs-3');
+  });
+  $( ".search-page" ).on( "mouseout", ".done-div-expand", function( event ) {    
+    $('.done-div-expand').removeClass('col-xs-5');
+    $('.done-div-expand').addClass('col-xs-4');
+    $('.college-div-expand').removeClass('col-xs-3');
+    $('.college-div-expand').addClass('col-xs-4');
+  });
+
+  $( ".search-page" ).on( "mouseover", ".college-div-expand", function( event ) {    
+    $('.done-div-expand').removeClass('col-xs-4');
+    $('.done-div-expand').addClass('col-xs-3');
+    $('.college-div-expand').removeClass('col-xs-4');
+    $('.college-div-expand').addClass('col-xs-5');
+  });
+  $( ".search-page" ).on( "mouseout", ".college-div-expand", function( event ) {    
+    $('.done-div-expand').removeClass('col-xs-3');
+    $('.done-div-expand').addClass('col-xs-4');
+    $('.college-div-expand').removeClass('col-xs-5');
+    $('.college-div-expand').addClass('col-xs-4');
+  });
+  $( ".search-page" ).on( "click", ".slip-main-content-title-ico", function( event ) {    
+    if($('.slip-main-content').hasClass('slip-main-content-open')) {
+      $('.slip-main-content').removeClass('slip-main-content-open');
+      $('.slip-main-content-title-ico').html('<i class="fa fa-chevron-left fa-2x"></i>');
+
+    }
+    else {
+      $('.slip-main-content').addClass('slip-main-content-open');
+      $('.slip-main-content-title-ico').html('<i class="fa fa-times fa-2x"></i>');
+    }
+  });
+
+</script>

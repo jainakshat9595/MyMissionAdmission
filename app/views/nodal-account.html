@@ -1,0 +1,205 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  
+<div class="theme-container">
+  <div class="container-fluid contentPadding">
+    <div class="row ">
+    <div class="col-xs-6 pull-left">
+      <h3 class="pull-left"> <a href="#/dashboard-nodal"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; My Account<h3>
+    </div>
+    <div class="col-xs-6 pull-right">
+      <h5 class="pull-right">You can see student status here.<h5>
+
+      </div>
+    </div>
+      <hr />
+    <div class="row">
+      <div class="container-fluid" ng-if ="signedIn() && usern.profile.profiletype=='nodal'"> 
+        <div class="row search-results">
+          
+          <div class="col-md-12">
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;" ng-init = "nodalReferredStudents = getStudentsInfo()">
+              <div class="row" >
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table">
+                      <col width="8px" />
+                      <col width="40px" />
+                      <col width="25px" />
+                      <col width="35px" />
+                      <col width="20px" />
+                      <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Student Details</th>
+                            <th>No. of sessions done</th>
+                            <th>No. of Approved sessions </th>
+                            <th>No. of referals made</th>
+                          </tr>
+                      </thead>
+                      <tbody ng-animate="'animate'" ng-repeat="(studentId,detail) in nodalReferredStudents">
+                        <tr class="feed-table-row">
+                          <td scope="row">{{$index+1}}</td>
+                          <td ng-init = "studentDetail = getStudentDetail(detail.$id)"><strong><i class="fa fa-user fa-1x"></i>&nbsp;&nbsp;<span style="cursor:pointer;color:blue;" data-toggle="modal" data-target=".stu-enq-modal" ng-click="getStudentInfo(detail.$id)">{{studentDetail.studentname}}</span><br>
+                          <i class="fa fa-envelope fa-1x"></i>&nbsp;&nbsp;{{studentDetail.email}}<br>
+                          <i class="fa fa-phone fa-1x"></i>&nbsp;&nbsp;{{studentDetail.studentmobile}}
+                          </strong></td>
+                          <td>{{allSessionCount[studentId]}}</td>
+                          <td ng-init = "getStudentSessionDetail(detail.$id, studentId); getStudentSessionDetailBeforeEnrollment(detail.$id, studentId)">
+                            {{totalSessionCount[studentId] - sessionTillDateCount[studentId].$value}}<!-- <br>
+                            Sessions Approved Before Enrollment: {{sessionTillDateCount[studentId].$value}} -->
+                          </td>
+                          <td ng-init="getStudentReferralBeforeEnrollment(detail.$id, studentId)">{{totalReferredStudents[studentId].length - totalReferredStudentsBeforeEnrollment[studentId].$value}}
+                            <!-- Referrals Before Enrollment : {{totalReferredStudentsBeforeEnrollment[studentId].$value}} --></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<!-- Student Detail Modal -->
+
+      <div ng-controller="NodalTaskCtrl" class="modal fade stu-enq-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">                                   
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>                                           
+              <h4 class="modal-title">Student Details</h4>
+            </div>
+            <div class="modal-body" style="padding:0">
+              <div class="container-fluid">
+                <div class="row" >
+                  <h4 class="text-center"> Personal Details</h4>
+                  <div class="student_picture col-lg-5">
+                     <img class="_photo" src="{{studentInfo.studentphoto}}" alt="" width="300" height="300">
+                  </div>
+                  <div class="student_information col-lg-7">
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td>Student Name :</td>
+                          <td>{{studentInfo.studentname}}</td>
+                        </tr>
+                        <tr>
+                          <td>Gender :</td>
+                          <td>{{studentInfo.gender | titleCase}}</td>
+                        </tr>
+                        <tr>
+                          <td>Father's Name :</td>
+                          <td>{{studentInfo.fathername | titleCase}}</td>
+                        </tr>
+                        <tr>
+                          <td>Father's Ocupation :</td>
+                          <td>{{studentInfo.occupation | titleCase}}</td>
+                        </tr>
+                        <tr>
+                          <td>Student's Contact Number :</td>
+                          <td>{{studentInfo.studentmobile }}</td>
+                        </tr>
+                        <tr ng-if="studentInfo.coursesUG">
+                          <td>Student's UGcourses :</td>
+                          <td>
+                            <span id="UGCourseIntrested" ng-repeat="ug in studentInfo.coursesUG">
+                                <span ng-if="ug == '0'">Engineering, </span> 
+                                <span ng-if="ug == '1'">Computer Applications / IT, </span> 
+                                <span ng-if="ug == '2'">Biotechnology, </span> 
+                                <span ng-if="ug == '3'">Microbiology, </span> 
+                                <span ng-if="ug == '4'">Agriculture, </span> 
+                                <span ng-if="ug == '5'">Food Technology, </span> 
+                                <span ng-if="ug == '6'">Nutrition and Dietetics, </span> 
+                                <span ng-if="ug == '7'">Arts (Humanities), </span> 
+                                <span ng-if="ug == '8'">Library Science, </span> 
+                                <span ng-if="ug == '9'">Management, </span> 
+                                <span ng-if="ug == '10'">Commerce, </span> 
+                                <span ng-if="ug == '11'">Economics, </span> 
+                                <span ng-if="ug == '12'">Hotel Management/Hospitality and Tourism, </span> 
+                                <span ng-if="ug == '13'">Architecture, </span> 
+                                <span ng-if="ug == '14'">Planning, </span> 
+                                <span ng-if="ug == '15'">Fine Arts, </span> 
+                                <span ng-if="ug == '16'">Performing Arts, </span> 
+                                <span ng-if="ug == '17'">Pharmaceutical Sciences, </span> 
+                                <span ng-if="ug == '18'">Ayurvedic Pharmaceutical Sciences, </span> 
+                                <span ng-if="ug == '19'">Physiotherapy, </span> 
+                                <span ng-if="ug == '20'">Paramedical Sciences, </span> 
+                                <span ng-if="ug == '21'">Education, </span> 
+                                <span ng-if="ug == '22'">Physical Education, </span> 
+                                <span ng-if="ug == '23'">Law, </span> 
+                                <span ng-if="ug == '24'">Design, </span> 
+                                <span ng-if="ug == '25'">Sciences, </span> 
+                                <span ng-if="ug == '26'">Nursing, </span> 
+                                <span ng-if="ug == '27'">Film & Television, </span> 
+                                <span ng-if="ug == '28'">Media & Journalism, </span>  
+                            </span>
+                          </td>
+                        </tr>
+                        <tr ng-if="studentInfo.coursesPG">
+                          <td>Student's PGcourses :</td>
+                          <td>
+                            <span id="PGCourseIntrested" ng-repeat="pg in studentInfo.coursesPG">
+                                <span ng-if="pg == '0'">Engineering, </span> 
+                                <span ng-if="pg == '1'">Computer Applications / IT, </span> 
+                                <span ng-if="pg == '2'">Biotechnology, </span> 
+                                <span ng-if="pg == '3'">Microbiology, </span> 
+                                <span ng-if="pg == '4'">Biochemistry, </span> 
+                                <span ng-if="pg == '5'">Agriculture, </span> 
+                                <span ng-if="pg == '6'">Food Technology, </span> 
+                                <span ng-if="pg == '7'">Nutrition and Dietetics, </span> 
+                                <span ng-if="pg == '8'">English and Foreign Languages, </span> 
+                                <span ng-if="pg == '9'">Indian Languages, </span> 
+                                <span ng-if="pg == '10'">Library Science, </span> 
+                                <span ng-if="pg == '11'">Sociology, </span> 
+                                <span ng-if="pg == '12'">Geography, </span> 
+                                <span ng-if="pg == '13'">Management, </span> 
+                                <span ng-if="pg == '14'">Commerce, </span> 
+                                <span ng-if="pg == '15'">Economics, </span> 
+                                <span ng-if="pg == '16'">Hotel Management/Hospitality and Tourism, </span> 
+                                <span ng-if="pg == '17'">Architecture, </span> 
+                                <span ng-if="pg == '18'">Planning, </span> 
+                                <span ng-if="pg == '19'">Fine Arts</span> 
+                                <span ng-if="pg == '20'">Performing Arts</span> 
+                                <span ng-if="pg == '21'">Pharmaceutical Sciences, </span> 
+                                <span ng-if="pg == '22'">Ayurvedic Pharmaceutical Sciences</span> 
+                                <span ng-if="pg == '23'">Physiotherapy, </span> 
+                                <span ng-if="pg == '24'">Paramedical Sciences</span> 
+                                <span ng-if="pg == '25'">History, </span> 
+                                <span ng-if="pg == '26'">Political Science, </span> 
+                                <span ng-if="pg == '27'">Psychology, </span> 
+                                <span ng-if="pg == '28'">Education, </span> 
+                                <span ng-if="pg == '29'">Physical Education, </span> 
+                                <span ng-if="pg == '30'">Law, </span> 
+                                <span ng-if="pg == '31'">Design, </span> 
+                                <span ng-if="pg == '32'">Sciences, </span> 
+                                <span ng-if="pg == '33'">Nursing, </span> 
+                                <span ng-if="pg == '34'">Film & Television, </span> 
+                                <span ng-if="pg == '35'">Media & Journalism, </span> 
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>  
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             </div>
+          </div> <!-- end of modal content -->
+        </div>
+      </div>  
+
+      </div>
+    </div>
+  </div>

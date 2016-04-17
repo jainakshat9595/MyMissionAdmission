@@ -1,0 +1,31 @@
+<div class="contentPadding">
+  <div class="theme-container">
+    <form class="form-inline" role="form">
+        <div class="col-md-3">
+          <input class="form-control" type="text" ng-model="postTitle" maxlength="50" placeholder="Post Title"></input>
+        </div>
+        <div class="col-md-3">
+            <label>Post Catagory :</label> 
+                <select  class="form-control" ng-model="postCatagory" >
+                    <option value="" default selected>Category</option>
+                    <option value="English">English</option>
+                    <option value="Science">Science</option>
+                    <option value="Random">Random</option>
+                </select>
+         </div>
+    </form>
+    <br><br><br>  
+    <div class="bord" style="display:none">
+        <fp-input ng-model="dummyPhoto" class="btn btn-success btn-block" data-fp-button-text="Pick Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-init="" />
+    </div>
+    <text-angular ng-model="htmlVariable" placeholder="Write your post here."></text-angular></br></br>
+    
+    <div class="row">
+      <div class="container-fluid">
+        <div class="col-md-offset-9 col-md-3">
+          <button class="btn btn-default btn-lg btn-block main-page-feature-first-signup-btn" ng-click="savePost(htmlVariable, postTitle, postCatagory, postPics, postVideo)">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

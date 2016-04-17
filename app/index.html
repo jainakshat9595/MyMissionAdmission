@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>My Mission Admission: Career, Courses and Colleges</title>
+    <meta name="description" content="Interactive video chats with experts helping you to make an informed decision regarding your career, course and college search. MyMissionAdmission.com">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google-site-verification" content="znyUxPjabilkpmHsO_mZt2-17OPDhAUnBTTMe2E8wC4" />
+    <meta name="msvalidate.01" content="F80F8063DF9B7CD6A6D58B8483E4D3E2" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
+    <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main_gp.css">
+    <link rel="stylesheet" href="styles/main_aj.css">
+    <link rel="stylesheet" href="styles/main_ns.css">
+    <link rel="stylesheet" href="styles/main_ak.css">
+    <link rel="stylesheet" href="scripts/js/textAngular/dist/textAngular.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.css" rel="stylesheet" /><!-- For popup notifications -->
+
+    <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '967254593338441');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=967254593338441&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+
+    <!-- endbuild -->
+  </head>
+  <body ng-app="mmaApp">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+    <div id="bg-img" class="faded"></div>
+    <div id="web-content" class="faded" >
+        <div ng-include="'views/nav.html'"></div>
+        <div class="container-fluid _container-fluid" ng-view=""></div>
+        <div ng-include="'views/foot.html'"></div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-65934737-1', 'auto');
+          ga('send', 'pageview');
+
+    </script>
+
+    
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/angularjs-toaster/toaster.js"></script>
+    <script src="bower_components/angular-md5/angular-md5.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+    <script src="bower_components/rangy/rangy-core.js"></script>
+    <script src="bower_components/rangy/rangy-classapplier.js"></script>
+    <script src="bower_components/rangy/rangy-highlighter.js"></script>
+    <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+    <script src="bower_components/rangy/rangy-serializer.js"></script>
+    <script src="bower_components/rangy/rangy-textrange.js"></script>
+    <script src="bower_components/textAngular/dist/textAngular.js"></script>
+    <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+    <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <script src="http://maps.google.com/maps/api/js"></script>
+
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/auth.js"></script>
+        <script src="scripts/controllers/admin-auth.js"></script>
+        <script src="scripts/controllers/authcollege.js"></script>
+        <script src="scripts/controllers/collegereg.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/nav.js"></script>
+        <script src="scripts/controllers/college-profile.js"></script>
+        <script src="scripts/controllers/admin-dashboard.js"></script>
+        <script src="scripts/controllers/student-dashboard.js"></script>
+        <script src="scripts/controllers/college-dashboard.js"></script>
+        <script src="scripts/controllers/college-dashboarda.js"></script>
+        <script src="scripts/controllers/search.js"></script>
+        <script src="scripts/controllers/admintask.js"></script>
+        <script src="scripts/controllers/modal.js"></script>        
+        <script src="scripts/controllers/modal2.js"></script> 
+        <script src="scripts/controllers/refer.js"></script>
+        <script src="scripts/controllers/verify.js"></script>
+        <script src="scripts/controllers/blog.js"></script>      
+        <script src="scripts/controllers/align-sessions.js"></script>
+        <script src="scripts/controllers/nodal-auth.js"></script>
+        <script src="scripts/controllers/nodal-dashboard.js"></script>
+        <script src="scripts/controllers/nodaltask.js"></script>
+        <script src="scripts/controllers/VerifyReferNodalCtrl.js"></script>      
+        <script src="scripts/controllers/AdminFeedback.js"></script>     
+        <script src="scripts/controllers/CollegeDashBookedHistory.js"></script>     
+        <script src="scripts/controllers/Adminworkdeligation.js"></script>       
+        <script src="scripts/controllers/collegeDashFeedback.js"></script>    
+        <script src="scripts/controllers/studentDashBookedHistory.js"></script>
+        <script src="scripts/controllers/totalsession.js"></script> 
+        <script src="scripts/controllers/contact.js"></script>
+        <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/controllers/AuthSchool.js"></script>     
+        <script src="scripts/controllers/school-dashboard.js"></script>
+        <script src="scripts/controllers/webinar.js"></script>
+        
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/admin-auth.js"></script>
+        <script src="scripts/services/admintask.js"></script>
+        <script src="scripts/services/authcollege.js"></script>
+        <script src="scripts/services/collegereg.js"></script>
+        <script src="scripts/services/main.js"></script>
+        <script src="scripts/services/search.js"></script>
+        <script src="scripts/services/session.js"></script>   
+        <script src="scripts/services/verify.js"></script>
+        <script src="scripts/services/blog.js"></script>
+        <script src="scripts/services/update.js"></script>                
+        <script src="scripts/services/feedback.js"></script>
+        <script src="scripts/services/nodaltask.js"></script>
+        <script src="scripts/services/nodal-auth.js"></script>
+        <script src="scripts/services/VerifyReferNodalCtrl.js"></script>
+        <script src="scripts/services/adminworkdeligation.js"></script>
+        <script src="scripts/services/CollegeDashBookedHistory.js"></script>
+        <script src="scripts/services/collegeDashFeedback.js"></script>
+        <script src="scripts/services/studentDashBookedHistory.js"></script>
+        <script src="scripts/services/total.js"></script>
+        <script src="scripts/services/chat.js"></script>     
+        <script src="scripts/services/AuthSchool.js"></script>
+        <script src="scripts/services/schooltask.js"></script>
+        <script src="scripts/services/webinar.js"></script>
+
+        <script src="scripts/scrollDirective.js"></script>
+        <script src="scripts/angular-filepicker.js"></script>           
+        <script src="scripts/countries3.js"></script>
+        <script src="scripts/scrollDirective.js"></script>
+        <script src="scripts/angular-filepicker.js"></script>           
+        <script src="scripts/countries3.js"></script>
+        <script src="scripts/js/rangy/rangy-core.js"></script>
+        <script src="scripts/js/rangy/rangy-classapplier.js"></script>
+        <script src="scripts/js/rangy/rangy-highlighter.js"></script>
+        <script src="scripts/js/rangy/rangy-selectionsaverestore.js"></script>
+        <script src="scripts/js/rangy/rangy-serializer.js"></script>
+        <script src="scripts/js/rangy/rangy-textrange.js"></script>
+        <script src="scripts/js/textAngular/dist/textAngular.js"></script>
+        <script src="scripts/js/textAngular/dist/textAngular-sanitize.js"></script>
+        <script src="scripts/js/textAngular/dist/textAngularSetup.js"></script>
+
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.6.5/angular-scroll.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.6.5/angular-scroll.min.js"></script>
+    
+        
+        <!-- endbuild -->
+
+    
+
+            <script src="https://apis.google.com/js/platform.js"></script>       
+            <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.js"></script>
+            <script src="https://www.youtube.com/iframe_api"></script>
+            <script src="http://cdn.angreasy.com/js/angular-youtube-embed.js"></script>
+</body>
+<script type="text/javascript">
+    $(window).load(function() {
+      setTimeout(function(){
+          $('#bg-img').removeClass("faded");
+      },100);// 500);
+      setTimeout(function(){
+          $('#web-content').removeClass("faded");
+      },500);// 1000);
+      setTimeout(function(){
+          $('.intro-head').removeClass("faded");
+          $('.intro-subhead').removeClass("faded");
+      },1000);// 1500);
+    });
+</script>
+</html>

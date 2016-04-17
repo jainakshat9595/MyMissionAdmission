@@ -1,0 +1,80 @@
+<div class="container-fluid" ng-init="toTheTop()">
+ 
+  <div class="theme-container">
+    <div class="row">
+       <div class="container-fluid">
+          <div class="col-xs-6 pull-left">
+            <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; View students for allignment<h3>
+          </div>
+          <div class="col-xs-6 pull-right">
+            <h5 class="pull-right">Click any Nodal Center to view their current Student Email List.<h5>
+          </div>
+        </div>  
+    </div>
+   
+    <hr />
+   
+
+    <div class="row">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div class="col-md-12">
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 800px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default panel-c" ng-animate="'animate'" ng-repeat="(nodalId,details) in nod  | filter:subfilter" ng-hide="details.studentEmailList == null">
+                      <a href="" ng-href="#/studentemails/{{details.$id}}" style="text-decoration:none"><!-- redirect to secnd page, acc to college -->
+                        <div class="panel-heading panel-c-h" >
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <table class="table table-striped">
+                                <tbody>
+                                  <tr>
+                                    <td>Nodal Admin Name:</td>
+                                    <td><span style="font-size:15px;">{{details.nodalAdminName}}</span></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Email:</td>
+                                    <td><span style="font-size:15px;">({{details.nodalAdminEmail}})</span></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Mobile:</td>
+                                    <td><span style="font-size:15px;">{{details.nodalAdminName}}</span></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="col-xs-6">
+                              <table class="table table-striped">
+                                <tbody>
+                                  <tr>
+                                    <td>CenterName:</td>
+                                    <td><span style="font-size:15px;">{{ details.nodalCenterName }}</span></td>
+                                  </tr>
+                                  <tr>
+                                    <td>City:</td>
+                                    <td><span style="font-size:15px;">{{details.nodalCity}}</span><span ng-if="details.availability=='online'" class="pull-right" style="color:green;"><i class="fa fa-circle"></i></span><span ng-if="details.availability=='offline'" class="pull-right" style="color:green; visibility:hidden"><i class="fa fa-circle"></i></span></td>
+                                  </tr>
+                                  <tr>
+                                    <td>NodalID:</td>
+                                    <td><span style="font-size:15px;" ng-hide="details.nodalurlid">nodal{{details.$id | slice:12}}</span><span style="font-size:15px;" ng-if="details.nodalurlid">nodal{{details.nodalurlid}}</span></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+</div>

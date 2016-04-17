@@ -1,0 +1,390 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  
+  <div class="theme-container">  
+      <div class="row">
+          <div class="container-fluid">
+              <div class="col-xs-6 pull-left">
+                <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Unverify Student<h3>
+              </div>
+              <div class="col-xs-6 pull-right">
+                <h5 class="pull-right">You can unverify a Student here.<h5>
+
+              </div>
+          </div>
+      </div>
+
+      <hr />
+      
+
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+          <div class="row search-results">
+            <div class="col-md-3 filter-pane">
+              <input type="text" placeholder="Search Student" class="form-control main-input-box aaa" ng-model="subfilter">
+            </div>
+            <div class="col-md-9">
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                    <table class="table table-striped feed-table">
+                        <col width="8px" />
+                        <col width="40px" />
+                        <col width="40px" />
+                        <col width="20px" />
+                        <col width="13px" />
+                        <col width="10px" />
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Student Name</th>
+                            <th>Student E-mail</th>
+                            <th>Click to Unverify</th>
+                            </tr>
+                          </thead>
+                          
+                          <tbody ng-animate="'animate'" ng-repeat="(studentId,student) in stu | filter:subfilter" ng-show="student.studentstatus=='verified'">
+                            <div ng-show="signedIn()">
+                              <tr class="feed-table-row">
+                                <td scope="row">{{$index + 1}}</td>
+                                <td><strong>{{student.studentname}}</strong></td>
+                                <td>
+                                   <a data-toggle="modal" data-target="#stu-enq_{{session.studenturlId}}" style="color:blue; cursor:pointer;" ng-click="studentDetail(student.$id)" >{{student.email}}<br>Password: {{student.password}}</a>
+                                </td>
+                                <td class="v-l" align="center" style="color:red; cursor:pointer;" ng-click="unverifyStudent(student)"><i class="fa fa-thumbs-o-down"></i></td>
+                              </tr>
+                            </div>
+                        </tbody>
+                      </table>
+
+                                        <!-- Student Enquiry Modal -->
+                      <div class="modal fade stu-enq-modal" tabindex="-1" ng-controller="CollegeDashCtrl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="stu-enq_{{session.studenturlId}}">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title">Student Details</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="row">
+                                  <div class="col-xs-5">
+                                    <div class="container-fluid">
+                                      <div class="row" style="border:1px solid grey; padding:2px;">
+                                        <img src="{{studentobject.studentphoto}}" alt="" width="300" height="300">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-xs-6">
+                                    <div class="container-fluid stu-det-block">
+                                      <div class="row block-head">
+                                        <h4 class="pull-right"> Personal Details </h4>
+                                      </div>
+                                      <div class="row block-det">
+                                        <div class="row">
+                                          <div class="col-xs-5">
+                                            Student Name
+                                          </div>
+                                          <div class="col-xs-7">
+                                               <h4>: {{studentobject.studentname}}</h4>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-xs-5">
+                                            Gender
+                                        </div>
+                                        <div class="col-xs-7">
+                                          <h4>: {{studentobject.gender}}</h4>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-xs-5">
+                                          Father's Name
+                                        </div>
+                                        <div class="col-xs-7">
+                                          <h4>: {{studentobject.fathername}}</h4>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-xs-5">
+                                          Father's Ocupation
+                                        </div>
+                                        <div class="col-xs-7">
+                                             <h4>: {{studentobject.occupation}}</h4>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="container-fluid stu-det-block">
+                                    <div class="row block-head">
+                                         <h4 class="pull-right"> Student Bio </h4>
+                                    </div>
+                                    <div class="row block-det">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <center><h4> {{studentobject.studentabout }} </h4></center>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <hr />
+                              <div class="row">
+                                <div class="container-fluid">
+                                  <div class="row">
+                                    <div class="col-xs-7">
+                                      <div class="container-fluid stu-det-block">
+                                        <div class="row block-head">
+                                          <h4 class="pull-right"> Courses interested in </h4>
+                                        </div>
+                                        <div class="row block-det">
+                                          <div class="row">
+                                            <div style="height:200px; overflow-y:scroll;" class="col-md-12 table-responsive">
+                                              <table class="table table-striped">
+                                                <tbody ng-repeat="ug in studentobject.coursesUG">
+                                                  <tr ng-if="ug == '0'">
+                                                   <td> Engineering </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '1'">
+                                                   <td> Computer Applications / IT  </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '2'">
+                                                   <td> Biotechnology </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '3'">
+                                                   <td> Microbiology </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '4'">
+                                                   <td> Agriculture </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '5'">
+                                                   <td> Food Technology </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '6'">
+                                                   <td> Nutrition and Dietetics </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '7'">
+                                                   <td> Arts (Humanities) </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '8'">
+                                                   <td> Library Science </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '9'">
+                                                   <td> Management </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '10'">
+                                                   <td> Commerce </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '11'">
+                                                   <td> Economics </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '12'">
+                                                   <td> Hotel Management/Hospitality and Tourism </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '13'">
+                                                   <td> Architecture </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '14'">
+                                                   <td> Planning </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '15'">
+                                                   <td> Fine Arts </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '16'">
+                                                   <td> Performing Arts </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '17'">
+                                                   <td> Pharmaceutical Sciences </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '18'">
+                                                   <td> Ayurvedic Pharmaceutical Sciences </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '19'">
+                                                   <td> Physiotherapy </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '20'">
+                                                   <td> Paramedical Sciences </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '21'">
+                                                   <td> Education </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '22'">
+                                                   <td> Physical Education </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '23'">
+                                                   <td> Law </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '24'">
+                                                   <td> Design </td>
+                                                  </tr>
+                                                  <tr ng-if="ug == '25'">
+                                                   <td> Sciences </td>
+                                                  </tr>                                                          
+                                                </tbody>
+                                                <tbody ng-repeat="pg in studentobject.coursesPG">
+                                                  <tr ng-if="pg == '0'">
+                                                   <td> Engineering </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '1'">
+                                                   <td> Computer Applications / IT  </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '2'">
+                                                   <td> Biotechnology </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '3'">
+                                                   <td> Microbiology </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '4'">
+                                                   <td> Biochemistry </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '5'">
+                                                   <td> Agriculture </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '6'">
+                                                   <td> Food Technology </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '7'">
+                                                   <td> Nutrition and Dietetics </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '8'">
+                                                   <td> English and Foreign Languages </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '9'">
+                                                   <td> Indian Languages </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '10'">
+                                                   <td> Library Science </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '11'">
+                                                   <td> Sociology </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '12'">
+                                                   <td> Geography </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '13'">
+                                                   <td> Management </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '14'">
+                                                   <td> Commerce </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '15'">
+                                                   <td> Economics </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '16'">
+                                                   <td> Hotel Management/Hospitality and Tourism  </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '17'">
+                                                   <td> Architecture </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '18'">
+                                                   <td> Planning </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '19'">
+                                                   <td> Fine Arts </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '20'">
+                                                   <td> Performing Arts </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '21'">
+                                                   <td> Pharmaceutical Sciences </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '22'">
+                                                   <td> Ayurvedic Pharmaceutical Sciences </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '23'">
+                                                   <td> Physiotherapy </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '24'">
+                                                   <td> Paramedical Sciences </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '25'">
+                                                   <td> History </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '26'">
+                                                   <td> Political Science </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '27'">
+                                                   <td> Psychology </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '28'">
+                                                   <td> Education </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '29'">
+                                                   <td> Physical Education </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '30'">
+                                                   <td> Law </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '31'">
+                                                   <td> Design </td>
+                                                  </tr>
+                                                  <tr ng-if="pg == '32'">
+                                                   <td> Sciences </td>
+                                                  </tr>                                 
+                                                </tbody>
+                                              </table>                        
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-5">
+                                      <div class="container-fluid stu-det-block">
+                                        <div class="row block-head">
+                                          <h4 class="pull-right"> Academic Records </h4>
+                                        </div>
+                                        <div class="row block-det">
+                                          <div class="row">
+                                            <div class="col-xs-8">
+                                              <h4> 10<sup>th</sup><h5>(% / CGPA)<h5></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                              <h4> : {{studentobject.academicrecord12thMarks }} </h4>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-8">
+                                              <h4> 12<sup>th</sup><h5>(% / CGPA)<h5></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                              <h4> : {{studentobject.academicrecordUGMarks }} </h4>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-8">
+                                              <h4> UG <h5>(% / CGPA)<h5></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                              <h4> : {{studentobject.academicrecordPGMarks }} </h4>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>       
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <div ng-show="studentobject.studentdocument != 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                <a href="{{studentobject.studentdocument}}" target="_blank">View Document</a>
+                              </div>
+                              <div ng-show="studentobject.studentdocument == 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                <h5 style="color:Red"> Student has not uploaded his document</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,55 @@
+<div class="container-fluid " ng-init="toTheTop()">
+
+  <div class="theme-container">
+    <div class="row ">
+      <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Verify a Session<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right"><b>Click any college to view their respective sessions and verify them.</b><h5>
+      </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div class="col-md-3">
+            <div class="theme-container" style="margin-bottom : 10px;">
+              <label class="radioFilter">
+                <input type="radio" name="colltype" value="paid" ng-model="colltype">&nbsp;Paid Colleges
+              </label>
+              <label class="radioFilter">
+                <input type="radio" name="colltype" checked value="college" ng-model="colltype">&nbsp;All Colleges
+              </label>
+              <hr />
+              <input type="text" placeholder="Search with College Name" class="form-control main-input-box aaa" ng-model="subfilter">
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 800px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" ng-init="getRejectedSessionCollege()">
+                    <div class="panel panel-default panel-c" ng-animate="'animate'" ng-repeat="(collegeId,details) in rejectedColleges| filter:colltype | filter:subfilter">
+                      <a href="" ng-href="#/rejected-sessions/{{details.values.$id}}" style="text-decoration:none"><!-- redirect to secnd page, acc to college -->
+                        <div class="panel-heading panel-c-h" ng-init="college = getcollegedetail(details.values.$id)">
+                          <h4 class="panel-title collapsed">
+                            {{college.collegename}} ( {{college.counselloremail}} )
+                          </h4>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

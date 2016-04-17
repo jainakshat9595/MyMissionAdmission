@@ -1,0 +1,242 @@
+<div class="row-fluid blue collegeRegistration-main-row">
+    <div class="container-fluid">
+
+        <div class="container-fluid collegeRegistration-form collegeRegistration-form_style">
+         <div class="row text-center" ng-init="toTheTop()">
+            <div class="container title-container">
+                <div class="col-md-12">
+                    <h2>List Your College</h2>
+                    <h4>{{message}}</h4>
+                    <div class="seperator"></div>
+                    <p style="margin-bottom: -1em;">Enter the details below in order to create a profile with us and showcase your college!</p>
+                    <p class="text-center">Already a Member? <a href="#/login-college"><strong>Log In</strong></a></p>
+                </div>
+            </div>
+        </div><br> <!-- END OF TITLE -->
+
+
+            <form name="college_reg" ng-submit="registerForCollege()">  
+
+                <div class="form-signin-div-tobeload new-college" ng-show="modalShown">
+                    <i class="fa fa-spinner fa-3x fa-spin"></i>
+                </div>
+
+                <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+
+                    <p ng-show="error" class="text-danger" style="color:#990000"><strong>{{ error }}</strong></p> 
+
+                    <div class="col-md-6 text-right">
+                    <div class="container-fluid">
+                        
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-education"></span>
+                            <input  required oninvalid="this.setCustomValidity('College Name could not be blank')" oninput="this.setCustomValidity('')" ng-model="userb.collegename" placeholder="College Name" type="text" class="login-inputgroup_style form-control">
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-list"></span>
+                            <input type="text" class="login-inputgroup_style form-control"  type="text" required oninvalid="this.setCustomValidity('Please enter the college affiliation')" oninput="this.setCustomValidity('')" ng-model="userb.collegeaffiliation" placeholder="College Affiliated to">
+                          </div>
+                        </div>
+
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-map-marker"></span>
+                            <select class=" form-select login-inputgroup_style form-control " required oninvalid="this.setCustomValidity('Please select a country from the list')" onclick="this.setCustomValidity('')" onkeypress="this.setCustomValidity('')" class="form-control" ng-model="userb.collegecountry" onchange="print_state('state',this.selectedIndex);" id="country" name ="country" type="text" >                                
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-map-marker"></span>
+                            <select class="form-select login-inputgroup_style form-control "     required oninvalid="this.setCustomValidity('Please select your state')" onclick="this.setCustomValidity('')" onchange="this.setCustomValidity('')" ng-model="userb.collegestate" name ="state" id ="state" type="text"> 
+                            </select>
+                            <script language="javascript">print_country("country");</script>                            
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-home"></span>
+                            <input type="text" class="login-inputgroup_style form-control" required oninvalid="this.setCustomValidity('Please enter your address')" oninput="this.setCustomValidity('')" ng-model="userb.collegeaddress" placeholder="Address">
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-home"></span>
+                            <input type="text" class="login-inputgroup_style form-control" required oninvalid="this.setCustomValidity('Please enter your city')" oninput="this.setCustomValidity('')" ng-model="userb.collegecity" placeholder="City">
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user"></span>
+                            <input type="text" class="login-inputgroup_style form-control" placeholder="Counsellors's Name">
+                          </div>
+                        </div>
+
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-bookmark"></span>
+                            <input type="text" required ng-model="userb.collegelocation" placeholder="Landmark" class="login-inputgroup_style form-control">
+                          </div>
+                        </div>    
+
+                        <div class="bord container-fluid">
+                            <div class="col-md-12 form-button-long">
+                                <fp-input ng-model="userb.collegephoto" data-fp-button-text="Upload Image" data-fp-services="COMPUTER" class="btn btn-default btn-lg main-search-btn sel-btn-file btn-form"  data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-init="userb.collegephoto.url='pic_not_uploaded'" />
+                            </div>
+
+                            <div class="col-md-12" style="color:green; text-align:right;" ng-if="userb.collegephoto.url !== 'pic_not_uploaded'">
+                                <center>Your Photo has been updated</center>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div> <!-- END OF LEFT COLUMN -->
+
+                <div class="col-md-6 text-right">
+                    <div class="container-fluid">
+                        
+                        <div class="input-group-container">
+                            <button type="button" class="btn btn-default btn-lg  btn-form" data-toggle="modal" data-target=".ug-courses">Select UG Courses</button>
+                        </div>
+
+                        <div class="input-group-container">
+                            <button type="button" class="btn btn-default btn-lg  btn-form" data-toggle="modal" data-target=".pg-courses">Select PG Courses</button>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+                            <input class="login-inputgroup_style form-control" pattern="^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$" required oninvalid="this.setCustomValidity('Please enter a valid Gmail Address')" type="email" oninput="this.setCustomValidity('')" title='Enter in format abcdef@gmail.com' ng-model="userb.counselloremail" placeholder="Counsellor's Gmail Address" ui-validate="{blacklist : 'notBlackListed($value)' }">
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+                            <input class="login-inputgroup_style form-control" name="confirm_email" type="email" ng-model="confirm_email" placeholder="Re-type Email Address"  required oninvalid="this.setCustomValidity('Please Re-enter Email Address')" oninput="this.setCustomValidity('')" ui-validate=" '$value==userb.counselloremail' " ui-validate-watch=" 'userb.counselloremail' ">
+                          </div>
+                          <div ng-show="college_reg.confirm_email.$dirty && college_reg.confirm_email.$error.validator"><strong style="color:red;" >Emails do not match!</strong></div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-phone  "></span>
+                            <input type="text" class="login-inputgroup_style form-control" ng-model="userb.collegemobile" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title="Phone number must be atleast 9 digits long" oninput="this.setCustomValidity('')"  placeholder="Mobile Number">
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-globe"></span>
+                            <input type="text" class="login-inputgroup_style form-control" required pattern="((www[.])[^\s()<>]+)" oninvalid="this.setCustomValidity('Please enter a valid website')" title='Your website must start with www.' oninput="this.setCustomValidity('')" ng-model="userb.collegewebsite" placeholder="Website" >
+                          </div>
+                        </div>
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+                            <input type="password" required oninvalid="this.setCustomValidity('Please enter your password')" oninput="this.setCustomValidity('')" ng-model="userb.collegepassword" placeholder="Password" class="login-inputgroup_style form-control" >
+                          </div>
+                        </div>
+                        
+
+                        <div class="input-group-container">
+                          <div class="input-group input-group-lg">
+                            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+                            <input name="confirm_password" type="password" required ng-model="confirm_password" placeholder="Re-type Password" ui-validate=" '$value==userb.collegepassword' " ui-validate-watch=" 'userb.collegepassword'" class="login-inputgroup_style form-control" >
+                          </div>
+                          <div ng-show="college_reg.confirm_password.$dirty && college_reg.confirm_password.$error.validator"><strong style="color:red;" >Passwords do not match!</strong></div>
+                        </div>
+
+                        <div class="input-group-container">
+                                 <input style="font-size:16px;" type="checkbox" style="box-shadow:none" ng-model="term" /><span style="color:black"> I agree to the My Mission Admission <a class='link' ng-href='#/about?tab=terms ' target="_blank" > Terms of Services </a> and  <a class='link' ng-href='#/about?tab=privacy' target="_blank" > Privacy Policy</a></span>
+                        </div>
+                        <input type="hidden" ng-model="userb.profiletype" ng-init="userb.profiletype='college'" class="form-control"><br>
+                        
+                        <input type="hidden" ng-model="userb.verifiedcollege" ng-init="userb.verifiedcollege='notverified'" class="form-control"><br>
+                        
+                        <input type="hidden" ng-model="userb.collegetype" ng-init="userb.collegetype='free'" class="form-control"><br>
+                        
+                        <input type="hidden" ng-model="userb.collegeAvailability" ng-init="userb.collegeAvailability='offline'" class="form-control"><br>
+                        
+                        <input type="hidden" ng-model="userb.collegeRank" ng-init="userb.collegeRank= 2001" class="form-control"><br>
+                        
+                        <input type="hidden" ng-model="userb.sessionCount" ng-init="userb.sessionCount= 0" class="form-control"><br>
+
+                    </div>
+                </div> <!-- END OF RIGHT COLUMN -->
+                    
+                    <div class="row submit-button">                   
+                        <button class="btn btn-lg btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn " type="submit" ng-click="toTheTop();">Register</button>
+                    </div>
+
+                </div>
+                
+            </form> <!-- END OF FORM -->
+        </div>
+
+    </div> <!-- End of main container -->
+</div>  <!-- End of main parent row -->
+
+<!-- MODAL CONTENT -->
+
+<div class="modal ug-modal fade ug-courses" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog ug-modal-dialog">
+        
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Select Undergraduate Courses</h4>
+            </div>
+            <div class="modal-body">
+                <div class="option-wrap">
+                    <label class="modal-checkbox modal-checkbox_style modal-checkbox_position checkbox" ng-repeat="role in roles">
+                        <input class="modal-checkbox" type="checkbox" checklist-model="uSer.roles" checklist-value="role.id">{{role.text}}
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer blue-light">
+                <button type="button" class=" btn btn-primary btn-modal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Done</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal pg-modal fade pg-courses" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog pg-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Select Postgraduate Courses</h4>
+            </div>
+            <div class="modal-body">
+                <div class="option-wrap">
+                    <label class="modal-checkbox modal-checkbox_style modal-checkbox_position checkbox" ng-repeat="roleA in rolesA">
+                        <input class="modal-checkbox" type="checkbox" checklist-model="uSerA.rolesA" checklist-value="roleA.idA"> {{roleA.textA}}
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" btn btn-primary btn-modal " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Done</span></button>
+            </div>
+        </div>
+    </div>
+</div>

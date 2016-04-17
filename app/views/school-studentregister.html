@@ -1,0 +1,200 @@
+<div class="theme-container">
+    <div class="container " ng-init="toTheTop()">
+      <div class="row ">
+        <div class="col-xs-6 pull-left">
+         <toaster-container toaster-options="{'time-out': 6000, 'position-class': 'toast-bottom-right'}"></toaster-container> 
+          <h3 class="pull-left"> <a href="#/dashboard-school"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Register Student<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can register new student here.<h5>
+        </div>
+      </div>
+
+        <div class="row" ng-if="users.profile.nodalCenterName">
+            <div class="col-md-12" ng-init="getemail()">
+                <center>
+                <h2>Enter Student Details</h2>
+                <h3>{{ message }}</h3>
+                    
+                </center>
+            </div>
+        </div>
+        <hr />
+        <form name="student_reg" ng-submit="register(); toTheTop()">
+
+            <div class="form-signin-div-tobeload new-college" ng-show="modalShown">
+                <i class="fa fa-spinner fa-3x fa-spin"></i>
+            </div>
+
+            <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+                <p ng-show="error" class="text-danger">{{ error }}</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            
+                            <input name="email" type="email" ng-model="user.email" placeholder="Email Address"  required oninvalid="this.setCustomValidity('Please enter a valid Email Address')" oninput="this.setCustomValidity('')" title='Enter in format abcdef@email.com' class="form-control input-lg" ui-validate="{blacklist : 'notBlackListed($value)' }" ng-keyup= "doThisForStudent(user.email)" 
+                            style="margin-bottom: 1em;">
+
+
+                            <div class="col-md-5" ng-show="student1schoolstatus.$value== null">
+                                <div class="row" ng-show="student1schoolstatus.$value== null && student1IdFlag == 'Done'" align="right">
+                                <h4 class="alert-message info"  style="color:red; font-family: Monospace;">This student is already registered with My Mission Admission Please Contact Support Team to affiliate With Your School.</h4>
+                                <img ng-show="student1IdFlag == 'Done'" class="img-responsive" src="" ng-src="{{ studentPic.$value}}" alt="Photo of {{student1Name.$value}}" />
+                                </div> 
+                            </div>
+
+                            <div class="alert-message info" ng-show= "student1schoolstatus.$value !== null && refBysameNodal==='no'">
+                                <h4 ng-show="student1schoolstatus.$value !== null && refBysameNodal==='no'" class="alert-message info" style="color:red; font-family: Monospace;">This student is already enrolled with one of our school centers. Therefore, he/she cannot be enrolled with your school center.</h4>
+                            </div>
+
+                            <div class="col-md-5" ng-show="student1schoolstatus.$value !== null && refBysameNodal==='yes'">
+                                <div class="row" ng-show="student1schoolstatus.$value !== null && refBysameNodal==='yes'" align="right">
+                                <h4 ng-show="student1IdFlag == 'Done'" class="alert-message info" style="color:green; font-family: Monospace;">This student is already registered with you.</h4>
+                                <img ng-show="student1IdFlag == 'Done'" class="img-responsive" src="" ng-src="{{ studentPic.$value}}" alt="Photo of {{student1Name.$value}}" /></div>
+                            </div>
+
+                            <input name="confirm_email" type="email" ng-model="confirm_email" placeholder="Re-type Email Address"  required class="form-control input-lg" ui-validate=" '$value==user.email' " ui-validate-watch=" 'user.email' " ng-hide= "student1IdFlag == 'Done'" style="margin-bottom: 1em;">
+                            <div ng-show="student_reg.confirm_email.$dirty && student_reg.confirm_email.$error.validator"><strong style="color:red">Emails do not match!</strong> </div>
+
+                            <input type="text" ng-model="user.studentname"required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')"  placeholder="Name" class="form-control input-lg" ng-hide= "student1IdFlag == 'Done'" style="margin-bottom: 1em;">
+                            
+                            
+
+                            <div ng-hide= "student1IdFlag == 'Done'">
+
+                            <div ng-hide="true">
+                                <input name="oldPassword" type="password" ng-init="user.oldPassword='1234'" ng-model="user.oldPassword" class="form-control input-lg" style="margin-bottom: 1em;">
+                            </div>
+
+                            <input name="password" type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="user.password" placeholder="Create Password" class="form-control input-lg" style="margin-bottom: 1em;">
+                            
+                            <input name="confirm_password" type="password" required ng-model="confirm_password" placeholder="Confirm Password" class="form-control input-lg" ui-validate=" '$value==user.password' " ui-validate-watch=" 'user.password' " style="margin-bottom: 1em;">
+                            <div ng-show="student_reg.confirm_password.$dirty && student_reg.confirm_password.$error.validator" style="margin-bottom: 1em;"><strong style="color:red">Passwords do not match! </strong></div>
+                            
+                            <input type="text" ng-model="user.studentmobile" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title="Phone number must be atleast 9 digits long"oninput="this.setCustomValidity('')"  placeholder="Mobile Number" class="form-control input-lg" style="margin-bottom: 1em;">
+                            
+                            <input type="text" ng-model="user.fathername" required oninvalid="this.setCustomValidity('Parent name cannot be blank')" oninput="this.setCustomValidity('')"  placeholder="Parent's Name" class="form-control input-lg"
+                            style="margin-bottom: 1em;">
+                            
+                            <input type="text" ng-model="user.occupation" required oninvalid="this.setCustomValidity('Please enter your Parent Occupation')" oninput="this.setCustomValidity('')"  placeholder="Parent's Occupation" class="form-control input-lg"
+                            style="margin-bottom: 1em;">
+                            
+                            <input type="text" ng-model="user.fathernumber" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title='Phone number must be atleast 9 digits long' oninput="this.setCustomValidity('')" placeholder="Parent's Mobile Number" class="form-control input-lg" style="margin-bottom: 1em;">
+
+                            <div class="bord">    
+                              <h4> Please select your gender</h4>
+                              <div ng-repeat="person in gender">
+                              <h4><input type="radio" value="{{person.name}}" ng-model="user.gender" name="name" required title="Please Select your Gender" />&nbsp; {{person.name}}</h4>
+                               </div>  
+                            </div>
+                            
+                            <h3>Academic Records:</h3> 
+
+                                <div>
+                                        <input type="radio" name="course" ng-model="user.standard" ng-change="user.studentclass = ''" required value="before"> &nbsp;&nbsp;Upto 10th&nbsp;&nbsp;
+                                        <input type="radio" name="course" ng-model="user.standard" required value="after" ng-change="user.studentclass = ''">&nbsp;&nbsp;Above 10th
+                                </div>
+
+                            <div class="bord" id="aced_bord" style="padding-left: 2.7em;">
+
+
+                            <div  ng-if="user.standard === 'before'">
+                              <h4>Select Current Standard</h4>
+                                <select class="form-control" ng-model="user.studentclass" required >
+                                    <option value="" default selected>Select Class</option>
+                                    <option value="5th">5</option>
+                                    <option value="6th">6</option>
+                                    <option value="7th">7</option>
+                                    <option value="8th">8</option>
+                                    <option value="9th">9</option>
+                                    <option value="10th">10</option>
+                                 </select>
+                            </div>          
+
+                            <div ng-if="user.standard ==='after'">
+                             <!--   <h6>Select Stream</h6>  -->  
+                              <select class="form-control" ng-model="user.studentstream" required  >
+                                    <option value="" default selected>Select Your Current Stream</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Commerce">Commerce</option>
+                                    <option value="Art">Art</option>
+                              </select> 
+                              <br/>
+                              <h4>Select Current Standard</h4>
+                              <input type="radio" name="class" ng-model="user.studentclass" required value="11th"> &nbsp;&nbsp;11th Appearing
+                              &nbsp;&nbsp;
+                              <input type="radio" name="class" ng-model="user.studentclass" required value="12th">&nbsp;&nbsp;12th Appearing
+
+
+
+                              <!-- <label class="checkbox">
+                                <input type="checkbox" ng-model="user.master12th" ng-required="true" > 11th
+                              </label>
+
+                              <input id="checkSlave12th" ng-model="user.master12thText" type="number" ng-required="true" ng-disabled="!user.master12th" placeholder="Your 10th standard's aggregate marks/ percentage" class="form-control slaveInput" min="0" max="100" >
+                             
+                              
+                              <label class="checkbox">
+                                <input type="checkbox" ng-model="user.masterUG" ng-disabled="((!user.master12thText) || (!user.master12th))"> 12th
+                              </label>
+         -->
+
+                              <!-- <input id="checkSlaveUG" ng-model="user.masterUGText" type="number" ng-disabled="((!user.masterUG) || (!user.master12th) || (!user.master12thText))" placeholder="Your 12th standard's aggregate marks/ percentage" class="form-control slaveInput" min="0" max="100"> -->
+                              
+                              
+                             </div> 
+
+                                
+
+                            
+                            </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-hide= "student1IdFlag == 'Done'">
+                            <div>
+                            <div class="bord container-fluid" style="margin-bottom: 1em;">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <fp-input ng-model="user.studentphoto" data-fp-button-text="Upload Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-init="user.studentphoto.url='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" style="margin-bottom: 1em;" />
+                                    </div>
+                                    <div class="col-sm-9" style="color:black; text-align:right;" ng-if="user.studentphoto.url!=='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                        File Uploaded Successfully
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bord container-fluid" style="margin-bottom: 1em;">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <fp-input ng-model="user.studentdocument" data-fp-button-text="Upload Document" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*,application/*" ng-init="user.studentdocument.url='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" data-fp-multiple="false" data-fp-maxsize="5242880" style="margin-bottom: 1em;"/>
+                                    </div>
+                                    <div class="col-sm-9" style="color:black; text-align:right;" ng-if="user.studentdocument.url!=='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                        File Uploaded Successfully
+                                    </div>
+                                </div>
+                            </div>    
+                            </div>
+                            <textarea ng-model="user.studentabout" placeholder="About Myself" class="form-control" rows="7" style="margin-bottom: 1em;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row " ng-hide= "student1IdFlag == 'Done'" style="margin-top:-32em;">
+                            <div class="input-group-container">
+                                 <input style="font-size:16px; "  type="checkbox" style="box-shadow:none" ng-model="term" /> &nbsp;&nbsp;I agree to the My Mission Admission <a class='link' ng-href='#/about?tab=terms ' target="_blank" > Terms of Services </a> and <br /> <a class='link' ng-href='#/about?tab=privacy' target="_blank" > Privacy Policy</a>
+                            </div>
+
+                        <div class="col-md-4">
+                            <input type="submit" value="Register" class="btn btn-success btn-lg pull-right btn-block" ng-disabled="submitbuttondisabled" style="margin-right: -10em;" />
+                        </div>
+                    </div>
+                    <!-- <div class="row" ng-show= "student1IdFlag == 'Done'">
+                        <div class="col-md-4" ng-hide="student1schoolstatus.$value !== null">
+                            <input type="button" ng-click="sendnodallink()" value="Send Enrollement Link" class="btn btn-success btn-lg pull-right btn-block" />
+                        </div>
+                    </div> -->
+                    <hr />
+            </div>
+
+        </form>
+    </div>
+</div>

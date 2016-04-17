@@ -1,0 +1,42 @@
+<div class="row-fluid login-row_style" ng-init="toTheTop()">
+    <div class="container-fluid text-center login-container blue login-container_style col-md-12 ">
+        <form class="form-signin" name="forma" ng-submit="login()">
+
+          <div class="form-signin-div-tobeload" ng-show="modalShown">
+            <i class="fa fa-spinner fa-3x fa-spin"></i>
+          </div>
+
+      <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+
+          <h2>SCHOOL LOG IN</h2>
+
+          
+          <div class="input-group-container">
+            <div class="input-group input-group-lg">
+             <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user"></span>
+             <input type="text" required oninvalid="this.setCustomValidity('Please enter your Email Address')" ng-change="showEmail()" ng-model="users.schooladminemail"  class="login-inputgroup_style form-control" placeholder="Username">
+            </div>
+          </div>
+          <div class="input-group-container">
+            <div class="input-group input-group-lg">
+             <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+             <input type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="users.password" class="login-inputgroup_style form-control" placeholder="Password">
+            </div>
+          </div>
+          <br/> <br/>
+          
+          <!-- <div class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me <a>(Forgot Password?)</a>
+            </label>
+          </div> -->
+          
+          <button class="btn btn-lg btn-primary btn-block btn-login_style" type="submit" ng-hide="modalShown" ng-click="toTheTop()">Sign in</button>
+          <br>
+          <p ng-show="error" class="error-danger">{{error}}</p>
+
+        </div>
+        
+        </form>
+    </div>
+  </div>

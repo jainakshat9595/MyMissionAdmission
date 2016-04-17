@@ -1,0 +1,75 @@
+<div class="container-fluid " ng-init="toTheTop(); getSchoolRegisterStudentList();" >
+    <div class="theme-container">
+      <div class="row">
+        <div class="container-fluid">
+          <div class="col-xs-6 pull-left">
+            <h3 class="pull-left"> <a href="#/school-webinar"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Book Webinar</h3>
+          </div>
+          <div class="col-xs-6 pull-right">
+            <h5 class="pull-right"><b>You can book webinar here.</b><h5>
+          </div>
+        </div>
+      </div>
+        
+
+      <hr />
+      <div ng-repeat="(schoolId,school) in studentList | filter:users.stream | filter: users.class " >
+                          
+      <div class="row" >
+        <div class="col-sm-1" style=" margin-top: 4em;">
+          <input ng-model="master[school.studentmd5_hash]" class="col-md-2" type="checkbox" style="box-shadow:none" ng-click="addSchoolStudentListForBookWebinar(school.studentName,master[school.studentmd5_hash],school.studenturl);">
+        </div>
+        <div class="col-sm-2" style="margin-bottom:1em;">
+          <img src="{{school.studentPhoto}}" alt="" class="img-thumbnail"  width="300" style="height:130px !important">
+        </div>
+        <div class="col-sm-3" style="margin-bottom:1em;">
+          <div ng-init="addSelectAllStudent(school.studentmd5_hash);">
+              <div class="st-name">
+                   Student Name : <strong>{{school.studentName}}</strong>
+              </div>
+              <div >
+                   Student Email : <strong>{{school.studentEmail}} </strong>&nbsp;&nbsp;<i ng-show="studentemailstatus.$value=='true'" style="color:green" class="fa fa-check-circle"></i> 
+              </div>
+              <div ng-if="school.studentClass">
+                   Student Class : <strong>{{school.studentClass}}  </strong>
+              </div>
+              <div ng-if="school.studentStream">
+                   Student Stream : <strong>{{school.studentStream}}  </strong>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer" style="position:fixed; bottom:0; left:0; height:3em; width:100%; background-color:#237DAC; color:white; font-size:1.2em; ">
+    <div class="row">
+      <div class="col-md-2" style="top: 1em;left: 1%;"> Select All
+        <input ng-model="selectAllStudent" class="col-md-2" type="checkbox" style="box-shadow:none" ng-click="selectAll(selectAllStudent);">
+      </div>
+      <div class="col-md-2 " style="top: 1em;" style="">
+        <select ng-model="users.class" ng-change="resetStudentList();" style="color: white;background-color: #31B0D5 !important;">
+          <option role="scope" value=""> Select your Class </option>
+          <option value="5th">5th</option>
+          <option value="6th">6th</option>
+          <option value="7th">7th</option>
+          <option value="8th">8th</option>
+          <option value="9th">9th</option>
+          <option value="10th">10th</option>
+          <option value="11th">11th</option>
+          <option value="12th">12th</option>
+        </select>          
+      </div>
+      <div class="col-md-2" style="top: 1em;">       
+        <select ng-model="users.stream" ng-change="resetStudentList();" style="color: white;background-color: #31B0D5 !important;">
+          <option role="scope" value="">Select your Stream </option>
+          <option value="Science">Science</option>
+          <option value="Art">Art</option>
+          <option value="Commerce">Commerce</option>
+        </select>
+      </div>
+      <div class="col-xs-6 pull-right" style="padding:10px;" >
+          <!-- <input type="button" style="margin-right: 9em;font-size: 1em;height: -18% !important;width: 20em;" class="btn btn-info pull-right" value="Book Webinar" ng-click="bookWebinarForSchoolStudent()" /> -->
+          <h4 style="color:black"> <center>All Seats are full.</center></h4>
+      </div>
+    </div>
+  </footer> 

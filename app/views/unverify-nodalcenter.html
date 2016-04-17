@@ -1,0 +1,66 @@
+<div class="container-fluid " ng-init="toTheTop()">
+
+<div class="theme-container">
+  <div class="row ">
+    <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Unverify Nodal Center<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right"><b>You can unverify a Nodal Center here.</b><h5>
+    </div>
+    </div>
+  </div>
+
+  <hr />
+  
+  <div class="row">
+    <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+      <div class="row search-results">
+        <div class="col-md-3 filter-pane">
+          <input type="text" placeholder="Search Student" class="form-control main-input-box aaa" ng-model="subfilter">
+        </div>
+        <div class="col-md-9">
+          <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+            <div class="row">
+              <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                <table class="table table-striped feed-table">
+                    <col width="8px" />
+                    <col width="25px" />
+                    <col width="25px" />
+                    <col width="30px" />
+                    <col width="20px" />
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Nodal Center Name</th>
+                        <th>Nodal Admin Name</th>
+                        <th>Nodal Admin E-mail</th>
+                        <th>Click to Unerify</th>
+                        </tr>
+                      </thead>
+                      
+                      <tbody ng-animate="'animate'" ng-repeat="(usernId,usern) in nod | filter:subfilter" ng-show="usern.privilege=='approved'">
+                        <div ng-show="signedIn()">
+                          <tr class="feed-table-row">
+                            <td scope="row">{{$index + 1}}</td>
+                            <td><strong>{{usern.nodalCenterName}}</strong></td>
+                            <td><strong>{{usern.nodalAdminName}}</strong></td>
+                            <td>{{usern.nodalAdminEmail}}</td>
+                            <!-- <td>
+                              <a data-toggle="modal" data-target="#stu-enq_{{session.studenturlId}}" style="color:blue; cursor:pointer;" ng-click="studentDetail(student.$id)" >{{usern.nodalAdminEmail}}<br>Password: {{usern.password}} </a>
+                            </td> -->
+                            <td class="v-l" align="center" style="color:red; cursor:pointer;" ng-click="unverifyNodal(usern)"><i class="fa fa-thumbs-o-down"></i></td>
+                          </tr>
+                        </div>
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

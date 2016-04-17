@@ -1,0 +1,79 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  <div class="theme-container">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Colleges for Training<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can fill the training details here.<h5>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div >
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table" >
+                      <col width="8px" />
+                      <col width="25px" />
+                      <col width="25px" />
+                      <col width="20px" />
+                      <col width="25px" />
+                      <col width="30px" />
+                      <col width="25px" />
+                      <col width="15px" />
+                      <col width="15px" />  
+                      <h4 style="color:red">{{emptyfield}}</h4>
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>College Name</th>
+                          <th>College E-mail</th>
+                          <th>Counsellor who took the training</th> 
+                          <th>Training Provided By</th>
+                          <th>Notes(Remarks/Issues)</th>
+                          <th>Counsellor Contact</th>
+                          <th>Training Successful</th>
+                          <th>Button</th>
+                          </tr>
+                      </thead>
+                        <tbody ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter" ng-show="college.trainingDone=='no'">
+                          <div ng-show="signedIn()">
+                            <tr class="feed-table-row">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><strong>{{college.collegename}}</strong></td>
+                              <td style="width:5em!important;">{{college.counselloremail}}<br>Password: {{college.collegepassword}}</td>
+                              <td><input type="text"  ng-model="college.counsellor" required class="form-control main-input-box aaa"></td>
+                              <td><input type="text"  ng-model="college.trainer" required class="form-control main-input-box aaa"></td>
+                              <td><input type="text"  ng-model="college.remark" required class="form-control main-input-box aaa"></td>
+                              <td><input type="text"  ng-model="college.contact" required class="form-control main-input-box aaa"></td>
+                              <td><label class="checkbox" style="padding-left:1em"><center>
+                                  <input type="checkbox" ng-model="college.successful"></center>
+                                  </label>
+                              </td>
+                              <td><button type="button" class="btn btn-default" ng-click="TrainingDone(college.$id,college.counsellor,college.trainer,college.remark,college.contact,college.successful)">Done</button></td>
+                            </tr>
+                          </div>
+                          <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                            <div class="container-fluid">
+                              <div class="row result-det">
+                                <strong><h5>{{college.collegename}}</h5></strong>
+                              </div>
+                            </div>
+                          </a>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

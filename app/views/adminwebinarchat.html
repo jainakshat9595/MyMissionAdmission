@@ -1,0 +1,121 @@
+<style type="text/css">
+iframe {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 520px;
+}
+.hide {
+	display: none;
+}	
+.arrow-up {
+	width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #eee;
+    top: -15px;
+    position: relative;
+    left: 10px;
+}
+</style>
+
+<script>
+	
+</script>
+
+
+
+<!---Division For Admin Webinar Chat Page-->
+<div class="row theme-container" id="adminwebinarchat" ng-init="WebinarChat(); getWebinarDetail(); hideButtonsOnAdminWebinarChat()">
+	<center style="color:green" id="url_saved_Message"><h4> Hangout URL and Live Streamng URL are successfully saved. </h4></center>
+		<h3 style="margin:0px; text-align:center;padding:10px 0px; width:80%; float:left;">{{specificWebinarDetail.webinarTopic}}</h3> 
+		<button class="btn" id="liveButton" style="color: #FF3636; padding: 0.5em 2em; float:right; background-color: transparent; border: 2px solid #FF3636; border-radius: 2em; letter-spacing: 2px;" ng-click="liveTheWebinar(specificWebinarDetail)"><i class="fa fa-circle" id="liveBtn"></i>&nbsp;<strong>Live</strong></button>
+		<!--Div Embeded Video Starts Here-->
+
+			<div class="col-lg-8 col-sm-8" id="embeded-video">
+
+					<div class="col-lg-12">
+
+						
+								
+								<p style="float:left; width:15%;"><b>Mentor :</b></p><p style="float:left; width:82%;">{{specificWebinarDetail.mentorName}}</p>
+								<p style="float:left; width:15%;"><b>Dscription :</b></p><p style="float:left; width:82%;">{{specificWebinarDetail.webinarDescription}}</p>
+								
+								<div class="input-group-container" id="liveUrl">
+					                <div class="input-group input-group-lg">
+					                 	<span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+					                 	<input type="text" ng-model="specificWebinarDetail.liveStreamURL" placeholder="Enter Live Streaming URL" class="login-inputgroup_style form-control">
+					                </div>
+					            </div>
+
+						        <div class="input-group-container" id="hangUrl">
+						            <div class="input-group input-group-lg">
+						                 <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+						                 <input type="text" ng-model="specificWebinarDetail.hangoutURL" placeholder="Enter Hangout URL" class="login-inputgroup_style form-control">
+						            </div>
+						        </div>
+						        <button type="button" id="save_webinar_url" class="btn btn-block btn-default btn-feed" ng-click="save_urls(specificWebinarDetail.hangoutURL,specificWebinarDetail.liveStreamURL,specificWebinarDetail.collegeId,specificWebinarDetail.webinarId)">Save Webinar URL<i class="fa fa-check-square-o"></i></button>
+						        
+						        <button type="button" class="btn btn-block btn-default btn-stu-det webinarCompleted" ng-click="onWebinarCompletion(specificWebinarDetail.webinarId,specificWebinarDetail.collegeId)">End Webinar <i class="fa fa-file-pdf-o"></i></button>
+
+						
+
+						
+						<br clear="all" />
+						<br/>
+					            <iframe ng-src="{{trustSrc(video.src)}}" frameborder="0" allowfullscreen></iframe>
+								<!-- <iframe src="http://www.youtube.com/embed/aQNMsw8Ljjc?autoplay=0"> -->
+								</iframe>
+					</div>
+			</div>
+
+
+
+		<!--Div Embeded Video Ends Here-->4
+
+
+		<div ng-class="expandSlip == true ? 'admin-slip admin-slip-expanded container-fluid' : 'admin-slip admin-slip-collapsed container-fluid'" style="height:600px;">
+			<div class="row admin-slip-title">
+				<div class="col-xs-10">
+					Chat Panel
+				</div>
+				<div class="col-xs-2 pull-right admin-slip-title-icon" ng-click="expandSlip=!expandSlip" style="cursor:pointer">
+					<i id="admin-slip-title-icon-1" class="fa fa-plus-square"></i>
+					<i id="admin-slip-title-icon-2" class="fa fa-minus-square"></i>
+				</div>
+			</div>
+			<hr />
+			<div style="overflow-y:scroll; padding:10px; padding-right:20px; font-family: Montserrat,Helvetica,Arial,sans-serif; height:500px;" class="row admin-slip-display">
+				<div class="container-fluid">
+					<div class="col-lg-12" style="height:auto; padding-bottom:8px; margin-bottom:10px; " ng-repeat="(questionId, question) in QuestionDetails | orderBy: '-timestamp'">
+						<div style="width:100%; padding:5px; height:auto; border:1px solid #ccc; border-radius:8px; background:#eeeeee;">
+							<div class="arrow-up"></div>
+							<div style="width:100%; height:100%; margin-top:-10px; overflow: hidden;">
+								<p style="margin-bottom:0px;"><b>{{question.studentName}}:</b></p>
+								<p style="margin-bottom:0px;">{{question.question}}</p>
+								<p ng-if="question.replyByAdmin" style="margin-bottom:0px; text-align:right"><b>Admin:</b></p>
+								<p ng-if="question.replyByAdmin" style="margin-bottom:0px; text-align:right">{{question.replyByAdmin}}</p></br>
+								<input type="text" class="form-control" id="adminreply{{questionId}}" name="adminreply" ng-model="reply[questionId]" style="display:none;" />
+								<!--Reply Text box enable button-->
+								<button class="btn btn-group btn-primary btn-sm" style="margin-top:5px; float:left;" ng-if="!question.replyByAdmin" ng-click="showTextBox(questionId)" id="replybtn{{questionId}}">Reply</button>
+
+								<!-- Submit button for Inserting Reply  -->
+								<button class="btn btn-group btn-primary btn-sm" style="margin-top:5px; margin-right:10px; float:left; display:none;" ng-click="replyTheQuery(reply[questionId],question.$id,questionId)" id="submitbtn{{questionId}}" ng-click="" >Submit</button>
+
+								<!-- Cancel Button for Cancel the reply and hide the text box -->
+								<button class="btn btn-group btn-primary btn-sm" style="margin-top:5px; display:none; float:left;" id="cancelbtn{{questionId}}" ng-click="cancelReply(questionId)" >Cancel</button>
+
+								<!-- Report Abuse Button for Deleting the Message -->
+								<button class="btn btn-group btn-primary btn-sm" style="margin-top:5px; float:right;" ng-click="reportAbuse(question.$id)">Report Abuse</button>
+
+								<br clear="all">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+</div>

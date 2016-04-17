@@ -1,0 +1,75 @@
+<div ng-init="toTheTop()">
+
+  <toaster-container toaster-options="{'time-out': 6000, 'position-class': 'toast-bottom-right'}"></toaster-container> 
+
+  <div class="row student-dashboard-dash-verify-row" ng-if="user.profile.emailverificationstatus === 'false'">
+    <div class="col-sm-10">
+      <i class="fa fa-bell"></i> &nbsp;&nbsp; Your email address has not been verified.
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" ng-click="resendemail()">Verify</button>
+    </div>
+  </div>
+
+  <div class="row student-dashboard-dash-detail-row">
+    <div class="col-sm-12">
+
+          
+
+
+  
+    <form class="form-signin" name="forma" ng-submit="changeStudentPassword()">
+      
+    <h3>  {{auth.uid}}   </h3>
+
+        <h2>Change your password</h2>
+        <br/>
+        <p>{{message}}</p>
+
+
+        <div class="input-group-container">
+              <div class="input-group input-group-lg">
+               <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+               <input name="password" type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="user.oldpassword" placeholder="Old Password" class="login-inputgroup_style form-control">
+              </div>
+            </div>
+        
+         <div class="input-group-container">
+              <div class="input-group input-group-lg">
+               <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+               <input name="password" type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="user.resetpassword" placeholder="Create Password" class="login-inputgroup_style form-control">
+              </div>
+            </div> 
+
+            <div class="input-group-container">
+              <div class="input-group input-group-lg">
+               <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+               <input name="confirm_password" type="password" required ng-model="user.confirm_password" placeholder="Confirm Password" class="login-inputgroup_style form-control" ui-validate=" '$value==user.resetpassword' " ui-validate-watch=" 'user.password' ">
+              </div>
+            </div>
+            <br/>
+            <div ng-show="forma.user.confirm_password.$dirty && forma.user.confirm_password.$error.validator"><strong style="color:red">Passwords do not match! </strong></div> 
+        
+        <button class="btn btn-lg btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" type="submit" ng-click="toTheTop()" ng-disabled="(forma.user.confirm_password.$dirty && forma.user.confirm_password.$error.validator)" >Submit</button>
+        
+        
+        <p ng-show="error" class="error-danger">{{error}}</p>
+
+      </div>
+
+    </form>
+  
+
+
+      
+
+    </div>
+    
+    
+  </div>
+
+</div>
+
+
+
+

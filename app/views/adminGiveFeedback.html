@@ -1,0 +1,114 @@
+<div class="container-fluid  " ng-controller="AdminFeedbackCtrl" ng-init="toTheTop()">
+    
+    <div class="theme-container">
+
+        <div class="row ">
+        <div class="container-fluid">
+          <div class="col-xs-6 ">
+            <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Give Feedback<h3>
+          </div>
+          <div class="col-xs-6 pull-right">
+            <h5 class="pull-right">Here you can give feedback to the sessions where college was not present to attend the session.<h5>
+          </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+          <form name="build_enquiry">
+            <div class="container-fluid" ng-show="signedIn && usera.profile.profiletype=='admin'">  
+              <div class="row">
+                <div class="col-md-6 ">
+                  <div class="container-fluid"> 
+                    <div class="row">
+
+                      <div class="col-xs-11">
+                        <input type="email" ng-model="collegeEmail" ng-keyup="doThisForCollege(collegeEmail)" placeholder="College Email" class="form-control" 
+                        style="margin-bottom: 1em;">
+                      </div>
+                      <div ng-if="collegeIdFlag == 'Done'" class="col-xs-1" style="color:#64FE2E">
+                        <i class="fa fa-check fa-2x"></i>
+                      </div>
+                      <div ng-if="collegeIdFlag == 'Done'">
+                        <h5 style="color:red">college Name :{{collegeName.$value}}</h5>
+                      </div>
+                      <div ng-if="collegeIdFlag == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                        <i class="fa fa-times fa-2x"></i> 
+                      </div>
+
+                      <div class="col-xs-11">
+                        <input type="email" ng-disabled="collegeIdFlag=='' || collegeIdFlag=='Not Done'" ng-model="studentEmail1" ng-keyup="doThisForStudent(studentEmail1)" placeholder="Student Email " class="form-control">
+                      </div>
+                      <div ng-if="student1IdFlag == 'Done'" class="col-xs-1" style="color:#64FE2E">
+                        <i class="fa fa-check fa-2x"></i>
+                      </div>
+                      <div ng-if="student1IdFlag == 'Done'">
+                        <h5 style="color:red">Student Name :{{student1Name.$value}}</h5>
+                      </div>
+                      <div ng-if="student1IdFlag == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                        <i class="fa fa-times fa-2x"></i>
+                      </div> 
+                      <div ng-if="student1IdFlag == 'Done' && collegeIdFlag == 'Done' && student1Name.$value!==null && collegeName.$value!==null">
+                        <h5 ng-init = "checkFeedback(student1Uid, collegeUid)"> </h5>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" ng-disabled = "(!sessionStatus || submitdisabled || sessionStatus.sessionVerificationStatus == 'approved' || sessionStatus.sessionVerificationStatus == 'rejected' || sessionStatus.sessionVerificationStatus == 'pending' || nosession == 'yes')" data-toggle="modal" data-target="#{{sessionStatus.studenturlId}}" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt">Give Feedback <i class="fa fa-check-square-o"></i></button>
+
+                 <!-- <input type="button" value="Give Feedback" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt" data-toggle="modal" data-target="#{{sessionStatus.studenturlId}}" ng-disabled = "submitdisabled"/>
+                </div> -->
+              </div>
+            </div>   
+            <center><div ng-if="sessionStatus.sessionVerificationStatus == 'approved' && student1IdFlag == 'Done' && collegeIdFlag == 'Done'"> <h4 style="color:red">Feedback cannot be given as the session is already approved By the Quality Person</h4></div></center>
+            <center><div ng-if="sessionStatus.sessionVerificationStatus == 'pending' && student1IdFlag == 'Done' && collegeIdFlag == 'Done'"> <h4 style="color:red">Feedback cannot be given as the session is already pending for approval.</h4></div></center>
+            <center><div ng-if="sessionStatus.sessionVerificationStatus == 'rejected' && student1IdFlag == 'Done' && collegeIdFlag == 'Done'"> <h4 style="color:red">Feedback cannot be given as the session is already rejected By the Quality Person</h4></div></center>
+            <center><div ng-if="nosession == 'yes'"> <h4 style="color:red">Session is not booked yet.</h4></div></center>
+          </form>
+        </div>
+
+        <!-- Chat Feedback Modal -->
+        <form ng-controller="CollegeDashCtrl" name="feedback_form" ng-submit="createFeedbackForCollege(sessionStatus.studentquery, sessionStatus.studenturlId,sessionStatus.collegeurlId, sessionStatus.sessiondate, sessionStatus.collegeurl, sessionStatus.studenturl, 'pending',sessionStatus.nodalId, sessionStatus.sessionhours, sessionStatus.sessionminute)">    
+          <div class="container-fluid">                  
+             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="{{sessionStatus.studenturlId}}">
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title">Give Feedback</h4>
+                   </div>
+                   <div class="modal-body feedback-modal">
+                        <div class="row">
+                             <div class="col-xs-12">
+                               <input ng-model="Feedback.videourl" type="text" placeholder="Youtube Video Link" class="form-control" required style="color:black">
+                          </div>
+                     </div>
+                     <div class="row">
+                          <div class="col-xs-6">
+                               <textarea ng-model="Feedback.chatdiscussion" type="text" placeholder="Chat Discussion Key Points" class="form-control" rows="7" required style="color:black"></textarea>
+                          </div>
+                          <div class="col-xs-6">
+                               <textarea ng-model="Feedback.nextstep" type="text" placeholder="Next Step" class="form-control" rows="7" required style="color:black"></textarea>
+                           </div>
+                           <!-- <input type="hidden" ng-model="sessionVerificationStatus" class="form-control"><br> -->
+                           <div ng-if = "onfeedbacksuccessful">
+                               <h5 style="color:green"><strong> Your feedback has been successfully submitted. </strong></h5>
+                             </div>
+                      </div>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" style="color:black" class="btn btn-default" data-dismiss="modal">Close</button>
+                     <input type="submit" style="color:black" value="Give Feedback" class="btn btn-primary"/></input>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             </div>
+        </form>
+
+    </div>
+
+</div>

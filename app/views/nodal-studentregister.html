@@ -1,0 +1,215 @@
+<div class="theme-container">
+    <div class="container " ng-init="toTheTop()">
+      <div class="row ">
+        <div class="col-xs-6 pull-left">
+         <toaster-container toaster-options="{'time-out': 6000, 'position-class': 'toast-bottom-right'}"></toaster-container> 
+          <h3 class="pull-left"> <a href="#/dashboard-nodal"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Register Student<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can register new student here.<h5>
+
+        </div>
+      </div>
+
+        <div class="row" ng-if="usern.profile.nodalCenterName">
+            <div class="col-md-12" ng-init="getemail()">
+                <center>
+                <h2>Enter Student Details</h2>
+                <h3>{{ message }}</h3>
+                    
+                </center>
+            </div>
+        </div>
+        <hr />
+        <form name="student_reg" ng-submit="register(); toTheTop()">
+
+            <div class="form-signin-div-tobeload new-college" ng-show="modalShown">
+                <i class="fa fa-spinner fa-3x fa-spin"></i>
+            </div>
+
+            <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+                <p ng-show="error" class="text-danger">{{ error }}</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            
+                            <input name="email" type="email" ng-model="user.email" placeholder="Email Address"  required oninvalid="this.setCustomValidity('Please enter a valid Email Address')" oninput="this.setCustomValidity('')" title='Enter in format abcdef@email.com' class="form-control input-lg" ui-validate="{blacklist : 'notBlackListed($value)' }" ng-keyup= "doThisForStudent(user.email)" 
+                            style="margin-bottom: 1em;">
+
+
+                            <div class="col-md-5" ng-show="student1nodalstatus.$value== null">
+                            <div class="row" ng-show="student1nodalstatus.$value== null" align="right">
+                            <img ng-show="student1IdFlag == 'Done'" class="img-responsive" src="" ng-src="{{ studentPic.$value}}" alt="Photo of {{student1Name.$value}}" />
+                            </div> </div>
+
+                            <div class="alert-message info" ng-show= "student1nodalstatus.$value !== null && refBysameNodal==='no'">
+                            <h4 ng-show="student1nodalstatus.$value !== null && refBysameNodal==='no'" class="alert-message info" style="color:red; font-family: Monospace;">This student is already enrolled with one of our nodal centers. Therefore, he/she cannot be enrolled with your nodal center.</h4></div>
+
+                            <div class="col-md-5" ng-show="student1nodalstatus.$value !== null && refBysameNodal==='yes'">
+                            <div class="row" ng-show="student1nodalstatus.$value !== null && refBysameNodal==='yes'" align="right">
+                            <h4 ng-show="student1IdFlag == 'Done'" class="alert-message info" style="color:green; font-family: Monospace;">This student is already registered with you.</h4>
+                            <img ng-show="student1IdFlag == 'Done'" class="img-responsive" src="" ng-src="{{ studentPic.$value}}" alt="Photo of {{student1Name.$value}}" /></div>
+                             </div>
+
+                            <input name="confirm_email" type="email" ng-model="confirm_email" placeholder="Re-type Email Address"  required class="form-control input-lg" ui-validate=" '$value==user.email' " ui-validate-watch=" 'user.email' " ng-hide= "student1IdFlag == 'Done'" style="margin-bottom: 1em;">
+                            <div ng-show="student_reg.confirm_email.$dirty && student_reg.confirm_email.$error.validator"><strong style="color:red">Emails do not match!</strong> </div>
+
+                            <input type="text" ng-model="user.studentname"required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')"  placeholder="Name" class="form-control input-lg" ng-hide= "student1IdFlag == 'Done'" style="margin-bottom: 1em;">
+                            
+                            
+
+                            <div ng-hide= "student1IdFlag == 'Done'">
+
+                            
+
+                            <input name="password" type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="user.password" placeholder="Create Password" class="form-control input-lg" style="margin-bottom: 1em;">
+                            
+                            <input name="confirm_password" type="password" required ng-model="confirm_password" placeholder="Confirm Password" class="form-control input-lg" ui-validate=" '$value==user.password' " ui-validate-watch=" 'user.password' " style="margin-bottom: 1em;">
+                            <div ng-show="student_reg.confirm_password.$dirty && student_reg.confirm_password.$error.validator" style="margin-bottom: 1em;"><strong style="color:red">Passwords do not match! </strong></div>
+                            
+                            <input type="text" ng-model="user.studentmobile" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title="Phone number must be atleast 9 digits long"oninput="this.setCustomValidity('')"  placeholder="Mobile Number" class="form-control input-lg" style="margin-bottom: 1em;">
+                            
+                            <input type="text" ng-model="user.fathername" required oninvalid="this.setCustomValidity('Fathers name cannot be blank')" oninput="this.setCustomValidity('')"  placeholder="Father's Name" class="form-control input-lg"
+                            style="margin-bottom: 1em;">
+                            
+                            <input type="text" ng-model="user.occupation" required oninvalid="this.setCustomValidity('Please enter your Fathers occupation')" oninput="this.setCustomValidity('')"  placeholder="Occupation" class="form-control input-lg"
+                            style="margin-bottom: 1em;">
+                            
+                            <input type="text" ng-model="user.fathernumber" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title='Phone number must be atleast 9 digits long' oninput="this.setCustomValidity('')" placeholder="Father's Mobile Number" class="form-control input-lg" style="margin-bottom: 1em;">
+
+                            <div class="bord">    
+                              <h4> Please select your gender</h4>
+                              <div ng-repeat="person in gender">
+                              <h4><input type="radio" value="{{person.name}}" ng-model="user.gender" name="name" required title="Please Select your Gender" />&nbsp; {{person.name}}</h4>
+                               </div>  
+                            </div>
+                            
+                            <h3>Academic Records:</h3> 
+                            <div class="bord" id="aced_bord" style="padding-left: 2.7em;">
+                              
+                              <label class="checkbox">
+                                <input type="checkbox" ng-model="user.master12th" ng-required="true" ng-change="user.master12thText=''; message = '' ; uSerA.rolesA = null; uSer.roles = null; user.masterUGText=''; user.masterPGText=''; user.masterUG =''; user.masterPG= ''; user.masterPGText = '' "> 10th
+                               </label>
+                              <input id="checkSlave12th" ng-model="user.master12thText" type="number" ng-required="true" ng-hide="!user.master12th" ng-disabled="!user.master12th" placeholder="Your 10th standard's aggregate marks/ percentage" class="form-control slaveInput" min="0" max="100" ng-keyup=" uSerA.rolesA = null; message = '' ; user.masterPGText = '' ">
+                              
+                              <label class="checkbox">
+                                <input type="checkbox" ng-change="user.masterUGText=''; message = '' ; user.masterPGText= ''; user.masterPG= ''; uSerA.rolesA = null; user.masterPGText = '' " ng-model="user.masterUG" ng-disabled="((!user.master12thText) || (!user.master12th))"> 12th
+                              </label>
+                              <input id="checkSlaveUG" ng-model="user.masterUGText" type="number" ng-hide="((!user.masterUG) || (!user.master12th) || (!user.master12thText))" ng-disabled="((!user.masterUG) || (!user.master12th) || (!user.master12thText))" placeholder="Your 12th standard's aggregate marks/ percentage" ng-keyup=" uSerA.rolesA = null; message = ''; user.masterPGText = '' " class="form-control slaveInput" min="0" max="100">
+                              
+                              <label class="checkbox">
+                                <input type="checkbox" ng-change="uSerA.rolesA = null; message = ''; user.masterPGText = '' " ng-model="user.masterPG" ng-disabled="((!user.masterUGText) || (!user.masterUG) || (!user.master12th) || (!user.master12thText))"> UG
+                              </label>
+                              <input id="checkSlavePG" ng-model="user.masterPGText" type="number" ng-hide="((!user.masterPG) || (!user.masterUGText) || (!user.masterUG) || (!user.master12th) || (!user.master12thText))" ng-disabled="((!user.masterPG) || (!user.masterUGText) || (!user.masterUG) || (!user.master12th) || (!user.master12thText))" placeholder="UG's CGPA / GPA/ Percentile" class="form-control slaveInput" min="0" max="100" ng-keyup=" message = '' ">
+
+
+                            
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-hide= "student1IdFlag == 'Done'">
+                            <div>
+                            <div class="bord container-fluid" style="margin-bottom: 1em;">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <fp-input ng-model="user.studentphoto" data-fp-button-text="Upload Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-init="user.studentphoto.url='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" style="margin-bottom: 1em;" />
+                                    </div>
+                                    <div class="col-sm-9" style="color:black; text-align:right;" ng-if="user.studentphoto.url!=='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                        File Uploaded Successfully
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bord container-fluid" style="margin-bottom: 1em;">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <fp-input ng-model="user.studentdocument" data-fp-button-text="Upload Document" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*,application/*" ng-init="user.studentdocument.url='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" data-fp-multiple="false" data-fp-maxsize="5242880" style="margin-bottom: 1em;"/>
+                                    </div>
+                                    <div class="col-sm-9" style="color:black; text-align:right;" ng-if="user.studentdocument.url!=='https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                        File Uploaded Successfully
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="no-bord">
+                                <button type="button" class="btn btn-default btn-lg main-search-btn btn-block sel-btn" data-toggle="modal" data-target=".bs-example-modal-1" ng-hide="!user.master12th" ng-show="((!user.masterPG) || (!user.masterPGText))" ng-click =" message = ''; uSerA.rolesA = []" >Select UG Courses</button>
+                            </div>
+                            <div class="no-bord">   
+                                <button type="button" class="btn btn-default btn-lg main-search-btn btn-block sel-btn" data-toggle="modal" data-target=".bs-example-modal-2" ng-hide="((!user.masterPG) || (!user.masterPGText)  || (!user.masterUGText) || (!user.masterUG) || (!user.master12th) || (!user.master12thText))" ng-click= " message = '' " >Select PG Courses</button>
+                            </div>
+                            </div>
+                            <textarea ng-model="user.studentabout" placeholder="About Myself" class="form-control" rows="7" style="margin-bottom: 1em;"></textarea>
+                            
+                            <input type="text" ng-model="user.studentfacebook" placeholder="Facebook Profile Link" class="form-control input-lg">
+                            <input type="hidden" ng-model="user.profiletype" ng-init="user.profiletype='student'" class="form-control" >
+                            <input type="hidden" ng-model="user.studentAvailability" ng-init="user.studentAvailability='offline'" class="form-control"><br>
+                            <input type="hidden" ng-model="user.studentstatus" ng-init="user.studentstatus='notverified'" class="form-control"><br>
+                            <input type="hidden" ng-model="user.emailverificationstatus" ng-init="user.emailverificationstatus='false'" class="form-control"><br>
+                            <input type="hidden" ng-model="user.referredBy" ng-init="user.referredBy='nobody'"  class="form-control"><br>
+                        </div>
+                    </div>
+                    <div class="row" ng-hide= "student1IdFlag == 'Done'">
+                        <div class="col-md-8">
+                            
+                        </div>
+                         <div class="input-group-container">
+                                 <input style="font-size:16px;"  type="checkbox" style="box-shadow:none" ng-model="term" /> I agree to the My Mission Admission <a class='link' ng-href='#/about?tab=terms ' target="_blank" > Terms of Services </a> and  <a class='link' ng-href='#/about?tab=privacy' target="_blank" > Privacy Policy
+                            </div>
+
+                        <div class="col-md-4">
+                            <input type="submit" value="Register" class="btn btn-success btn-lg pull-right btn-block" ng-disabled="submitbuttondisabled"/>
+                        </div>
+                    </div>
+                    <div class="row" ng-show= "student1IdFlag == 'Done'">
+                        <div class="col-md-8">
+                            
+                        </div>
+                        <div class="col-md-4" ng-hide="student1nodalstatus.$value !== null">
+                            <input type="button" ng-click="sendnodallink()" value="Send Enrollement Link" class="btn btn-success btn-lg pull-right btn-block" />
+                        </div>
+                    </div>
+                    <hr />
+            </div>
+
+        </form>
+    </div>
+
+    <!-- MODALS CONTENT -->
+
+    <div class="modal fade bs-example-modal-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select Undergraduate Courses</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="checkbox" ng-repeat="role in roles">
+                        <input type="checkbox" checklist-model="uSer.roles" checklist-value="role.id"> {{role.text}}
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Done</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select Postgraduate Courses</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="checkbox" ng-repeat="roleA in rolesA">
+                        <input type="checkbox" checklist-model="uSerA.rolesA" checklist-value="roleA.idA"> {{roleA.textA}}
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Done</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

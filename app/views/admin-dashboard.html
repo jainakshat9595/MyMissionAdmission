@@ -1,0 +1,393 @@
+<div class="container-fluid blue text-center" ng-init="toTheTop()">	
+
+	<section id="tilesec" class="tile-container"> 
+
+		<div class="row contentPadding">
+			<div class="col-md-6 pull-left">
+				<h3 class="pull-left"> Welcome, <span>{{ usera.profile.adminname | titleCase }}</span><h3>
+			</div>
+			<div class="col-md-6 pull-right text-right">
+				<div ng-if=" usera.profile.privilege =='access_denied' || usera.profile.privilege !='approved'" class="row a-rights-den">
+					<h4>Access Denied.</h4>
+				</div>
+				<div ng-if=" usera.profile.privilege =='approved'"> <!-- If access Granted -->
+					<h4>Access Granted.</h4>
+				</div>
+			</div>
+		</div>
+
+		<hr></hr>
+
+		<div ng-if=" usera.profile.privilege =='approved'" class="row admin-tile-container admin-tile-container_style">
+			<div class="row">
+				
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<a href="#/subscription" ng-show="usera.profile.role=='salesHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.UpgradeDowngradeCollege =='yes'">
+							<div class="col-md-4 tile blue-light">
+								Upgrade/ Downgrade College
+							</div>
+						</a>
+						
+
+						<a href="#/verify-college" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ShowCollegeinSearch =='yes' || usera.profile.role=='salesHead'">
+							<div class="col-md-4 tile blue-light">
+								Show College in Search
+							</div>
+						</a>
+						
+
+						<a href="#/hide-college" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.HidecollegeinSearch =='yes' || usera.profile.role=='salesHead'">	
+							<div class="col-md-4 tile blue-light">
+								Hide college in Search
+							</div>
+						</a>
+						
+
+						<a href="#/edit-college" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.EditCollegeDetails =='yes'">
+							<div class="col-md-4 tile blue-light">
+								Edit College Details
+							</div>
+						</a>						
+						
+
+						<a href="#/change-collegerank" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ChangeCollegeRank =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Change College Rank
+							</div>
+						</a>
+						
+
+						<a href="#/change-counsellor" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ChangeCounsellorEmail =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Change Counsellor Email
+							</div>
+						</a>						
+						
+
+						<a href="#/build-enquiry/Nidnone" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.Buildanenquiry =='yes'">	
+							<div class="col-md-4 tile blue-light">
+								Build an enquiry
+							</div>
+						</a>
+
+
+						<a href="#/delete-enquiry" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.DeleteEnquiry =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Delete Enquiry
+							</div>
+						</a>
+						
+
+						<a href="#/logout-users" ng-hide='true'>						
+							<div class="col-md-4 tile blue-light">
+								DONT USE THIS FEATURE FOR NOW (Logout Users)
+							</div>
+						</a>						
+						
+
+						<a href="#/edit-student" ng-hide='true'>						
+							<div class="col-md-4 tile blue-light">
+								DONT USE THIS FEATURE FOR NOW (Edit Student Details)
+							</div>
+						</a>						
+						
+
+						<a href="#/change-student-email" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ChangeStudentEmail =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Change Student E-mail
+							</div>
+						</a>
+						
+
+						<a href="#/change-student-password" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ChangeStudentPassword =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Change Student Password
+							</div>
+						</a>
+
+						
+						<a href="#/change-college-password" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ChangeCollegePassword =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Change College Password
+							</div>
+						</a>
+						
+
+						<a href="#/verify-student" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.VerifyaStudent =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Verify a Student
+							</div>
+						</a>
+						
+
+						<a href="#/unverify-student" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.UnverifyaStudent =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Unverify a Student
+							</div>
+						</a>
+						
+
+						<a href="#/block-student" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.BlockStudent =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Block Student
+							</div>
+						</a>
+						
+
+						<a href="#/unblock-student" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.UnblockStudent =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Unblock Student
+							</div>
+						</a>
+						
+
+						<a href="#/client-status" ng-show="usera.profile.role=='salesHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.TotalSessions =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Total Sessions
+							</div>
+					    </a>
+					    
+
+					    <a href="#/giveFeedback" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.GiveFeedback =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								 Give Feedback
+							</div>
+					    </a>
+					    
+
+					    <a href="#/verify-session" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.VerifyNewSessions =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Verify New Sessions
+							</div>
+					    </a>
+					    
+
+					    <a href="#/view-session" ng-show="usera.profile.role=='businessHead' ||usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ViewSessionDetails =='yes' || usera.profile.role=='salesHead'">						
+							<div class="col-md-4 tile blue-light">
+								View Session Details
+							</div>
+					    </a>
+					    
+
+					    <a href="#/rejected-session" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.RejectedSessionDetails =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Rejected Session Details
+							</div> 
+					    </a>
+					    
+
+					    <a href="#/align-sessions:none" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.SessionAllignment =='yes'">					
+							<div class="col-md-4 tile blue-light">
+								Session Allignment 
+							</div>
+					    </a>
+					   
+
+					    <a href="#/verify-nodalcenter" ng-show="usera.profile.role=='businessHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.VerifyNodalCenter =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Verify Nodal centre
+							</div>
+					    </a>
+					    
+
+					    <a href="#/unverify-nodalcenter" ng-show="usera.profile.role=='businessHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.UnverifyNodalCenter =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Unverify Nodal centre
+							</div>
+					    </a>        
+					    
+
+					    <a href="#/nodalcenterinfo" ng-show="usera.profile.role=='businessHead'  || usera.profile.role=='superAdmin'  ||  usera.profile.features.NodalCenterInformation =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								 Nodal centre Information
+							</div>
+					    </a>	
+					    
+					    <a href="#/pendingSessions" ng-show="usera.profile.features.CollegeFeedbackRequired =='yes' ">						
+							<div class="col-md-4 tile blue-light">
+								 College Feedback Required
+							</div>
+					    </a>
+
+					    <a href="#/workDeligation" ng-show="usera.profile.role=='superAdmin'">						
+							<div class="col-md-4 tile blue-light">
+								 Admin work delegation
+							</div>
+					    </a>
+					    <a href="#/workDeligation" ng-show="usera.profile.role=='operationHead'">						
+							<div class="col-md-4 tile blue-light">
+								 Operation  work delegation
+							</div>
+					    </a>
+					    <a href="#/workDeligation" ng-show="usera.profile.role=='salesHead'">						
+							<div class="col-md-4 tile blue-light">
+								 Sales work delegation
+							</div>
+					    </a>
+					    <a href="#/updateAdminDeligation" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' || usera.profile.role=='salesHead'">						
+							<div class="col-md-4 tile blue-light">
+								 Update Roles
+							</div>
+					    </a>
+					    <a href="#/change-adminemail" ng-show="usera.profile.role=='superAdmin'">						
+							<div class="col-md-4 tile blue-light">
+								Change Admin Email
+							</div>
+					    </a>
+					    <a href="#/change-admin-password" ng-show="usera.profile.role=='superAdmin'">						
+							<div class="col-md-4 tile blue-light">
+								Change Admin Password
+							</div>
+						</a>
+					    <a href="#/change-nodalemail" ng-show="usera.profile.role=='superAdmin' || usera.profile.role=='businessHead'">						
+							<div class="col-md-4 tile blue-light">
+								Change Nodal Email
+							</div>
+					    </a>		
+						<a href="#/change-nodal-password" ng-show="usera.profile.role=='superAdmin' || usera.profile.role=='businessHead'">						
+							<div class="col-md-4 tile blue-light">
+								Change Nodal Password
+							</div>
+						</a>	
+						<a href="#/nodal-studentemails" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.StudentsEmailList =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Students Email List From Nodal centre
+							</div>
+					    </a>	
+					    <a href="#/deleteDemoStudent" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.RemoveDemoStudentFromCollege =='yes'">						
+							<div class="col-md-4 tile blue-light">
+								Remove Demo Student From College
+							</div>
+					    </a>
+					    <a href="#/monthly-session-detail">
+					    	<div class="col-xs-4 tile blue-light">
+					    		Monthly Session Detail
+					    	</div>
+					    </a>
+					    <a href="#/edit-nodal" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ">
+					    	<div class="col-xs-4 tile blue-light">
+					    		Edit Nodal Details
+					    	</div>
+					    </a>
+					    <a href="#/upgraded-college" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ">
+							<div class="col-xs-4 tile blue-light">
+								Colleges For Training
+							</div>
+						</a>
+						<a href="#/trained-college" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ">
+							<div class="col-xs-4 tile blue-light">
+							    Colleges After Training
+							</div>
+						</a>
+						<a href="#/college-view" ng-show="usera.profile.role=='superAdmin' ">
+							<div class="col-xs-4 tile blue-light">
+							    Update College View
+							</div>
+						</a>
+						<a href="#/verify-school" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ||  usera.profile.features.ShowCollegeinSearch =='yes' || usera.profile.role=='salesHead'">
+							<div class="col-md-4 tile blue-light">
+								Verify School
+							</div>
+						</a>
+						<a href="#/align-webinar" ng-show="usera.profile.role=='operationHead' || usera.profile.role=='superAdmin' ">
+							<div class="col-xs-4 tile blue-light">
+							    Align Webinars
+							</div>
+						</a>	
+					</div>
+				</div>
+
+			</div>
+		</div>
+	<section>
+
+</div>
+
+<div class="row blue">
+	<section class="container-fluid tile-container text-center">
+			<div class="row">
+				<div class="container-fluid" style="padding-left:40px;">
+					<div class="row">
+						<h3 style="letter-spacing:1px;">Please read the instructions carefully : </h3>
+					</div>
+					<div class="row" style="padding-left:10px;">
+						Do not share your login details with anyone.
+						<br />
+						If you face any issues or you need to report any error then contact the system admin.
+						<br />
+						The changes you make here will affect the whole system and are irreversible.
+						<br />
+						System Admin : admin@mymissionadmission.com 
+					</div>
+				</div>
+			</div>
+	</section>
+</div>
+<!-- ****************************************************************see and edit********************************************* -->
+
+
+<div ng-controller="AdminDashCtrl" ng-if="usera.profile.features.LiveColleges=='yes'  || usera.profile.role=='operationHead'" ng-class="expandSlip == true ? 'admin-slip admin-slip-expanded container-fluid' : 'admin-slip admin-slip-collapsed container-fluid'" >
+	<div class="row admin-slip-title blue-dark">
+		<div class="col-xs-10">
+			Live Colleges
+		</div>
+		<div class="col-xs-2 pull-right admin-slip-title-icon" ng-click="expandSlip=!expandSlip" style="cursor:pointer">
+			<i id="admin-slip-title-icon-1" class="fa fa-plus-square"></i>
+			<i id="admin-slip-title-icon-2" class="fa fa-minus-square"></i>
+		</div>
+	</div>
+	<div style="height:100px; padding:10px;" class="row admin-slip-search">
+		<div class="col-xs-9">
+			<input list="browsers" ng-focus="changeEmailChangeStatus()" ng-model="liveCollege" class="form-control" name="browser">
+			<datalist  id="browsers">
+  			  <option style="width:100px; height:100px; overflow:scroll;" ng-repeat="(Id,college) in collegetype" ng-hide="college.verifiedcollege=='notverified'" value="{{college.collegename}} ({{college.counselloremail}})">
+  			</datalist>
+		</div>
+		<div class="col-xs-3">
+			<input class="form-control" ng-disabled="liveCollege==null" value="Add" ng-click="addLiveColleges(liveCollege)" type="button">
+		</div>
+		<div class="col-xs-9">
+			<h6 ng-if="emailChanged=='yes'" style="color:red"> Email has been changed/doesnot exists.</h6>
+		</div>
+	</div>
+	<hr />
+	<div style="overflow-y:scroll; padding:10px; padding-right:20px; font-family: Montserrat,Helvetica,Arial,sans-serif; max-height:200px;" class="row admin-slip-display">
+		<div class="container-fluid" ng-init="colleges = showLiveColleges()">
+			<div class="row">
+				<div class="col-xs-11" ng-repeat="(key,value) in colleges" style="height:50px; overflow:hidden; padding-bottom:5px; padding-top:5px; border-bottom:1px solid grey;">
+					<div ng-init="collegeName=getCollegeName(key); AMName=getAMName(value.AMId)"><strong style="color:black;">{{collegeName.$value}}</strong> ({{AMName.$value}}) &nbsp;&nbsp;&nbsp;<i class="fa fa-times" ng-click="removeCollege(key)"></i></div>
+				</div>			
+			</div>
+			
+		</div>
+	</div>
+</div> 
+
+
+
+<!-- ****************************************************************see only********************************************* -->
+
+
+<div ng-controller="AdminDashCtrl" ng-if="usera.profile.features.LiveCollegesSeeOnly=='yes' || usera.profile.role=='superAdmin' || usera.profile.role=='salesHead'" ng-class="expandSlip == true ? 'admin-slip admin-slip-expanded container-fluid' : 'admin-slip admin-slip-collapsed container-fluid'">
+	<div class="row admin-slip-title">
+		<div class="col-xs-10">
+			Live Colleges (Read Only)
+		</div>
+		<div class="col-xs-2 pull-right admin-slip-title-icon" ng-click="expandSlip=!expandSlip" style="cursor:pointer">
+			<i id="admin-slip-title-icon-1" class="fa fa-plus-square"></i>
+			<i id="admin-slip-title-icon-2" class="fa fa-minus-square"></i>
+		</div>
+	</div>
+	<hr />
+	<div style="overflow-y:scroll; padding:10px; padding-right:20px; font-family: Montserrat,Helvetica,Arial,sans-serif; max-height:300px;" class="row admin-slip-display">
+		<div class="container-fluid" ng-init="colleges = showLiveColleges()">
+			<div class="row">
+				<div class="col-xs-11" ng-repeat="(key,value) in colleges" style="height:50px; overflow:hidden; padding-bottom:5px; padding-top:5px; border-bottom:1px solid grey;">
+					<div ng-init="collegeName=getCollegeName(key); AMName=getAMName(value.AMId)"><strong style="color:black;">{{collegeName.$value}}</strong> ({{AMName.$value}})</div>
+				</div>			
+			</div>
+			
+		</div>
+	</div>
+</div>

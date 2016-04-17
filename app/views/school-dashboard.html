@@ -1,0 +1,91 @@
+<div class="container-fluid blue text-center" ng-init="toTheTop()">	
+
+	<section id="tilesec" class="tile-container"> 
+
+		<div class="row contentPadding">
+			<div class="col-md-6 pull-left">
+				<h3 class="pull-left"> Welcome, <span>{{ users.profile.schoolname }}</span><h3>
+			</div>
+			<div class="col-md-6 pull-right text-right">
+				<div ng-if=" users.profile.privilege =='access_denied' || users.profile.privilege !='approved'" class="row a-rights-den">
+					<h4>Access Denied.</h4>
+				</div>
+				<div ng-if=" users.profile.privilege =='approved'" class="row a-rights-gran"> 
+					<h4>Access Granted.</h4>
+				</div>
+			</div>
+		</div>
+
+		<hr></hr>
+
+		<div ng-if=" users.profile.privilege =='approved'" class="row admin-tile-container admin-tile-container_style">
+			<div class="row">
+				
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<a href="#/school-studentregister">
+							<div class="col-md-4 tile blue-light">
+								Student Registration
+							</div>
+						</a>
+						<a href="#/school-webinar">
+							<div class="col-md-4 tile blue-light">
+								Book webinar
+							</div>
+						</a>
+						<a href="#/school-webinar-history">
+							<div class="col-md-4 tile blue-light">
+								Booked webinar
+							</div>
+						</a>
+						
+
+						<!-- <a href="#/nodal-account">
+							<div class="col-md-4 tile blue-light">
+								My account
+							</div>
+						</a>
+						
+
+						<a href="#/nodal-send-email">	
+							<div class="col-md-4 tile blue-light">
+								Send Email
+							</div>
+						</a> 
+
+						<a href="#/nodal-monthly-session">
+							<div class="col-xs-4 tile blue-light">
+								Monthly Session Datewise
+							</div>
+						</a> -->
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+ 	<section>
+
+</div> 
+
+<div class="row blue">
+	<section class="container-fluid tile-container text-center">
+			<div class="row">
+				<div class="container-fluid" style="padding-left:40px;">
+					<div class="row">
+						<h3 style="letter-spacing:1px;">Please read the instructions carefully : </h3>
+					</div>
+					<div class="row" style="padding-left:10px;">
+						Do not share your login details with anyone.
+						<br />
+						If you face any issues or you need to report any error then contact the system admin.
+						<br />
+						The changes you make here will affect the whole system and are irreversible.
+						<br />
+						System Admin : admin@mymissionadmission.com 
+					</div>
+				</div>
+			</div>
+	</section>
+</div>  
+

@@ -1,0 +1,331 @@
+<div ng-controller="CollegeDashCtrl" ng-init="toTheTop()">
+
+    <div class="row student-dashboard-profile-row">
+        <div class="col-sm-3">
+            <div ng-if="userc.profile.collegename">
+                <div class="panel panel-default">
+                    <div class="panel-body student-dashboard-dash-detail-row-panel-body student-dashboard-dash-profile-row-panel-body-img">
+                      <center>
+                        <div class="med-user-img"><img ng-src="{{userc.profile.collegephoto}}" alt="Photo of {{userc.profile.collegephoto}}" /></div>
+
+                        <div class="seperator"></div>
+
+                        <div class="bord row">
+                            <div class="col-md-12 form-button-long">
+                                <fp-input class="btn btn-default btn-lg main-search-btn sel-btn-file btn-form" id="fp-btn-id-1" ng-model="newphoto" data-fp-button-text="Change Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-change=" userc.profile.collegephoto = newphoto.url "/>
+                            </div>
+                            <div class="col-md-12" style="color:green; text-align:right;" ng-if = "submitphotosuccesstext == true">
+                                <center>Your Photo has been updated</center>
+                            </div>
+                        </div>
+                        <div id="fb-btn-row" class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" type="button" class="btn btn-success btn-block change-img-btn" ng-click="cancel()" id="cancel-btn-10">Cancel</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn"type="button" ng-click="updatePhoto(newphoto.url)" id="save-btn-10">Save</button>
+                            </div>
+                        </div>
+
+                        <div class="seperator"></div>
+
+                        <div class="row">
+                            <center><h2> {{ userc.profile.collegename }} </h2></center>
+                        </div>
+
+                      </center>
+
+                      <!-- <center>
+                        <div class="med-user-img"><img ng-src="{{userc.profile.collegephoto}}" alt="Photo of {{userc.profile.collegephoto}}" /></div>
+
+                        <div class="seperator"></div>
+
+                        <div class="bord row">
+                            <div class="col-md-12 form-button-long">
+                                <fp-input class="btn btn-default btn-lg main-search-btn sel-btn-file btn-form" id="fp-btn-id-11" ng-model="newphoto" data-fp-button-text="Change Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-change=" userc.profile.collegephoto = newphoto.url "/>
+                            </div>
+                            <div class="col-md-12" style="color:green; text-align:right;" ng-if = "submitphotosuccesstext == true">
+                                <center>Your Photo has been updated</center>
+                            </div>
+                        </div>
+                        <div id="fb-btn-row1" class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" type="button" class="btn btn-success btn-block change-img-btn" ng-click="cancel()" id="cancel-btn-11">Cancel</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn"type="button" ng-click="updatePhoto(newphoto.url)" id="save-btn-11">Save</button>
+                            </div>
+                        </div>
+
+                        <div class="seperator"></div>
+
+                        <div class="row">
+                            <center><h2> {{ userc.profile.collegename }} </h2></center>
+                        </div>
+
+                      </center> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    College Details
+                    <span class="pull-right non-edit-field-1" id="edit-btn-1"> Edit </span>
+                </div>
+                <div class="panel-body">
+                    <form name="Details" ng-submit="updateClgProfile()">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h4> Full Name :</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')" placeholder="Full Name" class="login-inputgroup_style form-control edit-field-1" ng-model="userc.profile.collegename">
+                                <h4 class="non-edit-field-1"> {{ userc.profile.collegename }} </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h4> E- Mail :</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <h4> {{ userc.profile.counselloremail }} </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h4> Phone Number : </h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" required pattern="[0-9]{3}-?[0-9]{6,12}$" minlength=9 maxlength=15 title="Phone number must be atleast 9 digits long" oninput="this.setCustomValidity('')" placeholder="Phone Number" ng-model="userc.profile.collegemobile" class="login-inputgroup_style form-control edit-field-1">
+                                <h4 class="non-edit-field-1"> {{ userc.profile.collegemobile }} </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h4> Affiliation :</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" required oninvalid="this.setCustomValidity('College Affiliation cannot be blank')" oninput="this.setCustomValidity('')" placeholder="Affiliation" ng-model="userc.profile.collegeaffiliation" class="login-inputgroup_style form-control edit-field-1">
+                                <h4 class="non-edit-field-1"> {{ userc.profile.collegeaffiliation }} </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h4> Address :</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" required oninvalid="this.setCustomValidity('Please enter the College Address')" oninput="this.setCustomValidity('')" placeholder="Address" ng-model="userc.profile.collegeaddress" class="login-inputgroup_style form-control edit-field-1">
+                                <h4 class="non-edit-field-1"> {{ userc.profile.collegeaddress }} </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h4> Website : </h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" required  title='Please enter College Website' oninput="this.setCustomValidity('')" placeholder="Website" ng-model="userc.profile.collegewebsite" class="login-inputgroup_style form-control edit-field-1">
+                                <h4 class="non-edit-field-1"> {{ userc.profile.collegewebsite }} </h4>
+                            </div>
+                        </div>
+                        <div class="row edit-field-1">
+                            <div class="col-sm-offset-5 col-sm-7">
+                                <div class="row">
+                                    <div class="row" style="margin-top: 1em; padding: 0em 3em;">
+                                        <div class="col-xs-6">
+                                            <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" ng-click="cancel()" id="cancel-btn-1">Cancel</button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button type="submit" class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" id="submit-btn">Save</button>
+                                        </div>
+                                        <center><div ng-if = "submitsuccesstext1 == true"> <h5 style="color:green"><strong> Congratulations! </strong> Your profile has been updated</h5></div></center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Counsellor Details
+                    <span class="pull-right non-edit-field-4" id="edit-btn-2"> Edit </span>
+                </div>
+                <div class="panel-body">
+                    <form name="Details" novalidate>
+                        <center><h4  style="color:red;">{{ message }}</h4></center>
+                        <center><h4  style="color:red;">{{ validation }}</h4></center>
+                        <br />
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4> Counsellor's Name :</h4>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text"   title='Please enter Counsellor Name' required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')" placeholder="Counsellor Name" ng-model="userc.profile.collegeCounsellor1Name" class="login-inputgroup_style form-control edit-field-2" maxlength="25"/>
+                                    <h4 class="non-edit-field-2" > {{ userc.profile.collegeCounsellor1Name }} </h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5 edit-field-2">
+                                    <h4> Counsellor's Gender :</h4>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="input-group-container edit-field-2">
+                                      <div class="bord">    
+                                        <div ng-repeat="person in gender">
+                                          <h4 style="text-align:left; margin-left:1em;">
+                                            <input type="radio" value="{{person.name}}" ng-model="userc.profile.collegeCounsellor1gender" name="name" required title="Please Select your Gender" /> &nbsp; {{person.name}}
+                                          </h4>
+                                        </div>  
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4> Counsellor's Phone :</h4>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text"   title='Please enter Counsellor Number' required oninvalid="this.setCustomValidity('Number could not be blank')" oninput="this.setCustomValidity('')" placeholder="Counsellor Number" ng-model="userc.profile.collegeCounsellor1Number" class="login-inputgroup_style form-control edit-field-2" />
+                                    <h4 class="non-edit-field-2" > {{ userc.profile.collegeCounsellor1Number }} </h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4>Counsellor's Personal Email :</h4>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" title='Please enter Counsellor email' required oninvalid="this.setCustomValidity('Email could not be blank')" oninput="this.setCustomValidity('')" placeholder="Counsellor Email" ng-model="userc.profile.collegeCounsellor1Email" class="login-inputgroup_style form-control edit-field-2" maxlength="35" >
+                                    <h4 class="non-edit-field-2"> {{ userc.profile.collegeCounsellor1Email }} </h4>
+                                </div>
+                            </div>
+                            <div class="row edit-field-2">
+                                <div class="col-sm-offset-5 col-sm-7">
+                                    <div class="row">
+                                        <div class="row" style="margin-top: 1em; padding: 0em 3em;">
+                                            <div class="col-xs-6">
+                                                <button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" ng-click="cancel()" id="cancel-btn-2">Cancel</button>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <button type="submit" class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" id="submit-btn-2" ng-click="sendCounsellorMail()" >Save</button>
+                                            </div>
+                                            <center><div ng-if = "submitsuccesstext2 === true"> <h5 style="color:green"><strong> Congratulations! </strong> Your profile has been updated</h5></div></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <center><div class="med-user-img"><img style="width:8em; height:8em; border-radius:100%" ng-src="{{userc.profile.collegeCounsellor1photo}}" alt="Photo of {{userc.profile.collegeCounsellor1Name}}" /></div></center>
+                            <br />
+                            <div class="col-md-12 form-button-long">
+                                <fp-input class="btn btn-default main-search-btn sel-btn-file btn-form" id="fp-btn-id-11" ng-model="counsellorphoto" data-fp-button-text="Change Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-change=" userc.profile.collegeCounsellor1photo = counsellorphoto.url "/>
+                            </div>
+                            <!-- <div class="col-md-12" style="color:green; text-align:right;" ng-if = "submitphotosuccesstext == true">
+                                <center>Your Photo has been updated</center>
+                            </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+  
+$(".edit-field-1").hide();
+$(".non-edit-field-1").show();
+$(".edit-field-2").hide();
+$(".non-edit-field-2").show();
+$("#cancel-btn-10").hide();
+$("#save-btn-10").hide();
+$("#fp-btn-row").hide();
+$("#cancel-btn-11").hide();
+$("#save-btn-11").hide();
+$("#fp-btn-row1").hide();
+$("#fp-btn-id-11").hide();
+
+
+$( document ).on( "click", "#cancel-btn-10", function( event ) {
+    $("#fb-btn-row").hide();
+    $("#cancel-btn-10").hide();
+    $("#save-btn-10").hide();
+    $("#fp-btn-id-1").show();
+});
+
+$( document ).on( "click", "#save-btn-10", function( event ) {
+    $("#fb-btn-row").hide();
+    $("#cancel-btn-10").hide();
+    $("#save-btn-10").hide();
+    $("#fp-btn-id-1").show();
+});
+
+$( document ).on( "click", "#cancel-btn-11", function( event ) {
+    $("#fb-btn-row1").hide();
+    $("#cancel-btn-11").hide();
+    $("#save-btn-11").hide();
+    $("#fp-btn-id-11").show();
+});
+
+$( document ).on( "click", "#save-btn-11", function( event ) {
+    $("#fb-btn-row1").hide();
+    $("#cancel-btn-11").hide();
+    $("#save-btn-11").hide();
+    $("#fp-btn-id-11").show();
+});
+
+$( document ).on( "click", "#edit-btn-1", function( event ) {
+        $(".edit-field-1").show();
+    $(".non-edit-field-1").hide();
+    });
+
+$( document ).on( "click", "#edit-btn-2", function( event ) {
+        $(".edit-field-2").show();
+    $(".non-edit-field-2").hide();
+    $("#fp-btn-id-11").show();
+    });
+
+$( document ).on( "click", "#cancel-btn-1", function( event ) {    
+        $(".edit-field-1").hide();
+    $(".non-edit-field-1").show();
+    });
+
+$( document ).on( "click", "#submit-btn", function( event ) {    
+        $(".edit-field-1").hide();
+    $(".non-edit-field-1").show();
+
+    });
+$( document ).on( "click", "#cancel-btn-2", function( event ) {    
+        $(".edit-field-2").hide();
+    $(".non-edit-field-2").show();
+    $("#fp-btn-id-11").hide();
+    $("#fb-btn-row1").hide();
+    $("#cancel-btn-11").hide();
+    $("#save-btn-11").hide();
+    });
+
+
+
+$( document ).on( "click", "#fp-btn-id-1", function( event ) {
+    $("#fb-btn-row").show();
+    $("#cancel-btn-10").show();
+  $("#save-btn-10").show();
+  $("#fp-btn-id-1").hide();
+});
+
+$( document ).on( "click", "#fp-btn-id-11", function( event ) {
+    $("#fb-btn-row1").show();
+    $("#cancel-btn-11").show();
+  $("#save-btn-11").show();
+  $("#fp-btn-id-11").hide();
+});
+
+</script>

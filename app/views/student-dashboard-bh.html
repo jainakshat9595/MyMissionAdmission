@@ -1,0 +1,431 @@
+<style type="text/css">
+  .stu :hover {
+    letter-spacing: 0.5px;
+}
+.btn-group { width: 100%;margin-top: 8px;} .giv-feed-row{font-size: 17px}
+</style>
+<div ng-init="toTheTop(); getLimitedColleges(); getStudentsWebinarHistory()"> 
+
+  <div class="row student-dashboard-dash-sub-menu">
+    <div class="col-xs-9">
+      Showing Resuts for all your Sessions.
+    </div>
+    <div class="col-xs-1" style="padding-top:4px; cursor:pointer;" ng-click="searchToggle()">
+      Sessions
+    </div>
+    <div class="col-xs-1" ng-click="searchToggle()">
+      <div class="toggle-outer-div"><div class="toggle-inner-circle" style="background-color:#39A050;" id="searchToggleBtn"></div></div>
+    </div>
+    <div class="col-xs-1" style="padding-top:4px; cursor:pointer;" ng-click="searchToggle()">
+      Webinars
+    </div>
+  </div>
+
+                                                      <!-- SessionsDiv -->
+
+
+  <div class="row" style="margin:1em" ng-if="session.length == 0" ng-hide="viewTab=='webinars'">
+    <div class="container-fluid col-sm-12">
+      <div class="contentPadding theme-container panel-body student-dashboard-dash-detail-row-panel-body student-dashboard-dash-detail-row-panel-body-video"  > <center style="font-family:verdana; font-size:1em; font-weight:bold"><br> Umm.. it seems, you have not engaged with your dream college, yet. To Attend Webinar/Counselling-sessions with multiple colleges, kindly visit: </center> 
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+          <div style="font-family: verdana; :hover{color:white;letter-spacing:1px;};" class="stu"><br> <b><a style="font-size: 1.5em;">Join Upcoming Webinars</a></b> Attend Live and Informative Webinars with your friends.</div>
+          <div style="font-family: verdana; padding-bottom:1em;" class="stu"><br> <b><a style="font-size: 1.5em;">Get Counselled</a></b> Chat with your desired college counsellor and solve your queries instantly, personalised for your comfort.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row student-dashboard-bh-row" ng-if="session.length !== 0" ng-hide="viewTab=='webinars'">
+    <div class="col-sm-6 student-dashboard-bh-row-block" ng-repeat="(studentId, session) in session">
+
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="med-user-img"><img src="{{collegeDetail[session.collegeurlId].collegePhoto}}" alt="" class=""></div>
+          <br />
+          <div class="dateTimeIndc">
+            <div class="row dateTimeIndc-date"><center>{{session.sessiondate.split(" ")[0]}}</center></div>
+            <div class="row dateTimeIndc-month"><center>{{session.sessiondate.split(" ")[1]}},{{session.sessiondate.split(" ")[2]}}</center></div>
+            <div class="row dateTimeIndc-year"><center>{{session.sessionhour}}:{{session.sessionminute}} Hrs</center></div>
+          </div>
+        </div>
+        <div class="col-xs-9 student-dashboard-bh-row-rightPart">
+          <div class="row student-dashboard-bh-row-rightPart-name"><strong>{{collegeDetail[session.collegeurlId].collegeName}}</strong></div>
+          <div class="row student-dashboard-bh-row-rightPart-query">{{session.studentquery}}</div>
+          <div class="row student-dashboard-bh-row-rightPart-control" ng-init="getCollegeDetail(session.collegeurl,session.collegeurlId)">
+            <div class="col-xs-6"><button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" ng-click="go('/college-profile/{{session.collegeurl}}')">College Details</button></div>
+            <div class="col-xs-6"><button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" data-toggle="modal" data-target="#{{session.collegeurlId}}">Give Feedback</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="{{session.collegeurlId}}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" style="font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;">Give Feedback</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid giv-feed-con">
+                <div class="row giv-feed-row">
+                  How likely are you to take admission in this college?
+                  <br>
+                  <br>
+                  <center>
+                  <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="radioModel" btn-radio="'1'" uncheckable><i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModel" btn-radio="'2'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModel" btn-radio="'3'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModel" btn-radio="'4'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModel" btn-radio="'5'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star">&nbsp;</i><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                  </div>
+                </center>
+                </div>
+                <div class="row giv-feed-row">
+                  Rate the counsellor:
+                  <br>
+                  <br>
+                  <center>
+                  <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'1'" uncheckable><i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'2'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'3'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'4'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'5'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star">&nbsp;</i><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                  </div>
+                </center>
+                </div>
+                <div class="row giv-feed-row">
+                  Do you want to fill the registeration form?
+                  <br>
+                  <br>
+                  <center>
+                  <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                    <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'No'" uncheckable>&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+                  </div>
+                </center>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"ng-click="createFeedbackForStudent(radioModel, radioModelOne, radioModelTwo, session.studentquery, session.studenturlId, session.sessiondate, session.collegeurl, session.studenturl)" id="stu-feed-btn" class="btn btn-primary" >Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+                                                              <!-- EndSessionsDiv -->
+
+                                                                <!-- WebinarDiv -->
+     
+
+  <div class="row student-dashboard-bh-row" ng-if="viewTab=='webinars'">
+  <div class="container-fluid col-sm-12"  ng-if="webinarHistory.length == 0" >
+        <div class="contentPadding theme-container panel-body student-dashboard-dash-detail-row-panel-body student-dashboard-dash-detail-row-panel-body-video"  > <center style="font-family:verdana; font-size:1em; font-weight:bold"><br> Umm.. it seems, you have not engaged with your dream college, yet. To Attend Webinar/Counselling-sessions with multiple colleges, kindly visit: </center> 
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+            <div style="font-family: verdana; :hover{color:white;letter-spacing:1px;};" class="stu"><br> <b><a style="font-size: 1.5em;">Join Upcoming Webinars</a></b> Attend Live and Informative Webinars with your friends.</div>
+            <div style="font-family: verdana; padding-bottom:1em;" class="stu"><br> <b><a style="font-size: 1.5em;">Get Counselled</a></b> Chat with your desired college counsellor and solve your queries instantly, personalised for your comfort.</div>
+            </div>
+          </div>
+        </div>
+     </div>
+    <div class="col-sm-6 student-dashboard-bh-row-block" ng-repeat="(webinarId, webinar) in webinarHistory">
+
+      <div class="row" ng-if="webinar.webinarDate">
+        <div class="col-xs-3">
+          <div class="med-user-img"><img src="{{webinar.mentorPhoto}}" alt="" class=""></div>
+          <div class="row dateTimeIndc-year"><center><h4><strong>{{webinar.mentorName | titleCase}}</strong></h4></center></div>
+          <br />
+          <div class="dateTimeIndc">
+            <div class="row dateTimeIndc-date"><center>{{webinar.webinarDate.split(" ")[2]}}</center></div>
+            <div class="row dateTimeIndc-month"><center>{{webinar.webinarDate.split(" ")[1]}}</br>{{webinar.webinarDate.split(" ")[0]}}</center></div>
+            <div class="row dateTimeIndc-year"><center>{{webinar.webinarTime}}</center></div>
+          </div>
+        </div>
+        <div class="col-xs-9 student-dashboard-bh-row-rightPart">
+          <div class="row student-dashboard-bh-row-rightPart-name"><strong>{{webinar.webinarTopic | titleCase}}</strong></div>
+          <div class="row student-dashboard-bh-row-rightPart-control" ng-init="getCollegeDetail(session.collegeurl,session.collegeurlId)">
+            <div class="col-xs-6"><button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" data-toggle="modal" data-target="#webinarDetail_modal" ng-click="getCurrentWebinarDetails(webinar)">Webinar Details</button></div>
+            <div class="col-xs-6"><button class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" data-toggle="modal" data-target="#{{webinar.webinarId}}" ng-click="getstudentWebinarFeedbacks(webinar.webinarId)">Give Feedback</button></div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="{{webinar.webinarId}}">
+        <div class="modal-dialog">
+
+        <div class="modal-content" ng-if="studentwebinarFeed.collegeId">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" style="font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;">Give Feedback</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid giv-feed-con">
+            <div class="container-fluid giv-feed-con">
+            <h4 style="color:green; text-align:center">Thanks For Giving the Feedback for this Webinar.</h4>
+            </div>
+            <br>
+            <div class="row giv-feed-row">
+                <p style="width:70%;float:left"> Are you satisfied with the content of the webinar?</p>                 <p style="width:30%;float:left">:  &nbsp;{{studentwebinarFeed.webinarSatisfaction}} </p><br>
+                <p style="width:70%;float:left">Rate the quality of speaker(s) delivering the webinar?</p><p style="width:30%;float:left">:  &nbsp;{{studentwebinarFeed.SpeakerQuality}} </p> <br>
+                <p style="width:70%;float:left">Are you interested in career options, explain/ introduced by the speakers?</p>                  <p style="width:30%;float:left" ng-if="studentwebinarFeed.Interested === 'No'">
+                :  &nbsp;{{studentwebinarFeed.Interested}}</p><p style="width:30%;float:left" ng-if="studentwebinarFeed.Interested === 'Yes'">
+                :  &nbsp;{{studentwebinarFeed.InterestedArea}}</p> <br>
+                <p style="width:70%;float:left">Were all your questions answered?</p>                          <p style="width:30%;float:left" ng-if="studentwebinarFeed.AllQuestionAnswered === 'No'">:  &nbsp;{{studentwebinarFeed.QuestionDetails}}</p> <p style="width:30%;float:left" ng-if="studentwebinarFeed.AllQuestionAnswered === 'Yes'">:  &nbsp;{{studentwebinarFeed.AllQuestionAnswered}}</p> <br>
+            </div>  
+            </div>
+          </div> 
+        </div>   
+
+
+          <div class="modal-content" ng-if="!studentwebinarFeed.collegeId">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" style="font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;">Give Feedback</h4>
+            </div>
+            <div class="modal-body">
+                  <div class="text-danger" style="color:red" ng-show="errormessage">
+                    <h4 style="text-align:center">{{errormessage}}</h4>
+                  </div>
+              <div class="container-fluid giv-feed-con">
+                <div class="row giv-feed-row">
+                  Are you satisfied with the content of the webinar?
+                  <center>
+                    <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModelone" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                      <label class="btn btn-primary" ng-model="radioModelone" btn-radio="'No'" uncheckable>&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+                    </div>
+                  </center>
+                </div>
+                <br>
+                <div class="row giv-feed-row">
+                  Rate the quality of speaker(s) delivering the webinar?
+                  <center>
+                    <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'1'" uncheckable>1</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'2'" uncheckable>2</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'3'" uncheckable>3</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'4'" uncheckable>4</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'5'" uncheckable>5</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'6'" uncheckable>6</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'7'" uncheckable>7</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'8'" uncheckable>8</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'9'" uncheckable>9</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'10'" uncheckable>10</label>
+                    </div>
+                  </center>
+                </div>
+                <br>
+                <div class="row giv-feed-row">
+                  Are you interested in career options, explain/ introduced by the speakers?
+                  <center>
+                    <div class="btn-group">
+                      <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                      <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'No'" uncheckable>&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+                    </div>
+                    </div>
+                    <div class="btn-group" ng-show="radioModelTwo === 'Yes'">
+                      <input type="text" class="form-control" ng-model="StudentInterest" placeholder="In which Area you are interested?"/>
+                    </div>
+                  </center>
+                </div>
+                <br>
+                <div class="row giv-feed-row">
+                  Were all your questions answered?
+                  <center>
+                    <div class="btn-group">
+                      <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModelThree" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                      <label class="btn btn-primary" ng-model="radioModelThree" btn-radio="'No'" uncheckable>&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+                    </div>
+                    </div>
+                    <div class="btn-group" ng-show="radioModelThree === 'No'">
+                      <input type="text" class="form-control" ng-model="StudentQuestion" placeholder="Submit your Question"/>
+                    </div>
+                  </center>
+                </div>
+              </div>
+            </div>
+            <div class="text-info" style="color:green; text-align:center" ng-show="successmessage"><h4>{{ successmessage }}</h4></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" ng-click="SaveWebinarStudentFeedback(webinar.collegeId,webinar.webinarId,radioModelone,radioModel,radioModelTwo,StudentInterest,radioModelThree,StudentQuestion)" >Give Feedback</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+                                                                <!-- EndWebinarDiv -->
+
+</div>
+
+<div class="modal fade" id="webinarDetail_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{currentWebinar.webinarTopic}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-3">
+            <div class="med-user-img"><img src="{{currentWebinar.mentorPhoto}}" alt="" class=""></div>
+            <br />
+            <div class="dateTimeIndc">
+              <div class="row dateTimeIndc-date"><center>{{currentWebinar.webinarDate.split(" ")[2]}}</center></div>
+              <div class="row dateTimeIndc-month"><center>{{currentWebinar.webinarDate.split(" ")[1]}}</br>{{currentWebinar.webinarDate.split(" ")[0]}}</center></div>
+              <div class="row dateTimeIndc-year"><center>{{currentWebinar.webinarTime}}</center></div>
+            </div>
+          </div>
+          <div class="col-xs-9 student-dashboard-bh-row-rightPart">
+            <div class="row student-dashboard-bh-row-rightPart-name" style="padding-bottom:0.5em;"><strong>{{currentWebinar.mentorName}}</strong></div>
+            <div class="row student-dashboard-bh-row-rightPart-subName" style="margin-top:2em;"><i class="fa fa-envelope"></i> {{currentWebinar.mentorEmail}} &nbsp;&nbsp;<i class="fa fa-phone"></i> {{currentWebinar.mentorMobile}}</div>
+            <div class="seperator" style="margin-bottom:2em;"></div>
+            <div class="row student-dashboard-bh-row-rightPart-query" style="height:auto; margin-top:">{{currentWebinar.webinarDescription | limitTo:650}}.</div>
+            <div class="seperator"></div>
+            <div class="row student-dashboard-bh-row-rightPart-subName"><strong>Duration</strong> : {{currentWebinar.webinarDuration}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid booked-his" ng-init="toTheTop()">
+    <div class="row search-query">
+      <div class="col-md-12">
+        <center>
+          Showing results for all your booked session.
+        </center>
+      </div>
+    </div>
+    <div class="row" id="src-scroll" style="height : 600px; overflow-y:scroll;" ng-init = "getLimitedColleges()">
+      <div class="col-md-5 bh-block" ng-repeat="(studentId, session) in session" > 
+        <div class="button-bar" ng-init="getCollegeDetail(session.collegeurl,session.collegeurlId)">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="submit" ng-click="go('/college-profile/{{session.collegeurl}}')" value="College Details" class="btn btn-block btn-booked-his-view" />
+              </div>
+              <div class="col-md-6">
+                <input type="submit" value="Give Feedback" class="btn btn-block btn-booked-his-feed" data-toggle="modal" data-target="#{{session.collegeurlId}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" >
+           <center> <img src="{{collegeDetail[session.collegeurlId].collegePhoto}}" alt="" width="415" height="250"/></center> 
+          </div>
+        </div>
+        <div class="row bh-det" style="word-wrap:break-word;">
+          <h2> {{collegeDetail[session.collegeurlId].collegeName}}  </h2>
+        </div>
+        <div class="row bh-det">
+          <h5> {{session.sessionhour}}:{{session.sessionminute}} Hrs, {{session.sessiondate}} </h5>
+        </div>
+        <hr />
+        <div class="row bh-det">
+          <div class="col-md-12">
+            <div class="container-fluid bh-query-area" id="bh-query-area">
+              <div class="container-fluid bh-query-area-over">
+                {{session.studentquery}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+ng-init="rating = star.rating + 1"
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="{{session.collegeurlId}}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;">Give Feedback</h4>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid giv-feed-con">
+                  <div class="row giv-feed-row">
+                    How likely are you to take admission in this college?
+                    <br>
+                    <br>
+                    <center>
+                    <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'1'" uncheckable><i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'2'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'3'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'4'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModel" btn-radio="'5'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star">&nbsp;</i><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    </div>
+                  </center>
+                  </div>
+                  <div class="row giv-feed-row">
+                    Rate the counsellor:
+                    <br>
+                    <br>
+                    <center>
+                    <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'1'" uncheckable><i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'2'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'3'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'4'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                      <label class="btn btn-primary" ng-model="radioModelOne" btn-radio="'5'" uncheckable><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star">&nbsp;</i><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;</label>
+                    </div>
+                  </center>
+                  </div>
+                  <div class="row giv-feed-row">
+                    Do you want to fill the registeration form?
+                    <br>
+                    <br>
+                    <center>
+                    <div class="btn-group">
+                      <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'Yes'" uncheckable>&nbsp;Yes&nbsp;<i class="fa fa-thumbs-up"></i></label>
+                      <label class="btn btn-primary" ng-model="radioModelTwo" btn-radio="'No'" uncheckable>&nbsp;No&nbsp;<i class="fa fa-thumbs-down"></i>&nbsp;</label>
+                    </div>
+                  </center>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"ng-click="createFeedbackForStudent(radioModel, radioModelOne, radioModelTwo, session.studentquery, session.studenturlId, session.sessiondate, session.collegeurl, session.studenturl)" id="stu-feed-btn" class="btn btn-primary" >Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>      
+      </div>   
+      <div class="text-center btn-load-frame">
+                      <button class="btn-load btn-border" ng-click="getNextColleges()">Load More</button>
+      </div>        
+    </div>
+  </div> -->

@@ -1,0 +1,500 @@
+<style type="text/css">
+  .imgClass{
+    width: 300% !important;
+    height: 30em !important;
+    margin-left: 30em !important;
+  }
+  .hideCross{
+    opacity: 0;
+  }
+</style>
+<div class="container-fluid  noPadding" ng-init="toTheTop()">
+     <div class="row" ng-init = "getLimitedSessions()">
+     </div>
+</div>
+          <ol class="breadcrumb blue noBorder">
+                 <li>Home</li>
+                 <li>Student Enquiry</li>
+          </ol>
+</div>
+
+
+     <div class="noPadding contentPadding dashHome-content row content-area-dash dashboard-leftPadding dashboard-rightPadding ">
+          
+        <div class="panel panel-info ">
+         
+            <div class="panel-heading">
+              <i class="fa fa-lg fa-fw fa-users"></i>&nbsp;&nbsp;Student Enquiry
+              <div class="pull-right" ng-hide="loadVar === 'No value'">
+                  <div class="dropdown pull-right session-filter">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" >
+                      Number of Session
+                      <span class="caret"></span>
+                    </button>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" >
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="sendValue(10)" href="">10</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="sendValue(20)" href="">20</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="sendValue(50)" href="">50</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="sendValue(100)" href="">100</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="loadAllSessions()" href="">All Sessions</a></li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+            
+            <div class="panel-body">
+              <div class="col-lg-12 col-md-12 col-sm-12 pull-right  dashboard-leftPadding noPadding contentPadding block">
+                   
+                    <div class="row block-heading">
+                        <h5 class="pull-right" ng-if="session.length>1">Showing Sessions: 1-{{session.length}}</h5> 
+                   </div>
+
+                   <div class="row block-content " > 
+                    <!-- sub-block-ver should be implemented on verified status in the following div-->
+                        <div class="container-fluid sub-block sub-block" ng-class="{'container-fluid sub-block sub-block-ver' : session.sessionVerificationStatus=='approved' }" ng-repeat="(studentId, session) in session | orderBy:'-sessionNumber'">
+                          <!-- <h4>{{session.sessiondate }}</h4> -->
+                      
+
+
+                            <div ng-init="getStudentDetail(session.studenturl, session.studenturlId, session.collegeurl, session.sessionNumber)" ng-if="studentDetail[session.studenturlId].studentStatus.$value !=='block'">
+                               
+
+                                 <div ng-if="feedBackStatus && !feedBackStatus.videourl && !feedBackStatus.chatdiscussion && !feedBackStatus.nextstep"  ng-class="{'panel-enquiry_success':  session.sessionVerificationStatus=='approved', 'panel-enquiry_warning': session.sessionVerificationStatus=='pending', 'panel-enquiry_danger': session.sessionVerificationStatus== null }"  class="panel panel-info" style="width: 100%;">
+                                             <div class="panel-heading contentPadding" style="min-height: 3.6em;">
+
+                                      <div class="row">
+                                        <div class="col-xs-1"><center><div class="panel-heading-counter">{{$index + 1}}</div></center></div>
+                                        <div class="col-xs-11">
+                                          <div ng-init = "feedBackStatus = getFeedbackStatus(session.studenturl ,session.studenturlId , session.collegeurl)">
+                                           <div ng-if="feedBackStatus && !feedBackStatus.videourl && !feedBackStatus.chatdiscussion && !feedBackStatus.nextstep" ng-hide="session.sessionVerificationStatus=='approved' || session.sessionVerificationStatus=='rejected'" >
+                                           <i ng-if="feedBackStatus && !feedBackStatus.videourl && !feedBackStatus.chatdiscussion && !feedBackStatus.nextstep"  ng-class="{'fa-enquiry_success': session.sessionVerificationStatus=='approved', 'fa-enquiry_warning': session.sessionVerificationStatus=='pending', 'fa-enquiry_danger': session.sessionVerificationStatus===null }" class="fa fa-lg fa-enquiry_danger fa-exclamation-triangle"></i> &nbsp;&nbsp; Chat Feedback is not written for this session.
+                                           </div>
+                                          <div ng-if="feedBackStatus && feedBackStatus.videourl && feedBackStatus.chatdiscussion && feedBackStatus.nextstep" ng-hide="session.sessionVerificationStatus=='approved' || session.sessionVerificationStatus=='rejected'"  >
+                                            <i class="fa fa-magic"></i> &nbsp;&nbsp; Thank you for giving chat feedback. Our team is in the process of verifying the session details. Once this is done you will be able to check the student's phone number.
+                                           </div>
+                                         </div>
+                                        </div>
+                                      </div>
+
+                                  </div> 
+           
+           
+                                             <div class="panel-body lineHeight contentPadding">
+                                        
+                                              
+                                                 <div class="col-md-2 sub-block-img"> 
+                                                      <img src="{{studentDetail[session.studenturlId].studentPhoto.$value}}" alt="" class="img-thumbnail" ng-class="studentDetail[session.studenturlId].studentstatus.$value=='block' ? 'img-thumbnail haze' : 'img-thumbnail'" width="300" style="height:130px !important">
+                                                 </div>
+               
+                                                 <div class="col-md-6 " style="border-right : 1px solid #191919;">
+                                                      <div class="row st-name" ng-if="session.sessionVerificationStatus=='approved'">
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Name : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentName.$value}}</strong>
+                                                      </div>
+                                                      <div class="row st-name" ng-if="session.sessionVerificationStatus=='rejected'">
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Name : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentName.$value}}</strong>
+                                                      </div>
+                                                      <div class="row st-name" ng-hide="session.sessionVerificationStatus=='rejected' || session.sessionVerificationStatus=='approved'">
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Name : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentName.$value}}</strong>
+                                                      </div>
+                                                      <div class="row">
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student ID : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentEmail.$value}} </strong>&nbsp;&nbsp;<i ng-show="studentemailstatus.$value=='true'" style="color:green" class="fa fa-check-circle"></i> 
+                                                      </div>
+                                                      <div class="row">
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booked Slot : <strong>&nbsp;&nbsp;{{session.sessionhour}}:{{session.sessionminute}} Hrs, {{session.sessiondate}} </strong>
+                                                      </div>
+                                                          <br>
+                                                      <div class="row sub-block-button">
+                                                           <div class="col-md-3">
+                                                                <button type="button" ng-disabled="studentstatus.$value=='block' || feedBackStatus.chatdiscussion" ng-click="open('lg', session.nodalId); saveActiveStudentUrlIntempFirebase(session.studenturl,session.collegeurl,session.nodalId,session.sessiondate,session.sessionminute,session.sessionhour)" class="btn btn-default btn-block btn-chat">Start Chat  <i class="fa fa-play-circle-o"></i></button>
+                                                           </div>
+                                                           <div class="col-md-5">
+                                                                <button type="button" ng-disabled="studentstatus.$value=='block'" data-toggle="modal" data-target="#studentDetail" ng-click="studentsdetail(session.studenturl, session.sessionNumber); modalNormal()" class="btn btn-block btn-default btn-stu-det">Student Details <i class="fa fa-file-pdf-o"></i></button>
+                                                           </div>
+                                                           <div class="col-md-4">
+                                                                <button type="button" ng-click="getPreviousFeedbackOfStudents(session.studenturl, session.collegeurl, studentDetail[session.studenturlId].studentName.$value); getStudentGroup(session.collegeurl,session.nodalId,session.sessiondate,session.sessionminute,session.sessionhour,session.studenturl)" data-toggle="modal" data-target="#{{session.studenturlId}}" class="btn btn-block btn-default btn-feed">Chat Feedback <i class="fa fa-check-square-o"></i></button>
+                                                           </div>
+                                                      </div>
+                                                 </div>
+               
+               
+                                                 <div class="col-md-4">
+                                                      <div ng-class="studentstatus.$value=='block' ? 'container-fluid query-area haze' : 'container-fluid query-area'" style="padding:10px;">
+                                                           {{session.studentquery}}
+                                                      </div>
+                                                 </div>
+                                            </div>
+                                  </div>
+                            </div>  <!-- NORMAL STUDENT END -->
+                           
+
+                            <div ng-init="getStudentDetail(session.studenturl, session.studenturlId, session.collegeurl)" ng-if="studentDetail[session.studenturlId].studentStatus.$value ==='block'">
+                               <div  ng-if="feedBackStatus && !feedBackStatus.videourl && !feedBackStatus.chatdiscussion && !feedBackStatus.nextstep" class="panel panel-info _blocked" style="width: 100%;">
+                                  
+
+                                    <div class="panel-body  lineHeight contentPadding">
+                                        <div class="col-md-7 text-center">
+                                            <h2>BLOCKED STUDENT</h2>
+                                            <p>This student is blocked due to voilations of Terms and conditions.</p>
+
+                                           <div class="row sub-block-button">
+                                                <div class="col-md-12"><br>
+                                                     <button type="button" ng-click="alert('Contacting Admin to Resolve this issue. We will get back to you soon. Thankyou.')" class="btn btn-default btn-block btn-chat">Unblock Student</button>
+                                                </div>
+                                           </div>
+
+                                        </div>
+                                        <div class="row">
+                                             <div class="col-md-5  lineHeight">
+                                               <div class="row st-name" ng-if="session.sessionVerificationStatus=='approved'">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Name : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentName.$value}}</strong>
+                                               </div>
+                                               <div class="row st-name" ng-if="session.sessionVerificationStatus=='rejected'">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Name : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentName.$value}}</strong>
+                                               </div>
+                                               <div class="row st-name" ng-hide="session.sessionVerificationStatus=='rejected' || session.sessionVerificationStatus=='approved'">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Name : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentName.$value}}</strong>
+                                               </div>
+                                               <div class="row">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student ID : <strong>&nbsp;&nbsp;{{studentDetail[session.studenturlId].studentEmail.$value}} </strong>&nbsp;&nbsp;<i ng-show="studentemailstatus.$value=='true'" style="color:green" class="fa fa-check-circle"></i> 
+                                               </div>
+                                               <div class="row">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booked Slot : <strong>&nbsp;&nbsp;{{session.sessionhour}}:{{session.sessionminute}} Hrs, {{session.sessiondate}} </strong>
+                                               </div>
+
+                                               
+                                             </div>
+                                        </div>
+
+                                    </div>
+                               </div>
+                            </div>   <!-- BLOCKED STUDENT END -->
+
+  
+
+         <!-- Chat Feedback Modal -->
+                                  <form ng-controller = "CollegeDashCtrl" name="feedback_form" ng-submit="createFeedbackForCollege(session.studentquery, session.studenturlId, session.collegeurlId, session.sessiondate, session.collegeurl, session.studenturl, sessionVerificationStatus,session.nodalId, session.sessionhour, session.sessionminute)" style="color: black;">                        
+                                       <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="{{session.studenturlId}}">
+                                         <div class="modal-dialog">
+                                           <div class="modal-content">
+                                             <div class="modal-header">
+                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                               <h4 class="modal-title">Give Feedback</h4>
+                                             </div>
+                                             <div class="modal-body feedback-modal">
+                                                  <div class="row">
+                                                       <div class="col-xs-12">
+                                                         <input ng-model="Feedback.videourl" type="text" placeholder="Youtube Video Link" class="form-control" required>
+                                                    </div>
+                                               </div>
+                                               <div class="row">
+                                                    <div class="col-xs-6">
+                                                         <textarea ng-model="Feedback.chatdiscussion" type="text" placeholder="Chat Discussion Key Points" class="form-control" rows="7" required></textarea>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                         <textarea ng-model="Feedback.nextstep" type="text" placeholder="Next Step" class="form-control" rows="7" required></textarea>
+                                                     </div>
+                                                     <input type="hidden" ng-model="sessionVerificationStatus" ng-init="sessionVerificationStatus='pending'" class="form-control"><br><br>
+                                                     
+                                                     <p ng-if = "!onGroupfeedbacksuccessful && studentName.length > 0" align="center" ng-hide="onfeedbacksuccessful" style="padding-top:50px">Do you want to give feedback to following students also?</p> 
+                                                      <strong>
+                                                        <span style="color:black">
+                                                          <div ng-hide="studentName.length == 0 || onfeedbacksuccessful || onGroupfeedbacksuccessful">
+                                                            <input  type="checkbox" style="box-shadow:none" ng-model="selectedAll" ng-click="checkAll()" />&nbsp;&nbsp;&nbsp;Select all
+                                                          </div>
+                                                          <div ng-if = "!onGroupfeedbacksuccessful || !onfeedbacksuccessful" ng-hide="onfeedbacksuccessful || onGroupfeedbacksuccessful" ng-repeat="(id,value) in studentName">
+                                                            <input ng-model="master[id]" type="checkbox" style="box-shadow:none" ng-click="addStudentToGiveFeedback(value.url, master[id], id,value.name.$value)">&nbsp;&nbsp;&nbsp;{{value.name.$value}}                                                 
+                                                          </div>
+                                                        </span>
+                                                      </strong><br>
+                                                     <div ng-if = "onGroupfeedbacksuccessful">
+
+                                                         <h5 style="color:grey"><strong>Feedback for the following students has been successfully submitted :-<br>  <span style="color:black"> <br> &nbsp;1. {{currentStudentName}} &nbsp;<div ng-repeat="(id,value) in studentGroupToGiveFeedback"> {{$index+2}}. {{value.Name}}&nbsp;</div></span> . </strong></h5>
+                                                      </div>
+                                                     
+                                                     <div ng-if = "onfeedbacksuccessful">
+                                                         <h5 style="color:green"><strong> Your feedback has been successfully submitted. </strong></h5>
+                                                      </div>
+                                                </div>
+                                             </div>
+                                             <div class="modal-footer">
+                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                               <input type="submit" value="Give Feedback" class="btn btn-primary"/></input>
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </div>
+                                  </form>    
+
+        <!-- Student Enquiry Modal -->
+                                  <div class="modal fade stu-enq-modal" tabindex="-1" ng-controller="CollegeDashCtrl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="studentDetail" style="color:black;">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                       
+                                      <div class="modal-header">
+                                        <span style="position: absolute;z-index: 10000;cursor:pointer;top: 50%;" class="pull-left" ng-click="getPreviousStudentDetail(studentobject.$id)"><i class="fa fa-arrow-circle-left fa-3x"></i></span>
+                                        <h4 class="modal-title">Student Details</h4>
+                                        <span style="position: absolute;cursor:pointer; right: 0.6%;top: 50%;z-index: 10000;" ng-click="getNextStudentDetail(studentobject.$id)"><i class="fa fa-arrow-circle-right fa-3x"></i></span>
+                                        <div align="left" ng-show="studentobject.studentstatus == 'verified'">
+                                          <h6 style="color:Green">This Student is verified by My Mission Admission Team</h6>
+                                        </div>                                            
+                                      </div>  
+                                      <span id="closeBtn" class="hideCross" ng-click="hideLargeImg()" style="margin-left: 50%;">
+                                          <a href=""><i class="fa fa-close fa-3x"></i></a>
+                                      </span>
+                                      <div class="modal-body body_padding">
+                                        <div class="container-fluid _container-padding">
+                                          <div class="row" style="padding: 1.5em;">
+                                            <div class="col-sm-2" ng-click="imgClick()">
+                                              <center style="margin-top: 2.2em;">
+                                                <a href="" id="studPic" style="background-color:transparent;outline: none;border: none; font-size: 1em;font-weight: bold; font-family: Muli;"><img src="{{studentobject.studentphoto}}" id="studImg" alt=""></a>
+                                              </center>
+                                            </div>
+                                            
+                                            <div class="col-sm-5" id="personalInfo">
+                                              <div class="row head">
+                                                <center>Personal Information</center>
+                                              </div>
+                                              <table class="table table-striped">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>Student Name</td>
+                                                    <td>{{studentobject.studentname | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Gender</td>
+                                                    <td>{{studentobject.gender | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Father's Name</td>
+                                                    <td>{{studentobject.fathername | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Father's Ocupation</td>
+                                                    <td>{{studentobject.occupation | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Student's Contact Number</td>
+                                                    <td ng-if="session.sessionVerificationStatus=='pending'">{{studentobject.studentmobile | cut_phone}}</td>
+                                                    <td ng-if="session.sessionVerificationStatus=='Rejected'">{{studentobject.studentmobile | cut_phone}}</td>
+                                                    <td ng-if="session.sessionVerificationStatus=='approved'">{{studentobject.studentmobile}}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div class="col-sm-5" id="studBio">
+                                              <div class="row head">
+                                                <center>Student Bio</center>
+                                              </div>
+                                              <table class="table table-striped">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{{ studentobject.studentabout }}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+
+                                          <div class="row" style="padding: 1.5em;">
+                                            <div class="col-sm-4" id="acadRec">
+                                                <div class="row head">
+                                                <center>Academic Records</center>
+                                              </div>
+                                              <table class="table table-striped">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>10th (% / CGPA) </td>
+                                                    <td><span ng-if="!studentobject.academicrecord12thMarks">Yet to update</span><span ng-if="studentobject.academicrecord12thMarks">{{studentobject.academicrecord12thMarks }}</span></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>12th (% / CGPA) </td>
+                                                    <td><span ng-if="!studentobject.academicrecordUGMarks">Yet to update</span><span ng-if="studentobject.academicrecordUGMarks">{{studentobject.academicrecordUGMarks }}<span></span></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td ng-if="studentobject.academicrecordPGMarks">UG (% / CGPA) </td>
+                                                    <td>{{studentobject.academicrecordPGMarks }}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div class="col-sm-8" id="courIntr">
+                                              <div class="row head">
+                                                <center>Courses of Interest</center>
+                                              </div>
+                                              <div class="col-sm-6" ng-if="!studentobject.coursesUG && !studentobject.coursesPG"><center>The Student has shown interest in your college and is exploring his/her course options.</center></div>
+                                              <div class="row">
+                                                <div class="col-sm-6" ng-if="studentobject.coursesUG"><center>UG Courses</center></div>
+                                                <div class="col-sm-6" ng-if="studentobject.coursesPG"><center>PG Courses</center></div>  
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-sm-6" ng-if="studentobject.coursesUG"><center><span id="UGCourseIntrested" ng-repeat="ug in studentobject.coursesUG">
+                                                      <span ng-if="ug == '0'">Engineering, </span> 
+                                                      <span ng-if="ug == '1'">Computer Applications / IT, </span> 
+                                                      <span ng-if="ug == '2'">Biotechnology, </span> 
+                                                      <span ng-if="ug == '3'">Microbiology, </span> 
+                                                      <span ng-if="ug == '4'">Agriculture, </span> 
+                                                      <span ng-if="ug == '5'">Food Technology, </span> 
+                                                      <span ng-if="ug == '6'">Nutrition and Dietetics, </span> 
+                                                      <span ng-if="ug == '7'">Arts (Humanities), </span> 
+                                                      <span ng-if="ug == '8'">Library Science, </span> 
+                                                      <span ng-if="ug == '9'">Management, </span> 
+                                                      <span ng-if="ug == '10'">Commerce, </span> 
+                                                      <span ng-if="ug == '11'">Economics, </span> 
+                                                      <span ng-if="ug == '12'">Hotel Management/Hospitality and Tourism, </span> 
+                                                      <span ng-if="ug == '13'">Architecture, </span> 
+                                                      <span ng-if="ug == '14'">Planning, </span> 
+                                                      <span ng-if="ug == '15'">Fine Arts, </span> 
+                                                      <span ng-if="ug == '16'">Performing Arts, </span> 
+                                                      <span ng-if="ug == '17'">Pharmaceutical Sciences, </span> 
+                                                      <span ng-if="ug == '18'">Ayurvedic Pharmaceutical Sciences, </span> 
+                                                      <span ng-if="ug == '19'">Physiotherapy, </span> 
+                                                      <span ng-if="ug == '20'">Paramedical Sciences, </span> 
+                                                      <span ng-if="ug == '21'">Education, </span> 
+                                                      <span ng-if="ug == '22'">Physical Education, </span> 
+                                                      <span ng-if="ug == '23'">Law, </span> 
+                                                      <span ng-if="ug == '24'">Design, </span> 
+                                                      <span ng-if="ug == '25'">Sciences, </span> 
+                                                      <span ng-if="ug == '26'">Nursing, </span> 
+                                                      <span ng-if="ug == '27'">Film & Television, </span> 
+                                                      <span ng-if="ug == '28'">Media & Journalism, </span>  
+                                                  </span></center></div>
+                                                <div class="col-sm-6" ng-if="studentobject.coursesPG"><center><span id="PGCourseIntrested" ng-repeat="pg in studentobject.coursesPG">
+                                                      <span ng-if="pg == '0'">Engineering, </span> 
+                                                      <span ng-if="pg == '1'">Computer Applications / IT, </span> 
+                                                      <span ng-if="pg == '2'">Biotechnology, </span> 
+                                                      <span ng-if="pg == '3'">Microbiology, </span> 
+                                                      <span ng-if="pg == '4'">Biochemistry, </span> 
+                                                      <span ng-if="pg == '5'">Agriculture, </span> 
+                                                      <span ng-if="pg == '6'">Food Technology, </span> 
+                                                      <span ng-if="pg == '7'">Nutrition and Dietetics, </span> 
+                                                      <span ng-if="pg == '8'">English and Foreign Languages, </span> 
+                                                      <span ng-if="pg == '9'">Indian Languages, </span> 
+                                                      <span ng-if="pg == '10'">Library Science, </span> 
+                                                      <span ng-if="pg == '11'">Sociology, </span> 
+                                                      <span ng-if="pg == '12'">Geography, </span> 
+                                                      <span ng-if="pg == '13'">Management, </span> 
+                                                      <span ng-if="pg == '14'">Commerce, </span> 
+                                                      <span ng-if="pg == '15'">Economics, </span> 
+                                                      <span ng-if="pg == '16'">Hotel Management/Hospitality and Tourism, </span> 
+                                                      <span ng-if="pg == '17'">Architecture, </span> 
+                                                      <span ng-if="pg == '18'">Planning, </span> 
+                                                      <span ng-if="pg == '19'">Fine Arts</span> 
+                                                      <span ng-if="pg == '20'">Performing Arts</span> 
+                                                      <span ng-if="pg == '21'">Pharmaceutical Sciences, </span> 
+                                                      <span ng-if="pg == '22'">Ayurvedic Pharmaceutical Sciences</span> 
+                                                      <span ng-if="pg == '23'">Physiotherapy, </span> 
+                                                      <span ng-if="pg == '24'">Paramedical Sciences</span> 
+                                                      <span ng-if="pg == '25'">History, </span> 
+                                                      <span ng-if="pg == '26'">Political Science, </span> 
+                                                      <span ng-if="pg == '27'">Psychology, </span> 
+                                                      <span ng-if="pg == '28'">Education, </span> 
+                                                      <span ng-if="pg == '29'">Physical Education, </span> 
+                                                      <span ng-if="pg == '30'">Law, </span> 
+                                                      <span ng-if="pg == '31'">Design, </span> 
+                                                      <span ng-if="pg == '32'">Sciences, </span> 
+                                                      <span ng-if="pg == '33'">Nursing, </span> 
+                                                      <span ng-if="pg == '34'">Film & Television, </span> 
+                                                      <span ng-if="pg == '35'">Media & Journalism, </span> 
+                                                  </span></center></div>  
+                                              </div>
+                                            </div>
+                                          </div>
+                                         </div>
+                                        </div>  
+                                         <div class="modal-footer">
+                                            <a href="{{studentobject.studentdocument}}" target="_blank" style="text-decoration:none;"><button ng-if="studentobject.studentdocument != 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" type="button" class="btn btn-default">View Document</button></a>
+                                            <div ng-if="studentobject.studentdocument == 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                              Student has not uploaded his document
+                                            </div>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+
+                                       </div> <!-- end of modal content -->
+
+
+                                    </div>
+                                  </div>
+                          
+
+                             </div>
+      
+                                  </div> <!-- END OF PANEL BODY -->
+                              </div>
+
+
+                             
+
+                            
+
+                             <hr />
+                        </div> 
+
+
+
+
+
+                        <div class="text-center btn-load-frame" ng-if="session.length>10 || session.length==10">
+                          <center><span ng-if="waitstatus == 'Done'"> <i class="fa fa-spinner fa-pulse fa-5x"></i> </span></center>
+                          <button ng-hide="sessionNumber == 1 || waitstatus == 'Done'" class="btn-load btn-border" ng-click = "getNextSessions()" > Load More Sessions</button>
+                          <div ng-if="sessionNumber === 1"><p><h3><strong style="color:green">No more sessions</strong></h3></p></div>
+                        </div>
+                        
+
+                        <div class="container-fluid sub-block no-rec" ng-if="loadVar == 'Done'"> <!-- No Records Found -->
+                             <div class="row no-rec-block">
+                                  <center><i class="fa fa-spinner fa-3x fa-spin"></i><br><h3>Loading....</h3></center>
+                             </div>
+                        </div>                 
+                        <div class="container-fluid sub-block no-rec" ng-if="loadVar == 'No value'"> <!-- No Records Found -->
+                             <div class="row no-rec-block">
+                                  <center><h3> You don't have any enquiries yet. Students are currently viewing your college profile.<br />As soon as they book a session  you will start getting the notifications. </h3></center>
+                             </div>
+                        </div>
+                      </div>
+              </div>
+            </div>
+
+        </div>  
+
+     </div>
+
+
+</div>
+
+<div ng-controller="CollegeDashCtrl" id="startChatModal">
+    <script type="text/ng-template" id="myModalContent2.html">
+        <div class="modal-header">
+          <h3 class="modal-title">Start Chat</h3>
+        </div>
+        <div class="modal-body start-chat-mod">
+            <div class="container-fluid">
+                                             <div class="row">
+                                                  <div class="col-md-12 ">
+                                                       <h2>Guidlines for Chatting</h2>
+                                                  </div>
+                                             </div>
+                                             <div class="row">
+                                                  <div class="col-md-12 start-chat-mod-con">
+                                                       <p>Please make sure that you have Google+/Gmail account for Hangout chatting.</p>
+                                                       <p>We recommend 1:1 chatting to have personal counselling to Student.</p>
+                                                       <p>Please enter Student ID from College Dashboard in Invited guests list.</p>
+                                                       <p>Please click "Start Broadcast" button to start session and click on "End Broadcast" to end session.</p>
+                                                       <p>Please paste Youtube recording link (Lower right corner of screen with link symbol) in "Chat Feedback" button on your Dashboard before closing session.</p>
+                                                  </div>
+                                             </div>
+                                             <hr />
+                                             <div class="row">
+                                                  <div class="col-md-12">
+                                                       <h4>Recommended Browser : Google Chrome</h4>
+                                                       <h4>For any issue, Please drop a mail : " mail.mymissionadmission@gmail.com"</h4>
+                                                  </div>
+                                             </div>
+                                        </div>
+        </div>
+        <div class="modal-footer">
+               <button type="button" ng-click="nodalid()" class="btn btn-success btn-lg btn-block btn-chat"><i class="fa fa-weixin"></i>&nbsp;&nbsp;Start Chat</button>
+        </div>
+    </script>
+</div>
+
+ 

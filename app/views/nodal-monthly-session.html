@@ -1,0 +1,166 @@
+<script type="text/javascript">
+   $(document).on("click", function (e) {
+        if (e.target.id != "check" && !$(e.target).closest("#items").length) {
+            $("#items").hide("slow");
+        }
+        else{
+         $("#items").show("slow"); 
+        }
+    });
+</script>
+
+<div class="container-fluid  " ng-init="toTheTop()" style="overflow:auto">
+  
+
+  <div class="theme-container">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-6 pull-left" >
+             <h3 class="pull-left"> <a href="#/dashboard-nodal"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Nodal Session Details<h3>
+          </div>
+          <div class="col-xs-6 pull-right">
+            <h5 class="pull-right">Nodal Center Session Information - Datewise<h5>
+
+          </div>
+      </div>  <!-- END OF DIV HEADER -->
+
+
+      <div class="row ">          
+
+        <div calss="row clearfix" >
+
+            <div class="col-md-3"  >
+              <h4>Year</h4>          
+                <select ng-model="year.id" class="btn btn-primary" ng-change="hideLoadButton1()">
+                      <option role="scope" default selected value="">Select Year</option>
+                      <option value="2015">2015</option>
+                      
+                      
+                </select>
+            </div>
+
+
+          <div  class="col-md-3" ng-init="flag=false;" style="border:0px" >
+                <h4>Month</h4>
+            <span class="btn btn-primary" id="check" ng-click="flag=true" ng-disabled="!year.id" >Select Month(s)&nbsp;&nbsp;<span class="caret"></span>
+            </span>
+            <ul  ng-changed="hideLoadButton2()" class="items" id="items" ng-hide="!flag" id="mon" style="position:relative;background:#337AB7;z-index:20;list-style:none;width:150px">
+              <li>
+                 <input type="checkbox" ng-click="month=['January','February','March','April','May','June','July','August','September','October','November','December'];hideLoadButton2()">&nbsp;&nbsp;All </li>
+              <li>
+                 <input type="checkbox" value="January" ng-checked="month.indexOf('January')>-1" ng-click="toggleSelection('January')"/>&nbsp;&nbsp;January </li>
+              <li>  
+              <input type="checkbox" value="February" ng-checked="month.indexOf('February')>-1" ng-click="toggleSelection('February')"/>&nbsp;&nbsp;February</li>
+              <li><input type="checkbox" value="March" ng-checked="month.indexOf('March')>-1" ng-click="toggleSelection('March')"/>&nbsp;&nbsp;March </li>
+              <li><input type="checkbox" value="April" ng-checked="month.indexOf('April')>-1" ng-click="toggleSelection('April')"/>&nbsp;&nbsp;April </li>
+              <li><input type="checkbox" value="May" ng-checked="month.indexOf('May')>-1" ng-click="toggleSelection('May')"/>&nbsp;&nbsp;May </li>
+              <li><input type="checkbox" value="June" ng-checked="month.indexOf('June')>-1" ng-click="toggleSelection('June')"/>&nbsp;&nbsp;June </li>
+              <li><input type="checkbox" value="July" ng-checked="month.indexOf('July')>-1" ng-click="toggleSelection('July')"/>&nbsp;&nbsp;July</li>
+              <li><input type="checkbox" value="August" ng-checked="month.indexOf('August')>-1" ng-click="toggleSelection('August')"/>&nbsp;&nbsp;August </li>
+              <li><input type="checkbox" value="september" ng-checked="month.indexOf('September')>-1" ng-click="toggleSelection('September')"/>&nbsp;&nbsp;September</li>
+              <li><input type="checkbox" value="October" ng-checked="month.indexOf('October')>-1" ng-click="toggleSelection('October')"/>&nbsp;&nbsp;October</li>
+              <li><input type="checkbox" value="November" ng-checked="month.indexOf('November')>-1" ng-click="toggleSelection('November')"/>&nbsp;&nbsp;November</li>
+              <li><input type="checkbox"value="December" ng-checked="month.indexOf('December')>-1" ng-click="toggleSelection('December')"/>&nbsp;&nbsp;December</li>
+            </ul>
+          </div>
+          <div  class="col-md-3" style="margin-top:40px;" >
+              <span  ng-click="getMonthlyDetails(year.id,month);flag=false" ng-if="showLoadButton1 === 'show'" class="btn btn-primary" ng-disabled="!year.id">
+                Load</span>
+          </div>
+
+           <div class="col-md-3 text-center">
+           <p> &nbsp;</p>
+             <h3 style="color: black;float:right" ng-if="sessionList.length > 0">Total Sessions:{{sessionList.length}}</h3>
+           </div> 
+        </div>  <!-- END OF FILTERS -->
+      </div> <!-- End of ROW -->
+         
+      
+      <div class="row" class="x">
+        <div class="" ng-show="signedIn() && usern.profile.profiletype=='nodal'"> 
+          <modal-dialog ng-show='spinner'> 
+          <div class="container-fluid">
+              <div class="row">
+                  <center>
+                      <i class="fa fa-spinner fa-5x fa-spin"></i>
+                  </center>
+              </div>
+              <div class="row">
+                  <center>
+                      <h4>Please wait data is loading ... </h4>
+                  </center>
+              </div>
+          </div>
+        </modal-dialog>
+
+          <div class="row search-results">        
+            <div class="col-md-12 session-details">
+              <div class="container-fluid" id="src-scroll" style=" height : auto; z-index:8582;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                    <table class="table table-striped feed-table" ng-hide="sessionList.length===0">
+                        <col width="8px" />
+                        <col width="25px" />
+                        <col width="25px" />
+                        <col width="25px" />
+                        <col width="40px" />
+                        <col width="15px"/>
+                        <col width="15px" />
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>College</th>
+                            <th>Query</th>
+                            <th>Month</th>
+                            <th>Session Status</th>
+                            <!-- <th>Click to Verify</th> -->
+                            </tr>
+                          </thead>
+                          
+                          <tbody ng-animate="'animate'" ng-repeat="(k,v) in sessionList|orderBy: sortSessionsByDate: true" style="overflow:auto">
+                            <div ng-show="signedIn()">
+                              <tr class="feed-table-row">
+                                <td scope="row">{{$index + 1}}</td>
+                                <td><strong>{{v.sname}}</strong></td>
+                                <td><strong>{{v.email}}</strong></td>
+                                <td><strong>{{v.cname}}</strong></td>
+                                <!-- <td>
+                                  <a data-toggle="modal" data-target="#nodal-enq" style="color:blue; cursor:pointer;" ng-click="">{{v.c}}</a><br>
+                                  Password: {{usern.password}} 
+                                </td> -->
+
+                                <td><strong>{{v.stuquery}}</strong></td>
+                                <td><strong>{{v.date}}<strong></td>
+                                <td>
+                                  <span ng-if="v.sStatus !== null"><strong>{{v.sStatus}}</strong></span>
+                                  <span ng-if="v.sStatus == null"><strong> Feedback Not given </strong></span>
+                                </td>
+                                <!-- <td class="v-l" align="center" style="color:#00FF00; cursor:pointer;" ng-click="verifyStudent(student)"><i class="fa fa-thumbs-o-up"></i></td> -->
+                              </tr>
+                            </div>
+                        </tbody>
+                      </table>
+
+                   <!-- Nodal Enquiry Modal -->
+                   <!--  <button ng-click="iterate=iterate+1" ng-hide="sessionList.length<30||30*iterate>=sessionList.length">Load More Sessions</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  <!-- END OF TABLE -->
+
+
+      <div class="row">
+        <div class="col-md-12 page-break" style="width: 98%;"></div>
+      </div> <!-- END OF PAGE BREAK -->
+    </div>
+  </div>
+  
+
+
+
+  </div> <!-- End of _detail-attr -->

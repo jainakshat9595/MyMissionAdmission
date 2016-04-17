@@ -1,0 +1,96 @@
+<div class="theme-container">
+	<div class="container-fluid" style="background:rgba(255,255,255,0.5);" ng-init="toTheTop()">
+		<div class="row">
+			<div class="col-xs-6 pull-left">
+				<h3 class="pull-left" style="color:black;"> <a href="#/verify-session"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Inspect Session<h3>
+		  	</div>
+			<div class="col-xs-6 pull-right" style="color:black;">
+				<h5 class="pull-right">You can verify or un-verify a session here.<h5>
+			</div>
+		</div>
+	  	<hr />
+	  	<div class="row" ng-show="signedIn() && usera.profile.profiletype=='admin'" ng-init="getSessionDetails()">
+	  		<div ng-init="college = getcollegedetail(studentsId.$id)">
+	  			<center>
+	  				<h3 style="color:black; font-size:22px; font-weight:bold;">{{college.collegename}} ({{college.counselloremail}})</h3>
+	  			</center>
+	  		</div>
+			<div class="container-fluid sessions-page" ng-controller="AdminTaskCtrl" ng-repeat="(Id,details) in studentsId" ng-if="details.sessionVerificationStatus=='pending'" style="background:rgba(255,255,255,1); border: 1px solid black; margin-bottom:10px;">
+				<div class="row sess-head" ng-init= "getDetails(Id)" style="color:black;"> 
+					<center> Session Id = {{collegeSessionDetails.interactionId}} </center> 
+				</div>
+				<hr style="height:1px; background-color:grey; border:1px solid grey;" />
+				<div class="row">
+					<div class="col-md-4">
+						<img class="img-responsive" src="" ng-src="{{studentdetail.studentphoto}}" alt="Photo of {{studentdetail.studentname}}" />
+					</div>
+					<div class="col-md-8">
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" ng-src="{{trustSrc(video.src)}}"  frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+				</div>
+				<hr style="height:1px; background-color:grey; border:1px solid grey;" />
+				<div ng-if="studentdetail.studentstatus == 'verified'">
+					<center><strong style="color:green">This is a verified student.</strong></center><br>
+				</div>
+				<div ng-if="studentdetail.studentstatus == 'notverified'">
+					<center><strong style="color:red">Student verification required.</strong></center><br>
+				</div>
+				<div ng-if="studentdetail.studentstatus == 'block'">
+					<center><strong style="color:red">This student is currently blocked by Admin. Please inform your supervisor.</strong></center><br>		
+				</div>
+				<input type="hidden" ng-model="collegeurl" ng-init="collegeurl=collegeSessionDetails.collegeurl">
+				<input type="hidden" ng-model="studenturl" ng-init="studenturl=collegeSessionDetails.studenturl">
+				<div class="row sess-des" style="color:black;">
+					<div class="col-xs-6">
+						<div class="row">
+							<strong>Student's Name : </strong> {{studentdetail.studentname}} 
+						</div>
+						<div class="row">
+							<strong>Student's Email : </strong> {{studentmail.$value}}
+						</div>
+						<div class="row">
+							<strong>Student's Query : </strong> {{collegeSessionDetails.studentquery}}
+						</div>
+						<div class="row">
+							<strong>Session's Date : </strong> {{collegeSessionDetails.sessiondate}}
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="row" id="view-scroll" style="height:100px; overflow-y:scroll">
+							<strong>Chat discussion : </strong> {{collegeFeedbackDetails.chatdiscussion}}
+						</div>
+						<div class="row" style="margin-top:20px;">
+							<strong>Next Step : </strong> {{collegeFeedbackDetails.nextstep}}
+						</div>
+						<div class="row">
+							<strong>Video URL : </strong> <a href={{collegeFeedbackDetails.videourl}} target="_blank">{{collegeFeedbackDetails.videourl}}</a>
+						</div>
+					</div>
+				</div>
+				<hr style="height:1px; background-color:grey; border:1px solid grey;" />
+				<form>
+					<div class="row qua-controls">
+						<div class="col-xs-10">
+							<textarea required class="form-control input-g" style="border-color:black; color:black" ng-model="action" placeholder="Action Taken" rows="3"></textarea>
+						</div>
+						<div class="col-xs-2">
+							<input type="submit" style="border-color:black; color:black" class="btn btn-default btn-block input-g" ng-click="approveSession(action,hours,minutes,seconds,collegeSessionDetails.studenturl,collegeSessionDetails.collegeurl,collegeFeedbackDetails.videourl,collegeSessionDetails.interactionId, collegeFeedbackDetails.chatdiscussion,collegeFeedbackDetails.nextstep,'pending')" value="Approve">
+							<input type="submit" style="border-color:black; color:black" class="btn btn-default btn-block input-g" ng-click="rejectSession(action,hours,minutes,seconds,collegeSessionDetails.studenturl,collegeSessionDetails.collegeurl,collegeFeedbackDetails.videourl,collegeFeedbackDetails.chatdiscussion,collegeFeedbackDetails.nextstep)" value="Reject">
+						</div>
+						<div class="col-xs-3">
+							<input type="number" min="0" style="border-color:black; color:black; padding:5px; padding-left:10px; width:100px;" max="6" required ng-model="hours"><strong> Hours </strong>
+						</div>
+						<div class="col-xs-3"> 
+							<input type="number" min="0" style="border-color:black; color:black; padding:5px; padding-left:10px; width:100px;" max="60" required ng-model="minutes"><strong> Minutes </strong>
+						</div>
+						<div class="col-xs-3">
+							<input type="number" min="0" style="border-color:black; color:black; padding:5px; padding-left:10px; width:100px;" max="60" required ng-model="seconds"> <strong> Seconds </strong>
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>    
+	</div>
+</div>

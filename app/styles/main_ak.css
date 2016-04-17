@@ -1,0 +1,263 @@
+/*By ANIMESH! :D*/
+nav#dashboard-sidebar{
+  margin-left:-1.35vw;
+  opacity: 0.8;
+  border-right: 0.2em solid rgba(0,0,0,0.2);
+  transition:all 0.4s;
+}
+nav#dashboard-sidebar:hover{
+  margin-left:-1.35vw;
+  opacity: 1!important;
+}
+#dashboard-sidebar a{
+  padding: 0.9vw!important;
+  padding-right: 1.08em!important;
+  width: 21em!important;
+}
+ul.dashboard-sidebar span.nav-button{
+  display: none;
+}
+ul.dashboard-sidebar{
+  padding:0vw!important;
+  padding-left:0.72vw!important;
+}
+li.user-board{
+  padding-left:0vw!important;
+  padding-right:0vw!important;
+  padding-bottom: 2vw!important;
+  margin-top: 0vw!important;
+  padding-top: 1.5vw!important;
+}
+li#dashboard-btn:hover{
+  background-color: #1c1e25!important;
+  cursor: pointer;
+}
+#dashboard-btn{
+  transition:all 0.3s;
+  padding-top: 0.4vw!important;
+  padding-bottom: 0.4vw!important;
+}
+.img-profile{
+  height: 8.1vw!important;
+  width: 8.1vw!important;
+}
+.user-info-profile-image{
+  height: 10.8vw!important;
+  padding-top: 2.25vw;
+}
+.profile-image-college-dashboard-without-hover{
+  margin-right: 0.1em!important;
+  margin-top: 0vw!important;
+  width: 2.25em!important;
+  height: 2.25em!important;
+  transition:all 0.37s;
+}
+.profile-image-college-dashboard-hover{
+  width: 8.1vw!important;
+  height: 8.1vw!important; 
+  margin-right: 50%!important;
+  margin-top: -5vw!important;
+  transform: translate(50%,50%);
+  transition:all 0.37s;
+}
+li.user-board:hover{
+  background-color: #1c1e25!important;
+  cursor: pointer;
+}
+
+
+
+
+/*FOR COLLEGE PROFILE!!*/
+.col-xs-5.searchpg-main-content-row-block{
+  width:45%!important;
+}
+.searchpg-main-content-row .col-xs-5{
+  margin: 1.5vw 2vw!important;
+}
+.col-xs-5.searchpg-main-content-row-block{
+  right:1%!important;
+  height:auto!important;
+}
+.col-xs-5.searchpg-main-content-row-block.pull-right{
+  right:11.2%!important;
+}
+.searchpg-main-content-row-block{
+  padding: 2.5vw 2.4vw!important;
+}
+.searchpg-main-content-row .col-xs-6 {
+  border: 0.2em solid #237DAC;
+  border-radius: 1em;
+  width: 38%!important;
+  margin-top: 5%;
+  margin-left: 7.5%;
+  margin-right: 1.5%;
+}
+.searchpg-main-content-row .col-xs-12 {
+  border: 0.2em solid #237DAC;
+  border-radius: 1em;
+  width: 84%!important;
+  margin-top: 5%;
+  margin-left: 7.5%;
+  margin-right: 1.5%;
+  padding: 5%;
+  height: auto!important;
+}
+.searchpg-main-content-row-address .col-xs-12 {
+  border: 0.2em solid #237DAC;
+  border-radius: 1em;
+  width: 84%!important;
+  margin-top: 2%;
+  margin-left: 6.5%;
+  margin-right: 0.5%;
+  padding: 3%; 
+}
+.searchpg-main-content-row-block-icon{
+  padding:  0vw!important;
+  padding-top: 0.4vw!important;
+  height: 4vw!important;
+  width: 4vw!important;
+}
+.searchpg-main-content-row-block-icon i{
+  font-size: 3vw;
+}
+
+/*College Homepage*/
+.main-page-feature-sixth{
+  padding-top: 12px !important;
+  background-size: 115% 123%;
+  height:auto!important;
+  background-position: 0% 0% !important;
+}
+
+
+
+
+
+/*For HOMEPAGE - main.html*/
+.main-page-heading-for-small-screen-by-ak{
+  color:black!important;
+}
+.main-page-features-for-small-screen-by-ak{
+  background-color: rgb(30, 87, 108);
+  padding-bottom: 1.3em;
+  margin-left: 18%;
+  margin-right: 18%;
+  border: 5px solid whitesmoke;
+}
+.nav-fixed {
+  transition: all 0.2s;
+}
+
+
+#bg-img-landing>img{
+  position: absolute;
+  top:0;
+  z-index: 25135;
+  width:1250px;
+  height:auto;
+  left:0px !important;
+  margin-top:3em;
+  margin-left:50%;
+  transform:translate(-50%,0);
+}
+
+#bg-img-landing>#morning,#bg-img-landing>#evening,#bg-img-landing>#night{
+  /*left:-13% !important;*/
+  opacity: .5;
+}
+
+#bg-img-landing>#clock,#bg-img-landing>#clockCircle{
+  margin-top:0%;
+}
+
+#bg-img-landing>#minuteHand,#bg-img-landing>#hourHand,#bg-img-landing>#secondHand{
+  margin-top:-1px;
+  left:6px !important;
+}
+
+#mapPanButton{
+  cursor:pointer;
+  color:white;
+  border-radius:10%;
+  border:1px solid black;
+   background-color:white;
+   padding:0.6em;
+   margin-left:2em;
+}
+
+#mapAddressInfoBox{
+  text-align:center;
+}
+
+
+/* For android and ios page */
+
+.explore-app-inner-div-left {
+  background-color: #5CA9D6;
+  height: 50em;
+}
+.explore-app-inner-div-right {
+  background-color: #f0faff;
+  height: 50em;
+  padding: 10em;
+}
+.explore-app-phone-left {
+  position: absolute;
+  width: 25vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-65%,-50%);
+  z-index: 1;
+}
+.explore-app-phone-right {
+  position: absolute;
+  width: 44vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-35%,-50%);
+  z-index: 1;
+}
+.explore-app-content {
+  position: absolute;
+  display: block;
+  width: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3em; 
+  z-index: 1;
+}
+.input-group-addon_terms {
+  color:grey;
+  cursor:pointer;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
+  transition:all 0.37s;
+}
+.input-group-addon_terms:hover {
+  -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
+  -moz-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
+}
+.input-group-addon_terms.clicked {
+  color:#5CA9D6;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.webinar-main-btn-row {
+  background-color: #237DAC;
+    color: white;
+    position: absolute;
+    width: 85%;
+    z-index: 1;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    font-size: 1.3em;
+    transform: translate(0%, -100%);
+    transition: all 0.2s;
+    height: 10em;
+}

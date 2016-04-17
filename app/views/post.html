@@ -1,0 +1,178 @@
+<div class="row contentPadding" ng-init="posts=getPostDetail()">
+
+<!--   <div class="row blog-title-container" >
+      <div class="col-md-12 text-center">
+      <h4>Retrieve All Posts</h4>
+        <form class="form-inline" role="form">
+            
+            <div class="form-group">
+            <h3>
+              <a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="http://www.mymissionadmission.com/#/catagory/Science">Science</a>
+            </h3>
+          </div>
+          <div class="form-group" >
+            <h3><a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="http://www.mymissionadmission.com/#/catagory/English">English</a></h3>
+        </div>
+          <div class="form-group" >
+            <h3><a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" " href="http://www.mymissionadmission.com/#/catagory/Random">Random</a></h3>
+          </div>
+          <div class="form-group" >
+            <h3><a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" " href="http://www.mymissionadmission.com/#/blog">All Posts</a></h3>
+          </div>
+          <select  class="form-control" ng-model="year"  ng-change="updateYear(year)">
+              <option value="" default selected>Year</option>
+              <option value="2015">2015</option>
+              <option value="2016"><a  href="http://www.mymissionadmission.com/#/blog/:2016">2016</a></option>
+          </select>
+      
+            <select ng-model="month" ng-if="year" ng-change="updateMonth(month)">
+              <option value="" default selected>Month</option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+        </form>
+      </div>
+  </div> -->
+<!--  
+  <div class="col-md-12">
+    <div class="row" >
+      <div class="col-xs-12">
+        <h3 ></h3></br></br>
+        <div ta-bind ng-model="posts.postData"></div></br>
+      </div>
+      <div class="row">
+        <div class="col-xs-1 btn btn-primary" ><i ng-click="likePost()" class="fa fa-thumbs-o-up"> like</i></div>
+        <div class="col-xs-1 btn btn-primary" ><i ng-click="commentOnPost()" class="fa fa-comment-o"> comment</i></div>
+        <div class="col-xs-1 btn btn-primary" ><i ng-click="sharePost()" class="fa fa-share"> share</i></div>
+        <b> <div class="col-xs-3" style="margin-top:15px;" ng-if="posts.postDate">Dated: {{posts.postDate | convert}} </div> </b>
+        <b> <div class="col-xs-5" style="margin-top:15px;" ng-if="posts.postTime">Time: {{posts.postTime | change_time}} </div> </b>
+      </div>  
+    </div></br>
+  </div>
+  -->
+
+<!-- 
+<div class="row blog-title-container" >
+      <div class="col-md-12 text-center">
+        
+        <form class="form-inline" role="form">
+            <div class="form-group">
+            <h3>
+              <a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="#">Go Back</a>
+            </h3>
+          </div> 
+        </form>
+
+      </div>
+  </div> 
+ -->
+
+  <div class="row go-back"> 
+      <div class="container-fluid">
+          <div class="col-md-2">
+             <!--  <div class="form-group">
+                  <h3>
+                    <a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="#">Go Back</a>
+                  </h3>
+             </div> -->
+             <i class="fa fa-3x go-back-arrow  fa-chevron-left"><span onclick="window.history.back();">Go Back</span></i>
+
+          </div>
+      </div>
+  </div>
+
+ <div class="row contentPadding" style="padding:2.5em;">
+      <div class="col-md-12 ">
+        <div class="row blog-container post-container contentPadding">
+            <div>
+              <img class="img-circle img-responsive post-img-house" src="images/bower-logo.png">
+            </div>
+            <div class="row">
+
+                <div class=""> 
+                    <div class="contentPadding">
+                      <div class="row" >
+                        <div class="col-md-12 text-center">
+                            <a class="text-center" ng-href="{{value.sharingUrl}}">
+                              <h2 class="post-title" style="color:black;">{{posts.postTitle | titleCase}}</h2>
+                            </a>
+                            <ul class="list-inline">
+                              <li><a href="#" style="color:black;"><i class="fa fa-user"></i> Jon Snow</a></li>
+                              <li  style="color:black;" ><i class="fa fa-calendar-o"></i> {{posts.postDate | convert}}</li>
+                            </ul>
+                            <!-- <div class="contentPadding well" ta-bind ng-model="value.postData"></div></br> -->
+                            <div class="contentPadding">
+                              <ul class="list-inline">
+                                <li><i class="fa fa-tags"></i></li>
+                                <li><a href="#">#HouseOne</a></li>
+                                <li><a href="#">#HouseTwo</a></li>
+                                <li><a href="#">#HouseThree</a></li>
+
+                              </ul>
+                            </div>
+                          </div>
+                      </div>  
+                        <div class="row post-description">
+                          <div class="col-md-offset-1 col-md-10">
+                             <div style="padding:2.5em;" class="contentPadding" ta-bind ng-model="posts.postData"></div></br>
+                          </div>
+                        </div>
+                    </div>
+
+
+                    <div class="seperator"></div>
+                      
+                 <!--    <div class="row text-center " style="padding:2.5em;">
+                      
+                      <div class="contentPadding col-xs-4 post-footer">
+                        <ul class="list-inline text-left">
+                          <li><i ng-click="likePost()" class="fa fa-2x fa-heart-o"></i></li>
+                          <li><i ng-click="commentOnPost()" class="fa fa-2x fa-comment-o"></i></li>
+                        </ul> 
+
+                          
+                      </div>
+                      <div class="col-xs-8 text-right post-footer">
+                          <ul class="list-inline post-social">
+                            <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-2x fa-google-plus-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a></li>
+                          </ul>               
+                      </div>
+                      <input type="hidden" ng-init = "updateTimestamp(value.postNumber)"> 
+                    </div>  -->
+
+                </div> <!-- end of blog container -->
+
+
+
+          </div></br>
+
+    </div> 
+  </div>
+<!-- 
+  <div class="row"> 
+      <div class="container-fluid">
+          <div class="col-md-offset-5 col-md-2">
+              <div class="form-group">
+                  <h3>
+                    <a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="#">Go Back</a>
+                  </h3>
+                </div>
+          </div>
+      </div>
+  </div>
+ -->
+
+
+</div>

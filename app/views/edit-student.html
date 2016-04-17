@@ -1,0 +1,185 @@
+<div class="theme-container">
+  <div class="container-fluid" ng-init="toTheTop()">
+    <div class="row">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Edit Student Details<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right">You can edit Student details here.<h5>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div class="col-md-3">
+            <div class="filter-pane">
+              <div class="bord">
+                <input id ="imageUploadCollege" ng-model="dummyPhoto" type="filepicker-dragdrop" data-fp-button-text="Pick Image" data-fp-drag-text="Alternatively, drag and drop the file here " data-fp-services="COMPUTER" data-fp-button-class="btn btn-default main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" />
+              </div>
+              <hr />
+              <div class="bord">
+                <input id ="imageUploadCollege" ng-model="dummyPhoto" type="filepicker-dragdrop" data-fp-button-text="Pick Documents" data-fp-drag-text="Alternatively, drag and drop the file here " data-fp-services="COMPUTER" data-fp-button-class="btn btn-default main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 800px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <!-- repetetive Block -->
+                    <div class="panel panel-default panel-c" ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter">
+                      <form name="college_edit" ng-submit="updateCollege(collegeId, college, dummyCountry, dummyState, dummyPhoto)">
+                      <div class="panel-heading panel-c-h" role="tab" id="heading_{{collegeId}}">
+                        <h4 class="panel-title collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse_{{collegeId}}" aria-expanded="false" aria-controls="collapse_{{collegeId}}">
+                          {{college.collegename}} ( {{college.counselloremail}} )
+                        </h4>
+                      </div>
+                      <div id="collapse_{{collegeId}}" class="panel-collapse collapse panel-c-b" role="tabpanel" aria-labelledby="heading_{{collegeId}}">
+                        <div class="panel-body">
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <img src="{{college.collegephoto}}" alt="..." class="img-thumbnail">
+                              </div>
+                              <div class="col-sm-8">
+                                <input type="text" ng-model="college.collegename" required placeholder="College Name" value="{{college.collegename}}" class="form-control ">
+                                <input type="number" ng-model="college.collegeaffiliation" required placeholder="Mobile Number" value="{{college.collegeaffiliation}}" class="form-control ">
+                                <h4 class="form-control" style="border : 0px !important;">{{college.counselloremail}}</h4>
+                                <div class="bord">
+                                  <center>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" ng-model="user.gender" id="inlineRadio1" value="male"> Male
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" ng-model="user.gender" id="inlineRadio2" value="female"> Female
+                                  </label>
+                                </center>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <input type="text" ng-model="college.collegename" required placeholder="Father Name" class="form-control ">
+                                <input type="text" ng-model="college.collegeaffiliation" required placeholder="occupation" value="{{college.collegeaffiliation}}" class="form-control ">
+                                <input type="number" ng-model="college.collegeaffiliation" required placeholder="father Number" value="{{college.collegeaffiliation}}" class="form-control ">
+                                <input type="text" ng-model="college.collegeaffiliation" required placeholder="facebook profile link" class="form-control ">
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="no-bord">
+                                  <input type="button" class="btn btn-success btn-block" value="Select UG Courses" data-toggle="modal" data-target=".bs-example-modal-1_{{collegeId}}"></input>
+                                </div>
+                                <div class="no-bord">   
+                                  <input type="button" class="btn btn-success btn-block" value="Select PG Courses" data-toggle="modal" data-target=".bs-example-modal-2_{{collegeId}}"></input>
+                                </div>
+                                <div class="row">
+                                  <center>
+                                  <div class="col-xs-4" style="color:black;">
+                                    10th <input type="number" ng-model="college.collegeaffiliation" required placeholder="10th" class="form-control ">
+                                  </div>
+                                  <div class="col-xs-4" style="color:black;">
+                                    12th <input type="number" ng-model="college.collegeaffiliation" required placeholder="12th" class="form-control ">
+                                  </div>
+                                  <div class="col-xs-4" style="color:black;">
+                                    UG <input type="number" ng-model="college.collegeaffiliation" required placeholder="UG" class="form-control ">
+                                  </div>
+                                </center>
+                                </div>
+                                <div style="display:none">{{uSer.roles=college.coursesofferedUG}}</div>
+                                <div style="display:none">{{uSerA.rolesA=college.coursesofferedPG}}</div>  
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <textarea rows="7" required placeholder="student Bio" class="form-control "></textarea>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="row">
+                                  <center>
+                                  <div class="col-xs-12">
+                                    <img src="{{dummyPhoto}}" alt="..." class="img-thumbnail">
+                                  </div>
+                                  </center>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xs-12">
+                                <input style="width:1.2em; height:1.2em;" type="checkbox" ng-model="chkToSaveCountryState[collegeId]" ng-true-value="'YES'" ng-false-value="'NO'" id="ch1"></input>
+                                <label for="ch1">&nbsp;&nbsp;&nbsp;Click here to change Student Photo and then click Save Changes.</label>
+                                <br />
+                                <input style="width:1.2em; height:1.2em;" type="checkbox" ng-model="chkToSaveCollegePhoto[collegeId]" ng-true-value="'YES'" ng-false-value="'NO'" id="ch2"></input>
+                                <label for="ch2">&nbsp;&nbsp;&nbsp;Click here to change Student Documents and then click Save Changes.</label>
+                              </div>
+                              <label>{{message}}</label>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <input type="button" value="Preview" style="color : black; :hover{color:black;}" class="btn btn-success pull-right btn-block" />
+                              </div>
+                              <div class="col-sm-6">
+                                <input type="submit" value="Save Changes" style="color : black;" class="btn btn-success pull-right btn-block" />
+                              </div>
+                            </div>
+                          </div>
+                        </div> 
+                      </div>
+                      <div class="modal fade bs-example-modal-1_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content" style="color:black;">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                      <h4 class="modal-title">Select Undergraduate Courses</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <label class="checkbox" ng-repeat="role in roles">
+                                          <input type="checkbox" checklist-model="uSer.roles" checklist-value="role.id"> {{role.text}}
+                                      </label>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Done</span></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal fade bs-example-modal-2_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content" style="color:black;">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                      <h4 class="modal-title">Select Postgraduate Courses</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <label class="checkbox" ng-repeat="roleA in rolesA">
+                                          <input type="checkbox" checklist-model="uSerA.rolesA" checklist-value="roleA.idA"> {{roleA.textA}}
+                                      </label>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Done</span></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      </form>
+                    </div>
+                    <!-- repetetive Block end -->
+
+                    <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                      <div class="container-fluid">
+                        <div class="row result-det">
+                          <strong><h5>{{college.collegename}}</h5></strong>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>

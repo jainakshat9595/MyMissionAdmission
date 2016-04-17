@@ -1,0 +1,59 @@
+<img class="intro-bg" src="../images/intro-bg.jpg" />
+<div class="container-fluid search-page ex-pad" ng-controller="AdminTaskCtrl" ng-init="toTheTop()">
+  <div class="row a-head">
+    <div class="col-xs-6 pull-left">
+      <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Logout Users<h3>
+    </div>
+    <div class="col-xs-6 pull-right">
+      <h5 class="pull-right">You can logout any user by Email here.<h5>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-11">
+                <input type="email" ng-model="studentEmail1" placeholder="Student E-mail" class="form-control">
+              </div>
+              <div ng-if="somecondition == 'Done'" class="col-xs-1" style="color:#64FE2E">
+                <i class="fa fa-check fa-2x"></i>
+              </div>
+              <div ng-if="somecondition == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                <i class="fa fa-times fa-2x"></i>
+              </div>
+              <div class="col-xs-11">
+                <input type="email" ng-model="collegeEmail" placeholder="College E-mail" class="form-control">
+              </div>
+              <div ng-if="somecondition == 'Done'" class="col-xs-1" style="color:#64FE2E">
+                <i class="fa fa-check fa-2x"></i>
+              </div>
+              <div ng-if="somecondition == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                <i class="fa fa-times fa-2x"></i>
+              </div>
+              <div class="col-xs-11">
+                <input type="button" value="Prepare" class="btn btn-default pull-right">
+              </div>
+              <div class="col-xs-1">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12" style="color:#BDBDBD;">
+                <center>
+                  <h4> The Email(s) which you have entered is/are valid users, Please click on the LogOut button to log them out. </h4>
+                </center>
+              </div>
+              <input type="button" ng-click="logoutcollege(collegeEmail)" value="LogOut" class="btn btn-default pull-right btn-block">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

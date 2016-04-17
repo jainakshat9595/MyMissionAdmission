@@ -1,0 +1,111 @@
+<div class="row-fluid login-row_style" ng-init="toTheTop()">
+  <div class="container-fluid text-center login-container blue login-container_style col-md-12 ">
+    <form class="form-signin" name="admin_reg" ng-submit="registerAdmin()">
+
+      <div class="form-signin-div-tobeload" ng-show="modalShown">
+        <i class="fa fa-spinner fa-3x fa-spin"></i>
+      </div>
+
+      <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+
+        <h2>NODAL REGISTER</h2>
+        <h3>{{ message }}</h3>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+           <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user"></span>
+           <input type="text" ng-model="usern.nodalcentername"required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')"  placeholder="Nodal Center Name" class="login-inputgroup_style form-control input-lg">    
+         </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user"></span>
+            <input type="text" ng-model="usern.nodaladminname"required oninvalid="this.setCustomValidity('Nodal Center Name could not be blank')" oninput="this.setCustomValidity('')"  placeholder="Contact person Name" class="login-inputgroup_style form-control input-lg">    
+         </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+            <input name="email" type="email" ng-model="usern.nodaladminemail" placeholder="Email Address"  required oninvalid="this.setCustomValidity('Please enter a valid Email Address')" oninput="this.setCustomValidity('')" title='Enter in format abcdef@email.com' class="login-inputgroup_style form-control input-lg" ui-validate="{blacklist : 'notBlackListed($value)' }">    
+         </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+            <input name="confirm_email" type="email" ng-model="confirm_email" placeholder="Re-type Email Address"  required class="login-inputgroup_style form-control input-lg" ui-validate=" '$value==usern.nodaladminemail' " ui-validate-watch=" 'usern.nodaladminemail' ">
+            <div ng-show="admin_reg.confirm_email.$dirty && admin_reg.confirm_email.$error.validator"><strong style="color:red">Emails do not match! </strong></div>    
+          </div>
+        </div>
+                     
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-phone"></span>
+            <input type="text" ng-model="usern.nodalphone" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title="Phone number must be atleast 9 digits long"oninput="this.setCustomValidity('')"  placeholder="Mobile Number" class="login-inputgroup_style form-control input-lg">   
+          </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-print"></span>
+            <input type="number" ng-model="usern.assetnumber"required oninvalid="this.setCustomValidity('Number of Asscets could not be blank')" oninput="this.setCustomValidity('')"  placeholder="Number of Computers" class="login-inputgroup_style form-control input-lg">   
+          </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-map-marker"></span>
+            <input type="text" ng-model="usern.nodaladdress"required oninvalid="this.setCustomValidity('Please enter your address')" oninput="this.setCustomValidity('')" placeholder="Address" class="login-inputgroup_style form-control input-lg">    
+          </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-map-marker"></span>
+            <input type="text" ng-model="usern.nodalcity"required oninvalid="this.setCustomValidity('Please enter your city')" oninput="this.setCustomValidity('')"  placeholder="City" class="login-inputgroup_style form-control input-lg">   
+          </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-map-marker"></span>
+            <select required oninvalid="this.setCustomValidity('Please select a country from the list')" onclick="this.setCustomValidity('')" onkeypress="this.setCustomValidity('')" class="login-inputgroup_style form-control" ng-model="usern.nodalcountry" onchange="print_state('state',this.selectedIndex);" id="country" name ="country"></select>    
+          </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-map-marker"></span>
+            <select class="login-inputgroup_style form-control" required oninvalid="this.setCustomValidity('Please select your state')" onclick="this.setCustomValidity('')" onchange="this.setCustomValidity('')" ng-model="usern.nodalstate" name ="state" id ="state"></select>
+            <script language="javascript">print_country("country");</script>    
+          </div>
+        </div>
+
+        
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+            <input name="password" type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="usern.adminpassword" placeholder="Password" class="login-inputgroup_style form-control input-lg">   
+          </div>
+        </div>
+
+        <div class="input-group-container">
+          <div class="input-group input-group-lg">
+            <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+            <input name="confirm_password" type="password" required ng-model="confirm_password" placeholder="Re-type Password" class="login-inputgroup_style form-control input-lg" ui-validate=" '$value==usern.adminpassword' " ui-validate-watch=" 'usern.password' ">
+            <div ng-show="admin_reg.confirm_password.$dirty && admin_reg.confirm_password.$error.validator"><strong style="color:red">Passwords do not match! </strong></div>    
+          </div>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block btn-login_style" type="submit" ng-disabled="submitbuttondisabled">Register</button>
+        <br>
+        <p ng-show="error" class="error-danger">{{ error }}</p>
+
+      </div>
+        
+    </form>
+  </div>
+</div>

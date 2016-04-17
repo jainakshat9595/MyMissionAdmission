@@ -1,0 +1,109 @@
+<html>
+<head>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	
+</head>
+
+
+<div class="container-fluid hang-main blue-light " ng-init="toTheTop(); getEmail(); getActiveUserForHangout();">
+
+	<div class="row contentPadding" ng-onbeforeunload="test()">
+		<div class="col-xs-9 contentPadding">
+			<h4 class="pull-right">Press this button to start your session&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa-lg"></i></h4>
+		</div>
+		<div class="col-xs-3 pull-left">
+			<div class=" container-fluid hang-main-btn contentPadding">
+				<center ng-init="checckk()"><div id="placeholder-div3"></div></center>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid text-center contentPadding" ng-init="">
+		<h1 style="color:white;">Expected Participants </h1>
+		<div class="title-seperator"></div>
+
+          <div style="font-size: 1.5em; margin-top: 1.5em; margin-bottom: 1.5em;" ng-if="!activeUsersLoaded">
+            <i class="fa fa-spinner fa-3x fa-spin"></i>
+          </div>
+
+		<div class="col-md-3 col-sm-2" ng-repeat="(key,value) in studentDetailsForActiveUser">
+			<div class="contentPadding text-center" ng-init="getStudentDataForParticipant(value.collegeurl,value.studenturl,$index + 1)">
+				<div class="thumbnail"> 
+					<div class="thumb-img">
+						<img  class="img-responsive img-profile-hang" src="{{value.photo}}">
+					</div>
+					<div class="thumb-content">
+						<h3>{{value.name}}{{studentDataForParticipant}}</h3>
+						<p>{{value.email  | cut:false:22:'...'}} </p>
+              <div>
+                <button type="button"  ng-click="getPreviousFeedbackOfStudents(session.studenturl, session.collegeurl, studentDetail[session.studenturlId].studentName.$value); getStudentGroup(session.collegeurl,session.nodalId,session.sessiondate,session.sessionminute,session.sessionhour,value.studenturl)" data-toggle="modal" data-target="#feedbackmodal" class="btn btn-block btn-default btn-feed">Chat Feedback</button>
+              </div>
+				   </div>
+				</div>
+
+
+				<!-- Chat Feedback Modal -->
+                                  <form ng-controller = "CollegeDashCtrl" name="feedback_form" ng-submit="createFeedbackForCollege(session.studentquery, session.studenturlId, session.sessiondate, session.collegeurl, session.studenturl, sessionVerificationStatus,session.nodalId, session.sessionhour, session.sessionminute)" style="color: black;">                        
+                                       <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="feedbackmodal">
+                                         <div class="modal-dialog">
+                                           <div class="modal-content">
+                                             <div class="modal-header">
+                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                               <h4 class="modal-title">Give Feedback</h4>
+                                             </div>
+                                             <div class="modal-body feedback-modal">
+                                                  <div class="row">
+                                                       <div class="col-xs-12">
+                                                         <input ng-model="Feedback.videourl" type="text" placeholder="Youtube Video Link" class="form-control" required>
+                                                    </div>
+                                               </div>
+                                               <div class="row">
+                                                    <div class="col-xs-6">
+                                                         <textarea ng-model="Feedback.chatdiscussion" type="text" placeholder="Chat Discussion Key Points" class="form-control" rows="7" required></textarea>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                         <textarea ng-model="Feedback.nextstep" type="text" placeholder="Next Step" class="form-control" rows="7" required></textarea>
+                                                     </div>
+
+                                                     <input type="hidden" ng-model="sessionVerificationStatus" ng-init="sessionVerificationStatus='pending'" class="form-control"><br><br>
+                                                     
+                                                     <br /><br />
+
+                                                     <p ng-if = "!onGroupfeedbacksuccessful && studentName.length > 0" align="center" ng-hide="onfeedbacksuccessful" style="padding-top:50px">Do you want to give feedback to following students also?</p> 
+
+                                                      <strong style="text-align:left">
+                                                        <span style="color:black">
+                                                          <div ng-hide="studentName.length == 0 || onfeedbacksuccessful || onGroupfeedbacksuccessful">
+                                                            <input  type="checkbox" style="box-shadow:none" ng-model="selectedAll" ng-click="checkAll()" />&nbsp;&nbsp;&nbsp;Select all
+                                                          </div>
+                                                          <div ng-if = "!onGroupfeedbacksuccessful || !onfeedbacksuccessful" ng-hide="onfeedbacksuccessful || onGroupfeedbacksuccessful" ng-repeat="(id,value) in studentName">
+                                                            <input ng-model="master[id]" type="checkbox" style="box-shadow:none" ng-click="addStudentToGiveFeedback(value.url, master[id], id,value.name.$value)">&nbsp;&nbsp;&nbsp;{{value.name.$value}}                                                 
+                                                          </div>
+                                                        </span>
+                                                      </strong><br>
+
+                                                     <div ng-if = "onGroupfeedbacksuccessful">
+
+                                                         <h5 style="color:grey"><strong>Feedback for the following students has been successfully submitted :-<br>  <span style="color:black"> <br> &nbsp;1. {{currentStudentName}} &nbsp;<div ng-repeat="(id,value) in studentGroupToGiveFeedback"> {{$index+2}}. {{value.Name}}&nbsp;</div></span> . </strong></h5>
+                                                      </div>
+                                                     
+                                                     <div ng-if = "onfeedbacksuccessful">
+                                                         <h5 style="color:green"><strong> Your feedback has been successfully submitted. </strong></h5>
+                                                      </div>
+                                                </div>
+                                             </div>
+                                             <div class="modal-footer">
+                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                               <input type="submit" value="Give Feedback" class="btn btn-primary"/></input>
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </div>
+                                  </form>    
+					
+			</div>
+		</div>
+
+	</div>
+</div>
+

@@ -1,0 +1,142 @@
+<style type="text/css">
+  ::-webkit-input-placeholder {
+   color: #003263;
+   text-align: right;
+}
+</style>
+
+<div class="container-fluid" ng-init="toTheTop()">
+  
+  <div class="theme-container">
+    <div class="container">
+      <div class="row ">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Edit Nodal Details<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can edit nodal details here.<h5>
+
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-md-12">
+          <input class="pull-right theme-input form-control" type="text" ng-model="viewBy" style="width:35%;color:#237DAC; border:1px #8AD5F4 solid;" placeholder="Search Nodal Centre ">
+        </div> 
+      </div>
+
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+          <div class="row">
+            
+            <div class="col-md-12">
+              
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 800px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      <!-- repetetive Block -->
+                      <div class="panel panel-default panel-c" ng-animate="'animate'" ng-repeat="(usernId,usern) in nod|filter:viewBy">
+                        <form name="nodal_edit" ng-model-options="{ updateOn: 'submit' }" ng-init="show[usernId]=false">
+                        <div class="panel-heading panel-c-h" role="tab" id="heading_{{usernId}}">
+                          <h4 class="panel-title collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse_{{usernId}}" aria-expanded="false" aria-controls="collapse_{{usernId}}" ng-click="show[usernId]=!show[usernId]" style="cursor:pointer;">
+                            {{usern.nodalCenterName}} ( {{usern.nodalAdminEmail}} )
+                          </h4>
+                        </div>
+                        <div id="collapse_{{usernId}}" ng-if="show[usernId]" class="panel-collapse collapse panel-c-b"role="tabpanel" aria-labelledby="heading_{{usernId}}">
+                          <div class="panel-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                
+                                <div class="col-sm-6">
+                                <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;">Nodal Center :</div>
+                                <div class="col-sm-7">
+                                  <input type="text" ng-model="usern.nodalCenterName"  required placeholder="Nodal Center Name" value="{{usern.nodalCenterName}}" class="form-control  theme-input "></div> </div>
+                                  <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;">Admin Name :</div>
+                                <div class="col-sm-7">
+                                  <input type="text" ng-model="usern.nodalAdminName" required placeholder="Nodal Admin Name" value="{{usern.nodalAdminName}}" class="form-control theme-input"></div> </div>
+                                  <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;">Admin Email :</div>
+                                <div class="col-sm-7"  style="border : 0px !important;color:blue;font-family:Montserrat;font-size:20px">
+                                  
+                                  <b>{{usern.nodalAdminEmail}}</b>
+                                   </div> 
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="row">
+                                <div class="col-sm-7" style="font-size:16px;">Nodal Contact Number :</div>
+                                <div class="col-sm-5">
+                                  <input type="text" ng-model="usern.nodalPhone" required placeholder="Nodal Contact Number" value="{{usern.nodalPhone}}" class="form-control theme-input"></div></div>
+                                   <div class="row">
+                                <div class="col-sm-7" style="font-size:16px;">No Of Computers :</div>
+                                <div class="col-sm-5">
+                                  <input type="text" id="comp" ng-model="usern.numberOfAsstets" required placeholder="No of Computers" class="form-control theme-input"></div></div>
+                              </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-12">
+                                 <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;font-family:Montserrat;">Nodal Address :</div>
+                                <div class="col-sm-7">
+                                  <input type="text" ng-model="usern.nodalAddress" required placeholder="Address" value="{{usern.nodalAddress}}" class="form-control theme-input"></div></div>
+                                   <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;font-family:Montserrat;"> City :</div>
+                                <div class="col-sm-7">
+                                  <input type="text" ng-model="usern.nodalCity" required placeholder="City" value="{{usern.nodalCity}}" class="form-control theme-input"></div></div>
+                                   <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;font-family:Montserrat;">State :</div>
+                                <div class="col-sm-7">
+                                  <input type="text" ng-model="usern.nodalState" required placeholder="State" value="{{usern.nodalState}}" class="form-control theme-input"></div></div>
+                                   <div class="row">
+                                <div class="col-sm-5" style="font-size:16px;font-family:Montserrat;">Country :</div>
+                                <div class="col-sm-7">
+                                  <input type="text" ng-model="usern.nodalCountry" required placeholder="Country" value="{{usern.nodalCountry}}" class="form-control theme-input"></div></div>
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                  
+                                </div> -->
+                              </div>
+                             
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <div style="color:Green;font-size:20px;background:lavender;border-radius:5px;height:50px;padding-top:15px;" ng-if="submitsuccess" align="center">
+                                  UPDATE SUCCESSFUL</div>
+                                </div>
+                                <div class="col-sm-4">
+                                  <input type="submit" value="Cancel"  ng-click="nodal_edit.$rollbackViewValue();" style="color : white;"  class="btn btn-danger pull-right btn-block" />
+                                </div>
+                                <div class="col-sm-4">
+                                  <input type="submit" value="Save Changes"  ng-click="getNodalid(usern,usern.nodalAdminEmail)" style="color : white;"  class="btn btn-success pull-right btn-block" />
+                                </div>
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
+                        </form>
+                      </div>  
+                      <!-- repetetive Block end -->
+
+                      <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                        <div class="container-fluid">
+                          <div class="row result-det">
+                            <strong><h5>{{usern.nodalCenterName}}</h5></strong>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

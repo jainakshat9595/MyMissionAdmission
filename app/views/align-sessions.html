@@ -1,0 +1,2053 @@
+<div class="container-fluid search-page ex-pad" ng-init="toTheTop(); getEmailList()">
+<div class="theme-container" style="color:black;">
+
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Session Allignment Feature<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right">You can find colleges availlable for sessions here.<h5>
+      </div>
+    </div>
+  </div>
+  
+
+  <hr /> 
+  
+  <div class="container-fluid">
+    <label class="radioFilter">
+      <input type="radio" name="collType" ng-checked = true value="paid" ng-model="collType">Paid Colleges
+    </label>
+    <label class="radioFilter">
+      <input type="radio" name="collType" value="college" ng-model="collType">All Colleges
+    </label>
+  </div>
+<br>
+
+<div class="container-fluid">
+  <div class="row"> 
+    <div class="container-fluid"  ng-if="usera.profile.adminname && usera.profile.profiletype=='admin'"> 
+      <div class="row div-table-head">
+        <center>
+          <div class="col-xs-2">
+            Email
+          </div>
+          <div class="col-xs-2">
+            Courses Interested
+          </div>
+          <div class="col-xs-4">
+            Session Done
+          </div>
+          <div class="col-xs-4">
+            Available Colleges
+          </div>
+        </center> 
+      </div>
+
+<!--************************************************** student1 **************************************************-->
+
+      <div class="row div-table-content"> 
+        <div class="col-xs-2 email-div-expand">
+          Email 1 :
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 1"  ng-model = "studentEmail1" ng-blur="getResults(studentEmail1)" ng-keyup = "updateScopeForStudent1(studentEmail1)">
+          <h6 ng-if="collegesRemaining1 && studentEmail1 && studentDetail1!==null" ng-click="removeCollegeRemaining(collegesRemaining1,studentEmail1, 1)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent1 == 'no' && studentEmail1" style= "color:red"> Invalid Student Email </p>
+        </div>  
+        <div class="col-xs-2 course-div-expand"> 
+          <span ng-repeat="pg in studentDetail1.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail1.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand" style="overflow-y: scroll;">
+          <span ng-repeat = "(collegeId1,sessionDetail1) in student1Sessions" ng-init="collegeName1 = getCollegeName(collegeId1)">
+            {{collegeName1.$value}}<br />  
+          </span>
+        </div> 
+
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining1 = getRemainingColleges(studentDetail1.email)">
+          <span  ng-repeat="(collegeId1,detail1) in collegesRemaining1">
+            <span ng-if="collegesRemaining1" ng-init="addDataInArray(detail1.collegeId,studentDetail1.$id)">
+              <span ng-init ="collegename = getCollegeName(detail1.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student2 **************************************************-->
+
+
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 2 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 2"  ng-model = "studentEmail2" ng-blur="getResults(studentEmail2)" ng-keyup = "updateScopeForStudent2(studentEmail2)">
+          <h6 ng-if="collegesRemaining2 && studentEmail2 && studentDetail2!==null" ng-click="removeCollegeRemaining(collegesRemaining2,studentEmail2, 2)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent2 == 'no'  && studentEmail2" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail2.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail2.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId2,sessionDetail2) in student2Sessions" ng-init="collegeName2 = getCollegeName(collegeId2)">
+            {{collegeName2.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining2 = getRemainingColleges(studentDetail2.email)">
+          <span  ng-repeat="(collegeId2,detail2) in collegesRemaining2">
+            <span ng-if="collegesRemaining2" ng-init="addDataInArray(detail2.collegeId,studentDetail2.$id)">
+              <span ng-init ="collegename = getCollegeName(detail2.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student3 **************************************************-->
+
+    <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 3 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 3"  ng-model = "studentEmail3" ng-blur="getResults(studentEmail3)" ng-keyup = "updateScopeForStudent3(studentEmail3)">
+          <h6 ng-if="collegesRemaining3 && studentEmail3 && studentDetail3!==null" ng-click="removeCollegeRemaining(collegesRemaining3,studentEmail3, 3)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent3 == 'no' && studentEmail3" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail3.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail3.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId3,sessionDetail3) in student3Sessions" ng-init="collegeName3 = getCollegeName(collegeId3)">
+            {{collegeName3.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining3 = getRemainingColleges(studentDetail3.email)">
+          <span  ng-repeat="(collegeId3,detail3) in collegesRemaining3">
+            <span ng-if="collegesRemaining3" ng-init="addDataInArray(detail3.collegeId,studentDetail3.$id)">
+              <span ng-init ="collegename = getCollegeName(detail3.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student4 **************************************************-->
+
+
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 4 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 4"  ng-model = "studentEmail4" ng-blur="getResults(studentEmail4)" ng-keyup = "updateScopeForStudent4(studentEmail4)">
+          <h6 ng-if="collegesRemaining4 && studentEmail4 && studentDetail4!==null" ng-click="removeCollegeRemaining(collegesRemaining4,studentEmail4, 4)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent4 == 'no' && studentEmail4" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail4.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail4.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId4,sessionDetail4) in student4Sessions" ng-init="collegeName4 = getCollegeName(collegeId4)">
+            {{collegeName4.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining4 = getRemainingColleges(studentDetail4.email)">
+          <span  ng-repeat="(collegeId4,detail4) in collegesRemaining4">
+            <span ng-if="collegesRemaining4" ng-init="addDataInArray(detail4.collegeId,studentDetail4.$id)">
+              <span ng-init ="collegename = getCollegeName(detail4.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student5 **************************************************-->
+
+
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 5 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 5"  ng-model = "studentEmail5" ng-blur="getResults(studentEmail5)" ng-keyup = "updateScopeForStudent5(studentEmail5)">
+          <h6 ng-if="collegesRemaining5 && studentEmail5 && studentDetail5!==null" ng-click="removeCollegeRemaining(collegesRemaining5,studentEmail5, 5)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent5 == 'no' && studentEmail5" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail5.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail5.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId5,sessionDetail5) in student5Sessions" ng-init="collegeName5 = getCollegeName(collegeId5)">
+            {{collegeName5.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining5 = getRemainingColleges(studentDetail5.email)">
+          <span  ng-repeat="(collegeId5,detail5) in collegesRemaining5">
+            <span ng-if="collegesRemaining5" ng-init="addDataInArray(detail5.collegeId,studentDetail5.$id)">
+              <span ng-init ="collegename = getCollegeName(detail5.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student6 **************************************************-->
+
+
+    <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 6 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 6"  ng-model = "studentEmail6" ng-blur="getResults(studentEmail6)" ng-keyup = "updateScopeForStudent6(studentEmail6)">
+          <h6 ng-if="collegesRemaining6 && studentEmail6 && studentDetail6!==null" ng-click="removeCollegeRemaining(collegesRemaining6,studentEmail6, 6)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent6 == 'no' && studentEmail6" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail6.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail6.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId6,sessionDetail6) in student6Sessions" ng-init="collegeName6 = getCollegeName(collegeId6)">
+            {{collegeName6.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining6 = getRemainingColleges(studentDetail6.email)">
+          <span  ng-repeat="(collegeId6,detail6) in collegesRemaining6">
+            <span ng-if="collegesRemaining6" ng-init="addDataInArray(detail6.collegeId,studentDetail6.$id)">
+              <span ng-init ="collegename = getCollegeName(detail6.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student7 **************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 7 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 7"  ng-model = "studentEmail7" ng-blur="getResults(studentEmail7)" ng-keyup = "updateScopeForStudent7(studentEmail7)">
+          <h6 ng-if="collegesRemaining7 && studentEmail7 && studentDetail7!==null" ng-click="removeCollegeRemaining(collegesRemaining7,studentEmail7, 7)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent7 == 'no' && studentEmail7" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail7.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail7.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId7,sessionDetail7) in student7Sessions" ng-init="collegeName7 = getCollegeName(collegeId7)">
+            {{collegeName7.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining7 = getRemainingColleges(studentDetail7.email)">
+          <span  ng-repeat="(collegeId7,detail7) in collegesRemaining7">
+            <span ng-if="collegesRemaining7" ng-init="addDataInArray(detail7.collegeId,studentDetail7.$id)">
+              <span ng-init ="collegename = getCollegeName(detail7.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student8 **************************************************-->
+
+
+    <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 8 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 8"  ng-model = "studentEmail8" ng-blur="getResults(studentEmail8)" ng-keyup = "updateScopeForStudent8(studentEmail8)">
+          <h6 ng-if="collegesRemaining8 && studentEmail8 && studentDetail8!==null" ng-click="removeCollegeRemaining(collegesRemaining8,studentEmail8, 8)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent8 == 'no' && studentEmail8" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail8.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail8.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId8,sessionDetail8) in student8Sessions" ng-init="collegeName8 = getCollegeName(collegeId8)">
+            {{collegeName8.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining8 = getRemainingColleges(studentDetail8.email)">
+          <span  ng-repeat="(collegeId8,detail8) in collegesRemaining8">
+            <span ng-if="collegesRemaining8" ng-init="addDataInArray(detail8.collegeId,studentDetail8.$id)">
+              <span ng-init ="collegename = getCollegeName(detail8.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student9 **************************************************-->
+
+
+    <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 9 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 9"  ng-model = "studentEmail9" ng-blur="getResults(studentEmail9)" ng-keyup = "updateScopeForStudent9(studentEmail9)">
+          <h6 ng-if="collegesRemaining9 && studentEmail9 && studentDetail9!==null" ng-click="removeCollegeRemaining(collegesRemaining9,studentEmail9, 9)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent9 == 'no' && studentEmail9" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail9.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail9.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId9,sessionDetail9) in student9Sessions" ng-init="collegeName9 = getCollegeName(collegeId9)">
+            {{collegeName9.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining9 = getRemainingColleges(studentDetail9.email)">
+          <span  ng-repeat="(collegeId9,detail9) in collegesRemaining9">
+            <span ng-if="collegesRemaining9" ng-init="addDataInArray(detail9.collegeId,studentDetail9.$id)">
+              <span ng-init ="collegename = getCollegeName(detail9.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student10 *************************************************-->
+
+
+    <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 10 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 10"  ng-model = "studentEmail10" ng-blur="getResults(studentEmail10)" ng-keyup = "updateScopeForStudent10(studentEmail10)">
+          <h6 ng-if="collegesRemaining10 && studentEmail10 && studentDetail10!==null" ng-click="removeCollegeRemaining(collegesRemaining10,studentEmail10, 10)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent10 == 'no' && studentEmail10" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail10.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail10.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId10,sessionDetail10) in student10Sessions" ng-init="collegeName10 = getCollegeName(collegeId10)">
+            {{collegeName10.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining10 = getRemainingColleges(studentDetail10.email)">
+          <span  ng-repeat="(collegeId10,detail10) in collegesRemaining10">
+            <span ng-if="collegesRemaining10" ng-init="addDataInArray(detail10.collegeId,studentDetail10.$id)">
+              <span ng-init ="collegename = getCollegeName(detail10.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <!--************************************************** student11 **************************************************-->
+
+      <div class="row div-table-content"> 
+        <div class="col-xs-2 email-div-expand">
+          Email 11 : 
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 11"  ng-model = "studentEmail11" ng-blur="getResults(studentEmail11)" ng-keyup = "updateScopeForStudent11(studentEmail11)">
+          <h6 ng-if="collegesRemaining11 && studentEmail11 && studentDetail11!==null" ng-click="removeCollegeRemaining(collegesRemaining11,studentEmail11, 11)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent11 == 'no' && studentEmail11" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail11.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail11.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId11,sessionDetail11) in student11Sessions" ng-init="collegeName11 = getCollegeName(collegeId11)">
+            {{collegeName11.$value}}<br />  
+          </span>
+        </div> 
+
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining11 = getRemainingColleges(studentDetail11.email)">
+          <span  ng-repeat="(collegeId11,detail11) in collegesRemaining11">
+            <span ng-if="collegesRemaining11" ng-init="addDataInArray(detail11.collegeId,studentDetail11.$id)">
+              <span ng-init ="collegename = getCollegeName(detail11.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student12 **************************************************-->
+
+
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 12 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 12"  ng-model = "studentEmail12" ng-blur="getResults(studentEmail12)" ng-keyup = "updateScopeForStudent12(studentEmail12)">
+          <h6 ng-if="collegesRemaining12 && studentEmail12 && studentDetail12!==null" ng-click="removeCollegeRemaining(collegesRemaining12,studentEmail12, 12)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent12 == 'no' && studentEmail12" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail12.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail12.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId12,sessionDetail12) in student12Sessions" ng-init="collegeName12 = getCollegeName(collegeId12)">
+            {{collegeName12.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining12 = getRemainingColleges(studentDetail12.email)">
+          <span  ng-repeat="(collegeId12,detail12) in collegesRemaining12">
+            <span ng-if="collegesRemaining12" ng-init="addDataInArray(detail12.collegeId,studentDetail12.$id)">
+              <span ng-init ="collegename = getCollegeName(detail12.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student13 **************************************************-->
+
+      <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 13 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 13"  ng-model = "studentEmail13" ng-blur="getResults(studentEmail13)" ng-keyup = "updateScopeForStudent13(studentEmail13)">
+          <h6 ng-if="collegesRemaining13 && studentEmail13 && studentDetail13!==null" ng-click="removeCollegeRemaining(collegesRemaining13,studentEmail13, 13)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent13 == 'no' && studentEmail13" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail13.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail13.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId13,sessionDetail13) in student13Sessions" ng-init="collegeName13 = getCollegeName(collegeId13)">
+            {{collegeName13.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining13 = getRemainingColleges(studentDetail13.email)">
+          <span  ng-repeat="(collegeId13,detail13) in collegesRemaining13">
+            <span ng-if="collegesRemaining13" ng-init="addDataInArray(detail13.collegeId,studentDetail13.$id)">
+              <span ng-init ="collegename = getCollegeName(detail13.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student14 **************************************************-->
+
+
+     <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 14 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 14"  ng-model = "studentEmail14" ng-blur="getResults(studentEmail14)" ng-keyup = "updateScopeForStudent14(studentEmail14)">
+          <h6 ng-if="collegesRemaining14 && studentEmail14 && studentDetail14!==null" ng-click="removeCollegeRemaining(collegesRemaining14,studentEmail14, 14)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent14 == 'no' && studentEmail14" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail14.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail14.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId14,sessionDetail14) in student14Sessions" ng-init="collegeName14 = getCollegeName(collegeId14)">
+            {{collegeName14.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining14 = getRemainingColleges(studentDetail14.email)">
+          <span  ng-repeat="(collegeId14,detail14) in collegesRemaining14">
+            <span ng-if="collegesRemaining14" ng-init="addDataInArray(detail14.collegeId,studentDetail14.$id)">
+              <span ng-init ="collegename = getCollegeName(detail14.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student15 **************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 15 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 15"  ng-model = "studentEmail15" ng-blur="getResults(studentEmail15)" ng-keyup = "updateScopeForStudent15(studentEmail15)">
+          <h6 ng-if="collegesRemaining15 && studentEmail15 && studentDetail15!==null" ng-click="removeCollegeRemaining(collegesRemaining15,studentEmail15, 15)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent15 == 'no' && studentEmail15" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail15.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail15.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId15,sessionDetail15) in student15Sessions" ng-init="collegeName15 = getCollegeName(collegeId15)">
+            {{collegeName15.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining15 = getRemainingColleges(studentDetail15.email)">
+          <span  ng-repeat="(collegeId15,detail15) in collegesRemaining15">
+            <span ng-if="collegesRemaining15" ng-init="addDataInArray(detail15.collegeId,studentDetail15.$id)">
+              <span ng-init ="collegename = getCollegeName(detail15.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student16 **************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 16 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 16"  ng-model = "studentEmail16" ng-blur="getResults(studentEmail16)" ng-keyup = "updateScopeForStudent16(studentEmail16)">
+          <h6 ng-if="collegesRemaining16 && studentEmail16 && studentDetail16!==null" ng-click="removeCollegeRemaining(collegesRemaining16,studentEmail16, 16)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent16 == 'no' && studentEmail16" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail16.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail16.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId16,sessionDetail16) in student16Sessions" ng-init="collegeName16 = getCollegeName(collegeId16)">
+            {{collegeName16.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining16 = getRemainingColleges(studentDetail16.email)">
+          <span  ng-repeat="(collegeId16,detail16) in collegesRemaining16">
+            <span ng-if="collegesRemaining16" ng-init="addDataInArray(detail16.collegeId,studentDetail16.$id)">
+              <span ng-init ="collegename = getCollegeName(detail16.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student17 **************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 17 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 17"  ng-model = "studentEmail17" ng-blur="getResults(studentEmail17)" ng-keyup = "updateScopeForStudent17(studentEmail17)">
+          <h6 ng-if="collegesRemaining17 && studentEmail17 && studentDetail17!==null" ng-click="removeCollegeRemaining(collegesRemaining17,studentEmail17, 17)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent17 == 'no' && studentEmail17" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail17.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail17.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId17,sessionDetail17) in student17Sessions" ng-init="collegeName17 = getCollegeName(collegeId17)">
+            {{collegeName17.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining17 = getRemainingColleges(studentDetail17.email)">
+          <span  ng-repeat="(collegeId17,detail17) in collegesRemaining17">
+            <span ng-if="collegesRemaining17" ng-init="addDataInArray(detail17.collegeId,studentDetail17.$id)">
+              <span ng-init ="collegename = getCollegeName(detail17.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student18 **************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 18 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 18"  ng-model = "studentEmail18" ng-blur="getResults(studentEmail18)" ng-keyup = "updateScopeForStudent18(studentEmail18)">
+          <h6 ng-if="collegesRemaining18 && studentEmail18 && studentDetail18!==null" ng-click="removeCollegeRemaining(collegesRemaining18,studentEmail18, 18)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent18 == 'no' && studentEmail18" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail18.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail18.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId18,sessionDetail18) in student18Sessions" ng-init="collegeName18 = getCollegeName(collegeId18)">
+            {{collegeName18.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining18 = getRemainingColleges(studentDetail18.email)">
+          <span  ng-repeat="(collegeId18,detail18) in collegesRemaining18">
+            <span ng-if="collegesRemaining18" ng-init="addDataInArray(detail18.collegeId,studentDetail18.$id)">
+              <span ng-init ="collegename = getCollegeName(detail18.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student19 **************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 19 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 19"  ng-model = "studentEmail19" ng-blur="getResults(studentEmail19)" ng-keyup = "updateScopeForStudent19(studentEmail19)">
+          <h6 ng-if="collegesRemaining19 && studentEmail19 && studentDetail19!==null" ng-click="removeCollegeRemaining(collegesRemaining19,studentEmail19, 19)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent19 == 'no' && studentEmail19" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail19.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail19.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId19,sessionDetail19) in student19Sessions" ng-init="collegeName19 = getCollegeName(collegeId19)">
+            {{collegeName19.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining19 = getRemainingColleges(studentDetail19.email)">
+          <span  ng-repeat="(collegeId19,detail19) in collegesRemaining19">
+            <span ng-if="collegesRemaining19" ng-init="addDataInArray(detail19.collegeId,studentDetail19.$id)">
+              <span ng-init ="collegename = getCollegeName(detail19.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+<!--************************************************** student20 *************************************************-->
+
+
+  <div class="row div-table-content">
+        <div class="col-xs-2 email-div-expand">
+          Email 20 :  
+          <br />
+          <input type="email" class="div-table-input-email" placeholder="Email 20"  ng-model = "studentEmail20" ng-blur="getResults(studentEmail20)" ng-keyup = "updateScopeForStudent20(studentEmail20)">
+          <h6 ng-if="collegesRemaining20 && studentEmail20 && studentDetail20!==null" ng-click="removeCollegeRemaining(collegesRemaining20,studentEmail20, 20)" style="color:blue; cursor:pointer">Remove<h6>
+          <p ng-if = "validStudent20 == 'no' && studentEmail20" style= "color:red"> Invalid Student Email </p>
+        </div>
+        <div class="col-xs-2 course-div-expand">
+          <span ng-repeat="pg in studentDetail20.coursesPG">
+            <span ng-if="pg == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="pg == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="pg == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="pg == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="pg == '4'"><center><h6>Biochemistry </h6></center></span>
+            <span ng-if="pg == '5'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="pg == '6'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="pg == '7'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="pg == '8'"><center><h6>English and Foreign Languages </h6></center></span>
+            <span ng-if="pg == '9'"><center><h6>Indian Languages </h6></center></span>
+            <span ng-if="pg == '10'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="pg == '11'"><center><h6>Sociology </h6></center></span>
+            <span ng-if="pg == '12'"><center><h6>Geography </h6></center></span>
+            <span ng-if="pg == '13'"><center><h6>Management </h6></center></span>
+            <span ng-if="pg == '14'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="pg == '15'"><center><h6>Economics </h6></center></span>
+            <span ng-if="pg == '16'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="pg == '17'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="pg == '18'"><center><h6>Planning </h6></center></span>
+            <span ng-if="pg == '19'"><center><h6>Fine Arts</h6></center></span>
+            <span ng-if="pg == '20'"><center><h6>Performing Arts</h6></center></span>
+            <span ng-if="pg == '21'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="pg == '22'"><center><h6>Ayurvedic Pharmaceutical Sciences</h6></center></span>
+            <span ng-if="pg == '23'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="pg == '24'"><center><h6>Paramedical Sciences</h6></center></span>
+            <span ng-if="pg == '25'"><center><h6>History </h6></center></span>
+            <span ng-if="pg == '26'"><center><h6>Political Science </h6></center></span>
+            <span ng-if="pg == '27'"><center><h6>Psychology </h6></center></span>
+            <span ng-if="pg == '28'"><center><h6>Education </h6></center></span>
+            <span ng-if="pg == '29'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="pg == '30'"><center><h6>Law </h6></center></span>
+            <span ng-if="pg == '31'"><center><h6>Design </h6></center></span>
+            <span ng-if="pg == '32'"><center><h6>Sciences </h6></center></span>
+          </span> 
+          <span ng-repeat="ug in studentDetail20.coursesUG"> 
+            <span ng-if="ug == '0'"><center><h6>Engineering </h6></center></span>
+            <span ng-if="ug == '1'"><center><h6>Computer Applications / IT </h6></center></span>
+            <span ng-if="ug == '2'"><center><h6>Biotechnology </h6></center></span>
+            <span ng-if="ug == '3'"><center><h6>Microbiology </h6></center></span>
+            <span ng-if="ug == '4'"><center><h6>Agriculture </h6></center></span>
+            <span ng-if="ug == '5'"><center><h6>Food Technology </h6></center></span>
+            <span ng-if="ug == '6'"><center><h6>Nutrition and Dietetics </h6></center></span>
+            <span ng-if="ug == '7'"><center><h6>Arts (Humanities) </h6></center></span>
+            <span ng-if="ug == '8'"><center><h6>Library Science </h6></center></span>
+            <span ng-if="ug == '9'"><center><h6>Management </h6></center></span>
+            <span ng-if="ug == '10'"><center><h6>Commerce </h6></center></span>
+            <span ng-if="ug == '11'"><center><h6>Economics </h6></center></span>
+            <span ng-if="ug == '12'"><center><h6>Hotel Management/Hospitality and Tourism </h6></center></span>
+            <span ng-if="ug == '13'"><center><h6>Architecture </h6></center></span>
+            <span ng-if="ug == '14'"><center><h6>Planning </h6></center></span>
+            <span ng-if="ug == '15'"><center><h6>Fine Arts </h6></center></span>
+            <span ng-if="ug == '16'"><center><h6>Performing Arts </h6></center></span>
+            <span ng-if="ug == '17'"><center><h6>Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '18'"><center><h6>Ayurvedic Pharmaceutical Sciences </h6></center></span>
+            <span ng-if="ug == '19'"><center><h6>Physiotherapy </h6></center></span>
+            <span ng-if="ug == '20'"><center><h6>Paramedical Sciences </h6></center></span>
+            <span ng-if="ug == '21'"><center><h6>Education </h6></center></span>
+            <span ng-if="ug == '22'"><center><h6>Physical Education </h6></center></span>
+            <span ng-if="ug == '23'"><center><h6>Law </h6></center></span>
+            <span ng-if="ug == '24'"><center><h6>Design </h6></center></span>
+            <span ng-if="ug == '25'"><center><h6>Sciences </h6></center></span>
+          </span>
+        </div>
+        <div class="col-xs-4 done-div-expand">
+          <span ng-repeat = "(collegeId20,sessionDetail20) in student20Sessions" ng-init="collegeName20 = getCollegeName(collegeId20)">
+            {{collegeName20.$value}}<br />
+          </span>
+        </div>
+        <div class="col-xs-4 college-div-expand" ng-click = "collegesRemaining20 = getRemainingColleges(studentDetail20.email)">
+          <span  ng-repeat="(collegeId20,detail20) in collegesRemaining20">
+            <span ng-if="collegesRemaining20" ng-init="addDataInArray(detail20.collegeId,studentDetail20.$id)">
+              <span ng-init ="collegename = getCollegeName(detail20.collegeId)">
+                {{collegename.$value}}<br />
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+  </div>
+
+
+
+<!-- ********************************************************New************************************************************** -->
+
+  <div class="slip-main-content">
+      <div class="slip-main-content-title">
+        <div class="row">
+          <div class="col-xs-2 slip-main-content-title-ico" ng-click="excludeLiveColleges()">
+            <i class="fa fa-chevron-left fa-2x"></i>
+          </div>
+          <div class="col-xs-8" style="padding-top:8px; color:black; font-family:Montserrat,Helvetica,Arial,sans-serif;">
+            <div class="row" style="font-size:17px;">
+              <center>Available Colleges</center>
+            </div>
+            <div class="row">
+              <center>
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" ng-click="includeLiveColleges()" ng-checked="liveCollegesStatus=='included'">
+                    <span ng-class="liveCollegesStatus=='excluded' ? 'nr-font' : 'bg-font'"> All Colleges </span>
+                </label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" ng-click="excludeLiveColleges()"  ng-checked="liveCollegesStatus=='excluded'">
+                    <span ng-class="liveCollegesStatus=='included' ? 'nr-font' : 'bg-font'"> Non-Live Colleges </span>
+                </label>
+              </center>
+              <!-- <span ng-show="liveCollegesStatus=='included'">Exclude Live Colleges &nbsp;&nbsp; <i style="cursor:pointer;" ng-click="excludeLiveColleges()" class="fa fa-toggle-off"></i></span>
+              <span ng-show="liveCollegesStatus=='excluded'">Include Live Colleges &nbsp;&nbsp; <i style="cursor:pointer;" ng-click="includeLiveColleges()" class="fa fa-toggle-on"></i></span> -->
+            </div>
+          </div>
+          <div class="col-xs-2" style="font-size:40px; font-weight:bold; color:black; font-family: Montserrat,Helvetica,Arial,sans-serif;">
+            {{colleges.length}}
+          </div>
+        </div>
+      </div> 
+      <div class="container-fluid">    
+        <div class="row">
+          <div class="col-xs-12" style="height: 400px; overflow-y:scroll;">
+            <div class="row" style="padding-bottom:10px; padding-top:10px; border-bottom:1px solid grey;" ng-repeat="(collegesId,details) in colleges | orderBy: 'details.students.length' ">
+              <div class="col-xs-2" style="font-size:60px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:black">
+                <center>{{details.students.length}}</center>
+              </div>
+              <div class="col-xs-10" style="font-family: Montserrat,Helvetica,Arial,sans-serif;" ng-init="collegeDetail = getCollegeDetails(details.collegeId)">
+                <div class="row"><span style="font-weight:bold; color:black; font-size:18px;">{{collegeDetail.collegename}}</span></div>
+                <div class="row" style="border-bottom:1px solid #E6E6E6; padding-bottom:10px; margin-bottom:10px;">
+                  <div class="col-sm-6">
+                    <button class="form-control btn btn-success" style="background-color:grey; color:white;" ng-disabled="disableFirstTenStudentsForBuildEnquiry =='yes'" ng-if="details.students.length < 20" ng-click="buildEnquiryForFirstTenStu(collegeDetail.counselloremail,details.students)">BuildEnq 1-10</button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button class="form-control btn btn-success" style="background-color:grey; color:white;" ng-disabled="disableFirstTenStudentsForBuildEnquiry =='no'" ng-if="details.students.length > 10" ng-click="buildEnquiryForLastTenStu(collegeDetail.counselloremail,details.students)">BuildEnq 11-20</button>
+                  </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid #E6E6E6; padding-bottom:10px; margin-bottom:10px;">({{collegeDetail.counselloremail}})</div>
+                <div ng-if="collegeDetail.counsellornames && collegeDetail.counsellornumbers" class="row" style="border-bottom:1px solid #E6E6E6; padding-bottom:10px;">
+                  <div style="font-size:18px; color:black;" class="col-xs-6"><i class="fa fa-user fa-1x"></i>&nbsp;&nbsp;{{collegeDetail.counsellornames}}
+                  </div>
+                  <div style="font-size:18px; color:black;" class="col-xs-6"><i class="fa fa-phone fa-1x"></i>&nbsp;&nbsp;({{collegeDetail.counsellornumbers}})
+                  </div>
+                </div>
+                <div ng-if="!collegeDetail.counsellornames && !collegeDetail.counsellornumbers" class="row" style="color:red; border-bottom:1px solid #E6E6E6; padding-bottom:10px;">
+                  <div style="font-size:18px; color:black;" class="col-xs-12">Not Availlable
+                  </div>
+                </div>
+                <div ng-if="collegeDetail.counsellornames && !collegeDetail.counsellornumbers" class="row" style="border-bottom:1px solid #E6E6E6; padding-bottom:10px;">
+                  <div style="font-size:18px; color:black;" class="col-xs-6">{{collegeDetail.counsellornames}}
+                  </div>
+                  <div style="font-size:18px; color:black;" class="col-xs-6" style="color:red;">Not Availlable
+                  </div>
+                </div>
+                <div ng-if="!collegeDetail.counsellornames && collegeDetail.counsellornumbers" class="row" style="border-bottom:1px solid #E6E6E6; padding-bottom:10px;">
+                  <div style="font-size:18px; color:black;" class="col-xs-6" style="color:red;">Not Availlable
+                  </div>
+                  <div style="font-size:18px; color:black;" class="col-xs-6">{{collegeDetail.counsellornumbers}}
+                  </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    Students available for session:
+                    <br>
+                    <span ng-repeat="(key,value) in details.students" > 
+                      <span ng-init="studentName=getStudentName(value.studentId); studentEmail=getStudentEmail(value.studentId)">
+                        &nbsp;&nbsp;&nbsp;&nbsp;[{{$index+1}}]&nbsp;{{studentName.$value}} ({{studentEmail.$value}})<br>
+                      </span>
+                    </span>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--******************************************************************************************************************** -->
+</div>
+
+
+  <script>
+
+    $( ".search-page" ).on( "mouseover", ".email-div-expand", function( event ) {    
+      $('.done-div-expand').removeClass('col-xs-4');
+      $('.done-div-expand').addClass('col-xs-3');
+      $('.email-div-expand').removeClass('col-xs-2');
+      $('.email-div-expand').addClass('col-xs-3');
+    });
+    $( ".search-page" ).on( "mouseout", ".email-div-expand", function( event ) {    
+      $('.done-div-expand').removeClass('col-xs-3');
+      $('.done-div-expand').addClass('col-xs-4');
+      $('.email-div-expand').removeClass('col-xs-3');
+      $('.email-div-expand').addClass('col-xs-2');
+    });
+
+    $( ".search-page" ).on( "mouseover", ".done-div-expand", function( event ) {    
+      $('.done-div-expand').removeClass('col-xs-4');
+      $('.done-div-expand').addClass('col-xs-5');
+      $('.college-div-expand').removeClass('col-xs-4');
+      $('.college-div-expand').addClass('col-xs-3');
+    });
+    $( ".search-page" ).on( "mouseout", ".done-div-expand", function( event ) {    
+      $('.done-div-expand').removeClass('col-xs-5');
+      $('.done-div-expand').addClass('col-xs-4');
+      $('.college-div-expand').removeClass('col-xs-3');
+      $('.college-div-expand').addClass('col-xs-4');
+    });
+
+    $( ".search-page" ).on( "mouseover", ".college-div-expand", function( event ) {    
+      $('.done-div-expand').removeClass('col-xs-4');
+      $('.done-div-expand').addClass('col-xs-3');
+      $('.college-div-expand').removeClass('col-xs-4');
+      $('.college-div-expand').addClass('col-xs-5');
+    });
+    $( ".search-page" ).on( "mouseout", ".college-div-expand", function( event ) {    
+      $('.done-div-expand').removeClass('col-xs-3');
+      $('.done-div-expand').addClass('col-xs-4');
+      $('.college-div-expand').removeClass('col-xs-5');
+      $('.college-div-expand').addClass('col-xs-4');
+    });
+    $( ".search-page" ).on( "click", ".slip-main-content-title-ico", function( event ) {    
+      if($('.slip-main-content').hasClass('slip-main-content-open')) {
+        $('.slip-main-content').removeClass('slip-main-content-open');
+        $('.slip-main-content-title-ico').html('<i class="fa fa-chevron-left fa-2x"></i>');
+
+      }
+      else {
+        $('.slip-main-content').addClass('slip-main-content-open');
+        $('.slip-main-content-title-ico').html('<i class="fa fa-times fa-2x"></i>');
+      }
+    });
+
+  </script>

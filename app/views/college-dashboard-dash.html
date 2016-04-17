@@ -1,0 +1,255 @@
+<div class="container-fluid noPadding" ng-init="toTheTop()">
+
+	<div class="row">
+		<ol class="breadcrumb blue noBorder">
+  			<li>Home</li>
+  			<li>Dashboard</li>
+		</ol>
+	</div>
+
+	 <div class=" pull-right dashboard-leftPadding noPadding contentPadding dashHome-content ">
+
+			<div class=" dashboard-positionFix col-lg-5 s-md-5 s-sm-6 noPadding">
+			 
+			    <!-- <div class="panel panel-info" ng-if="userc.profile.collegetype =='paid'">
+			        <div class="panel-heading">
+			           <i class="fa-ns fa fa-lg fa-fw fa-bar-chart"></i>&nbsp;&nbsp;Statistics
+			        </div>
+			        <div class="panel-body ">
+						<div class="row Statistics-row">
+							<center>
+								<div class="col-xs-3">
+									<span class="Statistics-row-span">{{ userc.profile.contractsessions }} </span>
+									<br/>
+									<p>Total Session</p>
+								</div>
+								<div class="col-xs-3">
+									<span class="Statistics-row-span"> {{ userc.profile.feedbacknotgivenCount }} </span>
+									<br/>
+									<p>Feedback Required</p>
+								</div>
+								<div class="col-xs-3">
+									<span class="Statistics-row-span"> {{ userc.profile.approvesessionCount + userc.profile.pendingsessionCount + userc.profile.feedbacknotgivenCount + userc.profile.facetofacesessions + userc.profile.extrasessions }} </span>
+									<br/>
+									<p>Billable Session</p>
+								</div>
+								<div class="col-xs-3">
+									<span class="Statistics-row-span"> {{ (userc.profile.contractsessions) - (userc.profile.approvesessionCount + userc.profile.pendingsessionCount + userc.profile.feedbacknotgivenCount + userc.profile.facetofacesessions + userc.profile.extrasessions)}} </span>
+									<br/>
+									<p>To be serviced</p>
+								</div>
+							</center>
+						</div>			            
+			        </div>
+			    </div> -->
+
+			    <div class="panel panel-info">
+			        <div class="panel-heading">
+			           <i class="fa-ns fa fa-lg fa-fw fa-home"></i>&nbsp;&nbsp;Account Overview
+			        </div>
+			        <div class="panel-body">
+			            
+						<div ng-if="userc.profile.collegetype ==='free'">
+							<div class=" dashboard-positionFix col-xs-9">
+								<h5 > Plan type : <span style="font-size : 18px; color:red;">Free</span></h5>
+							</div>
+							<div class=" dashboard-positionFix col-xs-3">
+								<button data-toggle="modal" data-target="#upgrade-modal" type="button" class="btn btn-default">Upgrade</button>
+							</div>
+						</div>
+						<h5 ng-if="userc.profile.collegetype ==='paid'"> Plan type : <span style="font-size : 18px; color:green;">Paid</span></h5>
+			        </div>
+			    </div>
+			
+			    <div class="panel panel-info">
+			        <div class="panel-heading">
+			          <i class="fa-ns fa fa-lg fa-fw fa-male"></i>&nbsp;&nbsp;Account Manager
+			        </div>
+			        <div class="panel-body">
+			            <div class="row block-content" ng-if="userc.profile.collegetype =='paid'" ng-init="getdata(userc.profile.accountmanager)">
+						<div ng-if="adminname !== null">
+							<div class=" dashboard-positionFix col-xs-12">
+								<h6 > Account Manager's Name : &nbsp;&nbsp;&nbsp;<span style="font-size : 18px; color:green; font-family: Montserrat,Helvetica,Arial,sans-serif;">{{adminname}}</span></h6>
+							</div>
+							<div class=" dashboard-positionFix col-xs-12">
+								<h6 > Account Manager's Email : &nbsp;&nbsp;<span style="font-size : 18px; color:green;font-family: Montserrat,Helvetica,Arial,sans-serif;">{{ adminemail  }}</span></h6>
+							</div>
+							<div class=" dashboard-positionFix col-xs-12">
+								<h6 > Account Manager's Number : <span style="font-size : 18px; color:green;font-family: Montserrat,Helvetica,Arial,sans-serif;">{{ adminmobile }}</span></h6>
+							</div>
+						</div>
+
+							<div  ng-if="adminname == null">
+								<div class=" dashboard-positionFix col-xs-12">
+									<h5 > Account Manager's Name : &nbsp;&nbsp;&nbsp;<span style="font-size : 18px; color:green; font-family: Montserrat,Helvetica,Arial,sans-serif;">Zainab </span></h5>
+								</div>
+								<div class="dashboard-positionFix col-xs-12">
+									<h5 > Account Manager's Email : &nbsp;&nbsp;&nbsp;<span style="font-size : 18px; color:green;font-family: Montserrat,Helvetica,Arial,sans-serif;">Zainab@mymissionadmission.com</span></h5>
+								</div>
+								<div class="dashboard-positionFix col-xs-12">
+									<h5 > Account Manager's Number : <span style="font-size : 18px; color:green;font-family: Montserrat,Helvetica,Arial,sans-serif;">+91-8826941731</span></h5>
+								</div>
+							</div>
+						</div>  <!-- END OF NG-IF=PAID -->
+
+					<div class="container-fluid block" style="margin-top:50px" ng-if="userc.profile.collegetype =='free' " ng-init="getdata(userc.profile.operationemail)">
+						<div class="row block-content" ng-if="userc.profile.collegetype =='free'">
+							<div ><!-- free to be replaced by paid -->
+								<div class="dashboard-positionFix col-xs-12">
+									<h5 > Account Manager's Name : &nbsp;&nbsp;&nbsp;<span style="font-size : 18px; color:green; font-family: Montserrat,Helvetica,Arial,sans-serif;">Alnoor Virani </span></h5>
+								</div>
+								<div class="dashboard-positionFix col-xs-12">
+									<h5 > Account Manager's Email : &nbsp;&nbsp;&nbsp;<span style="font-size : 18px; color:green;font-family: Montserrat,Helvetica,Arial,sans-serif;">alnoor@anhadedutrain.com</span></h5>
+								</div>
+								<div class="dashboard-positionFix col-xs-12">
+									<h5 > Account Manager's Number : <span style="font-size : 18px; color:green;font-family: Montserrat,Helvetica,Arial,sans-serif;">+91-8826941731</span></h5>
+								</div>
+							</div>
+						</div>
+					</div> <!-- END OF NG-IF=FREE -->
+						
+			        </div>
+			    </div>
+
+			</div> <!-- END OF ACCOUNT INFO DIV -->
+
+		
+			<div class="col-lg-7 col-md-7 col-sm-6 dashboard-positionFix ">
+
+				<div class="panel panel-info">
+			        <div class="panel-heading">
+			           <i class="fa-ns fa fa-lg fa-fw fa-star-half-o"></i>&nbsp;&nbsp;Recent Activity
+			        </div>
+			        <div class="panel-body">
+			            
+						<div id="carousel-example" class="carousel slide" data-ride="carousel">
+
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner slide-height">
+						    
+						    <div class="item active">
+							  <img src="../images/IC (1).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (1).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (2).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (2).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+							
+							<div class="item">
+							  <img src="../images/IC (3).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (3).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (4).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (4).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (5).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (5).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (6).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (6).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (7).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (7).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (8).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (8).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (9).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (9).jpg')  top left; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (10).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (10).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (11).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (11).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (12).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (12).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+							<div class="item">
+							  <img src="../images/IC (13).jpg" class="carousel-img" alt="Carousel Image">
+							  <div style="background:url('../images/IC (13).jpg') top left ; 
+							          background-size:cover;" class="slider-size">
+							  </div>
+							</div>
+
+
+						  </div>
+
+						  <!-- Controls -->
+						  <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left"></span>
+						  </a>
+						  <a class="right carousel-control" href="#carousel-example" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right"></span>
+						  </a>
+						
+						</div>
+					
+			        </div>
+			    </div>
+
+		    </div> <!-- END OF CAROUSEL DIV -->
+	</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="upgrade-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upgrade Subscription</h4>
+      </div>
+      <div class="modal-body">
+      	To upgarde your subscription, Please call at +91-8826941731 or mail at "alnoor@anhadedutrain.com".
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Okay, Got It!</button>
+      </div>
+    </div>
+  </div>
+</div>

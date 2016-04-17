@@ -1,0 +1,188 @@
+<div class="container-fluid" ng-init="getYearlyPosts()">
+<!-- 	<div class="row" style="background-color:pink">
+  		<div class="col-md-12">
+    		<form class="form-inline" role="form">
+      			<h4>Retrieve Posts Yearly</h4>
+      			<div class="form-group" style="margin-right:30px">
+			    	<h3> <span class="label label-primary btn "><a style="color:red" href="http://www.mymissionadmission.com/#/catagory/Science">Science</a></span></h3>
+			    </div>
+			    <div class="form-group" style="margin-right:30px">
+			  	  <h3><span class="label label-primary btn "><a style="color:red" href="http://www.mymissionadmission.com/#/catagory/English">English</a></span></h3>
+				</div>
+			    <div class="form-group" style="margin-right:30px">
+			    	<h3><span class="label label-primary btn "><a style="color:red" href="http://www.mymissionadmission.com/#/catagory/Random">Random</a></span></h3>
+    			</div>
+    			<div class="form-group" style="margin-right:30px">
+			    	<h3> <span class="label label-primary btn"><a style="color:red" href="http://www.mymissionadmission.com/#/blog">All Posts</a></span></h3>
+			    </div>
+			    <select  ng-model="year" style="margin-right:30px" ng-change="updateYear(year)">
+			        <option value="" default selected>Year</option>
+			        <option value="2015">2015</option>
+			        <option value="2016">2016</option>
+			    </select>
+      
+		      	<select ng-model="month" ng-change="updateMonth(month)">
+			        <option value="" default selected>Month</option>
+			        <option value="01">January</option>
+			        <option value="02">February</option>
+			        <option value="03">March</option>
+			        <option value="04">April</option>
+			        <option value="05">May</option>
+			        <option value="06">June</option>
+			        <option value="07">July</option>
+			        <option value="08">August</option>
+			        <option value="09">September</option>
+			        <option value="10">October</option>
+			        <option value="11">November</option>
+			        <option value="12">December</option>
+		      	</select>
+    		</form>
+  		</div>
+  	</div> -->
+
+<div class="row blog-title-container" >
+	<div class="col-md-12 text-center">
+	<h4>Retrieve All Posts</h4>
+	<form class="form-inline" role="form">
+			
+			<div class="form-group">
+	    	<h3>
+		    	<a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="http://www.mymissionadmission.com/#/catagory/Science">Science</a>
+	    	</h3>
+	    </div>
+	    <div class="form-group" >
+	  	  <h3><a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="http://www.mymissionadmission.com/#/catagory/English">English</a></h3>
+		</div>
+	    <div class="form-group" >
+	    	<h3><a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="http://www.mymissionadmission.com/#/catagory/Random">Random</a></h3>
+		</div>
+		<div class="form-group" >
+	    	<h3><a class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" href="http://www.mymissionadmission.com/#/blog">All Posts</a></h3>
+	    </div>
+	    <select class="form-control" ng-model="year"  ng-change="updateYear(year)">
+	        <option value="" default selected>Year</option>
+	        <option value="2015">2015</option>
+	        <option value="2016"><a  href="http://www.mymissionadmission.com/#/blog/:2016">2016</a></option>
+	    </select>
+	    <select class="form-control" ng-model="month" ng-change="updateMonth(month)">
+			        <option value="" default selected>Month</option>
+			        <option value="01">January</option>
+			        <option value="02">February</option>
+			        <option value="03">March</option>
+			        <option value="04">April</option>
+			        <option value="05">May</option>
+			        <option value="06">June</option>
+			        <option value="07">July</option>
+			        <option value="08">August</option>
+			        <option value="09">September</option>
+			        <option value="10">October</option>
+			        <option value="11">November</option>
+			        <option value="12">December</option>
+		      	</select>
+
+	</form>
+	</div>
+</div>
+
+
+  	<!-- <div class="row">
+  		<div class="col-md-12" style="margin-top:50px;">
+			<div ng-repeat="(key,value) in post.slice().reverse()">
+	  			<div class="row"  style="border-radius: 25px; background: pink; padding: 20px;">
+	    			<div class="col-xs-12">
+	      				<a style="color:red; cursor:pointer" ng-href="{{value.sharingUrl}}"><h3>{{value.postTitle}}</h3></a></br></br>
+	      				<div ta-bind ng-model="value.postData"></div></br>
+	    			</div>
+	    			<div class="row">
+					    <div class="col-xs-1 btn" style="background:blue;color:white;margin-right:20px;margin-left:15px"><i ng-click="likePost()" class="fa fa-thumbs-o-up"> like</i></div>
+					    <div class="col-xs-1 btn" style="background:blue;color:white;margin-right:20px;"><i ng-click="commentOnPost()" class="fa fa-comment-o"> comment</i></div>
+					    <div class="col-xs-1 btn" style="background:blue;color:white;margin-right:20px;"><i ng-click="sharePost()" class="fa fa-share"> share</i></div>
+					    <b> <div class="col-xs-3" style="margin-top:15px;">Dated: {{value.postDate | convert}} </div> </b>
+					    <b> <div class="col-xs-5" style="margin-top:15px;">Time: {{value.postTime | change_time}} </div> </b>
+					    <input type="hidden" ng-init = "updateTimestamp(value.postNumber)"> 
+	  				</div>  
+	  			</div></br>
+			</div>
+		</div> 
+	</div> -->
+ 	<div class="row">
+  		<div class="contentPadding">
+			
+				<div class="col-md-6"  ng-repeat="(key,value) in post.slice().reverse()">
+	  			
+				<div class="blog-container">	
+		  			<div style="z-index=125236246246;">
+		  				<img class="img-circle img-responsive img-house" src="images/bower-logo.png">
+		  			</div>
+
+	  				<div class="row "><img class="img-responsive post-header" src="{{value.featuredImage}}"></img></div><br>
+		  			
+		  			
+		  				<div class="row" >
+			    			<div class="col-md-12 text-center">
+			      				<div class="post-title-container ">
+				      				<a class="text-center" ng-href="{{value.sharingUrl}}">
+				      					<h2 class="post-title" >{{value.postTitle | titleCase}}</h2>
+				      				</a>
+									<a href="#" style="color:white;"><i class="fa fa-user"></i> Jon Snow</a>
+			      				</div>
+			      				<!-- <div class="contentPadding well" ta-bind ng-model="value.postData"></div></br> -->
+			      				
+			      			</div>
+			    		</div>	
+		    			<div class="row post-description text-center">
+		    				<div class="text-center col-xs-12 actions contentPadding">
+			      				<ul class="list-inline hashtags">
+			      					<li><i class="fa fa-tags"></i></li>
+			      					<li><a href="#">#HouseOne</a></li>
+			      					<li><a href="#">#HouseTwo</a></li>
+			      					<li><a href="#">#HouseThree</a></li>
+
+			      				</ul>
+		      				</div>
+		    				<ul class="list-inline post-info">
+			      				<li class="col-xs-12 text-center" style="color:grey;" ><i class="fa fa-calendar-o"></i> {{value.postDate | convert}}</li>
+		      				</ul>
+
+
+		      				<div class="col-md-offset-1 col-md-10">
+		      					<p class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		      					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		      					quis nostrud exercitation ullamco laboris nisi ut[..]</p>
+		      					<a class="read-more" ng-href="{{value.sharingUrl}}" >Read More</a>
+		      				</div>
+		      			</div>
+		      		
+
+
+		    		<div class="seperator"></div>
+		    		
+					<!-- <div class="row text-center contentPadding " style="padding:2em;">
+	    				
+					    <div class="contentPadding actions col-xs-2 post-footer">
+					    	<ul class="list-inline text-left">
+	  							<li><i ng-click="likePost()" class="fa fa-2x fa-heart-o"></i></li>
+	  							<li><i ng-click="commentOnPost()" class="fa fa-2x fa-comment-o"></i></li>
+	  						</ul>	
+		    			</div>
+
+		    		
+		    			<div class="col-md-offset-5 col-xs-5 actions text-right post-footer">
+		  						<ul class="list-inline post-social">
+		  							<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a></li>
+		  							<li><a href="#"><i class="fa fa-2x fa-google-plus-square"></i></a></li>
+		  							<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a></li>
+		  						</ul>		    				
+		    			</div>
+							<input type="hidden" ng-init = "updateTimestamp(value.postNumber)">	
+	  				</div>  -->
+					<input type="hidden" ng-init = "updateTimestamp(value.postNumber)">	
+				</div>
+			</div>
+
+
+		</div> 
+	</div>
+
+	<div scroll-trigger="loadMoreYearlyBlogs()" threshold="150"></div>
+</div>

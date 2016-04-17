@@ -1,0 +1,226 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  
+    <div class="theme-container">
+
+      <div class="row ">
+        <div class="container-fluid">
+          <div class="col-xs-6 pull-left">
+            <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Edit College Details<h3>
+          </div>
+          <div class="col-xs-6 pull-right">
+            <h5 class="pull-right">You can edit college details here.<h5>
+          </div>
+        </div>
+      </div>
+
+
+      <hr />
+      
+
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+          <div class="row ">
+            <div class="col-md-3">
+              <div class="filter-pane" style="margin-bottom : 10px;">
+                <label class="radioFilter">
+                  <input type="radio" name="colltype" value="paid" ng-model="colltype">Paid Colleges
+                </label>
+                <label class="radioFilter">
+                  <input type="radio" name="colltype" checked value="college" ng-model="colltype">All Colleges
+                </label>
+                <hr />
+                <input type="text" placeholder="Search with College Name" class="form-control main-input-box aaa" ng-model="subfilter">
+              </div>
+              <div class="filter-pane">
+                <select required class="form-control" ng-model="dummyCountry" onchange="print_state('state',this.selectedIndex);" id="country" name ="country">
+                </select>
+                <select class="form-control" ng-model="dummyState" required name ="state" id ="state"></select>
+                <script language="javascript">print_country("country")</script>
+                <hr />
+                <div class="bord">
+                  <fp-input ng-model="dummyPhoto" class="btn btn-success btn-block" data-fp-button-text="Pick Image" class="btn btn-default btn-lg main-search-btn sel-btn-file" data-fp-apikey="AlHT3QcNWSGCQpTZ3dLn3z" data-fp-mimetypes="image/*" data-fp-multiple="false" data-fp-maxsize="5242880" ng-init="" />
+                </div>
+              </div>
+            </div> 
+            <div class="col-md-9">
+              
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 800px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      <!-- repetetive Block -->
+                      <div class="panel panel-default panel-c" ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter">
+                        <form name="college_edit" ng-submit="updateCollege(collegeId, college, dummyCountry, dummyState, dummyPhoto)">
+                        <div class="panel-heading panel-c-h" role="tab" id="heading_{{collegeId}}">
+                          <h4 class="panel-title collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse_{{collegeId}}" aria-expanded="false" aria-controls="collapse_{{collegeId}}" >
+                            {{college.collegename}} ( {{college.counselloremail}} )
+                          </h4>
+                        </div>
+                        <div id="collapse_{{collegeId}}" class="panel-collapse collapse panel-c-b" role="tabpanel" aria-labelledby="heading_{{collegeId}}">
+                          <div class="panel-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <img src="{{college.collegephoto}}" alt="..." class="img-thumbnail">
+                                </div>
+                                <div class="col-sm-8">
+                                  <input type="text" ng-model="college.collegename" required placeholder="College Name" value="{{college.collegename}}" class="form-control ">
+                                  <input type="text" ng-model="college.collegeaffiliation" required placeholder="College Affiliated to" value="{{college.collegeaffiliation}}" class="form-control ">
+                                  <h4 class="form-control" style="border : 0px !important;">{{college.counselloremail}}</h4>
+                                  <input type="text" ng-model="college.collegewebsite" required pattern="((www[.])[^\s()<>]+)" title='Your website must start with www.'placeholder="Website" value="{{college.collegewebsite}}" class="form-control">
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="no-bord">
+                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target=".bs-example-modal-1_{{collegeId}}" ng-click="preparecollegeUG(college)" >Select UG Courses</button>
+                                  </div>
+                                  <div class="no-bord">
+                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target=".bs-example-modal-2_{{collegeId}}" ng-click="preparecollegePG(college)">Select PG Courses</button>   
+                                  </div>
+                                  <center><div ng-if = "submitsuccesstext == true"> <h3 style="color:green">Congratulations! Course List has been updated</h3></div></center>
+                                </div>
+                                
+                                <div class="col-sm-6" style="margin-top:-8px;">
+                                  <h4 class="form-control">Current Data: {{college.collegestate}},{{college.collegecountry}}</h4>
+                                  <h4 class="form-control form-shadow">New Data: {{dummyState}},{{dummyCountry}}</h4>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <input type="text" ng-model="college.collegeaddress" required placeholder="Address" value="{{college.collegeaddress}}" class="form-control ">
+                                  <input type="text" ng-model="college.collegecity" required placeholder="City" value="{{college.collegecity}}" class="form-control ">
+                                  <input type="text" ng-model="college.collegelocation" required placeholder="Nearby Location (Optional)" value="{{college.collegelocation}}" class="form-control ">
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="row">
+                                    <center>
+                                    <div class="col-xs-12">
+                                      <img src="{{dummyPhoto.url}}" alt="..." class="img-thumbnail">
+                                    </div>
+                                    </center>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <label>Face To Face Sessions: </label><input type="text" ng-model="college.facetofacesessions" placeholder="Face to Face sessions" class="form-control ">
+                              <!-- <div ng-show="college.collegetype == 'paid'">
+                              <label>Number of Sessions as per Contract: </label><input type="text" ng-model="college.contractsessions"  placeholder="Sessions As per Contract" class="form-control ">
+                              </div> -->
+                            
+
+                              <div class="row" style="padding:20px; background:rgba(255,255,255,0.1); border:2px dashed grey;"><!-- added div -->
+                                <div class="col-sm-6">
+                                  <input type="text" ng-model="college.counsellornames"  placeholder="Counsellor Name" class="form-control ">
+                                  <input type="text" ng-model="college.counsellornumbers"  placeholder="Counsellor Number" class="form-control ">
+                                  <input type="text" ng-model="college.counselloremails"  placeholder="Counsellor Email" class="form-control ">
+                                </div>
+                                <div class="col-sm-6" >
+                                  <input type="text" ng-model="college.higherauthoritynames"  placeholder="Higher Authority's Name" class="form-control ">
+                                  <input type="text" ng-model="college.higherauthoritynumbers"  placeholder="Higher Authority's Number" class="form-control ">
+                                  <input type="text" ng-model="college.higherauthorityemails"  placeholder="Higher Authority's Email" class="form-control ">
+                                </div>
+                                <div ng-if="college.collegecity" ng-init="mm = getadminemail2(college.accountmanager)" >
+                                <span><a href="" ng-click="mm = getadminemail2(college.accountmanager)">Refresh</a></span>
+                                <strong style="color: white" >&nbsp;&nbsp; Current Account Manager Email: </strong> <span class="animate-show" style="color:green" ng-if="mm.$value !==  null" >&nbsp;&nbsp;{{ mm.$value }}  </span>
+                                <span class="animate-show" style="color:red" ng-if="mm.$value === null ">&nbsp;&nbsp; No Manager assigned Yet</span>
+                                </div>
+                                <div class="col-sm-12">
+                                  <input type="email" ng-model="college.accountmanagera"  placeholder="Account Manager's Email" class="form-control " ng-keyup="doThisForadmin(college.accountmanagera)" ng-change="mm = ''">
+                                </div>
+                                <div class="animate-show" ng-if="adminIdFlag == 'Done'">{{ adminname }} </div>
+                                <div class="animate-show" ng-if="adminIdFlag == 'Not Done'">Admin not exists </div>
+                                <input type="button" ng-disabled = "submitdisabled" value="Save Changes" style="color : white;"  class="btn btn-success pull-right btn-block" ng-click="updateoperation(college)" /> 
+                              </div><!-- added div end --> 
+
+
+
+
+                              <div class="row">
+                                <div class="col-xs-12">
+                                  <input style="width:1.2em; height:1.2em;" type="checkbox" ng-model="chkToSaveCountryState[collegeId]" ng-true-value="'YES'" ng-false-value="'NO'" id="ch1"></input>
+                                  <label for="ch1">&nbsp;&nbsp;&nbsp;Click here to change State and Country and then click Save Changes.</label>
+                                  <br />
+                                  <input style="width:1.2em; height:1.2em;" type="checkbox" ng-model="chkToSaveCollegePhoto[collegeId]" ng-true-value="'YES'" ng-false-value="'NO'" id="ch2"></input>
+                                  <label for="ch2">&nbsp;&nbsp;&nbsp;Click here to change college Photo and then click Save Changes.</label>
+                                </div>
+                                <label>{{message}}</label>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <input type="button" value="Preview" style="color : white; :hover{color:white;}" class="btn btn-success pull-right btn-block" />
+                                </div>
+                                <div class="col-sm-6">
+                                  <input type="submit" value="Save Changes" style="color : white;"  class="btn btn-success pull-right btn-block" />
+                                </div>
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
+
+                        <div class="modal fade bs-example-modal-1_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" style="color:black;">
+                                        <div class="modal-header">
+                                            <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <center><div ng-if = "submitsuccesstext == true"> <h5 style="color:green"><strong> Congratulations! </strong> Your profile has been updated</h5></div></center>
+                                            <h4 class="modal-title">Select Undergraduate Courses </h4>
+                                            <div style="display:none">{{ uSer.roles=college.coursesofferedUG }}</div> 
+                                        </div>
+                                        <div class="modal-body">
+                                            <label class="checkbox" ng-repeat="role in roles">
+                                                <input type="checkbox" checklist-model="uSer.roles" checklist-value="role.id"> {{role.text}}
+                                            </label>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button style="color:black;" type="button" class=" btn btn-primary" ng-click="updateUGcollege(college)" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Save Changes</span></button>
+                                            <button style="color:black;" type="button" class=" btn btn-primary" ng-click="cancelcollege(college)" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Cancel</span></button>
+                                        </div>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="modal fade bs-example-modal-2_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content" style="color:black;">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Select Postgraduate Courses</h4>
+                                        <div style="display:none">{{ uSerA.rolesA=college.coursesofferedPG }}</div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label class="checkbox" ng-repeat="roleA in rolesA">
+                                            <input type="checkbox" checklist-model="uSerA.rolesA" checklist-value="roleA.idA"> {{roleA.textA}}
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button style="color:black;" type="button" class=" btn btn-primary" ng-click="updatePGcollege(college)" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Save Changes</span></button>
+                                        <button style="color:black;" type="button" class=" btn btn-primary" ng-click="cancelcollege(college)" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Cancel</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                      </div>  
+                      <!-- repetetive Block end -->
+
+                      <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                        <div class="container-fluid">
+                          <div class="row result-det">
+                            <strong><h5>{{college.collegename}}</h5></strong>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+</div>

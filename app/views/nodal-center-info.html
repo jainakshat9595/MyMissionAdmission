@@ -1,0 +1,205 @@
+<div class="container-fluid search-page ex-pad" ng-init="toTheTop()">
+    
+<div class="theme-container">
+  <div class="row a-head">
+    <div class="container-fluid">
+      <div class="col-xs-6 pull-left">
+        <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Nodal Center Information<h3>
+      </div>
+      <div class="col-xs-6 pull-right">
+       <h5 class="pull-right">You can get all information about nodal center here.<h5>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+      <div class="row search-results">
+        <div class="row">
+        
+          <div class="col-md-12 filter-pane search-pane">
+            <div class="container-fluid">
+              <input type="text" placeholder="Search Student" class="form-control main-input-box aaa" ng-model="subfilter">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+        <div class="col-md-12">
+          <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+            <div class="row">
+              <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                <table class="table table-striped feed-table">
+                    <col width="8px" />
+                    <col width="40px" />
+                    <col width="40px" />
+                    <col width="20px" />
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Nodal Admin Name</th>
+                        <th>Nodal Center Name</th>
+                        <th>Nodal Admin E-mail</th>
+                        <!-- <th>Click to Verify</th> -->
+                        </tr>
+                      </thead>
+                      
+                      <tbody ng-animate="'animate'" ng-repeat="(usernId,usern) in nod | filter:subfilter" ng-show="usern.privilege=='approved'">
+                        <div ng-show="signedIn()">
+                          <tr class="feed-table-row">
+                            <td scope="row">{{$index + 1}}</td>
+                            <td><strong>{{usern.nodalAdminName}}</strong></td>
+                            <td><strong>{{usern.nodalCenterName}}</strong></td>
+                            <td>
+                              <a data-toggle="modal" data-target="#nodal-enq" style="color:blue; cursor:pointer;" ng-click="nodalDetail(usern.$id); getStudentsInfo(usern.$id)">{{usern.nodalAdminEmail}}</a><br>
+                              Password: {{usern.password}} 
+                            </td>
+                            <!-- <td class="v-l" align="center" style="color:#00FF00; cursor:pointer;" ng-click="verifyStudent(student)"><i class="fa fa-thumbs-o-up"></i></td> -->
+                          </tr>
+                        </div>
+                    </tbody>
+                  </table>
+
+                                      <!-- Nodal Enquiry Modal -->
+                  <div class="modal fade stu-enq-modal" tabindex="-1" ng-controller="AdminTaskCtrl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="nodal-enq">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div align="center" class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Nodal Center Details</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-xs-8">
+                                <div class="container-fluid stu-det-block">
+                                  <div class="row block-det">
+                                    <div class="row">
+                                      <div class="col-xs-5">
+                                        Nodal Admin Name
+                                      </div>
+                                      <div class="col-xs-7">
+                                           <h4>: {{nodalobject.nodalAdminName}}</h4>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-xs-5">
+                                        Nodal Center Name
+                                      </div>
+                                      <div class="col-xs-7">
+                                           <h4>: {{nodalobject.nodalCenterName}}</h4>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-xs-5">
+                                        Nodal Admin Email
+                                    </div>
+                                    <div class="col-xs-7">
+                                      <h4>: {{nodalobject.nodalAdminEmail}}</h4>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-xs-5">
+                                        Nodal Phone Number
+                                    </div>
+                                    <div class="col-xs-7">
+                                      <h4>: {{nodalobject.nodalPhone}}</h4>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-xs-5">
+                                        Nodal Address
+                                    </div>
+                                    <div class="col-xs-6">
+                                      <h4>: {{nodalobject.nodalAddress}} , {{nodalobject.nodalCity}},  {{nodalobject.nodalState}}, {{nodalobject.nodalCountry}}</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                      <div class="col-xs-5">
+                                        Date of Accepting
+                                    </div>
+                                    <div class="col-xs-7">
+                                      <h4>: {{nodalobject.dateOfAccepting}}</h4>
+                                    </div>
+                                  </div>
+                                  </br></br>
+
+                                <div class="container-fluid stu-det-block">
+                                  <div align="center" class="row block-head">
+                                       <h4> Nodal Center Perfomance Status  </h4>
+                                  </div>
+                                  
+
+
+                                  <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; margin-left: -100px; height : 500px; width: 910px;" ng-if="nodalobject">
+                                    <div class="row" >
+                                      <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                                        <table class="table table-striped feed-table">
+                                          <col width="8px" />
+                                          <col width="40px" />
+                                          <col width="40px" />
+                                          <col width="20px" />
+                                          <thead>
+                                              <tr>
+                                              <th>#</th>
+                                              <th>Student Details</th>
+                                              <th>Student Session Status</th>
+                                              <th>Student Referal Status</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody ng-animate="'animate'" ng-repeat="(studentId,detail) in nodalReferredStudents">
+                                            <tr class="feed-table-row">
+
+                                              <td scope="row">{{$index+1}}</td>
+                                              <td ng-init = "studentDetail = getStudentDetail(detail.$id)"><strong>{{studentDetail.studentname}}<br>
+                                              Email: ({{studentDetail.email}})<br>
+                                              Phone: {{studentDetail.studentmobile}}
+                                              </strong></td>
+                                              <td ng-init = "getStudentSessionDetail(detail.$id, studentId); getStudentSessionDetailBeforeEnrollment(detail.$id, studentId,nodalobject.$id)">
+                                                Sessions Approved After Enrollment: {{totalSessionCount[studentId] - sessionTillDateCount[studentId].$value}}
+                                                <br>
+                                                Sessions Approved Before Enrollment: {{sessionTillDateCount[studentId].$value}}
+                                              </td>
+                                              <td ng-init="getStudentReferralBeforeEnrollment(detail.$id, studentId,nodalobject.$id)">Total Referrals After Enrollment : {{totalReferredStudents[studentId].length - totalReferredStudentsBeforeEnrollment[studentId].$value}}<br>
+                                                Referrals Before Enrollment : {{totalReferredStudentsBeforeEnrollment[studentId].$value}}</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+
+                                </div>                                
+                                  
+                                
+                                </div>
+                              </div>
+                          </div>
+                          <hr />
+                        </div>       
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+

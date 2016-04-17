@@ -1,0 +1,431 @@
+<script>
+$('#webinarCompleted').hide();
+</script>
+
+<div class="container-fluid" ng-init="toTheTop(); getAllUpcomingWebinar()">
+  <div class="theme-container"> 
+    <div class="row">
+      <div class="container-fluid">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Align a webinar<h3>
+        </div>
+      <div class="col-xs-6 pull-right">
+        <h5 class="pull-right">Any webinar can be started any webinar link can be sent to the attendes from here.<h5>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="container-fluid"> 
+      <div class="col-md-12" ng-repeat="(webinarId,webinar) in allCommingWebinars" style="margin-bottom: 10px; border-bottom: 2px solid #237DAC;">
+        <div class="col-xs-1"><center><div class="panel-heading-counter">{{$index + 1}}</div></center></div>
+        <div class="col-xs-11">
+          <div class="panel-body lineHeight contentPadding">
+            
+            <div class="col-md-3 sub-block-img"> 
+              <img src="{{webinar.mentorPhoto}}" alt="" class="img-thumbnail" style="height:130px !important">
+              <a style="color:black" href="#/admin-webinar:{{webinar.webinarId}}"><button type="button" class="btn btn-default btn-block btn-chat" ng-click="startChat(webinar)">  Start Chat  <i class="fa fa-play-circle-o"></i></button></a>
+              <p id="webinarCompleted" style="color:green;">Webinar is completed.</p>
+              <!-- <button type="button" class="btn btn-block btn-default btn-stu-det" data-toggle="modal" data-target="#WebinarStudentList">Student Details <i class="fa fa-file-pdf-o"></i></button> -->
+              
+            </div>
+            <div class="col-md-5 " style="border-right : 1px solid #191919;">
+              <div class="row">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mentor Name : <strong>&nbsp;&nbsp;{{webinar.mentorName}} </strong>
+              </div>
+              <div class="row">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mentor Email : <strong>&nbsp;&nbsp;{{webinar.mentorEmail}} </strong>
+              </div>
+              <div class="row">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mentor Mobile : <strong>&nbsp;&nbsp;{{webinar.mentorMobile}} </strong>
+              </div>
+              <div class="row">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar Topic : <strong>&nbsp;&nbsp;{{webinar.webinarTopic}} </strong>
+              </div>
+              <div class="row">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar Duration : <strong>&nbsp;&nbsp;{{webinar.webinarId}} </strong>
+              </div>
+              <div class="row">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar Time : <strong>&nbsp;&nbsp;{{webinar.webinarTime}}, {{webinar.webinarDate}} </strong>
+              </div>
+              
+            </div>
+            <div class="col-md-4" style="overflow-y: scroll; height: 9em;">
+              <div ng-class="studentstatus.$value=='block' ? 'container-fluid query-area haze' : 'container-fluid query-area'" style="padding:10px;">
+                {{webinar.webinarDescription}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+                                                                      <!-- Student List Modal -->
+                                                                      
+<!-- <div class="modal fade stu-enq-modal" tabindex="-1" ng-controller="WebinarCtrl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="WebinarStudentList" style="color:black;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Student Details</h4>  
+        <div class="modal-body body_padding">
+          <div class="container-fluid _container-padding">
+            <div class="row" style="padding: 1.5em;">
+              <div class="col-sm-2">
+                <center style="margin-top: 2.2em;">
+                  <img src="{{studentobject.studentphoto}}" alt="">
+                </center>
+              </div>
+              <div class="col-sm-5">
+                <div class="row head">
+                  <center>Personal Information</center>
+                </div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>Student Name</td>
+                      <td>{{studentobject.studentname | titleCase}}</td>
+                    </tr>
+                    <tr>
+                      <td>Gender</td>
+                      <td>{{studentobject.gender | titleCase}}</td>
+                    </tr>
+                    <tr>
+                      <td>Father's Name</td>
+                      <td>{{studentobject.fathername | titleCase}}</td>
+                    </tr>
+                    <tr>
+                      <td>Father's Ocupation</td>
+                      <td>{{studentobject.occupation | titleCase}}</td>
+                    </tr>
+                    <tr>
+                      <td>Student's Contact Number</td>
+                      <td ng-if="session.sessionVerificationStatus=='pending'">{{studentobject.studentmobile | cut_phone}}</td>
+                      <td ng-if="session.sessionVerificationStatus=='Rejected'">{{studentobject.studentmobile | cut_phone}}</td>
+                      <td ng-if="session.sessionVerificationStatus=='approved'">{{studentobject.studentmobile}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-sm-5">
+                <div class="row head">
+                  <center>Student Bio</center>
+                </div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>{{ studentobject.studentabout }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row" style="padding: 1.5em;">
+              <div class="col-sm-4">
+                  <div class="row head">
+                  <center>Academic Records</center>
+                </div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>10th (% / CGPA) </td>
+                      <td><span ng-if="!studentobject.academicrecord12thMarks">Yet to update</span><span ng-if="studentobject.academicrecord12thMarks">{{studentobject.academicrecord12thMarks }}</span></td>
+                    </tr>
+                    <tr>
+                      <td>12th (% / CGPA) </td>
+                      <td><span ng-if="!studentobject.academicrecordUGMarks">Yet to update</span><span ng-if="studentobject.academicrecordUGMarks">{{studentobject.academicrecordUGMarks }}<span></span></td>
+                    </tr>
+                    <tr>
+                      <td ng-if="studentobject.academicrecordPGMarks">UG (% / CGPA) </td>
+                      <td>{{studentobject.academicrecordPGMarks }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-sm-8">
+                <div class="row head">
+                  <center>Courses of Interest</center>
+                </div>
+                <div class="col-sm-6" ng-if="!studentobject.coursesUG && !studentobject.coursesPG"><center>The Student has shown interest in your college and is exploring his/her course options.</center></div>
+                <div class="row">
+                  <div class="col-sm-6" ng-if="studentobject.coursesUG"><center>UG Courses</center></div>
+                  <div class="col-sm-6" ng-if="studentobject.coursesPG"><center>PG Courses</center></div>  
+                </div>
+                <div class="row">
+                  <div class="col-sm-6" ng-if="studentobject.coursesUG"><center><span id="UGCourseIntrested" ng-repeat="ug in studentobject.coursesUG">
+                        <span ng-if="ug == '0'">Engineering, </span> 
+                        <span ng-if="ug == '1'">Computer Applications / IT, </span> 
+                        <span ng-if="ug == '2'">Biotechnology, </span> 
+                        <span ng-if="ug == '3'">Microbiology, </span> 
+                        <span ng-if="ug == '4'">Agriculture, </span> 
+                        <span ng-if="ug == '5'">Food Technology, </span> 
+                        <span ng-if="ug == '6'">Nutrition and Dietetics, </span> 
+                        <span ng-if="ug == '7'">Arts (Humanities), </span> 
+                        <span ng-if="ug == '8'">Library Science, </span> 
+                        <span ng-if="ug == '9'">Management, </span> 
+                        <span ng-if="ug == '10'">Commerce, </span> 
+                        <span ng-if="ug == '11'">Economics, </span> 
+                        <span ng-if="ug == '12'">Hotel Management/Hospitality and Tourism, </span> 
+                        <span ng-if="ug == '13'">Architecture, </span> 
+                        <span ng-if="ug == '14'">Planning, </span> 
+                        <span ng-if="ug == '15'">Fine Arts, </span> 
+                        <span ng-if="ug == '16'">Performing Arts, </span> 
+                        <span ng-if="ug == '17'">Pharmaceutical Sciences, </span> 
+                        <span ng-if="ug == '18'">Ayurvedic Pharmaceutical Sciences, </span> 
+                        <span ng-if="ug == '19'">Physiotherapy, </span> 
+                        <span ng-if="ug == '20'">Paramedical Sciences, </span> 
+                        <span ng-if="ug == '21'">Education, </span> 
+                        <span ng-if="ug == '22'">Physical Education, </span> 
+                        <span ng-if="ug == '23'">Law, </span> 
+                        <span ng-if="ug == '24'">Design, </span> 
+                        <span ng-if="ug == '25'">Sciences, </span> 
+                        <span ng-if="ug == '26'">Nursing, </span> 
+                        <span ng-if="ug == '27'">Film & Television, </span> 
+                        <span ng-if="ug == '28'">Media & Journalism, </span>  
+                    </span></center></div>
+                  <div class="col-sm-6" ng-if="studentobject.coursesPG"><center><span id="PGCourseIntrested" ng-repeat="pg in studentobject.coursesPG">
+                    <span ng-if="pg == '0'">Engineering, </span> 
+                    <span ng-if="pg == '1'">Computer Applications / IT, </span> 
+                    <span ng-if="pg == '2'">Biotechnology, </span> 
+                    <span ng-if="pg == '3'">Microbiology, </span> 
+                    <span ng-if="pg == '4'">Biochemistry, </span> 
+                    <span ng-if="pg == '5'">Agriculture, </span> 
+                    <span ng-if="pg == '6'">Food Technology, </span> 
+                    <span ng-if="pg == '7'">Nutrition and Dietetics, </span> 
+                    <span ng-if="pg == '8'">English and Foreign Languages, </span> 
+                    <span ng-if="pg == '9'">Indian Languages, </span> 
+                    <span ng-if="pg == '10'">Library Science, </span> 
+                    <span ng-if="pg == '11'">Sociology, </span> 
+                    <span ng-if="pg == '12'">Geography, </span> 
+                    <span ng-if="pg == '13'">Management, </span> 
+                    <span ng-if="pg == '14'">Commerce, </span> 
+                    <span ng-if="pg == '15'">Economics, </span> 
+                    <span ng-if="pg == '16'">Hotel Management/Hospitality and Tourism, </span> 
+                    <span ng-if="pg == '17'">Architecture, </span> 
+                    <span ng-if="pg == '18'">Planning, </span> 
+                    <span ng-if="pg == '19'">Fine Arts</span> 
+                    <span ng-if="pg == '20'">Performing Arts</span> 
+                    <span ng-if="pg == '21'">Pharmaceutical Sciences, </span> 
+                    <span ng-if="pg == '22'">Ayurvedic Pharmaceutical Sciences</span> 
+                    <span ng-if="pg == '23'">Physiotherapy, </span> 
+                    <span ng-if="pg == '24'">Paramedical Sciences</span> 
+                    <span ng-if="pg == '25'">History, </span> 
+                    <span ng-if="pg == '26'">Political Science, </span> 
+                    <span ng-if="pg == '27'">Psychology, </span> 
+                    <span ng-if="pg == '28'">Education, </span> 
+                    <span ng-if="pg == '29'">Physical Education, </span> 
+                    <span ng-if="pg == '30'">Law, </span> 
+                    <span ng-if="pg == '31'">Design, </span> 
+                    <span ng-if="pg == '32'">Sciences, </span> 
+                    <span ng-if="pg == '33'">Nursing, </span> 
+                    <span ng-if="pg == '34'">Film & Television, </span> 
+                    <span ng-if="pg == '35'">Media & Journalism, </span> 
+                    </span></center></div>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div class="modal-footer">
+          <a href="{{studentobject.studentdocument}}" target="_blank" style="text-decoration:none;"><button ng-if="studentobject.studentdocument != 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" type="button" class="btn btn-default">View Document</button></a>
+          <div ng-if="studentobject.studentdocument == 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+              Student has not uploaded his document
+          </div>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>                                
+</div> -->
+<div class="modal fade stu-enq-modal" tabindex="-1" ng-controller="WebinarCtrl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="WebinarStudentList" style="color:black;">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                       
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">Student Details</h4>
+                                        <div align="left" ng-show="studentobject.studentstatus == 'verified'">
+                                          <h6 style="color:Green">This Student is verified by My Mission Admission Team</h6>
+                                        </div>                                            
+                                      </div>  
+
+                                      <div class="modal-body body_padding">
+                                        <div class="container-fluid _container-padding">
+                                          <div class="row" style="padding: 1.5em;">
+                                            <div class="col-sm-2">
+                                              <center style="margin-top: 2.2em;">
+                                                <img src="{{studentobject.studentphoto}}" alt="">
+                                              </center>
+                                            </div>
+                                            <div class="col-sm-5">
+                                              <div class="row head">
+                                                <center>Personal Information</center>
+                                              </div>
+                                              <table class="table table-striped">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>Student Name</td>
+                                                    <td>{{studentobject.studentname | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Gender</td>
+                                                    <td>{{studentobject.gender | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Father's Name</td>
+                                                    <td>{{studentobject.fathername | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Father's Ocupation</td>
+                                                    <td>{{studentobject.occupation | titleCase}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Student's Contact Number</td>
+                                                    <td ng-if="session.sessionVerificationStatus=='pending'">{{studentobject.studentmobile | cut_phone}}</td>
+                                                    <td ng-if="session.sessionVerificationStatus=='Rejected'">{{studentobject.studentmobile | cut_phone}}</td>
+                                                    <td ng-if="session.sessionVerificationStatus=='approved'">{{studentobject.studentmobile}}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div class="col-sm-5">
+                                              <div class="row head">
+                                                <center>Student Bio</center>
+                                              </div>
+                                              <table class="table table-striped">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{{ studentobject.studentabout }}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+
+                                          <div class="row" style="padding: 1.5em;">
+                                            <div class="col-sm-4">
+                                                <div class="row head">
+                                                <center>Academic Records</center>
+                                              </div>
+                                              <table class="table table-striped">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>10th (% / CGPA) </td>
+                                                    <td><span ng-if="!studentobject.academicrecord12thMarks">Yet to update</span><span ng-if="studentobject.academicrecord12thMarks">{{studentobject.academicrecord12thMarks }}</span></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>12th (% / CGPA) </td>
+                                                    <td><span ng-if="!studentobject.academicrecordUGMarks">Yet to update</span><span ng-if="studentobject.academicrecordUGMarks">{{studentobject.academicrecordUGMarks }}<span></span></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td ng-if="studentobject.academicrecordPGMarks">UG (% / CGPA) </td>
+                                                    <td>{{studentobject.academicrecordPGMarks }}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div class="col-sm-8">
+                                              <div class="row head">
+                                                <center>Courses of Interest</center>
+                                              </div>
+                                              <div class="col-sm-6" ng-if="!studentobject.coursesUG && !studentobject.coursesPG"><center>The Student has shown interest in your college and is exploring his/her course options.</center></div>
+                                              <div class="row">
+                                                <div class="col-sm-6" ng-if="studentobject.coursesUG"><center>UG Courses</center></div>
+                                                <div class="col-sm-6" ng-if="studentobject.coursesPG"><center>PG Courses</center></div>  
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-sm-6" ng-if="studentobject.coursesUG"><center><span id="UGCourseIntrested" ng-repeat="ug in studentobject.coursesUG">
+                                                      <span ng-if="ug == '0'">Engineering, </span> 
+                                                      <span ng-if="ug == '1'">Computer Applications / IT, </span> 
+                                                      <span ng-if="ug == '2'">Biotechnology, </span> 
+                                                      <span ng-if="ug == '3'">Microbiology, </span> 
+                                                      <span ng-if="ug == '4'">Agriculture, </span> 
+                                                      <span ng-if="ug == '5'">Food Technology, </span> 
+                                                      <span ng-if="ug == '6'">Nutrition and Dietetics, </span> 
+                                                      <span ng-if="ug == '7'">Arts (Humanities), </span> 
+                                                      <span ng-if="ug == '8'">Library Science, </span> 
+                                                      <span ng-if="ug == '9'">Management, </span> 
+                                                      <span ng-if="ug == '10'">Commerce, </span> 
+                                                      <span ng-if="ug == '11'">Economics, </span> 
+                                                      <span ng-if="ug == '12'">Hotel Management/Hospitality and Tourism, </span> 
+                                                      <span ng-if="ug == '13'">Architecture, </span> 
+                                                      <span ng-if="ug == '14'">Planning, </span> 
+                                                      <span ng-if="ug == '15'">Fine Arts, </span> 
+                                                      <span ng-if="ug == '16'">Performing Arts, </span> 
+                                                      <span ng-if="ug == '17'">Pharmaceutical Sciences, </span> 
+                                                      <span ng-if="ug == '18'">Ayurvedic Pharmaceutical Sciences, </span> 
+                                                      <span ng-if="ug == '19'">Physiotherapy, </span> 
+                                                      <span ng-if="ug == '20'">Paramedical Sciences, </span> 
+                                                      <span ng-if="ug == '21'">Education, </span> 
+                                                      <span ng-if="ug == '22'">Physical Education, </span> 
+                                                      <span ng-if="ug == '23'">Law, </span> 
+                                                      <span ng-if="ug == '24'">Design, </span> 
+                                                      <span ng-if="ug == '25'">Sciences, </span> 
+                                                      <span ng-if="ug == '26'">Nursing, </span> 
+                                                      <span ng-if="ug == '27'">Film & Television, </span> 
+                                                      <span ng-if="ug == '28'">Media & Journalism, </span>  
+                                                  </span></center></div>
+                                                <div class="col-sm-6" ng-if="studentobject.coursesPG"><center><span id="PGCourseIntrested" ng-repeat="pg in studentobject.coursesPG">
+                                                      <span ng-if="pg == '0'">Engineering, </span> 
+                                                      <span ng-if="pg == '1'">Computer Applications / IT, </span> 
+                                                      <span ng-if="pg == '2'">Biotechnology, </span> 
+                                                      <span ng-if="pg == '3'">Microbiology, </span> 
+                                                      <span ng-if="pg == '4'">Biochemistry, </span> 
+                                                      <span ng-if="pg == '5'">Agriculture, </span> 
+                                                      <span ng-if="pg == '6'">Food Technology, </span> 
+                                                      <span ng-if="pg == '7'">Nutrition and Dietetics, </span> 
+                                                      <span ng-if="pg == '8'">English and Foreign Languages, </span> 
+                                                      <span ng-if="pg == '9'">Indian Languages, </span> 
+                                                      <span ng-if="pg == '10'">Library Science, </span> 
+                                                      <span ng-if="pg == '11'">Sociology, </span> 
+                                                      <span ng-if="pg == '12'">Geography, </span> 
+                                                      <span ng-if="pg == '13'">Management, </span> 
+                                                      <span ng-if="pg == '14'">Commerce, </span> 
+                                                      <span ng-if="pg == '15'">Economics, </span> 
+                                                      <span ng-if="pg == '16'">Hotel Management/Hospitality and Tourism, </span> 
+                                                      <span ng-if="pg == '17'">Architecture, </span> 
+                                                      <span ng-if="pg == '18'">Planning, </span> 
+                                                      <span ng-if="pg == '19'">Fine Arts</span> 
+                                                      <span ng-if="pg == '20'">Performing Arts</span> 
+                                                      <span ng-if="pg == '21'">Pharmaceutical Sciences, </span> 
+                                                      <span ng-if="pg == '22'">Ayurvedic Pharmaceutical Sciences</span> 
+                                                      <span ng-if="pg == '23'">Physiotherapy, </span> 
+                                                      <span ng-if="pg == '24'">Paramedical Sciences</span> 
+                                                      <span ng-if="pg == '25'">History, </span> 
+                                                      <span ng-if="pg == '26'">Political Science, </span> 
+                                                      <span ng-if="pg == '27'">Psychology, </span> 
+                                                      <span ng-if="pg == '28'">Education, </span> 
+                                                      <span ng-if="pg == '29'">Physical Education, </span> 
+                                                      <span ng-if="pg == '30'">Law, </span> 
+                                                      <span ng-if="pg == '31'">Design, </span> 
+                                                      <span ng-if="pg == '32'">Sciences, </span> 
+                                                      <span ng-if="pg == '33'">Nursing, </span> 
+                                                      <span ng-if="pg == '34'">Film & Television, </span> 
+                                                      <span ng-if="pg == '35'">Media & Journalism, </span> 
+                                                  </span></center></div>  
+                                              </div>
+                                            </div>
+                                          </div>
+                                         </div>
+                                        </div>  
+                                         <div class="modal-footer">
+                                            <a href="{{studentobject.studentdocument}}" target="_blank" style="text-decoration:none;"><button ng-if="studentobject.studentdocument != 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'" type="button" class="btn btn-default">View Document</button></a>
+                                            <div ng-if="studentobject.studentdocument == 'https://www.filepicker.io/api/file/EZCfLcpQwz74j4SuozGA'">
+                                              Student has not uploaded his document
+                                            </div>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+
+                                       </div> <!-- end of modal content -->
+
+
+                                    </div>
+                                  </div>
+
+                                                                      <!-- Student List Modal -->
+
+
+

@@ -1,0 +1,95 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  <div class="theme-container">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Colleges After Training<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">You can see the details of training here.<h5>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+        <div class="row search-results">
+          <div >
+            <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+              <div class="row">
+                <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                  <table class="table table-striped feed-table" >
+                      <col width="8px" />
+                      <col width="25px" />
+                      <col width="15px" />
+                      <col width="20px" />
+                      <col width="25px" />
+                      <col width="25px" />
+                      <col width="30px" />
+                      <col width="25px" />
+                      <col width="15px" />
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>College Name</th>
+                          <th>College E-mail</th>
+                          <th>Counsellor who took the training</th> 
+                          <th>Training Provided By</th>
+                          <th>Training Date</th>
+                          <th>Notes(Remarks/Issues)</th>
+                          <th>Counsellor Contact</th>
+                          <th>Training Status</th>
+                          </tr>
+                        </thead>
+                        <tbody ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype| filter:colltype | filter:subfilter | orderBy: 'dateofTraining':true" ng-show="college.trainingDone=='yes'">
+                          <div ng-show="signedIn()">
+                            <tr class="feed-table-row">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><strong>{{college.collegename}}</strong></td>
+                              <td style="width:5em!important;">{{college.counselloremail}}<br>Password: {{college.collegepassword}}</td>
+                              <td>{{college.traineePerson}}</td>
+                              <td>{{college.trainingBy}}</td>
+                              <td>{{college.dateofTraining}}</td>
+                              <td>{{college.remarks}}</td>
+                              <td>{{college.traineeContact}}</td>
+                              <td><span ng-if="college.trainingStatus === 'true'" style="color:green">Training Done</span><span ng-if="college.trainingStatus === 'false'" style="color:red">Training Failed<br/> <br/> <input type="button" value="Alarm" data-toggle="modal" data-target="#newRequestModal_{{collegeId}}" /> </span></td>
+                            </tr>
+                          </div>
+                          <a href="" ng-hide="signedIn()" ng-href="#/login"> 
+                            <div class="container-fluid">
+                              <div class="row result-det">
+                                <strong><h5>{{college.collegename}}</h5></strong>
+                              </div>
+                            </div>
+                          </a>
+                          <td>
+                            <div class="modal fade" id="newRequestModal_{{collegeId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel" style="color:black">Training Request</h4>
+                                  </div>
+                                  <div class="modal-body" styLe="color:black;">
+                                    <h2 style="color:green">Request Training For </h2>
+                                    {{college.collegename}}
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" ng-click="trainingRequest(college.$id)" data-dismiss="modal">Send Request</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

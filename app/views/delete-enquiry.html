@@ -1,0 +1,67 @@
+ <div class="container-fluid  " ng-controller="AdminTaskCtrl" ng-init="toTheTop()">
+  <div class="theme-container">
+    <div class="row  ">
+      <div class="container-fluid">
+        <div class="col-xs-6 pull-left">
+          <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Delete Enquiry<h3>
+        </div>
+        <div class="col-xs-6 pull-right">
+          <h5 class="pull-right">Here you can delete enquiries of students and colleges from the database.<h5>
+        </div>
+      </div>  
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <form name="build_enquiry" ng-submit="deleteEnquiry(collegeEmail, studentEmail1)">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="container-fluid">
+                <div class="row">
+
+                  <div class="col-xs-11">
+                    <input type="email" ng-model="collegeEmail" ng-keyup="doThisForCollegeToDeleteEnquiry(collegeEmail)" placeholder="College Email" class="form-control" style="margin-bottom: 1em;">
+                  </div>
+                  <div ng-if="collegeIdFlag == 'Done'" class="col-xs-1" style="color:#64FE2E">
+                    <i class="fa fa-check fa-2x"></i>
+                  </div>
+                  <div ng-if="collegeIdFlag == 'Done'">
+                    <h5 style="color:red">{{collegeName.$value}}</h5>
+                  </div>
+                  <div ng-if="collegeIdFlag == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                    <i class="fa fa-times fa-2x"></i>
+                  </div>
+
+                  <div class="col-xs-11">
+                    <input type="email" ng-model="studentEmail1" ng-keyup="doThisForStudentToDeleteEnquiry(studentEmail1)" placeholder="Student Email " class="form-control" style="margin-bottom: 1em;">
+                  </div>
+                  <div ng-if="student1IdFlag == 'Done'" class="col-xs-1" style="color:#64FE2E">
+                    <i class="fa fa-check fa-2x"></i>
+                  </div>
+                  <div ng-if="student1IdFlag == 'Done'">
+                    <h5 style="color:red">{{student1Name.$value}}</h5>
+                  </div>
+                  <div ng-if="student1IdFlag == 'Not Done'" class="col-xs-1" style="color:#FF4000">
+                    <i class="fa fa-times fa-2x"></i>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+             <input type="submit" value="Delete Enquiry" style="color : white; :hover{color:white;}; letter-spacing:1px;" class="btn btn-success btn-block bw-bt" ng-disabled = "submitdisabled"/>
+            </div>
+          </div>
+        </div>
+        <center><div ng-if="sessionstatus == 'approved'"> <h2 style="color:red">Sessions Can't be deleted as it is approved By the Quality Person</h2></div></center>
+        <center><div ng-if="sessionstatus == 'rejected'"> <h2 style="color:red">Sessions Can't be deleted as it is Rejected By the Quality Person</h2></div></center>
+        <center><div ng-if="sessionstatus == 'pending'"> <h2 style="color:red">Sessions Can't be deleted as the feedback has been given by the college</h2></div></center>
+        <center><div ng-if="deleteSessionFlag == 'Done'"> <h5 style="color:red">Sessions successfully Deleted</h5></div></center>
+        <center><div ng-if="deleteCheck == 'Done'"> <h5 style="color:red">This session doses not exist therefore it cannot be deleted.</h5></div></center>
+        <center><div ng-if="deleteSessionFlag == 'Not Done'"> <h5 style="color:red">Some Error Has Occured</h5></div></center>
+      </form>
+    </div>
+  </div>
+</div>

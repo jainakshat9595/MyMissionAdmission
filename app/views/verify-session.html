@@ -1,0 +1,79 @@
+<div class="container-fluid" ng-init="toTheTop()">
+ 
+ <div class="theme-container"> 
+   <div class="row">
+     <div class="container-fluid">
+       <div class="col-xs-6 pull-left">
+         <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Verify a Session<h3>
+       </div>
+       <div class="col-xs-6 pull-right">
+         <h5 class="pull-right">Click any college to view their respective sessions and verify them.<h5>
+       </div>
+     </div>
+   </div>
+ 
+ 
+   <hr/>
+   
+ 
+   <div class="row">
+     <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin'"> 
+       <div class="row search-results">
+         <div class="col-md-3">
+           <div class="theme-container" style="margin-bottom : 10px;">
+             <label class="radioFilter">
+               <input type="radio" name="colltype" value="paid" ng-model="colltype">Paid Colleges
+             </label>
+             <label class="radioFilter">
+               <input type="radio" name="colltype" checked value="college" ng-model="colltype">All Colleges
+             </label>
+             <hr />
+             <input type="text" placeholder="Search with College Name" class="form-control main-input-box aaa" ng-model="subfilter">
+           </div>
+           <div class="filter-pane" style="margin-bottom : 10px;">
+             <center>  
+               <div class="row" style="color:green; font-weight:bold; font-size:30px;">
+                 {{totalPendingSessions}}
+               </div>
+             </center>
+           </div>
+         </div>
+         <div class="col-md-9">
+           <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 800px;">
+             <div class="row">
+               <div style="margin-top:10px;" class="container-fluid sub-block">
+                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" ng-init="getPendingSessionDetails()">
+                   <div class="panel panel-default panel-c" ng-animate="'animate'" ng-repeat="(collegeId,details) in pendingCollege  | filter:subfilter">
+                     
+ 
+                     <a href="" ng-href="#/sessions/{{details.values.$id}}" style="text-decoration:none"><!-- redirect to secnd page, acc to college -->
+                       <div class="panel-heading panel-c-h" ng-init="college = getcollegedetail(details.values.$id)">
+                         <div class="row">
+                           <div class="col-xs-1" ng-if="college.pendingsessionCount"> 
+                             <span ng-init="getTotalPendingSessions(college.pendingsessionCount)" style="color:green; font-weight:bold; font-size:30px;">{{college.pendingsessionCount}}</span>
+                           </div>
+                           <div class="col-xs-11">
+                             {{college.collegename}}<br />( {{college.counselloremail}} )
+                           </div>
+                         </div>
+                         <!-- <h4 class="panel-title collapsed">
+                           <span style="color:green; font-weight:bold;">9</span> &nbsp; {{college.collegename}} ( {{college.counselloremail}} ) 
+                         </h4> -->
+                       </div>
+                     </a>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ 
+ </div>
+</div>
+
+
+
+

@@ -1,0 +1,497 @@
+<style>
+.navLiveIndicator{
+  position: fixed;
+  top: 0;
+  left: 60%;
+  width: 90px;
+  height: 46px;
+  transform: translate(-50%, 0%);
+  z-index: 99999990;
+  background: url('../images/live_icon_bg.png');
+  cursor:pointer;
+  transition: all 0.5s;
+}
+.navLiveIndicator.show{
+  top: 100%;
+}
+.navLiveIndicator-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99999999;
+  background-color: #237DAC;
+  transform: translate(0%, -100%);
+  transition: all 0.5s;
+}
+.navLiveIndicator-div.show {
+  transform: translate(0%, 0%);
+}
+.navLiveIndicator-div_close {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1em;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: black;
+    z-index: 2;
+}
+</style>
+
+<script>
+  $(".navLiveIndicator-div_login").hide();
+</script>
+
+<nav ng-controller="MainCtrl" class="nav-fixed" ng-class="{'navbar navbar-default nav-fixed nav-signed-out nav_border': $route.current.activePage == 'transNav', 'navbar navbar-default nav-fixed blue-dark nav-signed-out nav_border nav-fixed': $route.current.activePage !== 'transNav'}"><!-- class="navbar navbar-default nav-signed-out blue-dark nav_border" -->
+  <div class="container-fluid" ng-init="isAnyWebinarLive()"><!-- ng-init="slide_navLiveIndicator_divOpen();" -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div style="color:white;" class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" id="mobile-menu-btn">
+        <i class="fa fa-ellipsis-v fa-2x"></i>
+      </button>
+      <a class="navbar-brand" style="margin-bottom : 5px;" href="#/main"><img class="nav-logo" width=40 src="../images/logo_n.png" alt="My Mission Admission" /></a>
+    </div>
+
+   
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="navLiveIndicator-div">
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+                                        <!-- WWWWWWWWWeeeeebbbbbbbiiiiinnnnnnnaaaaaaarrrrrrr -->
+
+        <div class="navLiveIndicator-div_close" ng-click="slide_navLiveIndicator_divClose();">
+          <i class="fa fa-times-circle-o"></i>&nbsp;Close
+        </div>
+
+                                                            <!-- login -->
+
+        <div class="container-fluid navLiveIndicator-div_login" style="padding-top: 3em; padding-left:15em; padding-right:15em; height:100%; background-color: rgba(0, 0, 0, 0.16); position: absolute; left: 50%; transform: translate(-50%, 0); width: 100%;">
+          <div class="row">
+            <div class="col-xs-6">
+              <form class="form-signin" name="forma" style="padding-top: 0.4px;" ng-submit="login()">
+                <div class="form-signin-div-tobeload" ng-show="modalShown">
+                  <i class="fa fa-spinner fa-3x fa-spin"></i>
+                </div>
+                <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+                  <h2>LOG IN</h2>
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                      <span ng-class="{'login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user': student1IdFlag !== 'Done', 'login-inputgroup_style input-group-addon _glyphicon green glyphicon glyphicon-user': student1IdFlag == 'Done', 'login-inputgroup_style input-group-addon _glyphicon red glyphicon glyphicon-user': collegeIdFlag == 'Done'}"></span>
+                      <input type="text" required ng-change="showEmail()" ng-model="user.email" ng-blur="doThisForStudent(user.email)" class="login-inputgroup_style form-control" placeholder="Username">
+                    </div>
+                  </div>
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+                     <input type="password" required ng-model="user.password" class="login-inputgroup_style form-control" placeholder="Password">
+                    </div>
+                  </div>
+                  <br/> <br/>
+                  <h4 style="color:red"><strong><center ng-if="student1IdFlag === 'Not Done'">You are not a valid Student.</center></strong></h4>
+                  <button class="btn btn-lg btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" type="submit" ng-click="toTheTop()"  ng-disabled="student1IdFlag === 'Not Done'">Sign in</button>
+                  <br>
+                  <p ng-show="error" class="error-danger">{{error}}</p>
+                </div>
+              </form>
+            </div>
+
+                                                          <!-- register -->
+
+
+            <div class="col-xs-6">
+              <form name="student_reg" class="form-signin" style="padding-top: 0.4px;" ng-submit="register(); toTheTop()">
+                <div class="form-signin-div-tobeload" ng-show="modalShown">
+                  <i class="fa fa-spinner fa-3x fa-spin"></i>
+                </div>
+                <div class="form-signin-div-tobehaze" ng-class="{'form-signin-div-tobehaze show_M': modalShown, 'form-signin-div-tobehaze': !modalShown}">
+                  <h2>SIGN UP</h2>
+                   <p ng-show="error" class="text-danger"><strong style="color:red">  {{ error }}</strong></p>
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-user"></span>
+                     <input type="text" ng-model="user.studentname"required oninvalid="this.setCustomValidity('Name could not be blank')" oninput="this.setCustomValidity('')" class="login-inputgroup_style form-control" placeholder="Student Name">
+                    </div>
+                  </div>
+                  <div class="input-group-container" style="background-color: #F5F9FC; margin: 0.4em; border: 1px solid #CEE5F3; border-radius: 0.4em; height: 3em; padding: 0.7em; padding-left: 1em;">
+                    <span ng-repeat="person in gender">
+                      <input type="radio" value="{{person.name}}" ng-model="user.gender" name="name" required title="Please Select your Gender" /> &nbsp; {{person.name}} &nbsp;
+                    </span>
+                  </div>
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+                     <input name="email" type="email" ng-model="user.email" placeholder="Email Address"  required oninvalid="this.setCustomValidity('Please enter a valid Email Address')" oninput="this.setCustomValidity('')" title='Enter in format abcdef@email.com' class="login-inputgroup_style form-control" ui-validate="{blacklist : 'notBlackListed($value)' }">
+                    </div>
+                  </div>
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-envelope"></span>
+                     <input name="confirm_email" type="email" ng-model="confirm_email" placeholder="Re-type Email Address"  required class="login-inputgroup_style form-control" ui-validate=" '$value==user.email' " ui-validate-watch=" 'user.email' ">
+                    </div>
+                  </div>
+                  <div ng-show="student_reg.confirm_email.$dirty && student_reg.confirm_email.$error.validator"><strong style="color:red">Emails do not match!</strong> </div>
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+                     <input name="password" type="password" required oninvalid="this.setCustomValidity('Password cannot be blank')" oninput="this.setCustomValidity('')" ng-model="user.password" placeholder="Create Password" class="login-inputgroup_style form-control">
+                    </div>
+                  </div> 
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class=" login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-lock"></span>
+                     <input name="confirm_password" type="password" required ng-model="confirm_password" placeholder="Confirm Password" class="login-inputgroup_style form-control" ui-validate=" '$value==user.password' " ui-validate-watch=" 'user.password' ">
+                    </div>
+                  </div>
+                  <div ng-show="student_reg.confirm_password.$dirty && student_reg.confirm_password.$error.validator"><strong style="color:red">Passwords do not match! </strong></div> 
+                  <div class="input-group-container">
+                    <div class="input-group input-group-lg">
+                     <span class="login-inputgroup_style input-group-addon _glyphicon glyphicon glyphicon-phone"></span>
+                     <input type="text" ng-model="user.studentmobile" required pattern="[0-9]{3}-?[0-9]{6,12}$" maxlength=15 title="Phone number must be atleast 9 digits long"oninput="this.setCustomValidity('')"  placeholder="Mobile Number" class="login-inputgroup_style form-control">
+                    </div>
+                  </div>
+                  <div class="input-group-container">
+                      <input style="font-size:16px;"  type="checkbox" style="box-shadow:none" ng-model="term" /> I agree to the My Mission Admission <a class='link' ng-href='#/about?tab=terms ' target="_blank" > Terms of Services </a> and  <a class='link' ng-href='#/about?tab=privacy' target="_blank" > Privacy Policy </a>
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block btn-login_style" type="submit"  ng-disabled="submitbuttondisabled">Register</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+                                        
+                                                          <!-- list of live webinars -->
+                                        
+
+        <div class="container-fluid" style="padding:2em; display:none" id="listOfLiveWebinar">
+          <div class="row" style="margin: 1em; padding: 1em; background-color: white; border-radius: 1em;" ng-repeat="(webinarId, webinar) in anyLiveWebinars">
+            <div class="col-xs-2">
+              <img src="{{webinar.mentorPhoto}}" style="width: 80%; height: 8em;" />
+            </div>
+            <div class="col-xs-8" style="color: black; font-size: 1.5em; margin-top: 1.5em;">
+              {{webinar.webinarTopic}}
+            </div>
+            <div class="col-xs-2">
+              <button class="form-control" style="margin-top:3em; color: red; border-color: red;" ng-click="showWebinar(webinar);">view</button>
+            </div>
+          </div>
+        </div>
+
+                                                          <!-- Attend webinar -->
+
+        <div class="container-fluid" style="padding:0em;  display:none" id="LiveWebinar">
+          <div class="row" style="margin: 1em; cursor:pointer;" ng-click="hideLiveWebinar();">
+            <i class="fa fa-chevron-left fa-2x"></i> <span style="fonr-size:2em;">Back</span>
+          </div>
+          <div class="row" style="margin: 1em; padding: 1em; background-color: white; border-radius: 1em;">
+            <div class="col-xs-7">
+              <iframe ng-src="{{trustSrc(video.src)}}" frameborder="0" style="width:100%" height="500" allowfullscreen></iframe>
+            </div>
+            <div class="col-xs-5" style="padding: 0em 3em">
+              <strong>Chats</strong>
+              <div style="overflow-y:scroll; max-height:200px; min-height:200px; border:1px solid #ccc; scrollTop:200px">
+                <div ng-repeat="(key,value) in QNADetails | orderBy: 'false'">
+                  <div>
+                    <div><strong>{{value.studentName}} :</strong> {{value.question}}</div>
+                    <div style="float:right" ng-if="value.replyByAdmin">{{value.replyByAdmin}} : <strong>Admin</strong> </div></br>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="font-size: 1.2em; font-weight: bolder; padding-top:1em">
+                Ask your query ?
+              </div>
+              <form ng-submit="askQuestion(question)">
+                <div class="row" style="margin-top:1.2em;">
+                  <textarea  ng-model="question" style="resize:none; border-bottom: 1px solid; height: 5em !important;" maxlength=1024 placeholder="Your Query" class="login-inputgroup_style form-control"></textarea>
+                </div>
+                <div class="row" style="margin-top:1em;">
+                  <input type="submit" class="btn btn-primary main-page-feature-first-signup-btn_border main-page-feature-first-signup-btn" value="Send"></input>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navLiveIndicator" style="height:45px;" ng-if="anyLiveWebinars.length!==0 && !signedIn()" ng-click="slide_navLiveIndicator_divOpen();"></div>
+
+      <div class="navLiveIndicator" style="height:45px;" ng-if="anyLiveWebinars.length!==0 && user.profile.profiletype == 'student' && signedIn()" ng-click="slide_navLiveIndicator_divOpen();"></div>
+
+
+                                        <!-- WWWWWWWWWeeeeebbbbbbbiiiiinnnnnnnaaaaaaarrrrrrr -->
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+        <ul ng-hide="signedIn() || regpage()" ng-controller="NavCtrl" class="nav navbar-nav navbar-right"><!-- Default -->
+
+          <li class="dash-name" style="margin-top:5px; border-left:0px !important;" ng-if="loc !== '/login' " ng-click="go('/login')"><a href=""><span>Login</span></a></li>
+
+          <li class="dash-name" style="margin-top:5px; border-left:0px !important;" ng-if="(loc !== '/register') && (loc !== '/login-college')" ng-click="go('/register')"><a href=""><span>Signup</span></a></li>
+
+          <li class="dash-name" style="margin-top:5px; border-left:0px !important;" ng-if="loc !== '/main' " ><a href="#main?scrollTo=howItWorks"><span>How It Works&nbsp;<i class="fa fa-question"></i></span></a></li><!-- ng-click="go('/main?scrollTo=howItWorks')" -->
+
+          <li class="dash-name" style="margin-top:5px; border-left:0px !important;" ng-if="(loc !== '/login') && (loc !== '/register') " ng-click="go('/college')"><a href=""><span><i class="fa fa-university"></i>&nbsp; List Your College</span></a></li>
+
+        </ul>
+      
+        <ul ng-show="signedIn()" ng-if="(usera.profile.profiletype == 'admin')" class="nav navbar-nav navbar-right"><!-- Admin Log In -->
+          <li class="dropdown dash-name" style="text-align:right;">
+            <a href="" class="dropdown-toggle" role="button" aria-expanded="false">
+              <img ng-if="(usera.profile.adminphoto == 'pic_not_uploaded')" ng-src="http://png-3.findicons.com/files/icons/2463/glossy/512/user_male.png" alt="" class="img-circle" width="22">
+              <img ng-if=" usera.profile.adminphoto != 'pic_not_uploaded' " ng-src="{{ usera.profile.adminphoto }}" class="img-circle" alt="" width="22" height="22">
+               &nbsp;&nbsp; <span class="">{{ usera.profile.adminname }}</span> &nbsp;&nbsp;
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dash-name-dropdown" role="menu">
+              <li>
+                <a href="#/dashboard-admin">Dashboard&nbsp;&nbsp;<i class="fa fa-desktop"></i></a>
+              </li>
+              <li>
+                <a ng-href="#/main" ng-click="logout()">Logout&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      
+        <ul ng-show="signedIn()" ng-if="(user.profile.profiletype == 'student')" class="nav navbar-nav navbar-right"><!-- Student Log In -->
+          <li ng-controller="MainCtrl" class="dash-name" style="border-left: 0px solid white; !important; width: 3em"><!-- search dropdown -->
+            <a ng-href="#/search" class="dropdown-toggle">
+              <i class="fa fa-search" style="font-size:20px;"></i>
+            </a>
+          </li>
+
+          <li class="dropdown dash-name" style="text-align:right;"><!-- dashboard dropdown -->
+            <a href="" class="dropdown-toggle" >
+              <img ng-if="(user.profile.studentphoto == 'pic_not_uploaded') " ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" alt="" class="img-circle" width="22">
+              <img ng-if=" user.profile.studentphoto != 'pic_not_uploaded' " ng-src="{{ user.profile.studentphoto }}" class="img-circle" alt="" width="22" height="22">
+               &nbsp;&nbsp; <span class="">{{ user.profile.studentname }}</span> &nbsp;&nbsp;
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dash-name-dropdown">
+              <li>
+                <a href="#/dashboard">Dashboard&nbsp;&nbsp;<i class="fa fa-desktop"></i></a>
+              </li>
+              <li>
+                <a href="#/account-settings">Account Settings&nbsp;&nbsp;<i class="fa fa-cogs"></i></a>
+              </li>
+              <li>
+                <a ng-href="#/main" ng-click="logout()">Logout&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul ng-show="signedIn()" ng-if="(usern.profile.profiletype == 'nodal')" class="nav navbar-nav navbar-right"><!-- Nodal Log In -->
+          <li class="dropdown dash-name" style="text-align:right;">
+            <a href="" class="dropdown-toggle" role="button" aria-expanded="false">
+              <img ng-src="http://www.gravatar.com/avatar/{{ usern.profile.md5_hash }}" alt="" class="img-circle" width="22">
+               &nbsp;&nbsp; <span class="">{{ usern.profile.nodalAdminName }}</span> &nbsp;&nbsp;
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dash-name-dropdown" role="menu">
+              <li>
+                <a href="#/dashboard-nodal">Dashboard&nbsp;&nbsp;<i class="fa fa-desktop"></i></a>
+              </li>
+              <li>
+                <a ng-href="#/main" ng-click="logout()">Logout&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul ng-show="signedIn()" ng-if="(users.profile.profiletype == 'School')" class="nav navbar-nav navbar-right"><!-- School Log In -->
+          <li class="dropdown dash-name" style="text-align:right;">
+            <a href="" class="dropdown-toggle" role="button" aria-expanded="false">
+              <img ng-src="http://www.gravatar.com/avatar/{{ users.profile.md5_hash }}" alt="" class="img-circle" width="22">
+               &nbsp;&nbsp; <span class="">{{ users.profile.schoolAdminname }}</span> &nbsp;&nbsp;
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dash-name-dropdown" role="menu">
+              <li>
+                <a href="#/dashboard-school">Dashboard&nbsp;&nbsp;<i class="fa fa-desktop"></i></a>
+              </li>
+              <li>
+                <a ng-href="#/main" ng-click="logout()">Logout&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+      
+        <ul ng-show="signedIn()" ng-if="(userc.profile.profiletype == 'college')" class="nav navbar-nav navbar-right"><!-- College Log In -->
+          <li class="dropdown dash-name">
+            <a href="" class="dropdown-toggle" role="button" aria-expanded="false">
+              <img ng-if="(userc.profile.collegephoto == 'pic_not_uploaded') " ng-src="http://www.gravatar.com/avatar/{{ userc.profile.md5_hash }}" alt="" class="img-circle" width="22">
+              <img ng-if=" userc.profile.collegephoto != 'pic_not_uploaded' " ng-src="{{ userc.profile.collegephoto }}" class="img-circle" alt="" width="22" height="22">
+               &nbsp;&nbsp; <span class="">{{ userc.profile.collegename | cut:false:20:'...' }}</span> &nbsp;&nbsp;
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dash-name-dropdown" role="menu">
+              <li>
+                <a href="#/dashboard-college">Dashboard&nbsp;&nbsp;<i class="fa fa-desktop"></i></a>
+              </li>
+              <li>                    
+                <a href="#/edit-college-profile">Edit Profile&nbsp;&nbsp;<i class="fa fa-edit"></i></a>       
+              </li>
+              <li>
+                <a ng-href="#/main" ng-click="logout()">Logout&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div id="mobile-menu" class="mobile-menu" ng-controller="MainCtrl">
+  <div class="container-fluid">
+    
+    <!-- If Signed In -->
+    <div class="row" ng-show="signedIn()">
+      <!-- Admin Signed In -->
+      <div class="container-fluid" ng-if="(usera.profile.profiletype == 'admin')">
+        <div class="row user-account-name">
+          <center>
+            <img ng-if="(usera.profile.adminphoto == 'pic_not_uploaded')" ng-src="http://png-3.findicons.com/files/icons/2463/glossy/512/user_male.png" alt="" class="img-circle" width="22">
+            <img ng-if=" usera.profile.adminphoto != 'pic_not_uploaded' " ng-src="{{ usera.profile.adminphoto }}" class="img-circle" alt="" width="22" height="22">
+            &nbsp;&nbsp; <span class="">{{ usera.profile.adminname }}</span>
+          </center>
+        </div>
+        <div class="row user-account-control">
+          <a href="#/dashboard-admin"><i class="fa fa-desktop"></i>&nbsp;&nbsp;Dashboard</a>
+        </div>
+        <div class="row user-account-control">
+          <a ng-href="#/main" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+        </div>
+      </div>
+      <!-- Student Signed In -->
+      <div class="container-fluid" ng-if="(user.profile.profiletype == 'student')">
+        <div class="row user-account-name">
+          <center>
+            <img ng-if="(user.profile.studentphoto == 'pic_not_uploaded') " ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" alt="" class="img-circle" width="22">
+            <img ng-if=" user.profile.studentphoto != 'pic_not_uploaded' " ng-src="{{ user.profile.studentphoto }}" class="img-circle" alt="" width="22" height="22">
+             &nbsp;&nbsp; <span class="">{{ user.profile.studentname }}</span>
+          </center>
+        </div>
+        <div class="row user-account-control">
+          <a href="#/dashboard"><i class="fa fa-desktop"></i>&nbsp;&nbsp;Dashboard</a>
+        </div>
+        <div class="row user-account-control">
+          <a ng-href="#/main" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+        </div>
+        <div class="row user-account-control">
+          <a href="#search" class="dropdown-toggle"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</a>
+        </div>
+      </div>
+      <!-- College Signed In -->
+      <div class="container-fluid" ng-if="(userc.profile.profiletype == 'college')">
+        <div class="row user-account-name">
+          <center>
+            <img ng-if="(userc.profile.collegephoto == 'pic_not_uploaded') " ng-src="http://www.gravatar.com/avatar/{{ userc.profile.md5_hash }}" alt="" class="img-circle" width="22">
+            <img ng-if=" userc.profile.collegephoto != 'pic_not_uploaded' " ng-src="{{ userc.profile.collegephoto }}" class="img-circle" alt="" width="22" height="22">
+             &nbsp;&nbsp; <span class="">{{ userc.profile.collegename }}</span>
+          </center>
+        </div>
+        <div class="row user-account-control">
+          <a href="#/dashboard-college"><i class="fa fa-desktop"></i>&nbsp;&nbsp;Dashboard</a>
+        </div>
+        <div class="row user-account-control">
+          <a ng-href="#/main" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+        </div>
+      </div>
+      <!-- Nodal Signed In -->
+      <div class="container-fluid" ng-if="(usern.profile.profiletype == 'nodal')">
+        <div class="row user-account-name">
+          <center>
+            <img ng-src="http://www.gravatar.com/avatar/{{ usern.profile.md5_hash }}" alt="" class="img-circle" width="22">
+             &nbsp;&nbsp; <span class="">{{ usern.profile.nodalAdminName }}</span>
+          </center>
+        </div>
+        <div class="row user-account-control">
+          <a href="#/dashboard-nodal"><i class="fa fa-desktop"></i>&nbsp;&nbsp;Dashboard</a>
+        </div>
+        <div class="row user-account-control">
+          <a ng-href="#/main" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Default If Signed Out-->
+    <div class="row user-not-log-name" ng-hide="signedIn() || regpage()" ng-click="go('/college')">
+      <i class="fa fa-university"></i>&nbsp; List Your College
+    </div>
+    <div class="row user-not-log-name" ng-hide="signedIn() || regpage()"  ng-click="go('/main?scrollTo=how-it-works-mob')">
+      How It Works&nbsp;<i class="fa fa-question"></i>
+    </div>
+    <div class="row user-not-log-name" ng-hide="signedIn() || regpage()" ng-click="go('/register')">
+      Signup
+    </div>
+    <div class="row user-not-log-name" style="border-bottom: 0px solid #0099CC !important;" ng-hide="signedIn() || regpage()" ng-click="go('/login')">
+      Login
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+$('#popup-overlay-2').hide();
+$('#popup-content-works').hide();
+
+$(function() {
+
+  $("#worksbtn").click(function() { 
+    $('#works-car-1').removeClass('active');
+    $('#works-car-2').removeClass('active');
+    $('#works-car-3').removeClass('active');   
+    $('#works-car-4').removeClass('active');
+    $('#works-car-1').addClass('active');
+    $('#works-car-indicator-li-1').removeClass('active');
+    $('#works-car-indicator-li-2').removeClass('active');
+    $('#works-car-indicator-li-3').removeClass('active');   
+    $('#works-car-indicator-li-4').removeClass('active');
+    $('#works-car-indicator-li-1').addClass('active');
+    window.setTimeout(function() {
+      $('#popup-overlay-2').fadeIn();
+      $('#popup-content-works').fadeIn();
+    }, 300 );
+  });
+
+  $('#mobile-menu').hide();
+  
+  $( document ).on( "click", "#mobile-menu-btn", function( event ) {    
+    $('#mobile-menu').show();
+  });
+
+  $('body').on('click', function (e) {
+    $('#mobile-menu').hide();
+  });
+
+  $( document ).on( "click", "#popup-overlay-2", function( event ) {    
+    $('#popup-overlay-2').fadeOut();
+    $('#popup-content-works').fadeOut();
+  });
+
+  $( document ).on( "click", "li.dropdown.dash-name a", function( event ) {    
+    $(this).parent().toggleClass('open');
+  });
+
+  $('body').on('click', function (e) {
+    if (!$('li.dropdown.dash-name').is(e.target) 
+        && $('li.dropdown.dash-name').has(e.target).length === 0 
+        && $('.open').has(e.target).length === 0
+    ) {
+        $('li.dropdown.dash-name').removeClass('open');
+    }
+  });
+
+});
+
+</script>

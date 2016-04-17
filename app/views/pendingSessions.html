@@ -1,0 +1,56 @@
+<img class="intro-bg" src="../images/intro-bg.jpg" />
+<div class="container-fluid search-page ex-pad" ng-init="toTheTop()">
+  <div class="row a-head">
+    <div class="col-xs-6 pull-left">
+      <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; College Feedback Required<h3>
+    </div>
+    <div class="col-xs-6 pull-right">
+      <h5 class="pull-right">You can see a pending sessions of college here.<h5>
+
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin' && usera.profile.role=='operationSubordinate'"> 
+      <div class="row search-results">
+        <div class="col-md-3 filter-pane">
+          <input type="text" placeholder="Search Student" class="form-control main-input-box aaa" ng-model="subfilter">
+        </div>
+        <div class="col-md-9">
+          <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+            <div class="row">
+              <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                <table class="table table-striped feed-table">
+                    <col width="8px" />
+                    <col width="35px" />
+                    <col width="12px" />
+                    <!-- <col width="25px" /> -->
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>College Name</th>&nbsp;&nbsp;
+                        <th>Pending Sessions</th>
+                        <!-- <th>Account manager</th> -->
+                        </tr>
+                      </thead>
+                      
+                      <tbody ng-animate="'animate'" ng-repeat="(collegeId,college) in collegetype" ng-show="(college.verifiedcollege=='verified') && (usera.uid == college.accountmanager)" >
+                        <div ng-show="signedIn()">
+                          <tr class="feed-table-row" >
+                            
+                            <td scope="row">{{$index + 1}}</td>
+                            <td><strong>{{college.collegename}}</strong></td>
+                            <td align="center"><strong>{{college.feedbacknotgivenCount}}</strong></td>
+                            <!-- <td align="center"><strong>{{college.accountmanager}}</strong></td> -->
+                            </tr>
+                        </div>
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

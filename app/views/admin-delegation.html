@@ -1,0 +1,217 @@
+<div class="container-fluid" ng-init="toTheTop()">
+  
+
+  <div class="theme-container">
+      <div class="row ">
+        <div class="container-fluid">
+            <div class="col-xs-6 pull-left">
+              <h3 class="pull-left"> <a href="#/dashboard-admin"><i data-toggle="tooltip" data-placement="bottom" title="Back" class="fa fa-arrow-circle-o-left fa-lg back-ico"></i></a> &nbsp; Work Deligation<h3>
+            </div>
+            <div class="col-xs-6 pull-right">
+              <h5 class="pull-right">You can assign roles to employees here.<h5> 
+            </div>
+        </div>    
+      </div>
+      
+
+      <hr />
+
+
+                                                    <!-- Super Admin -->
+
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin' && usera.profile.role == 'superAdmin'"> 
+          <div class="row search-results">
+            <!-- <div class="col-md-3 filter-pane">
+              <input type="text" placeholder="Search Admin" class="form-control main-input-box aaa" ng-model="subfilter">
+            </div> -->
+            <div class="col-md-12">
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                    <table class="table table-striped feed-table">
+                        <col width="8px" />
+                        <col width="20px" />
+                        <col width="25px" />
+                        <col width="40px" /> 
+                        
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Make-Him-Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approve</th>
+                                
+                            </tr>     
+                        </thead>
+                          <tbody ng-animate="'animate'" ng-repeat="(useraId,usera) in admin | filter:subfilter | filter:'access_denied'">
+                            <div ng-show="signedIn()">
+                              <tr class="feed-table-row">
+                                <td scope="row" ng-init="radioClicked='no'">{{$index + 1}}</td>
+                                <td scope="row">{{usera.adminname}}</td>
+                                <td><strong>{{usera.adminemail}}</strong></td>
+                                <td>
+                                  <form ng-submit="approveAdmin(usera); makeHimHead(usera, adminType)">
+                                    <input  type="radio" value="operationHead" ng-change="radioClicked='yes'" ng-model="adminType"/>&nbsp;Operation's Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="submit" class="" style="color:#00FF00; cursor:pointer;" ng-disabled="radioClicked=='no'"><i class='fa fa-power-off'></i> Approve </button>
+                                    <br>
+                                    <input  type="radio" ng-change="radioClicked='yes'" value="salesHead" ng-model="adminType"/>&nbsp;Sale's Head<br>
+                                    <input  type="radio" ng-change="radioClicked='yes'" value="businessHead" ng-model="adminType"/>&nbsp;Business Head
+                                  </form>
+                                </td>
+                              </tr>
+                            </div>
+                        </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+                                                            <!-- operations Head Admin -->
+      
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin' && usera.profile.role == 'operationHead'"> 
+          <div class="row search-results">
+            <div class="col-md-12">
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                    <table class="table table-striped feed-table">
+                        <col width="5px" />
+                        <col width="15px" />
+                        <col width="30px" />
+                        <col width="25px" /> 
+                        <col width="25px" />
+                        
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Feature access status</th>
+                            <th>Give Features</th>
+                            </tr>
+                        </thead>
+                          
+                          <tbody ng-animate="'animate'" ng-repeat="(useraId,usera) in admin | filter:subfilter | filter:'access_denied'">
+                            <div ng-show="signedIn()">
+                              <tr class="feed-table-row">
+                                <td scope="row">{{$index + 1}}</td>
+                                <td scope="row">{{usera.adminname}}</td>
+                                <td><strong>{{usera.adminemail}}</strong></td>
+                                <td ng-if="usera.privilege=='access_denied'" ng-init="access='Unauthorized'">{{access}}</td>
+                                <td><center><a ng-href="#/SelectFeatureForOperationsSub:{{usera.$id}}" class="btn btn-default btn-lg main-search-btn btn-block sel-btn">Give Features</a></center></td>
+                              </tr>
+                            </div>
+                        </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+                                                            
+
+                                                            <!-- Sales Head Admin -->
+      
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin' && usera.profile.role == 'salesHead'"> 
+          <div class="row search-results">
+            <div class="col-md-12">
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                    <table class="table table-striped feed-table">
+                        <col width="5px" />
+                        <col width="15px" />
+                        <col width="30px" />
+                        <col width="25px" /> 
+                        <col width="25px" />
+                        
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Feature access status</th>
+                            <th>Give Features</th>
+                            </tr>
+                        </thead>
+                          
+                          <tbody ng-animate="'animate'" ng-repeat="(useraId,usera) in admin | filter:subfilter | filter:'access_denied'">
+                            <div ng-show="signedIn()">
+                              <tr class="feed-table-row">
+                                <td scope="row">{{$index + 1}}</td>
+                                <td scope="row">{{usera.adminname}}</td>
+                                <td><strong>{{usera.adminemail}}</strong></td>
+                                <td ng-if="usera.privilege=='access_denied'" ng-init="access='Unauthorized'">{{access}}</td>
+                                <td><center><a ng-href="#/SelectFeatureForSalesSub:{{usera.$id}}" class="btn btn-default btn-lg main-search-btn btn-block sel-btn">Give Features</a></center></td>
+                              </tr>
+                            </div>
+                        </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+                                                                <!-- Sales Head Admin -->
+      
+      <div class="row">
+        <div class="container-fluid" ng-show="signedIn() && usera.profile.profiletype=='admin' && usera.profile.role == 'businessHead'"> 
+          <div class="row search-results">
+            <div class="col-md-12">
+              <div class="container-fluid" id="src-scroll" style="overflow-y : scroll; height : 900px;">
+                <div class="row">
+                  <div style="margin-top:10px;" class="container-fluid sub-block table-responsive">
+                    <table class="table table-striped feed-table">
+                        <col width="5px" />
+                        <col width="15px" />
+                        <col width="30px" />
+                        <col width="25px" /> 
+                        <col width="25px" />
+                        
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Feature access status</th>
+                            <th>Give Features</th>
+                            </tr>
+                        </thead>
+                          
+                          <tbody ng-animate="'animate'" ng-repeat="(useraId,usera) in admin | filter:subfilter | filter:'access_denied'">
+                            <div ng-show="signedIn()">
+                              <tr class="feed-table-row">
+                                <td scope="row">{{$index + 1}}</td>
+                                <td scope="row">{{usera.adminname}}</td>
+                                <td><strong>{{usera.adminemail}}</strong></td>
+                                <td ng-if="usera.privilege=='access_denied'" ng-init="access='Unauthorized'">{{access}}</td>
+                                <td><center><a ng-href="#/SelectFeatureForBusinessSub:{{usera.$id}}" class="btn btn-default btn-lg main-search-btn btn-block sel-btn">Give Features</a></center></td>
+                              </tr>
+                            </div>
+                        </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
